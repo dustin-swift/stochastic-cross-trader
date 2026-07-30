@@ -622,6 +622,38 @@ def test_record_stop_failure_always_logs_and_alerts(tmp_path):
     assert events == ["stop_placement_failed"]
 
 
+def test_record_trade_close_writes_history_and_logs(tmp_path):
+    payload = {
+        "symbol": "AAPL",
+        "position": {
+            "entry_price": 200.0,
+            "qty": 0.5,
+            "entry_time": "2026-07-29T14:30:00Z",
+            "entry_order_id": "entry-1",
+            "stop_price": 195.0,
+            "stop_order_id": "stop-1",
+        },
+        "exit_price": 205.0,
+        "exit_time": "2026-07-30T15:00:00Z",
+        "exit_order_id": "stop-1",
+        "exit_reason": "stop_out",
+    }
+
+    result = _run("record_trade_close.py", payload, ["--data-dir", str(tmp_path / "data")])
+
+    output = json.loads(result.stdout)
+    assert output["symbol"] == "AAPL"
+    assert output["pnl_usd"] == 2.5
+    assert output["exit_reason"] == "stop_out"
+
+    with (tmp_path / "data" / "trade_history.json").open() as f:
+        history = json.load(f)
+    assert history == [output]
+
+    events = [e["event"] for e in _events(tmp_path)]
+    assert events == ["trade_closed"]
+
+
 def test_run_backtest_end_to_end(tmp_path):
     cfg = {
         **BASE_CFG,

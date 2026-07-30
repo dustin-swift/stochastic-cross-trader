@@ -29,6 +29,11 @@ dedicated `bot-state` branch, not in the routine's working tree by default.
 Before evaluating any new signal, check whether reality has moved since the last cycle:
 
 - For each symbol in `positions.json` with a `stop_order_id`: `get_equity_orders(account_number, order_id=stop_order_id)`. If `state=filled`, the position was **stopped out** at the broker since the last cycle (a resting order can fill any time, not just when this skill runs).
+  - **Record the closed trade before clearing the slot**, using the order record's average fill price/time as the exit:
+    ```bash
+    echo '{"symbol": "...", "position": <the positions.json entry for this symbol, unmodified>, "exit_price": <average_price from the order record>, "exit_time": <fill time from the order record>, "exit_order_id": "<stop_order_id>", "exit_reason": "stop_out"}' | python3 scripts/record_trade_close.py
+    ```
+    This appends to `data/trade_history.json` and logs `trade_closed` — this is the *only* durable record of a closed trade once it's gone from `positions.json`, so don't skip it even though the position is about to be removed anyway.
   - Clear that symbol's slot from `positions.json` (rewrite the file — atomic write, see `lib/state.py`).
   - Log a `stop_out` event: symbol, fill price/time from the order record.
 - Cross-check against `get_equity_positions(account_number)` for anything in `positions.json` that no longer has a matching real position (or vice versa) — log a `reconciliation_drift` event if you find a mismatch (e.g. a manual trade placed outside this system) but don't guess at a fix; surface it.
@@ -72,8 +77,13 @@ For each symbol in the `exits` list that's still an open position (re-check agai
 - **`live: true`**:
   1. `cancel_equity_order(account_number, order_id=stop_order_id)` — cancel the resting stop *first*, so it can't also fire and double-sell. **This is unchanged by the overbought-hold refinement**: the resting ATR stop stays active and untouched throughout `OVERBOUGHT_HOLD` — it only ever gets cancelled here, at the moment of an actual exit, exactly as before. Suspending the oscillator-based exit never means suspending risk management.
   2. `place_equity_order(account_number, symbol, side="sell", type="market", quantity=qty, ref_id=<new uuid>)`.
-  3. Remove the symbol from `positions.json` (atomic write).
-  4. Log `exit_executed` (symbol, qty, order id).
+  3. Poll `get_equity_orders(account_number, order_id=<sell order id>)` a few times (same `poll_interval_seconds`/`poll_timeout_seconds` as the entry lifecycle in section 6 is fine — a plain market sell in regular hours fills about as fast as a market buy) until `state=filled`, and note its average fill price/time. If it still hasn't filled by the timeout, don't block the rest of the cycle on it — proceed with `exit_price: null` in the next step; the position is still being removed from `positions.json` either way since the sell order is in flight and won't be re-submitted next cycle.
+  4. **Record the closed trade**, before touching `positions.json`:
+     ```bash
+     echo '{"symbol": "...", "position": <the positions.json entry for this symbol, unmodified>, "exit_price": <fill price from step 3, or null>, "exit_time": <fill time from step 3, or now>, "exit_order_id": "<sell order id>", "exit_reason": "<the exits[] entry'\''s own exit_reason field, verbatim: signal_exit, overbought_hold_exit, or earnings_exit>"}' | python3 scripts/record_trade_close.py
+     ```
+  5. Remove the symbol from `positions.json` (atomic write).
+  6. Log `exit_executed` (symbol, qty, order id).
 
 ## 6. Entries — dual-confirmation stochastic crossover
 
@@ -103,7 +113,7 @@ Take `entries` in the order returned, up to however many open slots remain (reco
 
 ## 7. Sync state out
 
-`bash scripts/sync_state.sh push` — commits the updated `data/positions.json` (and today's log file) back to `bot-state`, so the next hourly cycle (and the next daily screen) see this run's reconciliation, entries, exits, and stop-outs. Run this even on a cycle with no entries/exits — `sync_state.sh push` correctly no-ops on an unchanged tree, so there's no harm running it every cycle unconditionally.
+`bash scripts/sync_state.sh push` — commits the updated `data/positions.json`, `data/trade_history.json` (if any trades closed this cycle), and today's log file back to `bot-state`, so the next hourly cycle (and the next daily screen) see this run's reconciliation, entries, exits, and stop-outs. Run this even on a cycle with no entries/exits — `sync_state.sh push` correctly no-ops on an unchanged tree, so there's no harm running it every cycle unconditionally.
 
 ## 8. Cycle summary
 

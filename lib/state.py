@@ -73,6 +73,65 @@ class StateStore:
     def save_daily_pnl(self, pnl_by_date: dict[str, dict]) -> None:
         _atomic_write_json(self.daily_pnl_path, pnl_by_date)
 
+    # -- closed-trade history -------------------------------------------
+    # positions.json only ever tracks OPEN positions -- once a position
+    # closes (stop-out, signal exit, or earnings-forced exit) it's removed
+    # from there. This is the only durable record of what actually happened
+    # to a closed trade, so the dashboard (and any P&L review) reads from
+    # here, not from positions.json.
+    @property
+    def trade_history_path(self) -> Path:
+        return self.data_dir / "trade_history.json"
+
+    def load_trade_history(self) -> list[dict]:
+        return _read_json(self.trade_history_path, default=[])
+
+    def append_trade_history(self, record: dict) -> None:
+        history = self.load_trade_history()
+        history.append(record)
+        _atomic_write_json(self.trade_history_path, history)
+
+
+def close_trade_record(
+    symbol: str,
+    position: dict,
+    exit_price: float | None,
+    exit_time: str,
+    exit_order_id: str | None,
+    exit_reason: str,
+    closed_at: str,
+) -> dict:
+    """Build a closed-trade record from an open position dict + exit info.
+
+    `exit_price` may be None (e.g. a sell order that never confirmed a fill
+    before this cycle had to move on) -- pnl fields are then also None rather
+    than a fabricated number. Pure function so the pnl math is unit-testable
+    without touching the filesystem or a broker.
+    """
+    qty = position["qty"]
+    entry_price = position["entry_price"]
+    pnl_usd = None
+    pnl_pct = None
+    if exit_price is not None:
+        pnl_usd = (exit_price - entry_price) * qty
+        pnl_pct = (exit_price / entry_price - 1) * 100
+    return {
+        "symbol": symbol,
+        "qty": qty,
+        "entry_price": entry_price,
+        "entry_time": position.get("entry_time"),
+        "entry_order_id": position.get("entry_order_id"),
+        "stop_price": position.get("stop_price"),
+        "stop_order_id": position.get("stop_order_id"),
+        "exit_price": exit_price,
+        "exit_time": exit_time,
+        "exit_order_id": exit_order_id,
+        "exit_reason": exit_reason,
+        "pnl_usd": pnl_usd,
+        "pnl_pct": pnl_pct,
+        "closed_at": closed_at,
+    }
+
 
 def has_open_slot(positions: dict[str, dict], max_positions: int) -> bool:
     return len(positions) < max_positions

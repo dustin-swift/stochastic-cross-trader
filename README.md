@@ -46,10 +46,15 @@ pip install -r requirements.txt
   triggered manually or by a scheduled cloud agent.
 - `data/` — gitignored on `main`. `finviz_export.csv` (your manual export —
   see below), `candidates.json` (today's list), `positions.json` (open
-  positions), `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check,
-  decision, order event, and alert). Not committed to `main` — see Cloud
-  routines & state persistence below for where this data actually lives when
-  running on a schedule.
+  positions only — see `trade_history.json` below for closed trades),
+  `trade_history.json` (every closed trade — stop-out, signal exit,
+  overbought-hold exit, or earnings-forced exit — with entry/exit price, P&L,
+  and exit reason; this is what the dashboard reads for closed-trade
+  drill-down, since `positions.json` drops a trade the moment it closes),
+  `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check, decision,
+  order event, and alert). Not committed to `main` — see Cloud routines &
+  state persistence below for where this data actually lives when running on
+  a schedule.
 - `scripts/sync_state.sh`, `scripts/publish_finviz_export.sh` — the
   state-persistence and Finviz-publish mechanics for cloud routines (see
   below).
