@@ -1,0 +1,13 @@
+{"csv_path": "data/finviz_export.csv", "event": "universe_screen", "input_count": 97, "output_count": 47, "symbols": ["ADP", "AER", "ALGN", "AMLP", "ASH", "AVTR", "AXGN", "BIIB", "BOX", "BUD", "BXP", "CAKE", "CBRE", "CCEP", "CGAU", "CNH", "CUZ", "DB", "DEO", "DFIV", "EA", "EBC", "EWG", "EXLS", "EXPE", "EXR", "F", "FTRE", "FWONK", "GD", "GLBE", "HIW", "IMAX", "JD", "JHX", "MAN", "MDLZ", "MPLX", "NOMD", "OMC", "PAGP", "PCG", "SHEL", "SONO", "SWK", "TTAN", "VZ"], "timestamp": "2026-07-29T19:37:33.649821+00:00"}
+{"account_value": 0, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-07-29T19:43:32.829253+00:00", "tripped": true, "unrealized_pnl_today": 0}
+{"event": "circuit_breaker_triggered", "message": "Circuit breaker tripped: realized 0 + unrealized 0 vs account value 0 (max_daily_loss_pct=3). No new entries this cycle.", "timestamp": "2026-07-29T19:43:32.830044+00:00"}
+{"d": 93.26524918804664, "event": "signal_check", "k": 88.30352514256094, "kind": "entry", "signal": false, "symbol": "ADP", "timestamp": "2026-07-29T19:45:48.036013+00:00"}
+{"d": 41.67060677698972, "event": "signal_check", "k": 48.510638297872276, "kind": "entry", "signal": false, "symbol": "AER", "timestamp": "2026-07-29T19:45:48.039283+00:00"}
+{"d": 92.22735402647044, "event": "signal_check", "k": 94.63954647370771, "kind": "entry", "signal": false, "symbol": "ALGN", "timestamp": "2026-07-29T19:45:48.041497+00:00"}
+{"d": 77.75632183908012, "event": "signal_check", "k": 69.8825031928477, "kind": "entry", "signal": false, "symbol": "AMLP", "timestamp": "2026-07-29T19:45:48.043672+00:00"}
+{"d": 91.67417970211646, "event": "signal_check", "k": 89.55765513490469, "kind": "entry", "signal": false, "symbol": "ASH", "timestamp": "2026-07-29T19:45:48.045946+00:00"}
+{"d": 95.43618217457846, "event": "signal_check", "k": 97.48753711691147, "kind": "entry", "signal": false, "symbol": "AVTR", "timestamp": "2026-07-29T19:45:48.049934+00:00"}
+{"d": 58.38691242376732, "event": "signal_check", "k": 58.02931088244463, "kind": "entry", "signal": false, "symbol": "AXGN", "timestamp": "2026-07-29T19:45:48.052166+00:00"}
+{"d": 59.59602442775673, "event": "signal_check", "k": 46.470621795283215, "kind": "entry", "signal": false, "symbol": "BIIB", "timestamp": "2026-07-29T19:45:48.054280+00:00"}
+{"d": 95.420657281803, "event": "signal_check", "k": 94.178873922162, "kind": "entry", "signal": false, "symbol": "BOX", "timestamp": "2026-07-29T19:45:48.056274+00:00"}
+{"d": 96.09838508409189, "event": "signal_check", "k": 96.92869740488796, "kind": "entry", "signal": false, "symbol": "BUD", "timestamp": "2026-07-29T19:45:48.058251+00:00"}
