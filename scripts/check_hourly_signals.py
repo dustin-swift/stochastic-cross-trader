@@ -32,7 +32,7 @@ Input (JSON, via --input file or stdin):
 Output (JSON, to stdout):
   {
     "entries": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "atr14": 3.2,
-                 "estimated_stop_price": 202.1}],
+                 "estimated_stop_price": 202.1, "qty": 1}],
     "exits": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
     "position_states": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}]
   }
@@ -41,6 +41,14 @@ Output (JSON, to stdout):
 every open position checked this cycle, whether or not it exited — the skill
 must write this back into positions.json every cycle so the state carries
 forward, not just on cycles with an exit.
+
+`entries[].qty` (spec update 2026-07-30, see lib.sizing): a whole-share
+quantity, sized off the last bar's close via lib.sizing.entry_share_quantity
+(config["sizing"]) -- entries are no longer dollar-based fractional orders,
+since this broker rejects any stop-type order against a fractional-share
+quantity. A candidate whose last close exceeds config["sizing"]["max_price_per_share"]
+never makes it into `entries` at all -- it's skipped and logged as
+`entry_skipped_price_cap` instead, even though the oscillator signal fired.
 
 `estimated_stop_price` uses the last bar's close as a stand-in entry price —
 the skill recomputes the real stop from the actual fill price once the market
@@ -80,6 +88,7 @@ from lib.config import load_config
 from lib.indicators import stochastic
 from lib.logging_utils import EventLogger
 from lib.signals import STATE_NORMAL, STATE_OVERBOUGHT_HOLD, entry_signal, exit_signal, stop_price, update_stochastic_state
+from lib.sizing import entry_share_quantity
 
 
 def _load_input(input_arg: str) -> dict:
@@ -109,6 +118,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
     overbought = stoch_cfg["overbought_threshold"]
     lookback_bars = stoch_cfg.get("entry_lookback_bars", 1)
     atr_mult = config["atr"]["stop_multiplier"]
+    sizing_cfg = config["sizing"]
     catalysts_cfg = config.get("catalysts", {})
     earnings_exclusion_days = catalysts_cfg.get("earnings_exclusion_days", 5)
     earnings_forced_exit_days = catalysts_cfg.get("earnings_forced_exit_days", 1)
@@ -138,6 +148,23 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
             last_close = float(bars[-1]["close"])
             atr14 = c.get("atr14")
             estimated_stop = stop_price(last_close, atr14, mult=atr_mult) if atr14 is not None else None
+
+            # Whole-share sizing (2026-07-30): a fractional-share fill can't
+            # get a resting stop placed at all on this broker (confirmed
+            # live). qty is decided here, off the last bar's close, not at
+            # fill time -- close enough for the price-cap decision and qty
+            # count; the real stop still gets computed from the actual fill
+            # price after the order executes, unchanged.
+            qty = entry_share_quantity(last_close, sizing_cfg["per_trade_usd"], sizing_cfg["max_price_per_share"])
+            if qty is None:
+                logger.log(
+                    "entry_skipped_price_cap",
+                    symbol=symbol,
+                    last_close=last_close,
+                    max_price_per_share=sizing_cfg["max_price_per_share"],
+                )
+                continue
+
             entries.append(
                 {
                     "symbol": symbol,
@@ -147,6 +174,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
                     "atr14": atr14,
                     "last_close": last_close,
                     "estimated_stop_price": estimated_stop,
+                    "qty": qty,
                 }
             )
 

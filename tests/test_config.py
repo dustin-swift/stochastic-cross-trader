@@ -18,7 +18,7 @@ VALID_CFG = {
         "overbought_threshold": 80,
     },
     "atr": {"period": 14, "stop_multiplier": 1.5},
-    "sizing": {"per_trade_usd": 100, "max_positions": 10},
+    "sizing": {"per_trade_usd": 100, "max_price_per_share": 150, "max_positions": 10},
     "risk": {"max_daily_loss_pct": 3},
     "order_lifecycle": {"poll_timeout_seconds": 30, "poll_interval_seconds": 5},
     "alerts": {"provider": "slack"},
@@ -66,14 +66,21 @@ def test_wrong_type_raises(tmp_path):
 
 
 def test_missing_nested_key_raises(tmp_path):
-    bad = {**VALID_CFG, "sizing": {"per_trade_usd": 100}}  # missing max_positions
+    bad = {**VALID_CFG, "sizing": {"per_trade_usd": 100, "max_price_per_share": 150}}  # missing max_positions
     path = _write(tmp_path, bad)
     with pytest.raises(ValueError, match="max_positions"):
         load_config(path)
 
 
 def test_non_positive_max_positions_raises(tmp_path):
-    bad = {**VALID_CFG, "sizing": {"per_trade_usd": 100, "max_positions": 0}}
+    bad = {**VALID_CFG, "sizing": {"per_trade_usd": 100, "max_price_per_share": 150, "max_positions": 0}}
     path = _write(tmp_path, bad)
     with pytest.raises(ValueError, match="max_positions"):
+        load_config(path)
+
+
+def test_non_positive_max_price_per_share_raises(tmp_path):
+    bad = {**VALID_CFG, "sizing": {"per_trade_usd": 100, "max_price_per_share": 0, "max_positions": 10}}
+    path = _write(tmp_path, bad)
+    with pytest.raises(ValueError, match="max_price_per_share"):
         load_config(path)

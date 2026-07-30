@@ -87,12 +87,26 @@ alerts:
   provider: slack
 
 # --- Step 5: position sizing & risk management ---
-# Deliberately small starting size (2026-07-30): first live cycles are about
-# observing real signal behavior on a real 16-symbol universe with minimal
-# capital at risk, not about return. $20/trade x 10 slots = $200 max
-# theoretical exposure. Revisit once a track record justifies scaling up.
+# Whole-share sizing (2026-07-30): entries used to be dollar-based fractional
+# market orders, but that's a dead end for this broker -- confirmed live,
+# twice (XLF, JHX), that *no* stop-type order (stop_market or stop_limit) can
+# be placed against a fractional-share quantity ("Invalid trigger for
+# fractional order"), independent of time_in_force. Every entry now sizes to
+# a whole number of shares via lib.sizing.entry_share_quantity(price,
+# per_trade_usd, max_price_per_share):
+#   - price < per_trade_usd: buy round(per_trade_usd / price) shares -- the
+#     whole-share count that lands closest to $100, whichever side it falls on.
+#   - per_trade_usd <= price <= max_price_per_share: buy exactly 1 share.
+#   - price > max_price_per_share: skip the entry entirely this cycle, not a
+#     1-share buy regardless of cost.
+# max_price_per_share is set to 1.5x per_trade_usd -- high enough that the
+# round() branch above can never land on 1 share costing more than $150, and
+# never come out to 0 shares for any price this doesn't already skip.
+# $100/trade x 10 slots = $1,000 max theoretical exposure. Revisit position
+# size and slot count together once a track record justifies scaling further.
 sizing:
-  per_trade_usd: 20
+  per_trade_usd: 100
+  max_price_per_share: 150
   max_positions: 10
 
 # Portfolio-level daily-loss circuit breaker. If realized + unrealized P&L

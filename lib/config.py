@@ -40,6 +40,7 @@ _REQUIRED_NESTED = {
     },
     "sizing": {
         "per_trade_usd": (int, float),
+        "max_price_per_share": (int, float),
         "max_positions": int,
     },
     "risk": {
@@ -94,3 +95,5 @@ def _validate(cfg: Any, path: Path) -> None:
         raise ValueError(f"{path}: sizing.max_positions must be positive")
     if cfg["sizing"]["per_trade_usd"] <= 0:
         raise ValueError(f"{path}: sizing.per_trade_usd must be positive")
+    if cfg["sizing"]["max_price_per_share"] <= 0:
+        raise ValueError(f"{path}: sizing.max_price_per_share must be positive")

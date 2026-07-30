@@ -16,7 +16,7 @@ BASE_CFG = {
     },
     "stochastic": {"k_period": 14, "k_smooth": 3, "d_period": 3, "oversold_threshold": 20, "overbought_threshold": 80},
     "atr": {"period": 14, "stop_multiplier": 1.5},
-    "sizing": {"per_trade_usd": 100, "max_positions": 10},
+    "sizing": {"per_trade_usd": 100, "max_price_per_share": 150, "max_positions": 10},
     "risk": {"max_daily_loss_pct": 3},
     "order_lifecycle": {"poll_timeout_seconds": 30, "poll_interval_seconds": 5},
     "alerts": {"provider": "slack"},
@@ -244,6 +244,7 @@ def test_check_hourly_signals_end_to_end(tmp_path):
     assert entry["d"] == 19
     assert entry["last_close"] == 12
     assert entry["estimated_stop_price"] == 9.0  # 12 - 1.5*2.0
+    assert entry["qty"] == 8  # round(100 / 12)
 
     assert [e["symbol"] for e in output["exits"]] == ["MSFT"]
     assert output["exits"][0]["stochastic_state"] == "NORMAL"
@@ -255,6 +256,37 @@ def test_check_hourly_signals_end_to_end(tmp_path):
     assert len(log_files) == 1
     events = [json.loads(line) for line in log_files[0].read_text().splitlines()]
     assert {(e["symbol"], e["kind"]) for e in events} == {("AAPL", "entry"), ("MSFT", "exit")}
+
+
+def test_check_hourly_signals_skips_entry_over_price_cap(tmp_path):
+    cfg = {
+        **BASE_CFG,
+        "stochastic": {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80},
+    }
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    # Same k-sequence-producing closes as the end-to-end test, scaled up so
+    # the signal bar's close (last_close) lands above max_price_per_share (150).
+    def bar(close):
+        return {"high": close * 5, "low": 0, "close": close}
+
+    entry_closes = [1000, 1000, 800, 700, 1200]  # last close 1200 > 150 cap
+
+    payload = {"candidates": [{"symbol": "EXPENSIVE", "sector": "Technology", "atr14": 20.0, "bars": [bar(c) for c in entry_closes]}]}
+
+    result = _run("check_hourly_signals.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    output = json.loads(result.stdout)
+
+    assert output["entries"] == []
+
+    events = _events(tmp_path)
+    skip_events = [e for e in events if e["event"] == "entry_skipped_price_cap"]
+    assert len(skip_events) == 1
+    assert skip_events[0]["symbol"] == "EXPENSIVE"
+    assert skip_events[0]["last_close"] == 1200
+    assert skip_events[0]["max_price_per_share"] == 150
 
 
 def test_check_hourly_signals_skips_candidate_entry_when_earnings_too_close(tmp_path):

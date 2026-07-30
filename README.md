@@ -27,7 +27,8 @@ pip install -r requirements.txt
 - `providers/finviz.py` — reads the manually-exported Finviz Elite CSV from
   disk and checks it isn't stale. No network calls, no auth key.
 - `lib/` — pure, unit-tested computation: indicators, signal logic, sector
-  cap, entry-order fill/reject/timeout decisions, state (JSON-backed
+  cap, whole-share entry sizing (`lib/sizing.py` — see Whole-share sizing
+  below), entry-order fill/reject/timeout decisions, state (JSON-backed
   candidates/positions/daily P&L), risk circuit breaker, config loading,
   JSONL event logging, earnings/catalyst avoidance (`lib/catalysts.py`), and
   the historical backtest engine (`lib/backtest.py` — see Backtesting below).
@@ -109,12 +110,12 @@ python3 scripts/check_universe_screen.py
   `data/logs/YYYY-MM-DD.jsonl`, but **no order tool is ever called**. This is
   how the system ships and how it should stay until you've reviewed several
   real cycles of dry-run output against live market data.
-- `live: true` — the hourly-signal-check skill places real orders: a market
-  buy sized in dollars, polled through to a fill/reject/timeout decision
-  (see Order-lifecycle robustness below), followed immediately by a real
-  resting `stop_market` sell order (not a soft "check next hour" stop). Only
-  flip this after you've reviewed dry-run logs and are ready to trade the
-  account for real.
+- `live: true` — the hourly-signal-check skill places real orders: a
+  whole-share market buy (see Whole-share sizing below), polled through to a
+  fill/reject/timeout decision (see Order-lifecycle robustness below),
+  followed immediately by a real resting `stop_market` sell order (not a
+  soft "check next hour" stop). Only flip this after you've reviewed
+  dry-run logs and are ready to trade the account for real.
 
 To flip live trading on: edit `live: true` in `config/strategy.yaml`. That's
 the only change needed — no code changes, no redeploy.
@@ -178,6 +179,28 @@ earnings data falls through to normal signal logic rather than being force-
 sold — a data-fetch hiccup shouldn't liquidate a live position. If Robinhood
 MCP is unavailable, both scripts still work fine with no earnings data at
 all, exactly as before this feature existed — it's additive, not required.
+
+## Whole-share sizing (config["sizing"])
+
+Entries are sized to a whole number of shares, not a dollar amount. This
+replaced dollar-based fractional entries after a live, confirmed platform
+limitation (2026-07-30): the broker rejects *any* stop-type order
+(`stop_market` or `stop_limit`) against a fractional-share quantity
+("Invalid trigger for fractional order"), independent of `time_in_force` — a
+fractional fill can never get a resting protective stop, full stop. Since
+the whole safety model depends on that stop existing, entries now go through
+`lib.sizing.entry_share_quantity(price, per_trade_usd, max_price_per_share)`:
+
+- **price < `per_trade_usd`**: buy `round(per_trade_usd / price)` shares —
+  whichever whole-share count lands closest to the target spend, above or below.
+- **`per_trade_usd` <= price <= `max_price_per_share`**: buy exactly 1 share.
+- **price > `max_price_per_share`**: skip the entry entirely for this cycle
+  (logged as `entry_skipped_price_cap`) rather than buying 1 share regardless
+  of cost — a candidate this expensive never makes it into `entries` at all.
+
+`max_price_per_share` is set to 1.5x `per_trade_usd` by default, chosen so
+the round() branch above can never land on a share costing more than the cap,
+and never rounds down to 0 shares for any price this doesn't already skip.
 
 ## Order-lifecycle robustness & alerting
 
