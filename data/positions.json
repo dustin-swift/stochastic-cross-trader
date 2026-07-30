@@ -1,0 +1,22 @@
+{
+  "JHX": {
+    "entry_order_id": "6a6b9b28-615d-41df-9a0d-58e74ab0cbde",
+    "entry_price": 26.4499,
+    "entry_time": "2026-07-30T18:42:54Z",
+    "qty": 0.756146,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": null,
+    "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T18:43:37Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+  },
+  "XLF": {
+    "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
+    "entry_price": 56.86,
+    "entry_time": "2026-07-30T17:40:33Z",
+    "qty": 0.351741,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": null,
+    "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+  }
+}
