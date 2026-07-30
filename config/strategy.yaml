@@ -15,7 +15,14 @@ account_number: "849995824"  # Robinhood Agentic account (••••5824)
 # high) and export it to the path below. See README for the full workflow.
 screening:
   finviz_csv_path: data/finviz_export.csv
-  max_candidates_per_sector: 5     # keeps basket diversified across sectors (applied in code, Finviz has no native per-sector cap)
+  # No per-sector cap (2026-07-30): deliberately uncapped so the daily list
+  # tracks wherever Finviz's momentum/52wk-high/SMA50 filters are actually
+  # finding strength that day, sector concentration and all, rather than
+  # artificially diversifying away from the hottest sectors. Set high enough
+  # that it never trims a realistic daily export (applied in code, Finviz has
+  # no native per-sector cap) — not literally "off" so the mechanism stays in
+  # place if a cap is ever wanted again, just a one-line edit away.
+  max_candidates_per_sector: 999
 
 # --- Step 3: hourly stochastic oscillator entry/exit signal ---
 stochastic:
