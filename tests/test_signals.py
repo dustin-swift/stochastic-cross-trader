@@ -1,0 +1,218 @@
+import numpy as np
+import pandas as pd
+import pytest
+
+from lib.signals import (
+    STATE_NORMAL,
+    STATE_OVERBOUGHT_HOLD,
+    entry_signal,
+    exit_signal,
+    stop_price,
+    update_stochastic_state,
+)
+
+
+def _stoch_df(k_values, d_values):
+    return pd.DataFrame({"k": k_values, "d": d_values})
+
+
+def test_entry_signal_true_dual_confirmation_and_prior_oversold():
+    # prior bar: k=18 (<20, satisfies "was below 20"), k<=d (18<=19)
+    # signal bar: k=22 crosses above 20, and k(22)>d(20) crosses above d
+    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 20])
+    assert entry_signal(df) is True
+
+
+def test_entry_signal_false_no_d_crossover():
+    # k crosses above 20, but k was already above d on prior bar -> no crossover
+    df = _stoch_df([25, 18, 22], [30, 15, 19])
+    assert entry_signal(df) is False
+
+
+def test_entry_signal_false_no_threshold_crossover():
+    # d crossover happens, but k never crosses above 20 (already above it)
+    df = _stoch_df([30, 25, 30], [35, 26, 28])
+    assert entry_signal(df) is False
+
+
+def test_entry_signal_false_insufficient_history():
+    df = _stoch_df([22], [20])
+    assert entry_signal(df) is False
+
+
+def test_entry_signal_false_with_nan():
+    # NaN in the immediately-preceding bar (the one actually evaluated for
+    # default lookback_bars=1) must short-circuit to False, not raise/compare NaN.
+    df = _stoch_df([30, np.nan, 22], [35, np.nan, 20])
+    assert entry_signal(df) is False
+
+
+def test_entry_signal_false_with_nan_outside_lookback_window():
+    # NaN further back than the lookback window doesn't matter.
+    df = _stoch_df([np.nan, 18, 22], [np.nan, 19, 20])
+    assert entry_signal(df) is True
+
+
+def test_entry_signal_wider_lookback_still_true():
+    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 20])
+    assert entry_signal(df, lookback_bars=3) is True
+
+
+def test_exit_signal_true_bearish_crossover():
+    df = _stoch_df([25, 18], [20, 19])
+    assert exit_signal(df) is True
+
+
+def test_exit_signal_false_already_below():
+    df = _stoch_df([15, 10], [20, 18])
+    assert exit_signal(df) is False
+
+
+def test_exit_signal_false_with_nan():
+    df = _stoch_df([25, np.nan], [20, 19])
+    assert exit_signal(df) is False
+
+
+def test_exit_signal_default_state_is_normal():
+    # Explicit STATE_NORMAL matches the default (no state param) — same
+    # bearish-crossover behavior either way.
+    df = _stoch_df([25, 18], [20, 19])
+    assert exit_signal(df) == exit_signal(df, state=STATE_NORMAL)
+
+
+# -- overbought-hold state machine (spec §4 refinement) ------------------
+
+
+def test_update_state_stays_normal_when_never_overbought():
+    df = _stoch_df([30, 45, 60], [28, 40, 55])
+    assert update_stochastic_state(STATE_NORMAL, df) == STATE_NORMAL
+
+
+def test_update_state_transitions_when_both_lines_at_or_above_threshold():
+    df = _stoch_df([60, 82], [58, 81])
+    assert update_stochastic_state(STATE_NORMAL, df, overbought_threshold=80) == STATE_OVERBOUGHT_HOLD
+
+
+def test_update_state_transitions_at_exact_threshold():
+    df = _stoch_df([60, 80], [58, 80])
+    assert update_stochastic_state(STATE_NORMAL, df, overbought_threshold=80) == STATE_OVERBOUGHT_HOLD
+
+
+def test_update_state_does_not_transition_when_only_k_spikes():
+    # %K pokes above 80 but %D hasn't followed -> must NOT enter overbought-hold.
+    df = _stoch_df([60, 85], [58, 65])
+    assert update_stochastic_state(STATE_NORMAL, df, overbought_threshold=80) == STATE_NORMAL
+
+
+def test_update_state_does_not_transition_when_only_d_is_high():
+    df = _stoch_df([60, 70], [58, 85])
+    assert update_stochastic_state(STATE_NORMAL, df, overbought_threshold=80) == STATE_NORMAL
+
+
+def test_update_state_is_sticky_even_if_lines_have_since_dropped():
+    # Already in the hold state -> stays there even though the latest bar's
+    # values alone wouldn't newly trigger it; only exit_signal leaves the hold.
+    df = _stoch_df([60, 50], [58, 45])
+    assert update_stochastic_state(STATE_OVERBOUGHT_HOLD, df) == STATE_OVERBOUGHT_HOLD
+
+
+def test_update_state_missing_field_defaults_to_normal_behavior():
+    # A position written before this feature existed has no stochastic_state
+    # field; any non-hold value must behave exactly like STATE_NORMAL.
+    df = _stoch_df([60, 82], [58, 81])
+    assert update_stochastic_state("", df, overbought_threshold=80) == STATE_OVERBOUGHT_HOLD
+
+
+def test_update_state_nan_does_not_transition():
+    df = _stoch_df([60, np.nan], [58, np.nan])
+    assert update_stochastic_state(STATE_NORMAL, df, overbought_threshold=80) == STATE_NORMAL
+
+
+def test_overbought_hold_ignores_whipsaw_crossovers():
+    # Spec's example: both lines pinned near 100, crossing above/below each
+    # other repeatedly while price keeps climbing -> must not exit on any of it.
+    whipsaw_k = [95, 99, 88, 97, 91, 98]
+    whipsaw_d = [93, 90, 96, 89, 97, 90]
+    for i in range(2, len(whipsaw_k) + 1):
+        df = _stoch_df(whipsaw_k[:i], whipsaw_d[:i])
+        assert exit_signal(df, state=STATE_OVERBOUGHT_HOLD, overbought_threshold=80) is False
+
+
+def test_overbought_hold_exits_when_both_lines_drop_below_threshold():
+    df = _stoch_df([95, 78], [93, 76])
+    assert exit_signal(df, state=STATE_OVERBOUGHT_HOLD, overbought_threshold=80) is True
+
+
+def test_overbought_hold_does_not_exit_if_only_one_line_drops():
+    # %K dips below 80 but %D is still >= 80 -> still holding.
+    df = _stoch_df([95, 75], [93, 85])
+    assert exit_signal(df, state=STATE_OVERBOUGHT_HOLD, overbought_threshold=80) is False
+
+
+def test_overbought_hold_exit_ignores_stale_nan_history():
+    # Only the latest bar matters for the hold-exit check, not history shape.
+    df = _stoch_df([np.nan, 95, 75], [np.nan, 93, 76])
+    assert exit_signal(df, state=STATE_OVERBOUGHT_HOLD, overbought_threshold=80) is True
+
+
+def test_overbought_hold_exit_false_when_latest_bar_is_nan():
+    df = _stoch_df([95, np.nan], [93, np.nan])
+    assert exit_signal(df, state=STATE_OVERBOUGHT_HOLD, overbought_threshold=80) is False
+
+
+def test_full_lifecycle_normal_then_hold_then_exit():
+    # Simulates the state carrying across cycles: NORMAL entry that never
+    # reaches overbought exits on an ordinary bearish cross (unchanged
+    # behavior); a separate run that does reach overbought whipsaws freely
+    # then exits only on the double drop below threshold.
+
+    # -- unchanged path: ordinary bearish crossover, never overbought -----
+    state = STATE_NORMAL
+    df = _stoch_df([40, 55, 45], [38, 50, 52])  # crosses below on the last bar
+    state = update_stochastic_state(state, df, overbought_threshold=80)
+    assert state == STATE_NORMAL
+    assert exit_signal(df, state=state, overbought_threshold=80) is True
+
+    # -- overbought-hold path ------------------------------------------------
+    state = STATE_NORMAL
+    bars_k = [40, 60, 82, 91, 88, 95, 78]
+    bars_d = [38, 55, 81, 95, 90, 85, 76]
+    expected_states = [
+        STATE_NORMAL,  # after bar 2 (index1)
+        STATE_OVERBOUGHT_HOLD,  # after bar 3 (index2) -> both >= 80
+        STATE_OVERBOUGHT_HOLD,
+        STATE_OVERBOUGHT_HOLD,
+        STATE_OVERBOUGHT_HOLD,
+        STATE_OVERBOUGHT_HOLD,
+    ]
+    exited = False
+    for i in range(2, len(bars_k) + 1):
+        df = _stoch_df(bars_k[:i], bars_d[:i])
+        state = update_stochastic_state(state, df, overbought_threshold=80)
+        assert state == expected_states[i - 2]
+        signal = exit_signal(df, state=state, overbought_threshold=80)
+        if i < len(bars_k):
+            assert signal is False
+        else:
+            exited = signal
+    assert exited is True  # final bar (78/76, both < 80) triggers the exit
+
+
+def test_stop_price_basic():
+    assert stop_price(100.0, 2.0, mult=1.5) == pytest.approx(97.0)
+
+
+def test_stop_price_default_mult():
+    assert stop_price(50.0, 1.0) == pytest.approx(48.5)
+
+
+@pytest.mark.parametrize("entry_price", [0, -5])
+def test_stop_price_invalid_entry_price(entry_price):
+    with pytest.raises(ValueError):
+        stop_price(entry_price, 1.0)
+
+
+@pytest.mark.parametrize("atr", [-1, float("nan")])
+def test_stop_price_invalid_atr(atr):
+    with pytest.raises(ValueError):
+        stop_price(100.0, atr)

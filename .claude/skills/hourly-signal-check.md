@@ -1,0 +1,100 @@
+---
+name: hourly-signal-check
+description: Run hourly during market hours. Reconciles open positions, checks the daily-loss circuit breaker, evaluates the stochastic entry/exit signal (state-aware — see the §4 overbought-hold refinement) plus earnings/catalyst avoidance against today's candidate list and open positions, and (only if config live=true) places real orders with a resting ATR stop.
+---
+
+# Hourly Signal Check
+
+Spec: `~/Downloads/hourly-stochastic-strategy-spec (1).md` §3-5, §6b. Plan: `/Users/dustinrowley/.claude/plans/elegant-brewing-phoenix.md`.
+
+**Read `config/strategy.yaml` first.** Every threshold and the `live` flag live
+there — this doc describes the procedure, not the numbers. If `live: false`
+(the default), this run computes and logs everything but **must not call any
+order-placing or order-cancelling tool**. Treat that as a hard rule, not a
+suggestion — dry-run is the whole point of the flag.
+
+## 0. Setup
+
+- `account_number` = `config/strategy.yaml`'s `account_number`.
+- Load `data/positions.json` and `data/candidates.json` (read the files directly, or run a one-off `python3 -c "from lib.state import StateStore; import json; print(json.dumps(StateStore().load_positions()))"` — either is fine).
+
+## 1. Reconcile first
+
+Before evaluating any new signal, check whether reality has moved since the last cycle:
+
+- For each symbol in `positions.json` with a `stop_order_id`: `get_equity_orders(account_number, order_id=stop_order_id)`. If `state=filled`, the position was **stopped out** at the broker since the last cycle (a resting order can fill any time, not just when this skill runs).
+  - Clear that symbol's slot from `positions.json` (rewrite the file — atomic write, see `lib/state.py`).
+  - Log a `stop_out` event: symbol, fill price/time from the order record.
+- Cross-check against `get_equity_positions(account_number)` for anything in `positions.json` that no longer has a matching real position (or vice versa) — log a `reconciliation_drift` event if you find a mismatch (e.g. a manual trade placed outside this system) but don't guess at a fix; surface it.
+
+## 2. Circuit breaker check
+
+- `get_portfolio(account_number)` → account value, unrealized P&L.
+- `get_realized_pnl(account_number, span="day", asset_classes=["equity"])` → today's realized P&L. Pass `asset_classes` explicitly — omitting it errors with "un-specified asset class" in practice, despite the tool description saying it's optional (confirmed during the first dry run).
+- `echo '{"account_value": ..., "realized_pnl_today": ..., "unrealized_pnl_today": ...}' | python3 scripts/check_circuit_breaker.py` → `{"tripped": bool}`. This already logs `circuit_breaker_check` (always) and `circuit_breaker_triggered` + sends an alert (only if tripped) — don't duplicate that logging yourself.
+- If `tripped`: **skip all new-entry evaluation for the rest of this run** (section 4 below). Exit/stop-out handling (sections 1 and 5) still runs normally — the breaker only blocks opening new risk, it doesn't touch existing positions.
+
+## 3. Determine slot availability
+
+`lib.state.has_open_slot(positions, config["sizing"]["max_positions"])`. If the breaker tripped in step 2, treat slots as unavailable regardless of the actual count — same effect (no new entries), simpler to reason about.
+
+## 4. Fetch bars and run the signal check
+
+Skip entry-side fetching entirely if step 2 tripped the breaker or step 3 has no open slot — no point spending calls on symbols you won't act on. Exit-side (open positions) always runs.
+
+- **Candidates** (only if a slot is open and the breaker isn't tripped): for each symbol in `data/candidates.json` **not already in** `positions.json`, `get_equity_historicals(symbols=[...], interval="hour", start_time=<enough lookback for k_period+k_smooth+d_period bars — a few trading days back is plenty>)`. Batch up to 10 symbols per call. Check the `interpolated` flag on returned bars — real intraday data has historically covered roughly the trailing 2-4 weeks in this environment; if a symbol's recent bars come back `interpolated=true`, skip it and log why rather than feeding synthetic data into the signal.
+- **Open positions**: same `get_equity_historicals` call, `interval="hour"`, for every symbol in `positions.json`.
+- **Earnings/catalyst check** (both candidates and open positions — see `lib/catalysts.py` and the daily-screen skill for why this exists): `get_earnings_results(symbol=...)` for each symbol you're about to include in the payload — candidates *not already earnings-filtered by today's daily screen are still worth checking here as defense-in-depth*, but open positions in particular need a **fresh** check every cycle, since a position can be held for several days after the daily screen last looked at it and drift into an earnings date that was safely far away at entry time. Build the report-dates list per symbol from the response (past dates are harmless to include, `lib.catalysts` ignores them). If a fetch fails for a symbol, simply omit `earnings_report_dates` for it — candidates fall back to "not re-checked here" (fine, the daily screen is still the primary gate) and open positions fall back to normal signal logic (deliberately **not** a forced exit — see script docstring, a data-fetch hiccup shouldn't liquidate a live position).
+- Build the payload. For each open position, pass its current `stochastic_state` from `positions.json` (a position written before this field existed, or one you're testing from scratch, has no such key — omit it and the script defaults to `NORMAL`, so nothing needs a migration):
+  ```json
+  {
+    "candidates": [{"symbol": "AAPL", "sector": "Technology", "atr14": null, "earnings_report_dates": ["2026-08-15"], "bars": [{"high":.., "low":.., "close":..}, ...]}],
+    "open_positions": [{"symbol": "MSFT", "entry_price": 400.0, "qty": 0.25, "stochastic_state": "NORMAL", "earnings_report_dates": [], "bars": [...]}]
+  }
+  ```
+  Bars must be oldest-first. Leave `atr14: null` for now — it's only needed to compute the *estimated* stop shown in dry-run output; fetch it (`get_equity_technical_indicators(symbol, type="atr", period=config["atr"]["period"], interval="hour")`) only for candidates, and only if you want that estimate populated. It is **not** used for the real stop calculation on a live entry — that happens after the real fill (section 6).
+- Run it: `echo '<payload>' | python3 scripts/check_hourly_signals.py` → `{"entries": [...], "exits": [...], "position_states": [...]}`. This call also logs a `signal_check` event per symbol regardless of `live`. A candidate skipped for earnings shows up with `skipped="earnings_too_close"` in the log rather than an entry signal; an earnings-forced exit shows up in `exits` with `"exit_reason": "earnings_exit"`.
+- **Persist `position_states` immediately**, before doing anything else with the result: for every entry in `position_states`, write its `stochastic_state` back onto the matching symbol in `positions.json` (atomic write). Do this on **every** cycle, not just cycles with an exit — a position that just transitioned into `OVERBOUGHT_HOLD` (or is still there) needs that recorded even when nothing else changes, otherwise the next cycle would incorrectly start it back at `NORMAL` and the whole point of the state machine (see spec §4) is lost.
+
+## 5. Exits — bearish %K/%D crossover, overbought-hold reversal, or earnings-forced
+
+The `exits` list already reflects the state-aware logic (spec §4): a position in `NORMAL` state exits on an ordinary bearish %K/%D crossover, same as before. A position that reached `OVERBOUGHT_HOLD` (both %K and %D simultaneously >= `stochastic.overbought_threshold`, default 80) ignores crossovers entirely — even repeated whipsaws between the two lines — and exits only once both lines drop back below that threshold. A third case, `exit_reason: "earnings_exit"`, fires regardless of stochastic state whenever a held position's next known earnings report falls within `catalysts.earnings_forced_exit_days` — this one is a scheduled risk decision, not a signal read, so don't second-guess it against the k/d values even if they look fine. You don't need to implement any of this here; `check_hourly_signals.py` already applied it using what you fed in at step 4. This step is purely about acting on the result — the handling below is identical regardless of which of the three reasons fired.
+
+For each symbol in the `exits` list that's still an open position (re-check against the reconciled `positions.json` from step 1 — it may have just been stopped out):
+
+- **`live: false`**: log an `exit_dry_run` event (symbol, qty, current k/d, `stochastic_state`) and stop there.
+- **`live: true`**:
+  1. `cancel_equity_order(account_number, order_id=stop_order_id)` — cancel the resting stop *first*, so it can't also fire and double-sell. **This is unchanged by the overbought-hold refinement**: the resting ATR stop stays active and untouched throughout `OVERBOUGHT_HOLD` — it only ever gets cancelled here, at the moment of an actual exit, exactly as before. Suspending the oscillator-based exit never means suspending risk management.
+  2. `place_equity_order(account_number, symbol, side="sell", type="market", quantity=qty, ref_id=<new uuid>)`.
+  3. Remove the symbol from `positions.json` (atomic write).
+  4. Log `exit_executed` (symbol, qty, order id).
+
+## 6. Entries — dual-confirmation stochastic crossover
+
+Take `entries` in the order returned, up to however many open slots remain (recompute slot count after step 5's exits, if any freed one up mid-run).
+
+- **`live: false`**: log an `entry_dry_run` event per candidate (symbol, k/d, `estimated_stop_price`) and stop there — **do not** call `place_equity_order`.
+- **`live: true`**, for each entry, in order, stopping once slots are full:
+  1. `place_equity_order(account_number, symbol, side="buy", type="market", dollar_amount="100.00", market_hours="regular_hours", ref_id=<new uuid>)`. Dollar-based sizing requires a plain market order in regular hours — this is intentional, not a shortcut (see tool inventory: fractional/dollar orders are market+regular_hours only).
+  2. **Poll loop** (spec §6b): every `config["order_lifecycle"]["poll_interval_seconds"]`, call `get_equity_orders(account_number, order_id=<entry order id>)`, then feed the result through `scripts/evaluate_order_fill.py`:
+     ```bash
+     echo '{"symbol": "...", "order_id": "...", "order_state": "<state from get_equity_orders>", "filled_qty": <from order>, "requested_qty": <original quantity>, "elapsed_seconds": <time since order placed>}' | python3 scripts/evaluate_order_fill.py
+     ```
+     (`timeout_seconds` defaults to `config["order_lifecycle"]["poll_timeout_seconds"]` if omitted.) Keep polling while the returned `decision` is `"wait"`. Stop as soon as it's anything else:
+     - **`"rejected"`** (order came back rejected/cancelled/failed/voided at any point): already logged and alerted by the script. Do **not** proceed to stop placement, do **not** write a position. Move on to the next entry candidate.
+     - **`"timeout"`** (still unfilled when the poll timeout was reached): already logged and alerted. `cancel_equity_order(account_number, order_id=<entry order id>)` since `needs_cancel=true` — don't leave a stale order resting. No position written. Move on.
+     - **`"proceed"`**: use the returned `filled_qty` (this is the real filled quantity — on a clean full fill it equals the request, but on a late partial fill past timeout it's less; either way, if `needs_cancel=true`, `cancel_equity_order` the unfilled remainder before continuing so nothing keeps resting). Continue to step 3 below with this `filled_qty` and the real average fill price from the order record.
+  3. `get_equity_technical_indicators(symbol, type="atr", period=config["atr"]["period"], interval="hour", output="latest")` for the real ATR at this moment (re-fetch, don't reuse a stale value from step 4).
+  4. `lib.signals.stop_price(fill_price, atr14, mult=config["atr"]["stop_multiplier"])`.
+  5. **Immediately** `place_equity_order(account_number, symbol, side="sell", type="stop_market", stop_price=<computed>, quantity=<filled_qty from step 2>, time_in_force="gtc", ref_id=<new uuid>)` — this is the real resting protective stop. This is not optional and not deferred to "check again next hour": the whole reason for a resting order instead of a soft check is that this system runs unattended.
+  6. **If step 5 fails**: retry immediately, once. If it still fails, this is a critical situation — a live position with no protective stop:
+     ```bash
+     echo '{"symbol": "...", "qty": <filled_qty>, "fill_price": <fill price>, "error": "<the error>"}' | python3 scripts/record_stop_failure.py
+     ```
+     This always logs `stop_placement_failed` and sends an alert — don't treat it as a normal log line to move past; this is the one failure mode the whole design exists to avoid, and it needs a human to look at it. Do not write a position to `positions.json` in this case either — an unprotected fill with no recorded stop is worse tracked than untracked, since untracked at least prompts a manual look at the account.
+  7. Write the new position into `positions.json`: `{entry_price: fill_price, qty: filled_qty, entry_time, entry_order_id, stop_order_id, stop_price, stochastic_state: "NORMAL"}` — every new position starts in `NORMAL` (spec §4); it only moves to `OVERBOUGHT_HOLD` via step 4 of a later cycle.
+  8. Log `entry_executed` and `stop_placed` events.
+
+## 7. Cycle summary
+
+Log (and report back to whoever/whatever triggered this run) a one-line summary: candidates checked, entries taken vs. proposed, exits taken, stop-outs found in reconciliation, circuit-breaker status, slots remaining. This is what a human skims to sanity-check a cycle without reading the full JSONL log.

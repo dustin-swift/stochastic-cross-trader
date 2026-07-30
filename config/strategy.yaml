@@ -1,0 +1,111 @@
+# Hourly Stochastic Pullback Strategy — tunable config.
+# Edit values here to refine the strategy; no code changes needed.
+
+# Live/dry-run switch. Must be flipped to true explicitly and deliberately —
+# everything defaults to dry-run (signals/orders are computed and logged,
+# but no order tools are ever called) until this is true.
+live: true
+
+account_number: "849995824"  # Robinhood Agentic account (••••5824)
+
+# --- Daily universe screen (spec §2, §6a) — Finviz-backed, manual export ---
+# Market cap / price / volume / % off 52wk-high / above-SMA50 filters all live
+# on the Finviz side now: build the screen in the Finviz Elite UI (market cap
+# > $2B, price > $10, avg volume > 750K, price > SMA50, within 15% of 52-week
+# high) and export it to the path below. See README for the full workflow.
+screening:
+  finviz_csv_path: data/finviz_export.csv
+  max_candidates_per_sector: 5     # keeps basket diversified across sectors (applied in code, Finviz has no native per-sector cap)
+
+# --- Step 3: hourly stochastic oscillator entry/exit signal ---
+stochastic:
+  k_period: 14
+  k_smooth: 3
+  d_period: 3
+  oversold_threshold: 20
+  # Overbought-hold exit refinement (spec §4): once %K and %D are both >= this
+  # threshold, the position's signal exit switches from "any bearish %K/%D
+  # crossover" to "both lines drop back below this threshold" — so whipsaws
+  # between the two lines while a stock is running hot don't shake you out of
+  # a move that's still working. The resting ATR stop is unaffected either way.
+  overbought_threshold: 80
+  # How many bars back (strictly before the signal bar) %K must have dipped
+  # below oversold_threshold to count as "was below 20 on a prior bar" (spec
+  # §3 condition 1). 1 = only the immediately-preceding bar.
+  # NOTE: raising this above 1 does NOT make entries stricter/deeper-dip —
+  # traced and confirmed (tests/test_backtest.py) that the crossing condition
+  # itself already requires the immediately-preceding bar to be oversold, and
+  # that bar is always inside the lookback window regardless of its width, so
+  # widening this is a no-op once there's enough clean history to evaluate.
+  # It's kept here (rather than removed) because it's real, tested, load-
+  # bearing behavior for short-history edge cases (see lib/backtest.py) — not
+  # because it's a useful noise-reduction knob, which an earlier version of
+  # this comment incorrectly claimed.
+  entry_lookback_bars: 1
+
+# --- Step 4: ATR-based stop-loss ---
+atr:
+  period: 14
+  stop_multiplier: 1.5
+
+# Backtest-only research variant — NOT read by the live hourly-signal-check
+# pipeline. lib/backtest.py's run_backtest() can simulate a trailing stop
+# when enabled: once a position's unrealized gain (from entry to the running
+# high) reaches activation_pct, its effective stop starts trailing
+# atr_multiplier x current ATR behind that running high — ratcheting up only,
+# never loosening below the original fixed ATR stop. Built to test whether
+# the meaningful giveback seen on overbought-hold winners in the 2026-07
+# 16-symbol backtest (avg 2.75pp between peak and realized exit, some trades
+# round-tripping most of the way back to flat) can be captured without
+# clipping the big winners early. The live resting broker stop stays fixed
+# at entry regardless of this setting, exactly as spec'd, unless/until this
+# is validated and explicitly promoted out of research.
+trailing_stop:
+  enabled: false
+  activation_pct: 3.0     # unrealized gain (%) before the trail arms
+  atr_multiplier: 2.0     # trail distance behind the running high, in ATRs
+
+# Entry-order fill polling (spec §6b). Poll get_equity_orders on this
+# interval up to this timeout before treating an unfilled order as timed out
+# (cancel it, alert, no position written).
+order_lifecycle:
+  poll_timeout_seconds: 30
+  poll_interval_seconds: 5
+
+# Out-of-band alerting for critical unattended-failure events (spec §6b).
+# provider is "slack" or "discord" — determines the webhook JSON payload
+# shape. The webhook URL itself is NOT here: set it via the ALERT_WEBHOOK_URL
+# environment variable (never commit a webhook URL to this file). See README.
+alerts:
+  provider: slack
+
+# --- Step 5: position sizing & risk management ---
+# Deliberately small starting size (2026-07-30): first live cycles are about
+# observing real signal behavior on a real 16-symbol universe with minimal
+# capital at risk, not about return. $20/trade x 10 slots = $200 max
+# theoretical exposure. Revisit once a track record justifies scaling up.
+sizing:
+  per_trade_usd: 20
+  max_positions: 10
+
+# Portfolio-level daily-loss circuit breaker. If realized + unrealized P&L
+# for the day drops below -max_daily_loss_pct% of account value, no new
+# entries are opened for the rest of the day (existing exits/stops still run).
+# Placeholder default — revisit once real ATR-implied stop distances for the
+# actual candidate list are observed.
+risk:
+  max_daily_loss_pct: 3
+
+# Earnings/catalyst avoidance. The resting protective stop is a stop_market
+# order, which per Robinhood's own platform rules can ONLY be placed regular-
+# hours — it's a hard constraint, not a config choice. A pre-market or after-
+# hours earnings gap gets zero stop protection until regular hours resume,
+# and the eventual fill can land well below the intended stop. Since there's
+# no way to protect against the gap itself, the mitigation is avoiding known
+# earnings dates: exclude new candidates whose next report is within
+# earnings_exclusion_days (daily screen), and force-close any open position
+# whose next report is within earnings_forced_exit_days (hourly check) rather
+# than risk holding it across the announcement.
+catalysts:
+  earnings_exclusion_days: 5      # daily screen: don't open a new position this close to earnings
+  earnings_forced_exit_days: 1    # hourly check: close an existing position this close to earnings, regardless of signal state

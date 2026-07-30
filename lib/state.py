@@ -1,0 +1,82 @@
+"""JSON-backed state: today's candidate list, open positions, and daily P&L.
+
+Files live under a data directory (default `data/`, gitignored). Writes are
+atomic (write to a temp file in the same directory, then os.replace) since a
+scheduled cloud agent run could in principle overlap with a manual run.
+"""
+from __future__ import annotations
+
+import json
+import os
+import tempfile
+from pathlib import Path
+from typing import Any
+
+
+def _atomic_write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            json.dump(payload, f, indent=2, sort_keys=True)
+            f.write("\n")
+        os.replace(tmp_path, path)
+    except BaseException:
+        Path(tmp_path).unlink(missing_ok=True)
+        raise
+
+
+def _read_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    with path.open() as f:
+        return json.load(f)
+
+
+class StateStore:
+    """All strategy state for one data directory."""
+
+    def __init__(self, data_dir: str | Path = "data"):
+        self.data_dir = Path(data_dir)
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+    # -- candidates -----------------------------------------------------
+    @property
+    def candidates_path(self) -> Path:
+        return self.data_dir / "candidates.json"
+
+    def load_candidates(self) -> list[dict]:
+        return _read_json(self.candidates_path, default=[])
+
+    def save_candidates(self, candidates: list[dict]) -> None:
+        _atomic_write_json(self.candidates_path, candidates)
+
+    # -- positions --------------------------------------------------------
+    @property
+    def positions_path(self) -> Path:
+        return self.data_dir / "positions.json"
+
+    def load_positions(self) -> dict[str, dict]:
+        return _read_json(self.positions_path, default={})
+
+    def save_positions(self, positions: dict[str, dict]) -> None:
+        _atomic_write_json(self.positions_path, positions)
+
+    # -- daily P&L ----------------------------------------------------------
+    @property
+    def daily_pnl_path(self) -> Path:
+        return self.data_dir / "daily_pnl.json"
+
+    def load_daily_pnl(self) -> dict[str, dict]:
+        return _read_json(self.daily_pnl_path, default={})
+
+    def save_daily_pnl(self, pnl_by_date: dict[str, dict]) -> None:
+        _atomic_write_json(self.daily_pnl_path, pnl_by_date)
+
+
+def has_open_slot(positions: dict[str, dict], max_positions: int) -> bool:
+    return len(positions) < max_positions
+
+
+def open_slot_count(positions: dict[str, dict], max_positions: int) -> int:
+    return max(0, max_positions - len(positions))
