@@ -44,10 +44,15 @@ pip install -r requirements.txt
   — step-by-step runbooks for an agent invocation (Robinhood MCP calls +
   the scripts above). These are what actually run each cycle, whether
   triggered manually or by a scheduled cloud agent.
-- `data/` — gitignored. `finviz_export.csv` (your manual export — see below),
-  `candidates.json` (today's list), `positions.json` (open positions),
-  `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check, decision,
-  order event, and alert).
+- `data/` — gitignored on `main`. `finviz_export.csv` (your manual export —
+  see below), `candidates.json` (today's list), `positions.json` (open
+  positions), `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check,
+  decision, order event, and alert). Not committed to `main` — see Cloud
+  routines & state persistence below for where this data actually lives when
+  running on a schedule.
+- `scripts/sync_state.sh`, `scripts/publish_finviz_export.sh` — the
+  state-persistence and Finviz-publish mechanics for cloud routines (see
+  below).
 
 ## Finviz Elite manual screen
 
@@ -61,8 +66,8 @@ SMA50) is **not automated** — you build and export it yourself:
    - 50-Day Simple Moving Average: price above SMA50
    - 52-Week High/Low: within 15% of the 52-week high
 2. Export the results to CSV (Elite plans include CSV export).
-3. Save the file to `data/finviz_export.csv` (the default path — configurable via `config/strategy.yaml`'s `screening.finviz_csv_path`).
-4. Re-export whenever you want to refine the filters, or when the daily screen reports the file is stale.
+3. Publish it: `bash scripts/publish_finviz_export.sh /path/to/your/export.csv`. This is the step that actually matters when the daily screen runs as a scheduled cloud routine (see Cloud routines & state persistence below) — the routine runs in a fresh clone with no access to your Mac, so simply saving the file locally to `data/finviz_export.csv` isn't enough on its own; the script pulls the latest `bot-state`, copies your export into `data/`, and pushes it back so the next cloud run can see it. (If you're only ever running the skills manually, by hand, from this machine, saving the file to `data/finviz_export.csv` directly also works — `screening.finviz_csv_path` is configurable in `config/strategy.yaml` — but the script is the supported path once anything is scheduled.)
+4. Re-publish whenever you want to refine the filters, or when the daily screen reports the file is stale.
 
 **Staleness check**: the daily-universe-screen skill refuses to run on a stale
 export. "Stale" is trading-day-aware, not just "older than N hours" — a
@@ -259,11 +264,70 @@ Everything in the suite is deterministic and network-free — the only real
 network call in the whole repo is `lib/alerts.py`'s webhook POST, and it's
 mocked (`requests.post`) in every test.
 
+## Cloud routines & state persistence
+
+The two skills above are designed to run as **scheduled cloud agents**
+(Anthropic's `RemoteTrigger`/routines mechanism, via the `schedule` skill) —
+not a machine that has to stay on. This matters because a cloud routine
+starts from a **fresh, isolated git clone of this repo on every single run**:
+it has no memory of the previous run and no access to your Mac's filesystem
+or your local Claude Code session. Three consequences, and how each is
+handled:
+
+1. **State needs to survive between runs somewhere other than a gitignored
+   local folder.** `data/` (`positions.json`, `candidates.json`,
+   `finviz_export.csv`, `logs/`) is gitignored on `main` and stays that way —
+   it's never committed to the code-history branch. Instead it lives on a
+   dedicated **`bot-state`** branch, kept deliberately separate from `main` so
+   the code history isn't cluttered with dozens of small hourly data commits.
+   `scripts/sync_state.sh` moves `data/` in and out of that branch:
+   - `sync_state.sh pull` — refreshes local `data/` from `origin/bot-state`. Every skill run does this first.
+   - `sync_state.sh push` — commits current `data/` back to `origin/bot-state`. Every skill run does this last.
+   - Implemented via low-level git plumbing (`write-tree`/`ls-tree`/`mktree`/`commit-tree`) — it never checks out `bot-state`, never switches `HEAD`, and never touches `main`'s commit history. Safe to run from any branch, including mid-run on a cloud agent's checkout of `main`.
+   - No-ops cleanly if `data/` hasn't actually changed since the last push.
+   - Both skill docs (`.claude/skills/daily-universe-screen.md`,
+     `.claude/skills/hourly-signal-check.md`) call this at the start and end
+     of every run — this is not optional, it's a mandatory first/last step in
+     each runbook.
+
+2. **The Finviz CSV needs a delivery path from your Mac to the cloud.** You
+   still export it by hand in the Finviz Elite UI (see above), but instead of
+   just saving it to `data/finviz_export.csv` locally, run
+   `scripts/publish_finviz_export.sh /path/to/export.csv` — it pulls the
+   latest `bot-state` (so it doesn't clobber cloud-accumulated
+   positions/candidates state with a stale local copy), copies your export
+   in, and pushes `bot-state` back out. Do this before the next scheduled
+   daily-screen run needs it.
+
+3. **This repo needs to actually be on GitHub** so a cloud routine has
+   something to clone: `git@github.com:dustin-swift/stochastic-cross-trader.git`
+   (`main` = code, `bot-state` = data — see above). And the **Robinhood MCP
+   connector needs to be explicitly authorized for routine/cloud use** at
+   https://claude.ai/customize/connectors — the connector authorized for a
+   local Claude Code CLI session is a separate authorization and is not
+   automatically available to a cloud routine.
+
+An unattended trading bot that silently loses track of its own open
+positions between runs — thinking a slot is open when it's actually
+occupied, or vice versa — is a much worse failure mode than anything else
+this system guards against, which is why this got built out as real
+architecture (a branch + a script + mandatory skill steps) rather than an
+assumption that `data/` would "just be there."
+
 ## Scheduling
 
-Not yet wired up. Per the plan, once manual dry-run cycles have been reviewed,
-the next step is two scheduled cloud agents (via the `schedule` skill) running
-the two skills above on a daily / hourly cadence — still dry-run first.
+Two scheduled cloud routines, one per skill, created via the `schedule`
+skill / `RemoteTrigger`, each pointed at this repo and configured with the
+Robinhood MCP connector (see prerequisite #3 above):
+
+- **daily-universe-screen** — once per day, before market open. Requires a
+  freshly published Finviz export (`scripts/publish_finviz_export.sh`,
+  run locally by you) beforehand.
+- **hourly-signal-check** — hourly during market hours.
+
+Minimum cron interval for a routine is 1 hour. Both routines are safe to
+also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
+agent to follow the skill directly) any time, in addition to their schedule.
 
 ## Safety notes
 

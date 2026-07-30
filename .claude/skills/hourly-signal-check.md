@@ -15,6 +15,12 @@ suggestion — dry-run is the whole point of the flag.
 
 ## 0. Setup
 
+This routine runs in an isolated cloud checkout with no memory of previous
+runs and no access to the user's Mac. All persistent state (`data/` —
+`positions.json`, `candidates.json`, `finviz_export.csv`, logs) lives on a
+dedicated `bot-state` branch, not in the routine's working tree by default.
+
+- **Sync state in (mandatory, do this first)**: `bash scripts/sync_state.sh pull` — populates `data/` from the `bot-state` branch. If it reports no `bot-state` branch yet, continue with an empty `data/`: `positions.json`/`candidates.json` will simply read as empty/missing, which is the correct "nothing open, nothing to trade" starting state for a genuinely fresh setup.
 - `account_number` = `config/strategy.yaml`'s `account_number`.
 - Load `data/positions.json` and `data/candidates.json` (read the files directly, or run a one-off `python3 -c "from lib.state import StateStore; import json; print(json.dumps(StateStore().load_positions()))"` — either is fine).
 
@@ -95,6 +101,10 @@ Take `entries` in the order returned, up to however many open slots remain (reco
   7. Write the new position into `positions.json`: `{entry_price: fill_price, qty: filled_qty, entry_time, entry_order_id, stop_order_id, stop_price, stochastic_state: "NORMAL"}` — every new position starts in `NORMAL` (spec §4); it only moves to `OVERBOUGHT_HOLD` via step 4 of a later cycle.
   8. Log `entry_executed` and `stop_placed` events.
 
-## 7. Cycle summary
+## 7. Sync state out
+
+`bash scripts/sync_state.sh push` — commits the updated `data/positions.json` (and today's log file) back to `bot-state`, so the next hourly cycle (and the next daily screen) see this run's reconciliation, entries, exits, and stop-outs. Run this even on a cycle with no entries/exits — `sync_state.sh push` correctly no-ops on an unchanged tree, so there's no harm running it every cycle unconditionally.
+
+## 8. Cycle summary
 
 Log (and report back to whoever/whatever triggered this run) a one-line summary: candidates checked, entries taken vs. proposed, exits taken, stop-outs found in reconciliation, circuit-breaker status, slots remaining. This is what a human skims to sanity-check a cycle without reading the full JSONL log.
