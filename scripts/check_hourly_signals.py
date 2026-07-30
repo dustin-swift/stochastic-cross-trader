@@ -70,6 +70,16 @@ asymmetrically on purpose:
   existing position shouldn't get liquidated because a data fetch happened
   to fail this cycle; that's a materially more disruptive default than
   skipping a not-yet-opened candidate.
+
+Trend-intact filter (config["trend_filter"], spec §4a, optional -- defaults
+to enabled with a 50-bar SMA if the section is omitted entirely): stochastic
+whipsaws repeatedly during a genuinely trending move, so a bearish %K/%D
+crossover on a STATE_NORMAL position is suppressed whenever price is still
+above its own SMA on the signal bar (see lib.indicators.sma, lib.signals
+docstring). Computed fresh each cycle from the same bars already fetched for
+the stochastic calc -- no extra data, no state field. STATE_OVERBOUGHT_HOLD
+is completely unaffected (governed purely by the downside-80 rule); this
+only ever gates the plain crossover exit.
 """
 from __future__ import annotations
 
@@ -85,7 +95,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lib.catalysts import is_too_close_to_earnings
 from lib.config import load_config
-from lib.indicators import stochastic
+from lib.indicators import sma, stochastic
 from lib.logging_utils import EventLogger
 from lib.signals import STATE_NORMAL, STATE_OVERBOUGHT_HOLD, entry_signal, exit_signal, stop_price, update_stochastic_state
 from lib.sizing import entry_share_quantity
@@ -112,6 +122,20 @@ def _stoch(bars: list[dict], stoch_cfg: dict) -> pd.DataFrame:
     )
 
 
+def _trend_intact(bars: list[dict], sma_period: int) -> bool | None:
+    """spec §4a: is price still above its own SMA on the last bar? None if
+    there isn't enough bar history yet to compute the SMA -- exit_signal
+    treats None the same as "unknown," falling through to the plain
+    crossover check rather than trapping the position open on missing data.
+    """
+    df = pd.DataFrame(bars)[["close"]].astype(float)
+    sma_series = sma(df, period=sma_period, column="close")
+    latest_sma = sma_series.iloc[-1]
+    if pd.isna(latest_sma):
+        return None
+    return bool(df["close"].iloc[-1] > latest_sma)
+
+
 def run(payload: dict, config: dict, logger: EventLogger, today: date | None = None) -> dict:
     stoch_cfg = config["stochastic"]
     oversold = stoch_cfg["oversold_threshold"]
@@ -122,6 +146,9 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
     catalysts_cfg = config.get("catalysts", {})
     earnings_exclusion_days = catalysts_cfg.get("earnings_exclusion_days", 5)
     earnings_forced_exit_days = catalysts_cfg.get("earnings_forced_exit_days", 1)
+    trend_filter_cfg = config.get("trend_filter", {})
+    trend_filter_enabled = trend_filter_cfg.get("enabled", True)
+    trend_filter_sma_period = trend_filter_cfg.get("sma_period", 50)
     today = today or date.today()
 
     entries = []
@@ -219,7 +246,14 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
         # both lines above the overbought threshold must already suppress a
         # same-bar crossover exit, not wait a cycle (spec §4).
         new_state = update_stochastic_state(prior_state, sdf, overbought_threshold=overbought)
-        signal = exit_signal(sdf, state=new_state, overbought_threshold=overbought)
+
+        # Trend-intact filter (spec §4a): only meaningful for the NORMAL-state
+        # crossover check — OVERBOUGHT_HOLD ignores it entirely inside
+        # exit_signal — but it's cheap to always compute when enabled rather
+        # than branch on state here too.
+        trend_intact = _trend_intact(bars, trend_filter_sma_period) if trend_filter_enabled else None
+
+        signal = exit_signal(sdf, state=new_state, overbought_threshold=overbought, trend_intact=trend_intact)
 
         logger.log(
             "signal_check",
@@ -230,6 +264,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
             d=d,
             stochastic_state=new_state,
             state_transitioned=new_state != prior_state,
+            trend_intact=trend_intact,
         )
 
         position_states.append({"symbol": symbol, "k": k, "d": d, "stochastic_state": new_state})

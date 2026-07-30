@@ -44,3 +44,12 @@ def stochastic(
     d = k.rolling(window=d_period).mean()
 
     return pd.DataFrame({"k": k, "d": d}, index=bars.index)
+
+
+def sma(bars: pd.DataFrame, period: int, column: str = "close") -> pd.Series:
+    """Simple moving average of `column` over `period` bars (spec §4a trend
+    filter). Rows before `period` bars of history exist are NaN.
+    """
+    if column not in bars.columns:
+        raise ValueError(f"bars is missing required column: {column!r}")
+    return bars[column].rolling(window=period).mean()

@@ -505,6 +505,101 @@ def test_check_hourly_signals_overbought_hold_suppresses_exit_and_persists_state
     assert [e["symbol"] for e in output3["exits"]] == ["NVDA"]
 
 
+def test_check_hourly_signals_trend_filter_suppresses_normal_exit(tmp_path):
+    cfg = {
+        **BASE_CFG,
+        "stochastic": {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80},
+        "trend_filter": {"enabled": True, "sma_period": 3},
+    }
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    def bar(close):
+        return {"high": 50, "low": 0, "close": close}
+
+    # closes -> k=[.., 50, 46], d=[.., 45, 48]: prev_k(50)>=prev_d(45) and
+    # cur_k(46)<cur_d(48) -> a genuine bearish crossover under STATE_NORMAL,
+    # k/d both well under 80 so no OVERBOUGHT_HOLD transition either. Last
+    # close (23) is above the 3-bar SMA of the last 3 closes (22.67) -> trend
+    # is intact, so the crossover must be suppressed.
+    closes = [10, 10, 20, 25, 23]
+    result = _run(
+        "check_hourly_signals.py",
+        {"candidates": [], "open_positions": [{"symbol": "SHW", "entry_price": 20.0, "qty": 1.0, "bars": [bar(c) for c in closes]}]},
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+    )
+    output = json.loads(result.stdout)
+    assert output["exits"] == []
+    assert output["position_states"][0]["stochastic_state"] == "NORMAL"
+
+    events = _events(tmp_path)
+    signal_check = [e for e in events if e["event"] == "signal_check" and e["kind"] == "exit"][0]
+    assert signal_check["trend_intact"] is True
+    assert signal_check["signal"] is False
+
+
+def test_check_hourly_signals_trend_broken_allows_normal_exit(tmp_path):
+    cfg = {
+        **BASE_CFG,
+        "stochastic": {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80},
+        "trend_filter": {"enabled": True, "sma_period": 3},
+    }
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    def bar(close):
+        return {"high": 50, "low": 0, "close": close}
+
+    # Same crossover shape as the suppression test (k=[..,50,38], d=[..,45,44]
+    # -> prev_k>=prev_d, cur_k<cur_d), but last close (19) is now BELOW the
+    # 3-bar SMA (21.33) -> trend is broken, so the crossover exit must fire.
+    closes = [10, 10, 20, 25, 19]
+    result = _run(
+        "check_hourly_signals.py",
+        {"candidates": [], "open_positions": [{"symbol": "SHW", "entry_price": 20.0, "qty": 1.0, "bars": [bar(c) for c in closes]}]},
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+    )
+    output = json.loads(result.stdout)
+    assert [e["symbol"] for e in output["exits"]] == ["SHW"]
+    assert output["exits"][0]["exit_reason"] == "signal_exit"
+
+    events = _events(tmp_path)
+    signal_check = [e for e in events if e["event"] == "signal_check" and e["kind"] == "exit"][0]
+    assert signal_check["trend_intact"] is False
+    assert signal_check["signal"] is True
+
+
+def test_check_hourly_signals_trend_filter_disabled_via_config(tmp_path):
+    # Same bars as the suppression test, but trend_filter.enabled: False ->
+    # the crossover must fire normally, same as if the filter didn't exist.
+    cfg = {
+        **BASE_CFG,
+        "stochastic": {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80},
+        "trend_filter": {"enabled": False, "sma_period": 3},
+    }
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    def bar(close):
+        return {"high": 50, "low": 0, "close": close}
+
+    closes = [10, 10, 20, 25, 23]
+    result = _run(
+        "check_hourly_signals.py",
+        {"candidates": [], "open_positions": [{"symbol": "SHW", "entry_price": 20.0, "qty": 1.0, "bars": [bar(c) for c in closes]}]},
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+    )
+    output = json.loads(result.stdout)
+    assert [e["symbol"] for e in output["exits"]] == ["SHW"]
+
+    events = _events(tmp_path)
+    signal_check = [e for e in events if e["event"] == "signal_check" and e["kind"] == "exit"][0]
+    assert signal_check["trend_intact"] is None
+
+
 def test_check_hourly_signals_handles_string_typed_bar_values(tmp_path):
     # Robinhood's get_equity_historicals returns high/low/close as JSON
     # strings (e.g. "253.595000"), not numbers — regression test for a real

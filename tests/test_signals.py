@@ -80,6 +80,49 @@ def test_exit_signal_default_state_is_normal():
     assert exit_signal(df) == exit_signal(df, state=STATE_NORMAL)
 
 
+# -- trend-intact filter (spec §4a) ---------------------------------------
+
+
+def test_exit_signal_trend_intact_suppresses_bearish_crossover():
+    # Same genuine bearish crossover as test_exit_signal_true_bearish_crossover
+    # (which asserts True with no trend_intact arg) -- trend_intact=True
+    # suppresses it entirely.
+    df = _stoch_df([25, 18], [20, 19])
+    assert exit_signal(df, trend_intact=True) is False
+
+
+def test_exit_signal_trend_broken_allows_bearish_crossover():
+    df = _stoch_df([25, 18], [20, 19])
+    assert exit_signal(df, trend_intact=False) is True
+
+
+def test_exit_signal_trend_intact_none_falls_through_to_normal():
+    # Default / "couldn't determine trend" must never silently trap a
+    # position open -- same behavior as omitting the argument entirely.
+    df = _stoch_df([25, 18], [20, 19])
+    assert exit_signal(df, trend_intact=None) is True
+    assert exit_signal(df, trend_intact=None) == exit_signal(df)
+
+
+def test_exit_signal_trend_intact_does_not_create_false_exit():
+    # trend_intact should never itself trigger an exit when there's no
+    # crossover to begin with -- it only ever suppresses, never fires.
+    df = _stoch_df([15, 10], [20, 18])
+    assert exit_signal(df, trend_intact=False) is False
+    assert exit_signal(df, trend_intact=True) is False
+
+
+def test_exit_signal_trend_intact_has_no_effect_on_overbought_hold():
+    # OVERBOUGHT_HOLD is governed purely by the downside-80 rule --
+    # trend_intact must not change that branch's behavior at all, in either
+    # direction.
+    still_overbought = _stoch_df([90, 85], [88, 84])
+    dropped_below = _stoch_df([90, 70], [88, 75])
+    for trend in (True, False, None):
+        assert exit_signal(still_overbought, state=STATE_OVERBOUGHT_HOLD, trend_intact=trend) is False
+        assert exit_signal(dropped_below, state=STATE_OVERBOUGHT_HOLD, trend_intact=trend) is True
+
+
 # -- overbought-hold state machine (spec §4 refinement) ------------------
 
 

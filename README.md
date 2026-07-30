@@ -146,6 +146,30 @@ per-invocation — it advances the state by one bar given whatever
 `position_states` for every open position each cycle so the skill can persist
 it back to `positions.json`, whether or not that cycle produced an exit.
 
+## Exit logic: trend-intact filter (config["trend_filter"], spec §4a)
+
+A second, independent refinement to the same `NORMAL`-state crossover exit
+above — this one motivated by a real observed pattern (a stock climbing
+steadily while %K/%D whipsawed bearishly several times mid-move, each of
+which would have exited a still-working position). Stochastic is a
+mean-reversion/momentum oscillator and is well known to generate false
+reversal signals during a genuinely trending move; the standard remedy is to
+gate the oscillator's exit behind a trend filter and only honor it once the
+trend itself has actually broken.
+
+While a position is `stochastic_state: NORMAL`, a bearish %K/%D crossover is
+suppressed whenever price is still above its own `trend_filter.sma_period`-bar
+SMA (default 50) on the signal bar — computed fresh each cycle from the same
+hourly bars already fetched for the stochastic calc, not a state field, not
+persisted. `stochastic_state: OVERBOUGHT_HOLD` is **completely unaffected** —
+still governed purely by the downside-80 rule from the section above — and
+the hard ATR stop is unaffected by this filter exactly as it's unaffected by
+overbought-hold. Missing/insufficient bar history for the SMA falls through
+to the plain crossover check rather than trapping a position open
+indefinitely on missing data. Optional in config — omitting the
+`trend_filter` section entirely defaults to enabled with a 50-bar SMA, same
+as setting it explicitly.
+
 ## Catalyst avoidance: earnings (config["catalysts"])
 
 The resting protective stop (`stop_market`) can only be placed regular-hours

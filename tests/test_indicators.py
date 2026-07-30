@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from lib.indicators import stochastic
+from lib.indicators import sma, stochastic
 
 
 def _bars(closes, highs=None, lows=None):
@@ -62,3 +62,26 @@ def test_stochastic_missing_columns_raises():
     bad = pd.DataFrame({"close": [1, 2, 3]})
     with pytest.raises(ValueError):
         stochastic(bad)
+
+
+def test_sma_hand_computed():
+    bars = _bars([10, 20, 30, 40, 50])
+    result = sma(bars, period=3)
+    assert result.iloc[:2].isna().all()
+    assert result.iloc[2] == 20.0  # mean(10,20,30)
+    assert result.iloc[3] == 30.0  # mean(20,30,40)
+    assert result.iloc[4] == 40.0  # mean(30,40,50)
+
+
+def test_sma_custom_column():
+    bars = pd.DataFrame({"high": [10, 20, 30], "low": [1, 2, 3], "close": [5, 5, 5]})
+    result = sma(bars, period=2, column="high")
+    assert result.iloc[0] != result.iloc[0]  # NaN
+    assert result.iloc[1] == 15.0
+    assert result.iloc[2] == 25.0
+
+
+def test_sma_missing_column_raises():
+    bars = pd.DataFrame({"close": [1, 2, 3]})
+    with pytest.raises(ValueError):
+        sma(bars, period=2, column="high")

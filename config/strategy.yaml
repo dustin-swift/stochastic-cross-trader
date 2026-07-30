@@ -50,6 +50,23 @@ stochastic:
   # this comment incorrectly claimed.
   entry_lookback_bars: 1
 
+# Trend-intact exit filter (spec §4a, 2026-07-30): stochastic is well known
+# to whipsaw repeatedly during a genuinely trending move -- a bearish %K/%D
+# crossover mid-trend doesn't mean the trend broke, just that momentum
+# paused for a bar or two. While a position is in stochastic_state NORMAL,
+# the crossover exit is suppressed whenever price is still above its own
+# SMA on the signal bar -- generalizes the overbought-hold refinement above
+# (which does the same thing, but only above the 80 line) down across the
+# whole trend. Computed fresh each cycle from the same hourly bars already
+# fetched for the stochastic calc; not a state field, not persisted.
+# STATE_OVERBOUGHT_HOLD is completely unaffected -- still governed purely by
+# the downside-80 rule. The hard ATR stop is unaffected by either mechanism.
+# This section is optional: omitting it entirely defaults to enabled with a
+# 50-bar SMA, same as the values below.
+trend_filter:
+  enabled: true
+  sma_period: 50
+
 # --- Step 4: ATR-based stop-loss ---
 atr:
   period: 14

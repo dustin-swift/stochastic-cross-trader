@@ -24,6 +24,19 @@ has been running hot for days). The two states are:
   threshold. Callers are responsible for persisting `stochastic_state` on the
   position between cycles (see StateStore) and calling
   `update_stochastic_state` before `exit_signal` each cycle.
+
+Trend-intact filter (spec §4a, 2026-07-30): a generalization of
+overbought-hold below the 80 line. Stochastic is well known to whipsaw
+repeatedly during a genuinely trending move — a bearish %K/%D crossover
+mid-trend doesn't mean the trend has broken, just that momentum paused for a
+bar or two. `exit_signal`'s STATE_NORMAL branch takes an optional
+`trend_intact` argument (computed by the caller from price structure, e.g.
+close vs. a rising SMA — see lib.indicators.sma): when True, the crossover
+exit is suppressed regardless of what %K/%D just did, the same way
+STATE_OVERBOUGHT_HOLD suppresses it above 80. This is stateless (recomputed
+every cycle from current price/SMA, not tracked on the position) and only
+gates the STATE_NORMAL branch — STATE_OVERBOUGHT_HOLD's behavior is
+completely unaffected. The hard ATR stop is unaffected by either mechanism.
 """
 from __future__ import annotations
 
@@ -116,19 +129,39 @@ def update_stochastic_state(
     return STATE_NORMAL
 
 
-def exit_signal(stoch_df: pd.DataFrame, state: str = STATE_NORMAL, overbought_threshold: float = 80) -> bool:
+def exit_signal(
+    stoch_df: pd.DataFrame,
+    state: str = STATE_NORMAL,
+    overbought_threshold: float = 80,
+    trend_intact: bool | None = None,
+) -> bool:
     """Exit trigger for the current bar, given the position's (already
     updated — see `update_stochastic_state`) `stochastic_state`:
 
     - STATE_NORMAL: True iff %K crosses below %D on the last bar (bearish
-      crossover): prev %K >= prev %D, current %K < current %D. Unchanged from
-      the original single-condition exit.
+      crossover): prev %K >= prev %D, current %K < current %D — UNLESS
+      `trend_intact` is True, in which case the crossover is suppressed
+      entirely (spec §4a trend-intact filter, see below).
     - STATE_OVERBOUGHT_HOLD: crossovers are ignored entirely (a stock can
       whipsaw %K/%D against each other many times while pinned near 100 and
       still be working — see spec §4). True only when both %K and %D are
-      currently below `overbought_threshold`.
+      currently below `overbought_threshold`. `trend_intact` has NO effect
+      here — this branch is completely unchanged by the trend filter.
 
     Any state other than STATE_OVERBOUGHT_HOLD is treated as STATE_NORMAL.
+
+    `trend_intact` (spec §4a, generalizes overbought-hold below the 80 line):
+    stochastic is a mean-reversion/momentum oscillator and is well known to
+    whipsaw repeatedly during a strongly trending move — %K/%D can cross
+    bearishly several times mid-trend without the trend itself having broken.
+    The caller determines "is the trend still intact" from price structure
+    (e.g. close still above a rising SMA) and passes the answer in here; this
+    function only applies the resulting gate, it doesn't compute the trend
+    itself (see lib.indicators.sma). `trend_intact=None` (the default; also
+    used when the caller couldn't determine it, e.g. insufficient bars for
+    the SMA) falls through to the plain crossover check — missing trend data
+    must never silently trap a position open forever, only *known-intact*
+    trend suppresses the exit.
     """
     if state == STATE_OVERBOUGHT_HOLD:
         latest = _latest_k_d(stoch_df)
@@ -147,7 +180,10 @@ def exit_signal(stoch_df: pd.DataFrame, state: str = STATE_NORMAL, overbought_th
     prev_k, cur_k = k.iloc[-2], k.iloc[-1]
     prev_d, cur_d = d.iloc[-2], d.iloc[-1]
 
-    return bool(prev_k >= prev_d and cur_k < cur_d)
+    crossed_below = bool(prev_k >= prev_d and cur_k < cur_d)
+    if trend_intact:
+        return False
+    return crossed_below
 
 
 def stop_price(entry_price: float, atr14: float, mult: float = 1.5) -> float:
