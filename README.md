@@ -329,10 +329,43 @@ Robinhood MCP connector (see prerequisite #3 above):
   freshly published Finviz export (`scripts/publish_finviz_export.sh`,
   run locally by you) beforehand.
 - **hourly-signal-check** — hourly during market hours.
+- **dashboard-refresh** — hourly during market hours, a few minutes after
+  `hourly-signal-check` — see Dashboard below.
 
-Minimum cron interval for a routine is 1 hour. Both routines are safe to
-also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
+Minimum cron interval for a routine is 1 hour. All three routines are safe
+to also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
 agent to follow the skill directly) any time, in addition to their schedule.
+
+## Dashboard
+
+A published Claude Artifact — positions, closed-trade history with
+drill-down, today's watchlist, and portfolio/system stats — kept fresh by
+the **dashboard-refresh** cloud routine on the same hourly cadence as
+trading itself, with no manual "refresh" step required:
+
+- `dashboard/template.html` — the page itself (self-contained: fonts
+  embedded as base64 `@font-face` data URIs, since a published Artifact's
+  strict CSP blocks any outbound font/CDN/API request at view time).
+- `dashboard/fonts/*.b64` — the embedded IBM Plex Sans / JetBrains Mono
+  variable-font files, base64-encoded.
+- `scripts/build_dashboard.py` — renders `template.html` into
+  `dashboard/dist.html`, pulling positions/trade history/candidates/logs/
+  config straight from `data/` and `config/strategy.yaml`. The only inputs
+  it can't derive itself — live account totals and current prices for open
+  positions — come in via a small JSON payload on stdin (see the script's
+  own docstring for the exact shape).
+- The **dashboard-refresh** routine's job each run: `sync_state.sh pull`,
+  fetch that live snapshot via the Robinhood MCP connector, run
+  `build_dashboard.py`, then publish `dashboard/dist.html` with the
+  Artifact tool using the dashboard's existing URL (so it updates in place
+  rather than minting a new one each time).
+
+Since a published Artifact page runs in a locked-down sandbox with no
+general network access, this "rebuild and republish" pattern — rather than
+having the page fetch its own data live — is what makes hourly refresh
+possible without a connected GitHub connector. If you ever need it current
+sooner than the next scheduled run, just ask an agent to run the
+`dashboard-refresh` routine, or follow its steps manually.
 
 ## Safety notes
 
