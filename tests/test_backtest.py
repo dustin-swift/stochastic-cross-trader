@@ -444,7 +444,9 @@ def test_earnings_skips_entry_when_too_close():
         "XXX": {
             "bars": bars,
             "atr_series": [{"begins_at": _T[4], "value": 150.0}],
-            "earnings_report_dates": ["2026-07-22"],  # 2 days out, within default 5-day exclusion
+            # Reports 2026-07-21, BMO (bare string = conservative default) ->
+            # exit_date is 2026-07-20, exactly the would-be entry bar's date.
+            "earnings_report_dates": ["2026-07-21"],
         }
     }
 

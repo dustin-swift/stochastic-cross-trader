@@ -89,7 +89,9 @@ def test_check_universe_screen_excludes_earnings_too_close(tmp_path):
     with config_path.open("w") as f:
         yaml.safe_dump(cfg, f)
 
-    soon = (date.today() + timedelta(days=2)).isoformat()
+    # A reports tomorrow BMO -> exit_date is today (bare string = conservative
+    # BMO default) -> today is the entry-blocked day. B is far out -> kept.
+    soon = (date.today() + timedelta(days=1)).isoformat()
     far = (date.today() + timedelta(days=60)).isoformat()
     earnings = {"A": [soon], "B": [far]}  # C intentionally omitted -> "unknown" exclusion
 
@@ -304,7 +306,9 @@ def test_check_hourly_signals_skips_candidate_entry_when_earnings_too_close(tmp_
         return {"high": 50, "low": 0, "close": close}
 
     entry_closes = [10, 10, 8, 7, 12]  # would otherwise signal entry (see earlier derivation)
-    soon = (date.today() + timedelta(days=2)).isoformat()  # inside the default 5-day exclusion window
+    # Reports tomorrow, BMO (bare string = conservative default) -> exit_date
+    # is today -> today is exactly the entry-blocked day.
+    soon = (date.today() + timedelta(days=1)).isoformat()
 
     payload = {
         "candidates": [
@@ -351,7 +355,9 @@ def test_check_hourly_signals_force_exits_position_when_earnings_too_close(tmp_p
     # comfortably mid-range) -- proves the forced exit fires independent of
     # what the oscillator says, not just alongside a signal that would fire anyway.
     flat_closes = [20, 20, 22, 23, 25]
-    tomorrow = (date.today() + timedelta(days=1)).isoformat()  # inside the default 1-day forced-exit window
+    # Reports tomorrow, BMO (bare string = conservative default) -> exit_date
+    # is today -> forced exit fires today.
+    tomorrow = (date.today() + timedelta(days=1)).isoformat()
 
     payload = {
         "candidates": [],

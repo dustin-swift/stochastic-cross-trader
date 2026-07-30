@@ -140,10 +140,23 @@ risk:
 # hours earnings gap gets zero stop protection until regular hours resume,
 # and the eventual fill can land well below the intended stop. Since there's
 # no way to protect against the gap itself, the mitigation is avoiding known
-# earnings dates: exclude new candidates whose next report is within
-# earnings_exclusion_days (daily screen), and force-close any open position
-# whose next report is within earnings_forced_exit_days (hourly check) rather
-# than risk holding it across the announcement.
+# earnings dates around the exact moment the gap risk exists.
+#
+# The rule is BMO/AMC-aware (2026-07-30, see lib/catalysts.py), not a fixed
+# day-count window: a BMO (before-market-open) report on date D means the
+# regular session on D already opens knowing the news, so the exit_date is
+# D-1; an AMC (after-market-close) report on date D means the regular
+# session on D is unaffected by the news, so the exit_date is D itself.
+# Unknown/missing timing defaults to the conservative BMO treatment (D-1).
+#
+# - Open positions (hourly check): force-closed regardless of stochastic
+#   state, including OVERBOUGHT_HOLD, on or after the report's exit_date.
+# - New candidates (daily screen + hourly-check defense-in-depth re-check):
+#   blocked only on the exit_date itself — a single-day buffer, not a
+#   multi-day window — since entering that day would get force-closed again
+#   almost immediately. Earlier days are intentionally left open so entries
+#   still capture the run-up into the report (previously this was a flat
+#   5-day exclusion window, which was excessive and cost real run-up —
+#   2026-07-30 change, at the user's direction).
 catalysts:
-  earnings_exclusion_days: 5      # daily screen: don't open a new position this close to earnings
-  earnings_forced_exit_days: 1    # hourly check: close an existing position this close to earnings, regardless of signal state
+  enabled: true   # set false to disable earnings avoidance entirely (both sides)

@@ -177,23 +177,43 @@ The resting protective stop (`stop_market`) can only be placed regular-hours
 after-hours earnings gap gets zero stop protection until regular hours
 resume, and the eventual fill can land well below the intended stop. Since
 there's no way to protect against the gap itself, the mitigation is avoiding
-known earnings dates:
+known earnings dates around the exact moment the gap risk exists.
 
-- **Daily screen**: candidates whose next earnings report falls within
-  `catalysts.earnings_exclusion_days` (default 5) are excluded from
-  `candidates.json` before it's even written. Applied *after* the sector cap,
-  not before — earnings-checking the full raw Finviz universe (50-100+ rows)
-  would reintroduce the same per-symbol-call scaling problem Finviz replaced
-  `create_scan` for in the first place. An excluded slot isn't backfilled
-  from the same sector.
-- **Hourly check**: open positions are re-checked fresh every cycle (not just
-  at entry) — a position can be held for days after the daily screen last
-  looked at it and drift into an earnings date that was safely far away at
-  entry time. If the next report falls within
-  `catalysts.earnings_forced_exit_days` (default 1), the position exits
-  immediately (`exit_reason: "earnings_exit"`) regardless of what the
-  stochastic oscillator says — this is a scheduled risk decision, not a
-  signal read.
+**The rule is BMO/AMC-aware (2026-07-30), not a fixed day-count window** —
+see `lib/catalysts.py` for the implementation. Each report carries a
+`timing` — `"am"` (before market open) or `"pm"` (after market close), from
+`get_earnings_results`' `report.timing` — and the *exit_date* (the last
+trading day it's safe to hold through the close of) is computed from it:
+
+- **BMO** report on date D: the regular session on D already opens knowing
+  the news, so exit_date = D - 1.
+- **AMC** report on date D: the regular session on D is unaffected by the
+  report (it lands after that session closes), so exit_date = D itself.
+- **Unknown/missing timing** (e.g. legacy data, or a fetch that didn't
+  include it): treated as BMO, exit_date = D - 1 — the more conservative
+  choice, since this whole rule exists to protect against an unprotected
+  gap.
+
+Both sides of the check read off the same exit_date:
+
+- **Hourly check (open positions)**: force-exited (`exit_reason:
+  "earnings_exit"`) regardless of stochastic state — including while
+  `OVERBOUGHT_HOLD`, since a stock can easily be holding overbought right
+  into its earnings date — on or after the nearest upcoming report's
+  exit_date. Re-checked fresh every cycle, not just at entry, since a
+  position can be held for days after the daily screen last looked at it and
+  drift into an earnings date that was safely far away at entry time.
+- **Daily screen + hourly-check defense-in-depth (candidates)**: blocked
+  only on the exit_date itself — a **single-day buffer**, not a multi-day
+  window. Entering on the exit_date would get force-exited again almost
+  immediately (near-zero-value trade), but entering any day before that is
+  intentionally allowed, so entries still capture the run-up into the
+  report. (Prior to 2026-07-30 this was a flat 5-day exclusion window,
+  which was excessive and cost real run-up — changed at the user's
+  direction after noticing it.)
+
+`config["catalysts"]["enabled"]` (default `true`) is a single on/off switch
+for the whole feature, both sides.
 
 Both checks are **optional per call** — a symbol missing `earnings_report_dates`
 entirely is handled differently depending on context (see `lib/catalysts.py`

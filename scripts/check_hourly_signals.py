@@ -18,13 +18,13 @@ Input (JSON, via --input file or stdin):
   {
     "candidates": [
       {"symbol": "AAPL", "sector": "Technology", "atr14": 3.2,
-       "earnings_report_dates": ["2026-08-15"],  # optional, see catalyst-avoidance note below
+       "earnings_report_dates": [{"date": "2026-08-15", "timing": "am"}],  # optional, see catalyst-avoidance note below
        "bars": [{"high": 210.1, "low": 208.5, "close": 209.9}, ...]}   # oldest-first
     ],
     "open_positions": [
       {"symbol": "MSFT", "entry_price": 400.0, "qty": 0.25,
        "stochastic_state": "NORMAL",   # optional, defaults to NORMAL if omitted
-       "earnings_report_dates": ["2026-07-30"],  # optional, see catalyst-avoidance note below
+       "earnings_report_dates": [{"date": "2026-07-30", "timing": "pm"}],  # optional, see catalyst-avoidance note below
        "bars": [{"high": ..., "low": ..., "close": ...}, ...]}
     ]
   }
@@ -54,22 +54,31 @@ never makes it into `entries` at all -- it's skipped and logged as
 the skill recomputes the real stop from the actual fill price once the market
 buy executes (see plan: Order lifecycle).
 
-Catalyst avoidance (lib.catalysts): `earnings_report_dates` is optional on
-both candidates and open positions, and the two cases are handled
-asymmetrically on purpose:
-- Candidates: if the field is present and earnings are within
-  config["catalysts"]["earnings_exclusion_days"], the candidate is skipped
-  entirely (no entry, even if the oscillator would otherwise signal one).
-  Absent field -> not re-checked here (candidates.json is already earnings-
-  filtered by the daily screen when that ran with --earnings-input; this is a
-  defense-in-depth re-check, not the primary gate).
-- Open positions: if present and earnings are within
-  config["catalysts"]["earnings_forced_exit_days"], the position is force-
-  exited (reason "earnings_exit") regardless of stochastic state. Absent
-  field -> falls through to normal signal logic, NOT a forced exit — an
-  existing position shouldn't get liquidated because a data fetch happened
-  to fail this cycle; that's a materially more disruptive default than
-  skipping a not-yet-opened candidate.
+Catalyst avoidance (lib.catalysts, config["catalysts"]["enabled"], default
+true): `earnings_report_dates` is optional on both candidates and open
+positions — each entry is either a `{"date": "YYYY-MM-DD", "timing": "am"|
+"pm"}` dict (timing from get_earnings_results' report.timing; "am"=BMO,
+"pm"=AMC) or a bare date string for backward compat (treated as the
+conservative "am" default). The two cases are handled asymmetrically on
+purpose:
+- Candidates: if the field is present and today is exactly the report's
+  BMO/AMC-aware exit_date (see lib.catalysts module docstring —
+  `is_entry_blocked_day`), the candidate is skipped entirely (no entry, even
+  if the oscillator would otherwise signal one) — entering on that day would
+  get force-exited again almost immediately, a near-zero-value trade. This is
+  deliberately a single-day buffer, not a multi-day window: entries on
+  earlier days are allowed through so they still capture the run-up into the
+  report. Absent field -> not re-checked here (candidates.json is already
+  earnings-filtered by the daily screen when that ran with --earnings-input;
+  this is a defense-in-depth re-check, not the primary gate).
+- Open positions: if present and today is on-or-after the nearest upcoming
+  report's exit_date (`is_forced_exit_day`), the position is force-exited
+  (reason "earnings_exit") regardless of stochastic state — including while
+  OVERBOUGHT_HOLD, since a stock can easily be holding overbought right into
+  its earnings date. Absent field -> falls through to normal signal logic,
+  NOT a forced exit — an existing position shouldn't get liquidated because a
+  data fetch happened to fail this cycle; that's a materially more disruptive
+  default than skipping a not-yet-opened candidate.
 
 Trend-intact filter (config["trend_filter"], spec §4a, optional -- defaults
 to enabled with a 50-bar SMA if the section is omitted entirely): stochastic
@@ -93,7 +102,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from lib.catalysts import is_too_close_to_earnings
+from lib.catalysts import is_entry_blocked_day, is_forced_exit_day
 from lib.config import load_config
 from lib.indicators import sma, stochastic
 from lib.logging_utils import EventLogger
@@ -144,8 +153,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
     atr_mult = config["atr"]["stop_multiplier"]
     sizing_cfg = config["sizing"]
     catalysts_cfg = config.get("catalysts", {})
-    earnings_exclusion_days = catalysts_cfg.get("earnings_exclusion_days", 5)
-    earnings_forced_exit_days = catalysts_cfg.get("earnings_forced_exit_days", 1)
+    catalysts_enabled = catalysts_cfg.get("enabled", True)
     trend_filter_cfg = config.get("trend_filter", {})
     trend_filter_enabled = trend_filter_cfg.get("enabled", True)
     trend_filter_sma_period = trend_filter_cfg.get("sma_period", 50)
@@ -157,7 +165,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
         bars = c["bars"]
 
         earnings_dates = c.get("earnings_report_dates")
-        if earnings_dates is not None and is_too_close_to_earnings(earnings_dates, today, earnings_exclusion_days):
+        if catalysts_enabled and earnings_dates is not None and is_entry_blocked_day(earnings_dates, today):
             logger.log("signal_check", symbol=symbol, kind="entry", skipped="earnings_too_close")
             continue
 
@@ -213,7 +221,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
         prior_state = p.get("stochastic_state") or STATE_NORMAL
 
         earnings_dates = p.get("earnings_report_dates")
-        if earnings_dates is not None and is_too_close_to_earnings(earnings_dates, today, earnings_forced_exit_days):
+        if catalysts_enabled and earnings_dates is not None and is_forced_exit_day(earnings_dates, today):
             logger.log(
                 "signal_check",
                 symbol=symbol,

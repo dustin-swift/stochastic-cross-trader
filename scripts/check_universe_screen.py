@@ -17,10 +17,18 @@ create_scan for in the first place. The tradeoff is that an excluded slot
 isn't backfilled from the same sector — acceptable for now, revisit if this
 meaningfully shrinks the daily list in practice.
 
+Earnings entries carry timing ("am"=BMO, "pm"=AMC, from get_earnings_results'
+report.timing) so lib.catalysts can compute the correct trigger date — see
+lib/catalysts.py's module docstring for the BMO/AMC-aware rule. A candidate
+is excluded only on the exact day that would otherwise force-exit it almost
+immediately (a single-day buffer, not a multi-day window) — entries on
+earlier days are intentionally allowed through so they still capture the
+run-up into the report.
+
 Usage:
   python3 scripts/check_universe_screen.py
   python3 scripts/check_universe_screen.py --config config/strategy.yaml --data-dir data
-  echo '{"AAPL": ["2026-08-15"], "MSFT": []}' | python3 scripts/check_universe_screen.py --earnings-input -
+  echo '{"AAPL": [{"date": "2026-08-15", "timing": "am"}], "MSFT": []}' | python3 scripts/check_universe_screen.py --earnings-input -
 """
 from __future__ import annotations
 
@@ -33,7 +41,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lib.alerts import send_alert
-from lib.catalysts import filter_earnings_too_close
+from lib.catalysts import filter_earnings_entry_blocked
 from lib.config import load_config
 from lib.logging_utils import EventLogger
 from lib.state import StateStore
@@ -52,7 +60,7 @@ def _normalize(rows: list[dict]) -> list[dict]:
     return normalized
 
 
-def _load_earnings_input(arg: str | None) -> dict[str, list[str]] | None:
+def _load_earnings_input(arg: str | None) -> dict[str, list[dict | str]] | None:
     if arg is None:
         return None
     if arg == "-":
@@ -66,8 +74,8 @@ def run(
     max_per_sector: int,
     today: date,
     logger: EventLogger,
-    earnings_by_symbol: dict[str, list[str]] | None = None,
-    earnings_exclusion_days: int | None = None,
+    earnings_by_symbol: dict[str, list[dict | str]] | None = None,
+    catalysts_enabled: bool = True,
 ) -> list[dict]:
     try:
         check_freshness(csv_path, today=today)
@@ -79,10 +87,8 @@ def run(
     raw_rows = load_universe(csv_path)
     candidates = cap_per_sector(_normalize(raw_rows), max_per_sector=max_per_sector)
 
-    if earnings_by_symbol is not None:
-        candidates, excluded = filter_earnings_too_close(
-            candidates, earnings_by_symbol, as_of=today, max_days=earnings_exclusion_days
-        )
+    if catalysts_enabled and earnings_by_symbol is not None:
+        candidates, excluded = filter_earnings_entry_blocked(candidates, earnings_by_symbol, as_of=today)
         if excluded:
             logger.log(
                 "universe_screen_earnings_excluded",
@@ -112,8 +118,8 @@ def main() -> None:
     parser.add_argument(
         "--earnings-input",
         default=None,
-        help="JSON file (or '-' for stdin) mapping symbol -> list of earnings report date strings. "
-        "Omit to skip earnings filtering entirely.",
+        help="JSON file (or '-' for stdin) mapping symbol -> list of {\"date\", \"timing\"} report objects "
+        "(or bare date strings for backward compat). Omit to skip earnings filtering entirely.",
     )
     args = parser.parse_args()
 
@@ -131,7 +137,7 @@ def main() -> None:
             today=date.today(),
             logger=logger,
             earnings_by_symbol=earnings_by_symbol,
-            earnings_exclusion_days=catalysts.get("earnings_exclusion_days", 5),
+            catalysts_enabled=catalysts.get("enabled", True),
         )
     except (FileNotFoundError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

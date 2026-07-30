@@ -22,18 +22,21 @@ default — see config/strategy.yaml): once a position's running high reaches
 a backtest research toggle; the live pipeline (scripts/check_hourly_signals.py)
 doesn't read this config section and always uses the fixed entry-time stop.
 
-Earnings/catalyst avoidance (config["catalysts"], mirrors lib.catalysts and
-scripts/check_hourly_signals.py so the backtest stays a faithful simulator of
-the live behavior): if a symbol's `earnings_report_dates` is provided in
-symbol_data, entries are skipped on any bar within `earnings_exclusion_days`
-of a report, and open positions are force-exited (exit_reason
-"earnings_exit", at that bar's close) within `earnings_forced_exit_days` —
-checked before the stop/trailing-stop check each bar, since it's a scheduled,
-date-driven decision, not a reactive one. A symbol with no
-`earnings_report_dates` key is never restricted (backtest default is "don't
-know, don't filter" — unlike the live daily-screen's conservative "unknown ->
-exclude," since a missing key here almost always just means the caller didn't
-fetch earnings for that symbol, not a real gap to be cautious about).
+Earnings/catalyst avoidance (config["catalysts"]["enabled"], default true;
+mirrors lib.catalysts and scripts/check_hourly_signals.py so the backtest
+stays a faithful simulator of the live behavior): if a symbol's
+`earnings_report_dates` is provided in symbol_data (each entry a
+`{"date", "timing"}` dict — "am"=BMO, "pm"=AMC — or a bare date string for
+backward compat), entries are skipped on the exact bar-date that is the
+report's BMO/AMC-aware exit_date (see lib.catalysts module docstring), and
+open positions are force-exited (exit_reason "earnings_exit", at that bar's
+close) on or after that same exit_date — checked before the stop/trailing-
+stop check each bar, since it's a scheduled, date-driven decision, not a
+reactive one. A symbol with no `earnings_report_dates` key is never
+restricted (backtest default is "don't know, don't filter" — unlike the live
+daily-screen's conservative "unknown -> exclude," since a missing key here
+almost always just means the caller didn't fetch earnings for that symbol,
+not a real gap to be cautious about).
 
 Trend-intact exit filter (config["trend_filter"], spec §4a, mirrors
 lib.signals/scripts/check_hourly_signals.py so the backtest stays a faithful
@@ -57,7 +60,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from lib.catalysts import is_too_close_to_earnings
+from lib.catalysts import is_entry_blocked_day, is_forced_exit_day
 from lib.indicators import sma, stochastic
 from lib.signals import (
     STATE_NORMAL,
@@ -206,8 +209,7 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
     trailing_atr_mult = trailing_cfg.get("atr_multiplier", 2.0)
 
     catalysts_cfg = config.get("catalysts", {})
-    earnings_exclusion_days = catalysts_cfg.get("earnings_exclusion_days", 5)
-    earnings_forced_exit_days = catalysts_cfg.get("earnings_forced_exit_days", 1)
+    catalysts_enabled = catalysts_cfg.get("enabled", True)
     earnings_by_symbol = {
         symbol: data["earnings_report_dates"] for symbol, data in symbol_data.items() if "earnings_report_dates" in data
     }
@@ -244,8 +246,8 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
 
             pos.trade.update_excursion(float(bar["high"]), float(bar["low"]))
 
-            if symbol in earnings_by_symbol and is_too_close_to_earnings(
-                earnings_by_symbol[symbol], pd.Timestamp(t).date(), earnings_forced_exit_days
+            if catalysts_enabled and symbol in earnings_by_symbol and is_forced_exit_day(
+                earnings_by_symbol[symbol], pd.Timestamp(t).date()
             ):
                 pos.trade.exit_time = t
                 pos.trade.exit_price = float(bar["close"])
@@ -297,8 +299,8 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
             if len(open_positions) >= max_positions:
                 break
 
-            if symbol in earnings_by_symbol and is_too_close_to_earnings(
-                earnings_by_symbol[symbol], pd.Timestamp(t).date(), earnings_exclusion_days
+            if catalysts_enabled and symbol in earnings_by_symbol and is_entry_blocked_day(
+                earnings_by_symbol[symbol], pd.Timestamp(t).date()
             ):
                 continue
 
