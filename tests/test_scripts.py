@@ -654,6 +654,71 @@ def test_record_trade_close_writes_history_and_logs(tmp_path):
     assert events == ["trade_closed"]
 
 
+def test_build_dashboard_renders_html_from_repo_state(tmp_path):
+    import yaml as _yaml
+    from datetime import datetime, timezone
+
+    data_dir = tmp_path / "data"
+    (data_dir / "logs").mkdir(parents=True)
+
+    (data_dir / "positions.json").write_text(json.dumps({
+        "AAPL": {"entry_price": 200.0, "qty": 0.1, "entry_time": "2026-07-30T14:00:00Z",
+                  "entry_order_id": "e1", "stop_order_id": "s1", "stop_price": 195.0, "stochastic_state": "NORMAL"},
+    }))
+    (data_dir / "trade_history.json").write_text(json.dumps([
+        {"symbol": "MSFT", "qty": 0.2, "entry_price": 400.0, "exit_price": 410.0,
+         "pnl_usd": 2.0, "pnl_pct": 2.5, "exit_reason": "signal_exit",
+         "entry_time": "2026-07-28T14:00:00Z", "exit_time": "2026-07-29T14:00:00Z",
+         "entry_order_id": "e2", "exit_order_id": "s2", "stop_price": 390.0, "closed_at": "2026-07-29T14:00:05Z"},
+    ]))
+    (data_dir / "candidates.json").write_text(json.dumps([
+        {"symbol": "AAPL", "sector": "Technology", "Price": "200.00", "Change": "1.00%"},
+    ]))
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    log_path = data_dir / "logs" / f"{today}.jsonl"
+    log_path.write_text(
+        json.dumps({"timestamp": f"{today}T14:00:00+00:00", "event": "circuit_breaker_check",
+                    "tripped": False, "account_value": 1500}) + "\n"
+        + json.dumps({"timestamp": f"{today}T14:00:01+00:00", "event": "signal_check"}) + "\n"
+    )
+
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        _yaml.safe_dump(BASE_CFG, f)
+
+    payload = {
+        "account": {"total_value": 1500.0, "cash": 1400.0, "buying_power": 1400.0,
+                    "equity_value": 100.0, "realized_pnl_all_time": 2.0},
+        "position_prices": {"AAPL": 205.0},
+    }
+    output_path = tmp_path / "dist.html"
+
+    _run("build_dashboard.py", payload, [
+        "--config", str(config_path),
+        "--data-dir", str(data_dir),
+        "--dashboard-dir", str(REPO_ROOT / "dashboard"),
+        "--output", str(output_path),
+    ])
+
+    html = output_path.read_text()
+    assert "Stochastic Pullback Trader" in html
+    assert "@font-face" in html
+
+    data_marker = 'type="application/json">'
+    start = html.index(data_marker) + len(data_marker)
+    end = html.index("</script>", start)
+    embedded = json.loads(html[start:end])
+    assert embedded["account"]["realized_pnl_all_time"] == 2.0
+    assert embedded["positions"][0]["symbol"] == "AAPL"
+    assert embedded["positions"][0]["current_price"] == 205.0
+    assert embedded["trade_history"][0]["symbol"] == "MSFT"
+    assert embedded["candidates"][0]["symbol"] == "AAPL"
+    assert embedded["circuit_breaker"]["tripped"] is False
+    assert embedded["activity_today"]["signal_check"] == 1
+    assert any(r["name"] == "dashboard-refresh" for r in embedded["routines"])
+
+
 def test_run_backtest_end_to_end(tmp_path):
     cfg = {
         **BASE_CFG,
