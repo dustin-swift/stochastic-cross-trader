@@ -77,6 +77,41 @@ def test_entry_then_signal_exit_bearish_crossover():
     assert result["open_positions"] == []
 
 
+def test_trend_filter_suppresses_signal_exit_while_price_above_sma():
+    # Continue past entry with a shallow pullback: closes [400, 380] ->
+    # k5=33.33, k6=31.11, d5=28.67, d6=32.22 -> prev_k(33.33)>=prev_d(28.67)
+    # and cur_k(31.11)<cur_d(32.22) -> a genuine bearish crossover under
+    # STATE_NORMAL. But close(380) at t6 is still above the 3-bar SMA of
+    # (316, 400, 380) = 365.33 -> trend intact, so the crossover must be
+    # suppressed and the position stays open.
+    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 380)]
+    cfg = {**CFG, "trend_filter": {"enabled": True, "sma_period": 3}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+
+    result = run_backtest(data, cfg)
+
+    assert result["trades"] == []
+    assert len(result["open_positions"]) == 1
+    assert result["open_positions"][0]["exit_reason"] == "open_at_end"
+
+
+def test_trend_filter_disabled_reproduces_old_crossover_behavior():
+    # Identical bars/crossover to the suppression test above, but with the
+    # filter explicitly disabled -- the exit must fire exactly as it did
+    # before spec §4a existed.
+    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 380)]
+    cfg = {**CFG, "trend_filter": {"enabled": False}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+
+    result = run_backtest(data, cfg)
+
+    assert len(result["trades"]) == 1
+    trade = result["trades"][0]
+    assert trade["exit_time"] == _T[6]
+    assert trade["exit_reason"] == "signal_exit"
+    assert trade["exit_price"] == pytest.approx(380.0)
+
+
 def test_overbought_hold_suppresses_whipsaw_then_exits_on_double_drop():
     # Ramp into overbought, whipsaw while both lines stay >= 80, then both
     # drop below 80 together. raw %K sequence from t4: 24, 60, 88, 91, 97, 82,

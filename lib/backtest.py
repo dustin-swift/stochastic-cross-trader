@@ -35,6 +35,16 @@ know, don't filter" — unlike the live daily-screen's conservative "unknown ->
 exclude," since a missing key here almost always just means the caller didn't
 fetch earnings for that symbol, not a real gap to be cautious about).
 
+Trend-intact exit filter (config["trend_filter"], spec §4a, mirrors
+lib.signals/scripts/check_hourly_signals.py so the backtest stays a faithful
+simulator of live behavior): defaults to enabled with a 50-bar SMA if the
+section is omitted, matching live. While a position is stochastic_state
+NORMAL, a bearish %K/%D crossover is suppressed whenever the bar's close is
+still above its own trailing SMA — same mechanism as overbought-hold, just
+keyed off trend structure instead of the 80 line. STATE_OVERBOUGHT_HOLD is
+unaffected. Set config["trend_filter"]["enabled"] = False to reproduce the
+old (pre-2026-07-30) exit behavior for comparison backtests.
+
 Multi-symbol tie-breaking: when more candidates signal an entry in the same
 bar than there are open slots, symbols are processed in alphabetical order.
 This is a backtest-only modeling choice (the live system takes entries "in
@@ -48,7 +58,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from lib.catalysts import is_too_close_to_earnings
-from lib.indicators import stochastic
+from lib.indicators import sma, stochastic
 from lib.signals import (
     STATE_NORMAL,
     STATE_OVERBOUGHT_HOLD,
@@ -137,10 +147,14 @@ class _OpenPosition:
     effective_stop: float = float("nan")
 
 
-def _prep_symbol(bars: list[dict], atr_series: list[dict], stoch_cfg: dict) -> tuple[pd.DataFrame, dict[str, int]]:
+def _prep_symbol(
+    bars: list[dict], atr_series: list[dict], stoch_cfg: dict, trend_sma_period: int | None
+) -> tuple[pd.DataFrame, dict[str, int]]:
     """One DataFrame per symbol: float-coerced high/low/close, precomputed
-    %K/%D, and ATR aligned by `begins_at` timestamp — plus a timestamp->row
-    index lookup so the main loop doesn't rescan the frame per bar.
+    %K/%D, ATR aligned by `begins_at` timestamp, and (if `trend_sma_period` is
+    given) a trailing SMA of close for the spec §4a trend-intact filter —
+    plus a timestamp->row index lookup so the main loop doesn't rescan the
+    frame per bar.
     """
     df = pd.DataFrame(bars)
     for col in ("high", "low", "close"):
@@ -154,6 +168,9 @@ def _prep_symbol(bars: list[dict], atr_series: list[dict], stoch_cfg: dict) -> t
     )
     df["k"] = sdf["k"]
     df["d"] = sdf["d"]
+
+    if trend_sma_period is not None:
+        df["sma"] = sma(df, period=trend_sma_period, column="close")
 
     atr_by_time = {a["begins_at"]: a["value"] for a in atr_series}
     df["atr14"] = df["begins_at"].map(atr_by_time)
@@ -195,8 +212,12 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
         symbol: data["earnings_report_dates"] for symbol, data in symbol_data.items() if "earnings_report_dates" in data
     }
 
+    trend_filter_cfg = config.get("trend_filter", {})
+    trend_filter_enabled = trend_filter_cfg.get("enabled", True)
+    trend_sma_period = trend_filter_cfg.get("sma_period", 50) if trend_filter_enabled else None
+
     prepped = {
-        symbol: _prep_symbol(data["bars"], data.get("atr_series", []), stoch_cfg)
+        symbol: _prep_symbol(data["bars"], data.get("atr_series", []), stoch_cfg, trend_sma_period)
         for symbol, data in symbol_data.items()
     }
 
@@ -253,7 +274,14 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
             sdf_upto = df.iloc[: i + 1][["k", "d"]]
             new_state = update_stochastic_state(pos.stochastic_state, sdf_upto, overbought_threshold=overbought)
             pos.stochastic_state = new_state
-            if exit_signal(sdf_upto, state=new_state, overbought_threshold=overbought):
+
+            trend_intact = None
+            if trend_sma_period is not None:
+                latest_sma = bar["sma"]
+                if not pd.isna(latest_sma):
+                    trend_intact = float(bar["close"]) > latest_sma
+
+            if exit_signal(sdf_upto, state=new_state, overbought_threshold=overbought, trend_intact=trend_intact):
                 pos.trade.exit_time = t
                 pos.trade.exit_price = float(bar["close"])
                 pos.trade.exit_reason = (
