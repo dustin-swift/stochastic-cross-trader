@@ -14,5 +14,37 @@
     "stop_order_id": null,
     "stop_price": null,
     "symbol": "JHX"
+  },
+  {
+    "closed_at": "2026-07-31T19:36:42.062742+00:00",
+    "entry_order_id": "6a6cca79-4bad-40ac-a7b8-ea514fd4b9d4",
+    "entry_price": 83.7399,
+    "entry_time": "2026-07-31T16:16:57.899Z",
+    "exit_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
+    "exit_price": 83.63,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-07-31T19:05:22.985Z",
+    "pnl_pct": -0.13123970771401483,
+    "pnl_usd": -0.10990000000001032,
+    "qty": 1.0,
+    "stop_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
+    "stop_price": 83.63,
+    "symbol": "CRNX"
+  },
+  {
+    "closed_at": "2026-07-31T19:45:50.110873+00:00",
+    "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
+    "entry_price": 72.1099,
+    "entry_time": "2026-07-31T16:16:56.923Z",
+    "exit_order_id": "6a6cfb62-c84f-488d-9cd8-dd1ad1da7f51",
+    "exit_price": 72.1301,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-07-31T19:45:38.736Z",
+    "pnl_pct": 0.028012797133269984,
+    "pnl_usd": 0.02020000000000266,
+    "qty": 1.0,
+    "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
+    "stop_price": 71.94,
+    "symbol": "TECH"
   }
 ]

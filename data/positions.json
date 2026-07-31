@@ -8,6 +8,15 @@
     "stop_order_id": "6a6cee86-1c8f-45d5-afde-1bdfcb1ee2fb",
     "stop_price": 64.03
   },
+  "FHN": {
+    "entry_order_id": "6a6cd017-68ff-45e0-94a6-a795a7586d6d",
+    "entry_price": 25.6899,
+    "entry_time": "2026-07-31T16:40:56.074Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6cd02d-0987-4b7a-9753-7d3c632c52f7",
+    "stop_price": 25.46
+  },
   "HDV": {
     "entry_order_id": "6a6cee91-30aa-4d32-b8e1-37be520f0478",
     "entry_price": 28.71,
@@ -26,33 +35,6 @@
     "stop_order_id": "6a6ceeb7-ea01-4dba-a326-db48da857f76",
     "stop_price": 143.08
   },
-  "CRNX": {
-    "entry_order_id": "6a6cca79-4bad-40ac-a7b8-ea514fd4b9d4",
-    "entry_price": 83.7399,
-    "entry_time": "2026-07-31T16:16:57.899Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
-    "stop_price": 83.63
-  },
-  "FHN": {
-    "entry_order_id": "6a6cd017-68ff-45e0-94a6-a795a7586d6d",
-    "entry_price": 25.6899,
-    "entry_time": "2026-07-31T16:40:56.074Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6cd02d-0987-4b7a-9753-7d3c632c52f7",
-    "stop_price": 25.46
-  },
-  "TECH": {
-    "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
-    "entry_price": 72.1099,
-    "entry_time": "2026-07-31T16:16:56.923Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
-    "stop_price": 71.94
-  },
   "TTAN": {
     "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
     "entry_price": 80.865,
@@ -61,6 +43,15 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a6ca5c6-6a03-448c-8d73-3e69a99917b0",
     "stop_price": 78.21
+  },
+  "VTRS": {
+    "entry_order_id": "6a6cfb7b-7af7-472e-8211-dad642e5245b",
+    "entry_price": 17.5887,
+    "entry_time": "2026-07-31T19:46:03.507Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06",
+    "stop_price": 17.39
   },
   "XLF": {
     "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
