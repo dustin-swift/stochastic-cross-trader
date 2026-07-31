@@ -1,14 +1,4 @@
 {
-  "JHX": {
-    "entry_order_id": "6a6b9b28-615d-41df-9a0d-58e74ab0cbde",
-    "entry_price": 26.4499,
-    "entry_time": "2026-07-30T18:42:54Z",
-    "qty": 0.756146,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": null,
-    "stop_price": null,
-    "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T18:43:37Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
-  },
   "TTAN": {
     "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
     "entry_price": 80.865,

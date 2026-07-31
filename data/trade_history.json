@@ -1,0 +1,18 @@
+[
+  {
+    "closed_at": "2026-07-31T14:15:47.905965+00:00",
+    "entry_order_id": "6a6b9b28-615d-41df-9a0d-58e74ab0cbde",
+    "entry_price": 26.4499,
+    "entry_time": "2026-07-30T18:42:54Z",
+    "exit_order_id": "6a6cadbc-15f2-4870-a29a-800696ebbfd9",
+    "exit_price": 25.93,
+    "exit_reason": "manual_stop_out",
+    "exit_time": "2026-07-31T14:14:20Z",
+    "pnl_pct": -1.9656028945289061,
+    "pnl_usd": -0.39312030539999987,
+    "qty": 0.756146,
+    "stop_order_id": null,
+    "stop_price": null,
+    "symbol": "JHX"
+  }
+]
