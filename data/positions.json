@@ -17,5 +17,23 @@
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+  },
+  "TECH": {
+    "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
+    "entry_price": 72.1099,
+    "entry_time": "2026-07-31T16:16:56.923Z",
+    "qty": 1.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
+    "stop_price": 71.94
+  },
+  "CRNX": {
+    "entry_order_id": "6a6cca79-4bad-40ac-a7b8-ea514fd4b9d4",
+    "entry_price": 83.7399,
+    "entry_time": "2026-07-31T16:16:57.899Z",
+    "qty": 1.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
+    "stop_price": 83.63
   }
 }
