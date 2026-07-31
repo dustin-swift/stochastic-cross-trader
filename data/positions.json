@@ -1,31 +1,30 @@
 {
-  "TTAN": {
-    "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
-    "entry_price": 80.865,
-    "entry_time": "2026-07-31T13:40:01.263Z",
-    "qty": 1.0,
+  "BALL": {
+    "entry_order_id": "6a6cee6b-1a0f-4c8a-a7a6-f86c977efc7d",
+    "entry_price": 64.78,
+    "entry_time": "2026-07-31T18:50:19.671Z",
+    "qty": 2,
     "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6ca5c6-6a03-448c-8d73-3e69a99917b0",
-    "stop_price": 78.21
+    "stop_order_id": "6a6cee86-1c8f-45d5-afde-1bdfcb1ee2fb",
+    "stop_price": 64.03
   },
-  "XLF": {
-    "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
-    "entry_price": 56.86,
-    "entry_time": "2026-07-30T17:40:33Z",
-    "qty": 0.351741,
+  "HDV": {
+    "entry_order_id": "6a6cee91-30aa-4d32-b8e1-37be520f0478",
+    "entry_price": 28.71,
+    "entry_time": "2026-07-31T18:50:57.968Z",
+    "qty": 3,
     "stochastic_state": "NORMAL",
-    "stop_order_id": null,
-    "stop_price": null,
-    "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+    "stop_order_id": "6a6cee9f-ea5b-466f-be47-27deb01d8dbf",
+    "stop_price": 28.52
   },
-  "TECH": {
-    "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
-    "entry_price": 72.1099,
-    "entry_time": "2026-07-31T16:16:56.923Z",
-    "qty": 1.0,
+  "TGT": {
+    "entry_order_id": "6a6ceea9-dbcb-4741-921a-5fa67e348542",
+    "entry_price": 144.6211,
+    "entry_time": "2026-07-31T18:51:21.97Z",
+    "qty": 1,
     "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
-    "stop_price": 71.94
+    "stop_order_id": "6a6ceeb7-ea01-4dba-a326-db48da857f76",
+    "stop_price": 143.08
   },
   "CRNX": {
     "entry_order_id": "6a6cca79-4bad-40ac-a7b8-ea514fd4b9d4",
@@ -44,6 +43,34 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a6cd02d-0987-4b7a-9753-7d3c632c52f7",
     "stop_price": 25.46
+  },
+  "TECH": {
+    "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
+    "entry_price": 72.1099,
+    "entry_time": "2026-07-31T16:16:56.923Z",
+    "qty": 1.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
+    "stop_price": 71.94
+  },
+  "TTAN": {
+    "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
+    "entry_price": 80.865,
+    "entry_time": "2026-07-31T13:40:01.263Z",
+    "qty": 1.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a6ca5c6-6a03-448c-8d73-3e69a99917b0",
+    "stop_price": 78.21
+  },
+  "XLF": {
+    "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
+    "entry_price": 56.86,
+    "entry_time": "2026-07-30T17:40:33Z",
+    "qty": 0.351741,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": null,
+    "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
   },
   "XLRE": {
     "entry_order_id": "6a6cd03f-5fc8-4ead-9cc6-8e4f3e7cffe7",
