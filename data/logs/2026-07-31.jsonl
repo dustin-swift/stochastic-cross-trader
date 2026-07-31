@@ -1221,3 +1221,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 6, "needs_cancel": false, "order_id": "6a6cfb7b-7af7-472e-8211-dad642e5245b", "order_state": "filled", "symbol": "VTRS", "timestamp": "2026-07-31T19:46:09.931206+00:00"}
 {"event": "entry_executed", "fill_price": 17.5887, "order_id": "6a6cfb7b-7af7-472e-8211-dad642e5245b", "qty": 6, "symbol": "VTRS", "timestamp": "2026-07-31T19:46:29.352090+00:00"}
 {"event": "stop_placed", "stop_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06", "stop_price": 17.39, "symbol": "VTRS", "timestamp": "2026-07-31T19:46:29.352204+00:00"}
+{"candidates_checked": 194, "candidates_skipped_no_bars": 6, "circuit_breaker_tripped": false, "entries_proposed": 1, "entries_taken": 1, "event": "cycle_summary", "exits_taken": 1, "slots_max": 10, "slots_remaining": 2, "stop_outs_reconciled": 1, "timestamp": "2026-07-31T19:47:19.370810+00:00"}
