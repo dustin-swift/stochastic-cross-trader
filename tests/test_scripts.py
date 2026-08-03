@@ -73,6 +73,51 @@ def test_check_universe_screen_end_to_end(tmp_path):
     assert record["output_count"] == 3
 
 
+def test_check_universe_screen_parses_atr_from_finviz_column(tmp_path):
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text(
+        "Ticker,Sector,Price,Average True Range\n"
+        "A,Tech,10,1.39\n"
+        "B,Tech,11,\n"  # blank cell -> None, not a crash
+        "C,Health,12,0.42\n"
+    )
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run(
+        "check_universe_screen.py",
+        None,
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+    )
+
+    output = {c["symbol"]: c for c in json.loads(result.stdout)}
+    assert output["A"]["atr14"] == 1.39
+    assert output["B"]["atr14"] is None
+    assert output["C"]["atr14"] == 0.42
+
+
+def test_check_universe_screen_atr14_none_when_column_absent(tmp_path):
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text("Ticker,Sector,Price\nA,Tech,10\n")
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run(
+        "check_universe_screen.py",
+        None,
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+    )
+
+    output = json.loads(result.stdout)
+    assert output[0]["atr14"] is None
+
+
 def test_check_universe_screen_excludes_earnings_too_close(tmp_path):
     from datetime import date, timedelta
 

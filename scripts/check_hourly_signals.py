@@ -2,8 +2,10 @@
 """Hourly signal check (spec §3-4): stochastic %K/%D entry signal for
 candidates with an open slot, and exit signal for currently open positions.
 Pure computation over data the hourly-signal-check skill has already fetched
-via get_equity_historicals (+ get_equity_technical_indicators for ATR on
-new-entry candidates) — this script places no orders itself.
+via get_equity_historicals, plus each candidate's `atr14` carried straight
+through from the Finviz export (see providers/finviz.py, scripts/
+check_universe_screen.py) — no live indicator fetch for ATR. This script
+places no orders itself.
 
 Exit signal is a per-position state machine (spec §4 overbought-hold
 refinement, see lib.signals): while `stochastic_state` is NORMAL, exit is an

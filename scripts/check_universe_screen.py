@@ -49,14 +49,37 @@ from lib.universe import cap_per_sector
 from providers.finviz import check_freshness, load_universe
 
 
+def _parse_atr(raw: str | None) -> float | None:
+    if raw is None or raw.strip() == "":
+        return None
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
 def _normalize(rows: list[dict]) -> list[dict]:
     """Finviz CSV rows use "Ticker"/"Sector" (and whatever else the user's
     export includes) — add lowercase "symbol"/"sector" keys for cap_per_sector
     and downstream consumers, keeping the original columns alongside.
+
+    Also parses "Average True Range" (when the export includes it — the
+    user's Finviz Elite screener column, daily ATR(14)) into a clean float
+    "atr14" field. This is the same ATR(14)-on-daily-bars a live fetch would
+    return during market hours anyway (today's daily bar isn't complete yet,
+    so both sources reflect the same last-completed session) — using the
+    already-exported value means the live entry lifecycle never needs to
+    call get_equity_technical_indicators for this at all. Exports without
+    that column (or a blank cell) leave "atr14" as None, same as before.
     """
     normalized = []
     for row in rows:
-        normalized.append({**row, "symbol": row["Ticker"], "sector": row.get("Sector", "UNKNOWN")})
+        normalized.append({
+            **row,
+            "symbol": row["Ticker"],
+            "sector": row.get("Sector", "UNKNOWN"),
+            "atr14": _parse_atr(row.get("Average True Range")),
+        })
     return normalized
 
 

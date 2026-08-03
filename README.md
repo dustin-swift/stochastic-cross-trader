@@ -6,8 +6,10 @@ during a short-term pullback, entering on an hourly stochastic dual-confirmation
 crossover, with an ATR-based resting stop and a state-aware signal exit (see
 Exit logic below — extended overbought runs are held through whipsaws instead
 of exiting on the first crossover). The daily universe screen is Finviz Elite
-(manual export); everything else — hourly bars, ATR, account data, and order
-execution — goes through the Robinhood Agentic MCP connector (`.mcp.json`).
+(manual export, which also supplies daily ATR(14) directly — see "Finviz
+Elite manual screen" below, no live indicator fetch needed for it); everything
+else — hourly bars, account data, and order execution — goes through the
+Robinhood Agentic MCP connector (`.mcp.json`).
 
 Design plan: `/Users/dustinrowley/.claude/plans/elegant-brewing-phoenix.md`.
 
@@ -71,7 +73,15 @@ SMA50) is **not automated** — you build and export it yourself:
    - Average Volume: over 750K
    - 50-Day Simple Moving Average: price above SMA50
    - 52-Week High/Low: within 15% of the 52-week high
-2. Export the results to CSV (Elite plans include CSV export).
+2. Export the results to CSV (Elite plans include CSV export). Include the
+   **Average True Range** column — `scripts/check_universe_screen.py` parses
+   it straight into each candidate's `atr14` (daily ATR(14), the standard
+   convention), which the live entry lifecycle then uses directly for the
+   resting stop-loss calculation with no live indicator fetch needed. A
+   symbol without that column (or a blank cell) just carries `atr14: null`
+   through — its estimated stop won't show in dry-run output, and a live
+   entry signal on it gets logged and skipped rather than guessing a stop
+   distance (see `.claude/skills/hourly-signal-check.md`).
 3. Publish it: `bash scripts/publish_finviz_export.sh /path/to/your/export.csv`. This is the step that actually matters when the daily screen runs as a scheduled cloud routine (see Cloud routines & state persistence below) — the routine runs in a fresh clone with no access to your Mac, so simply saving the file locally to `data/finviz_export.csv` isn't enough on its own; the script pulls the latest `bot-state`, copies your export into `data/`, and pushes it back so the next cloud run can see it. (If you're only ever running the skills manually, by hand, from this machine, saving the file to `data/finviz_export.csv` directly also works — `screening.finviz_csv_path` is configurable in `config/strategy.yaml` — but the script is the supported path once anything is scheduled.)
 4. Re-publish whenever you want to refine the filters, or when the daily screen reports the file is stale.
 
@@ -85,7 +95,7 @@ fresh on the Tuesday after it. Re-export after any holiday to be safe.
 ## Running a cycle manually
 
 There's no CLI entry point that does the whole cycle end-to-end by itself —
-the Robinhood MCP calls (hourly bars, ATR, order placement) only work from an
+the Robinhood MCP calls (hourly bars, order placement) only work from an
 authenticated agent session. To run a cycle, tell the agent to follow one of
 the skills:
 
