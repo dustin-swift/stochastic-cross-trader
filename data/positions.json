@@ -1,13 +1,4 @@
 {
-  "BALL": {
-    "entry_order_id": "6a6cee6b-1a0f-4c8a-a7a6-f86c977efc7d",
-    "entry_price": 64.78,
-    "entry_time": "2026-07-31T18:50:19.671Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6cee86-1c8f-45d5-afde-1bdfcb1ee2fb",
-    "stop_price": 64.03
-  },
   "FHN": {
     "entry_order_id": "6a6cd017-68ff-45e0-94a6-a795a7586d6d",
     "entry_price": 25.6899,
@@ -62,14 +53,5 @@
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
-  },
-  "XLRE": {
-    "entry_order_id": "6a6cd03f-5fc8-4ead-9cc6-8e4f3e7cffe7",
-    "entry_price": 45.1486,
-    "entry_time": "2026-07-31T16:41:35.642Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a6cd051-6bec-462d-93bd-ab9e5316eb1a",
-    "stop_price": 44.75
   }
 }

@@ -46,5 +46,37 @@
     "stop_order_id": "6a6ccaa2-eae3-4e75-b69d-bb0e110fab02",
     "stop_price": 71.94,
     "symbol": "TECH"
+  },
+  {
+    "closed_at": "2026-08-03T13:46:06.043646+00:00",
+    "entry_order_id": "6a6cee6b-1a0f-4c8a-a7a6-f86c977efc7d",
+    "entry_price": 64.78,
+    "entry_time": "2026-07-31T18:50:19.671Z",
+    "exit_order_id": "6a709b8b-cd83-4f2b-aa11-38d442ca8330",
+    "exit_price": 65.4341,
+    "exit_reason": "earnings_exit",
+    "exit_time": "2026-08-03T13:45:47.51Z",
+    "pnl_pct": 1.0097252238345122,
+    "pnl_usd": 1.3081999999999994,
+    "qty": 2,
+    "stop_order_id": "6a6cee86-1c8f-45d5-afde-1bdfcb1ee2fb",
+    "stop_price": 64.03,
+    "symbol": "BALL"
+  },
+  {
+    "closed_at": "2026-08-03T13:46:06.085880+00:00",
+    "entry_order_id": "6a6cd03f-5fc8-4ead-9cc6-8e4f3e7cffe7",
+    "entry_price": 45.1486,
+    "entry_time": "2026-07-31T16:41:35.642Z",
+    "exit_order_id": "6a709b8c-27bc-4a28-82f6-d76c4728b239",
+    "exit_price": 45.0501,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-03T13:45:48.818Z",
+    "pnl_pct": -0.2181684481910917,
+    "pnl_usd": -0.19700000000000273,
+    "qty": 2,
+    "stop_order_id": "6a6cd051-6bec-462d-93bd-ab9e5316eb1a",
+    "stop_price": 44.75,
+    "symbol": "XLRE"
   }
 ]
