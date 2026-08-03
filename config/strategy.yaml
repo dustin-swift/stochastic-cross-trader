@@ -128,12 +128,16 @@ alerts:
 # max_price_per_share is set to 1.5x per_trade_usd -- high enough that the
 # round() branch above can never land on 1 share costing more than $150, and
 # never come out to 0 shares for any price this doesn't already skip.
-# $100/trade x 10 slots = $1,000 max theoretical exposure. Revisit position
-# size and slot count together once a track record justifies scaling further.
+# $100/trade x 15 slots = $1,500 max theoretical exposure. Raised from 10 to
+# 15 slots 2026-08-04 after an additional $750 transfer into the agentic
+# account, alongside the larger candidate pool from loosening the Finviz
+# volume/price filters the same day -- more concurrent slots to actually use
+# that bigger pool. Revisit position size and slot count together again once
+# a track record justifies scaling further.
 sizing:
   per_trade_usd: 100
   max_price_per_share: 150
-  max_positions: 10
+  max_positions: 15
 
 # Portfolio-level daily-loss circuit breaker. If realized + unrealized P&L
 # for the day drops below -max_daily_loss_pct% of account value, no new
