@@ -68,6 +68,15 @@ trend_filter:
   sma_period: 50
 
 # --- Step 4: ATR-based stop-loss ---
+# `period` counts DAILY bars (the standard ATR convention, matching what
+# Finviz and most platforms mean by "ATR") -- the live skill fetches this via
+# get_equity_technical_indicators(..., interval="day"). Originally this was
+# fetched on HOURLY bars, which only gave a ~2.5-trading-day lookback window;
+# that's short enough to occasionally land in an anomalously quiet stretch
+# for a given name and produce a stop tight enough to sit inside normal
+# bid-ask noise. Confirmed live on CRNX (2026-07-31): hourly ATR(14) was
+# ~0.08 vs. its own daily ATR(14) of 1.39 (an 18x gap) -- stopped out on an
+# insignificant wiggle a few hours after entry. Fixed 2026-08-03.
 atr:
   period: 14
   stop_multiplier: 1.5

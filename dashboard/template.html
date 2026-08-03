@@ -303,7 +303,17 @@
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px 20px;
   }
+  /* Two compounding causes of the order-id overlap bug: (1) grid items
+     default to min-width: auto, letting long unbreakable content overflow
+     its own column into the next one instead of wrapping -- min-width: 0
+     forces the item to respect the track boundary; (2) `tbody td` (further
+     up this stylesheet) sets white-space: nowrap for normal table columns,
+     which is inherited by everything inside this row's <td>, including
+     .kv-value -- nowrap disables wrapping outright regardless of
+     word-break/overflow-wrap, so it has to be reset back to normal here. */
   .exp-detail-inner.open { display: grid; }
+  .exp-detail-inner > div { min-width: 0; }
+  .exp-detail-inner { white-space: normal; }
   .kv-label {
     font-size: 10px;
     text-transform: uppercase;
@@ -315,6 +325,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
     word-break: break-all;
+    overflow-wrap: anywhere;
   }
   .caret { display: inline-block; transition: transform 0.15s ease; color: var(--ink-muted); }
   .caret.open { transform: rotate(90deg); }
@@ -749,7 +760,7 @@
         <div class="row"><span class="k">ATR stop mult.</span><span class="v">${cfg.stop_multiplier}&times; ATR(${cfg.atr_period})</span></div>
         <div class="row"><span class="k">Stochastic bands</span><span class="v">${cfg.oversold_threshold} / ${cfg.overbought_threshold}</span></div>
         <div class="row"><span class="k">Daily loss breaker</span><span class="v">${cfg.max_daily_loss_pct}%</span></div>
-        <div class="row"><span class="k">Earnings exclude / force-exit</span><span class="v">${cfg.earnings_exclusion_days}d / ${cfg.earnings_forced_exit_days}d</span></div>
+        <div class="row"><span class="k">Earnings avoidance</span><span class="v">${cfg.catalysts_enabled ? 'BMO/AMC-aware, 1-day entry buffer' : 'disabled'}</span></div>
       </div>
     </div>
     <div class="system-cell">
