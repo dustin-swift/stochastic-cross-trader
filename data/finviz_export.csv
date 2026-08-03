@@ -1,232 +1,427 @@
 "No.","Ticker","Company","Sector","Industry","Country","Market Cap","P/E","Volume","Price","Change","Earnings Date","Average True Range"
-1,"ABNB","Airbnb Inc","Consumer Cyclical","Travel Services","USA",92714.10,37.89,2773,153.83,1.52%,8/6/2026 4:30:00 PM,4.26
-2,"ACWI","iShares MSCI ACWI ETF","Financial","Exchange Traded Fund","USA",,,6768,157.69,0.81%,,2.11
-3,"ADPT","Adaptive Biotechnologies Corp","Healthcare","Diagnostics & Research","USA",3601.00,,540,22.50,-0.31%,7/29/2026 4:30:00 PM,1.31
-4,"AFL","Aflac Inc","Financial","Insurance - Life","USA",66127.32,14.74,1430,129.92,1.91%,8/6/2026 4:30:00 PM,2.19
-5,"AIG","American International Group Inc","Financial","Insurance - Diversified","USA",42527.84,14.17,4850,80.21,2.07%,8/6/2026 4:30:00 PM,1.68
-6,"AMGN","AMGEN Inc","Healthcare","Drug Manufacturers - General","USA",212639.65,27.40,11268,393.99,2.29%,8/4/2026 4:30:00 PM,9.67
-7,"AMZN","Amazon.com Inc","Consumer Cyclical","Internet Retail","USA",2978428.50,22.27,2259905,276.88,1.95%,7/30/2026 4:30:00 PM,9.28
-8,"AMZU","Direxion Daily AMZN Bull 2X ETF","Financial","Exchange Traded Fund","USA",,,357948,43.42,4.07%,,2.57
-9,"ANET","Arista Networks Inc","Technology","Computer Hardware","USA",219730.86,59.75,80117,174.50,-3.24%,8/4/2026 4:30:00 PM,10.20
-10,"APLE","Apple Hospitality REIT Inc","Real Estate","REIT - Hotel & Motel","USA",3937.61,23.01,1925,16.68,1.03%,8/5/2026 4:30:00 PM,0.32
-11,"ARMK","Aramark","Industrials","Specialty Business Services","USA",15246.04,43.25,1611,57.98,1.77%,8/11/2026 8:30:00 AM,1.06
-12,"ASB","Associated Banc-Corp","Financial","Banks - Regional","USA",5833.27,10.82,4704,30.91,0.10%,7/23/2026 4:30:00 PM,0.58
-13,"AWK","American Water Works Co Inc","Utilities","Utilities - Regulated Water","USA",26862.91,23.40,263,135.17,0.75%,7/29/2026 4:30:00 PM,4.17
-14,"BAC","Bank Of America Corp","Financial","Banks - Diversified","USA",443040.14,14.37,95304,62.43,0.77%,7/14/2026 8:30:00 AM,1.10
-15,"BALL","Ball Corp","Consumer Cyclical","Packaging & Containers","USA",17622.86,19.18,229,66.19,1.99%,8/4/2026 8:30:00 AM,1.65
-16,"BBY","Best Buy Co Inc","Consumer Cyclical","Specialty Retail","USA",18073.28,15.86,19579,85.75,-0.59%,8/27/2026 8:30:00 AM,2.50
-17,"BCS","Barclays plc ADR","Financial","Banks - Diversified","United Kingdom",93631.56,10.25,188697,27.77,0.98%,7/28/2026 8:30:00 AM,0.82
-18,"BEN","Franklin Resources Inc","Financial","Asset Management","USA",17714.43,23.24,1254,34.09,0.68%,7/31/2026 8:30:00 AM,0.94
-19,"BMRN","Biomarin Pharmaceutical Inc","Healthcare","Biotechnology","USA",11678.24,44.09,6036,60.42,0.67%,8/6/2026 4:30:00 PM,1.53
-20,"BNS","Bank Of Nova Scotia","Financial","Banks - Diversified","Canada",108179.15,16.74,5,87.77,0.00%,8/25/2026 8:30:00 AM,1.55
-21,"BNY","Bank Of New York Mellon Corp","Financial","Banks - Diversified","USA",109099.95,18.51,140317,158.95,1.68%,7/15/2026 8:30:00 AM,3.44
-22,"BOX","Box Inc","Technology","Software - Infrastructure","USA",4453.82,49.27,623,32.15,1.90%,5/26/2026 4:30:00 PM,1.17
-23,"BP","BP plc ADR","Energy","Oil & Gas Integrated","United Kingdom",112893.52,36.54,265970,43.84,-3.05%,8/4/2026 8:30:00 AM,1.07
-24,"BRK-B","Berkshire Hathaway Inc","Financial","Insurance - Diversified","USA",999705.24,15.34,29857,515.20,0.72%,5/2/2026 4:30:00 PM,6.85
-25,"BRKR","Bruker Corp","Healthcare","Medical Devices","USA",9712.00,,181,63.80,1.53%,8/4/2026 8:30:00 AM,2.83
-26,"BUD","Anheuser-Busch InBev SA/NV ADR","Consumer Defensive","Beverages - Brewers","Belgium",146301.57,18.23,27408,84.63,-2.14%,7/30/2026 8:30:00 AM,1.88
-27,"CAH","Cardinal Health Inc","Healthcare","Medical Distribution","USA",54277.20,35.44,622,231.75,0.75%,8/11/2026 8:30:00 AM,5.10
-28,"CFG","Citizens Financial Group Inc","Financial","Banks - Regional","USA",30599.74,15.72,1162,72.36,0.99%,7/16/2026 8:30:00 AM,1.64
-29,"CHD","Church & Dwight Co Inc","Consumer Defensive","Household & Personal Products","USA",23694.36,32.18,501,100.00,1.20%,7/31/2026 8:30:00 AM,2.46
-30,"CL","Colgate-Palmolive Co","Consumer Defensive","Household & Personal Products","USA",73865.48,36.52,1898,92.31,1.11%,7/31/2026 8:30:00 AM,2.34
-31,"CLBK","Columbia Financial Inc","Financial","Banks - Regional","USA",2935.31,42.06,6447,10.89,0.74%,7/30/2026 4:30:00 PM,0.26
-32,"CNK","Cinemark Holdings Inc","Communication Services","Entertainment","USA",4304.96,20.65,1742,37.14,1.50%,7/30/2026 8:30:00 AM,1.27
-33,"CNQ","Canadian Natural Resources Ltd","Energy","Oil & Gas E&P","Canada",96948.26,13.94,38582,46.60,-2.26%,8/6/2026 8:30:00 AM,1.20
-34,"CRWD","Crowdstrike Holdings Inc","Technology","Software - Infrastructure","USA",200291.60,,411240,196.70,3.06%,6/3/2026 4:30:00 PM,9.31
-35,"CSX","CSX Corp","Industrials","Railroads","USA",94124.25,29.34,7432,50.81,0.81%,7/22/2026 4:30:00 PM,1.13
-36,"CTAS","Cintas Corp","Industrials","Specialty Business Services","USA",82434.93,41.97,3270,206.00,0.67%,7/15/2026 8:30:00 AM,5.66
-37,"CUBE","CubeSmart","Real Estate","REIT - Industrial","USA",9405.17,28.28,1280,41.36,-0.24%,7/30/2026 4:30:00 PM,1.03
-38,"CVE","Cenovus Energy Inc","Energy","Oil & Gas Integrated","Canada",54110.00,11.32,15131,29.34,-2.82%,7/29/2026 8:30:00 AM,0.99
-39,"CVX","Chevron Corp","Energy","Oil & Gas Integrated","USA",387106.85,18.64,117762,194.37,-1.25%,7/31/2026 8:30:00 AM,4.29
-40,"DAL","Delta Air Lines Inc","Industrials","Airlines","USA",59041.40,14.92,104982,89.78,2.68%,7/10/2026 8:30:00 AM,2.71
-41,"DB","Deutsche Bank AG","Financial","Banks - Regional","Germany",70052.10,9.68,3957,37.28,1.58%,7/29/2026 8:30:00 AM,0.94
-42,"DBRG","DigitalBridge Group Inc","Financial","Asset Management","USA",2981.36,32.65,3637,15.87,0.00%,4/28/2026 4:30:00 PM,0.05
-43,"DBX","Dropbox Inc","Technology","Software - Infrastructure","USA",7436.32,18.03,16300,33.05,1.49%,8/6/2026 4:30:00 PM,1.11
-44,"DDOG","Datadog Inc","Technology","Software - Application","USA",98166.70,736.00,45364,275.78,2.91%,8/6/2026 8:30:00 AM,12.92
-45,"DFAC","Dimensional U.S. Core Equity 2 ETF","Financial","Exchange Traded Fund","USA",,,32,44.49,0.00%,,0.44
-46,"DHT","DHT Holdings Inc","Energy","Oil & Gas Midstream","Bermuda",3035.63,9.16,10078,18.85,1.51%,8/5/2026 4:30:00 PM,0.67
-47,"DIA","Spdr Dow Jones Industrial Average ETF Trust","Financial","Exchange Traded Fund","USA",,,80686,530.75,1.23%,,6.18
-48,"DINO","HF Sinclair Corp","Energy","Oil & Gas Refining & Marketing","USA",16086.68,8.64,3321,90.48,-1.08%,7/28/2026 8:30:00 AM,3.20
-49,"DLO","DLocal Limited","Technology","Software - Infrastructure","Uruguay",4480.01,22.62,2742,15.19,0.73%,8/13/2026 4:30:00 PM,0.54
-50,"DLR","Digital Realty Trust Inc","Real Estate","REIT - Specialty","USA",70301.90,92.42,1181,190.00,0.79%,7/23/2026 4:30:00 PM,6.51
-51,"DRH","Diamondrock Hospitality Co","Real Estate","REIT - Hotel & Motel","USA",2760.40,18.65,3913,13.45,1.59%,7/30/2026 4:30:00 PM,0.33
-52,"DYN","Dyne Therapeutics Inc","Healthcare","Biotechnology","USA",4762.04,,236,25.50,1.27%,7/29/2026 4:30:00 PM,1.34
-53,"DYNF","iShares U.S. Equity Factor Rotation Active ETF","Financial","Exchange Traded Fund","USA",,,7407,68.08,0.94%,,0.89
-54,"EBC","Eastern Bankshares Inc","Financial","Banks - Regional","USA",5357.90,13.14,1280,23.18,0.96%,7/23/2026 4:30:00 PM,0.52
-55,"EC","Ecopetrol SA ADR","Energy","Oil & Gas Integrated","Colombia",34345.89,15.25,10897,16.71,-0.38%,8/3/2026 4:30:00 PM,0.57
-56,"EFA","iShares MSCI EAFE ETF","Financial","Exchange Traded Fund","USA",,,22215,105.72,0.13%,,1.39
-57,"EFV","iShares MSCI EAFE Value ETF","Financial","Exchange Traded Fund","USA",,,48,80.88,0.00%,,0.91
-58,"ELAN","Elanco Animal Health Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",13210.45,,11616,26.45,0.30%,8/5/2026 8:30:00 AM,0.92
-59,"EMR","Emerson Electric Co","Industrials","Specialty Industrial Machinery","USA",85056.78,35.04,1864,151.86,1.36%,8/4/2026 4:30:00 PM,4.17
-60,"EOG","EOG Resources Inc","Energy","Oil & Gas E&P","USA",77774.41,14.36,3665,146.02,-1.80%,8/5/2026 8:30:00 AM,3.99
-61,"EQNR","Equinor ASA ADR","Energy","Oil & Gas Integrated","Norway",95892.98,10.92,18867,40.11,-2.41%,7/22/2026 8:30:00 AM,1.28
-62,"ET","Energy Transfer LP","Energy","Oil & Gas Midstream","USA",69855.53,17.06,44644,20.30,-0.29%,8/4/2026 8:30:00 AM,0.33
-63,"ETN","Eaton Corp Plc","Industrials","Specialty Industrial Machinery","Ireland",160406.73,42.03,14268,413.10,-0.51%,7/31/2026 8:30:00 AM,18.86
-64,"EWA","iShares MSCI Australia ETF","Financial","Exchange Traded Fund","USA",,,0,29.34,0.00%,,0.42
-65,"EWH","iShares MSCI Hong Kong ETF","Financial","Exchange Traded Fund","USA",,,11904,22.97,-0.48%,,0.28
-66,"FANG","Diamondback Energy Inc","Energy","Oil & Gas E&P","USA",55339.11,221.80,3954,196.72,-3.07%,8/3/2026 4:30:00 PM,6.36
-67,"FAST","Fastenal Co","Industrials","Industrial Distribution","USA",55883.13,41.44,3972,48.70,2.08%,7/14/2026 8:30:00 AM,1.28
-68,"FHN","First Horizon Corp","Financial","Banks - Regional","USA",12238.02,12.39,1261,25.78,0.57%,7/15/2026 8:30:00 AM,0.51
-69,"FINA","Fidelity MSCI North American Subset Index ETF","Financial","Exchange Traded Fund","USA",,,0,25.03,0.00%,,0.20
-70,"FIVN","Five9 Inc","Technology","Software - Infrastructure","USA",2192.27,43.46,10710,28.63,4.08%,8/6/2026 4:30:00 PM,1.61
-71,"FNB","F.N.B. Corp","Financial","Banks - Regional","USA",6798.91,11.35,3194,19.10,1.06%,7/16/2026 4:30:00 PM,0.36
-72,"FRO","Frontline Plc","Energy","Oil & Gas Midstream","Cyprus",8834.12,9.76,27779,39.68,0.79%,5/22/2026 8:30:00 AM,1.36
-73,"FTNT","Fortinet Inc","Technology","Software - Infrastructure","USA",121004.05,58.11,17593,164.92,1.83%,7/29/2026 4:30:00 PM,7.13
-74,"GE","GE Aerospace","Industrials","Aerospace & Defense","USA",378523.56,43.00,31122,364.82,1.32%,7/16/2026 8:30:00 AM,9.97
-75,"GH","Guardant Health Inc","Healthcare","Diagnostics & Research","USA",21873.98,,2530,163.00,0.62%,7/30/2026 4:30:00 PM,8.73
-76,"GM","General Motors Company","Consumer Cyclical","Auto Manufacturers","USA",78762.24,45.28,5951,89.76,1.02%,7/21/2026 8:30:00 AM,2.66
-77,"GPN","Global Payments Inc","Technology","Software - Infrastructure","USA",23051.51,22.45,145,84.27,0.23%,8/5/2026 8:30:00 AM,2.88
-78,"GTES","Gates Industrial Corp Ltd","Industrials","Specialty Industrial Machinery","USA",7353.30,20.50,562,28.95,3.47%,7/31/2026 8:30:00 AM,1.20
-79,"HDV","iShares Core High Dividend ETF","Financial","Exchange Traded Fund","USA",,,8808,28.90,0.59%,,0.41
-80,"HON","Honeywell International Inc","Industrials","Conglomerates","USA",78198.23,9.12,2792,246.73,1.51%,7/23/2026 8:30:00 AM,7.32
-81,"HPQ","HP Inc","Technology","Computer Hardware","USA",25313.98,10.22,46937,27.68,1.50%,5/27/2026 4:30:00 PM,1.13
-82,"HST","Host Hotels & Resorts Inc","Real Estate","REIT - Hotel & Motel","USA",17361.69,17.31,479,25.35,0.88%,8/5/2026 4:30:00 PM,0.54
-83,"HWM","Howmet Aerospace Inc","Industrials","Aerospace & Defense","USA",115376.71,66.90,1517,288.36,2.16%,8/6/2026 8:30:00 AM,9.61
-84,"IEFA","iShares Core MSCI EAFE ETF","Financial","Exchange Traded Fund","USA",,,1198,98.64,0.40%,,1.36
-85,"IFF","International Flavors & Fragrances Inc","Basic Materials","Specialty Chemicals","USA",20225.14,24.27,0,79.22,0.00%,8/4/2026 4:30:00 PM,2.34
-86,"IJH","iShares Core S&P Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,10156,75.81,0.72%,,0.96
-87,"IJR","iShares Core S&P Small-Cap ETF","Financial","Exchange Traded Fund","USA",,,1943,146.61,0.79%,,1.85
-88,"ILF","iShares Latin America 40 ETF","Financial","Exchange Traded Fund","USA",,,219,35.47,0.28%,,0.54
-89,"INVH","Invitation Homes Inc","Real Estate","REIT - Residential","USA",17683.26,53.48,26,29.94,0.74%,7/29/2026 4:30:00 PM,0.54
-90,"IVV","iShares Core S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,23131,754.78,0.59%,,8.64
-91,"IVW","iShares S&P 500 Growth ETF","Financial","Exchange Traded Fund","USA",,,1225,136.13,0.65%,,3.27
-92,"IVZ","Invesco Ltd","Financial","Asset Management","USA",13121.58,,0,29.60,0.00%,7/28/2026 8:30:00 AM,1.00
-93,"IWM","iShares Russell 2000 Index Fund","Financial","Exchange Traded Fund","USA",,,447312,294.00,0.96%,,4.36
-94,"IWR","iShares Russell Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,85,109.69,0.00%,,1.27
-95,"IYR","iShares U.S. Real Estate ETF","Financial","Exchange Traded Fund","USA",,,226,105.38,0.27%,,1.39
-96,"JCI","Johnson Controls International plc","Industrials","Building Products & Equipment","Ireland",88959.20,25.53,3306,146.86,0.14%,7/29/2026 8:30:00 AM,4.93
-97,"JEPI","JPMorgan Equity Premium Income ETF","Financial","Exchange Traded Fund","USA",,,49992,57.40,-0.06%,,0.44
-98,"JETS","ESS U.S.Global Jets ETF","Financial","Exchange Traded Fund","USA",,,13036,31.90,1.98%,,0.84
-99,"JNJ","Johnson & Johnson","Healthcare","Drug Manufacturers - General","USA",623609.39,29.99,20370,258.77,0.94%,7/15/2026 8:30:00 AM,6.35
-100,"JPM","JPMorgan Chase & Co","Financial","Banks - Diversified","USA",953932.90,15.25,22234,356.01,1.20%,7/14/2026 8:30:00 AM,7.22
-101,"KHC","Kraft Heinz Co","Consumer Defensive","Packaged Foods","USA",31138.52,,40687,26.26,1.59%,8/5/2026 8:30:00 AM,0.76
-102,"KMX","Carmax Inc","Consumer Cyclical","Auto & Truck Dealerships","USA",8230.84,38.17,511,58.00,1.29%,6/17/2026 8:30:00 AM,2.11
-103,"KO","Coca-Cola Co","Consumer Defensive","Beverages - Non-Alcoholic","USA",380334.13,26.63,85596,88.40,0.92%,7/28/2026 8:30:00 AM,1.94
-104,"KRE","State Street SPDR S&P Regional Banking ETF","Financial","Exchange Traded Fund","USA",,,55913,76.71,0.85%,,1.28
-105,"LEVI","Levi Strauss & Co","Consumer Cyclical","Apparel Manufacturing","USA",9448.09,20.09,218,24.55,0.12%,7/8/2026 4:30:00 PM,0.86
-106,"LTH","Life Time Group Holdings Inc","Consumer Cyclical","Leisure","USA",10111.65,24.74,238,45.25,0.33%,7/30/2026 8:30:00 AM,1.47
-107,"M","Macy's Inc","Consumer Cyclical","Department Stores","USA",6625.92,10.36,4428,25.19,1.49%,6/3/2026 8:30:00 AM,0.89
-108,"MA","Mastercard Incorporated","Financial","Credit Services","USA",513625.07,31.96,27660,581.00,1.38%,7/30/2026 8:30:00 AM,12.52
-109,"MAC","Macerich Co","Real Estate","REIT - Retail","USA",7694.18,,195,26.09,0.96%,8/4/2026 4:30:00 PM,0.61
-110,"MAGS","Roundhill Magnificent Seven ETF","Financial","Exchange Traded Fund","USA",,,211972,66.75,1.20%,,1.37
-111,"MDLZ","Mondelez International Inc","Consumer Defensive","Confectioners","USA",80483.98,23.13,6029,63.06,1.20%,7/28/2026 4:30:00 PM,1.71
-112,"MET","Metlife Inc","Financial","Insurance - Life","USA",62432.66,18.77,117,97.03,0.94%,8/5/2026 4:30:00 PM,1.76
-113,"MFC","Manulife Financial Corp","Financial","Insurance - Life","Canada",74866.41,17.81,39,44.86,0.95%,8/5/2026 4:30:00 PM,0.68
-114,"MMM","3M Co","Industrials","Conglomerates","USA",92154.44,31.73,11254,178.69,1.37%,7/21/2026 8:30:00 AM,4.63
-115,"MNST","Monster Beverage Corp","Consumer Defensive","Beverages - Non-Alcoholic","USA",94866.79,47.07,3675,97.00,0.64%,8/6/2026 4:30:00 PM,2.05
-116,"MPC","Marathon Petroleum Corp","Energy","Oil & Gas Refining & Marketing","USA",90821.48,20.33,4577,311.10,-1.70%,8/4/2026 8:30:00 AM,9.20
-117,"MRK","Merck & Co Inc","Healthcare","Drug Manufacturers - General","USA",325235.36,37.06,12352,131.68,1.14%,8/4/2026 8:30:00 AM,3.34
-118,"MTCH","Match Group Inc","Communication Services","Internet Content & Information","USA",9312.00,15.24,1281,39.92,1.29%,8/4/2026 4:30:00 PM,1.06
-119,"MUFG","Mitsubishi UFJ Financial Group Inc ADR","Financial","Banks - Diversified","Japan",258373.16,16.19,30255,22.89,1.96%,8/3/2026 4:30:00 PM,0.48
-120,"NAVN","Navan Inc","Technology","Software - Application","USA",6923.53,,6244,27.22,2.26%,6/10/2026 4:30:00 PM,1.58
-121,"NDAQ","Nasdaq Inc","Financial","Financial Data & Stock Exchanges","USA",53483.57,27.88,1764,95.68,1.58%,7/23/2026 8:30:00 AM,2.49
-122,"NEO","Neogenomics Inc","Healthcare","Diagnostics & Research","USA",1991.37,,3570,15.50,1.37%,7/28/2026 4:30:00 PM,0.81
-123,"NET","Cloudflare Inc","Technology","Software - Infrastructure","USA",100361.24,,10053,282.61,1.30%,8/6/2026 4:30:00 PM,13.83
-124,"NLY","Annaly Capital Management Inc","Real Estate","REIT - Mortgage","USA",17305.81,5.75,11632,22.96,1.06%,7/21/2026 4:30:00 PM,0.44
-125,"NTAP","Netapp Inc","Technology","Software - Infrastructure","USA",35302.55,28.30,67825,179.90,0.78%,5/28/2026 4:30:00 PM,6.72
-126,"OGN","Organon & Co","Healthcare","Drug Manufacturers - General","USA",3558.36,17.36,227,13.55,0.00%,4/30/2026 8:30:00 AM,0.05
-127,"OHI","Omega Healthcare Investors Inc","Real Estate","REIT - Healthcare Facilities","USA",15271.86,18.00,364,50.40,-0.45%,7/29/2026 4:30:00 PM,1.10
-128,"OKTA","Okta Inc","Technology","Software - Infrastructure","USA",25497.54,106.55,28423,146.70,3.36%,5/28/2026 4:30:00 PM,7.10
-129,"ONB","Old National Bancorp","Financial","Banks - Regional","USA",10191.66,11.86,23387,26.64,0.00%,7/22/2026 8:30:00 AM,0.51
-130,"OSCR","Oscar Health Inc","Healthcare","Healthcare Plans","USA",9457.83,,14983,31.37,0.48%,8/6/2026 8:30:00 AM,1.64
-131,"OVV","Ovintiv Inc","Energy","Oil & Gas E&P","USA",16687.25,16.93,3750,60.57,-3.03%,7/23/2026 4:30:00 PM,1.92
-132,"PAA","Plains All American Pipeline LP","Energy","Oil & Gas Midstream","USA",17236.14,18.29,652,24.43,-0.57%,8/7/2026 8:30:00 AM,0.47
-133,"PANW","Palo Alto Networks Inc","Technology","Software - Infrastructure","USA",279088.60,281.68,82398,342.44,3.20%,6/2/2026 4:30:00 PM,15.21
-134,"PBF","PBF Energy Inc","Energy","Oil & Gas Refining & Marketing","USA",8356.84,6.23,7311,70.50,-2.46%,7/30/2026 8:30:00 AM,3.89
-135,"PCAR","Paccar Inc","Industrials","Farm & Heavy Construction Machinery","USA",70217.07,28.08,42508,133.40,0.54%,7/28/2026 8:30:00 AM,4.08
-136,"PDBC","Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF","Financial","Exchange Traded Fund","USA",,,67095,17.27,-1.65%,,0.32
-137,"PEB","Pebblebrook Hotel Trust","Real Estate","REIT - Hotel & Motel","USA",2171.10,,2362,19.24,0.73%,7/29/2026 4:30:00 PM,0.60
-138,"PENN","PENN Entertainment Inc","Consumer Cyclical","Resorts & Casinos","USA",2777.25,,27,20.75,1.07%,8/6/2026 8:30:00 AM,0.71
-139,"PK","Park Hotels & Resorts Inc","Real Estate","REIT - Hotel & Motel","USA",3044.59,,5977,15.12,0.40%,8/6/2026 4:30:00 PM,0.41
-140,"PM","Philip Morris International Inc","Consumer Defensive","Tobacco","USA",300391.57,27.70,26218,192.73,1.00%,7/22/2026 8:30:00 AM,5.67
-141,"PR","Permian Resources Holdings Inc","Energy","Oil & Gas E&P","USA",17499.32,24.32,6216,20.90,-1.92%,8/5/2026 4:30:00 PM,0.62
-142,"PSX","Phillips 66","Energy","Oil & Gas Refining & Marketing","USA",83795.42,20.57,1948,209.00,-1.27%,8/5/2026 8:30:00 AM,6.08
-143,"REET","iShares Global REIT ETF","Financial","Exchange Traded Fund","USA",,,756,28.38,0.00%,,0.34
-144,"RF","Regions Financial Corp","Financial","Banks - Regional","USA",26633.98,12.69,5849,31.21,0.84%,7/17/2026 8:30:00 AM,0.62
-145,"RHI","Robert Half Inc","Industrials","Staffing & Employment Services","USA",3917.12,33.36,1021,38.29,1.30%,7/23/2026 4:30:00 PM,2.16
-146,"RLJ","RLJ Lodging Trust","Real Estate","REIT - Hotel & Motel","USA",1893.49,,344,12.40,1.22%,8/6/2026 4:30:00 PM,0.31
-147,"RNG","RingCentral Inc","Technology","Software - Application","USA",4755.98,45.36,8480,56.95,2.40%,7/23/2026 4:30:00 PM,3.14
-148,"ROKU","Roku Inc","Communication Services","Entertainment","USA",21536.32,109.17,1006,145.18,0.12%,8/6/2026 4:30:00 PM,2.12
-149,"ROST","Ross Stores Inc","Consumer Cyclical","Apparel Retail","USA",81221.76,35.29,3580,253.20,0.85%,5/21/2026 4:30:00 PM,5.84
-150,"RPRX","Royalty Pharma plc","Healthcare","Biotechnology","USA",33689.40,30.64,13614,58.50,0.12%,8/5/2026 8:30:00 AM,1.48
-151,"RSP","Invesco S&P 500 Equal Weight ETF","Financial","Exchange Traded Fund","USA",,,19544,216.70,0.79%,,2.20
-152,"RTX","RTX Corp","Industrials","Aerospace & Defense","USA",292692.64,38.24,7845,217.17,0.91%,7/23/2026 8:30:00 AM,5.46
-153,"RVMD","Revolution Medicines Inc","Healthcare","Biotechnology","USA",40267.90,,992,189.41,1.00%,8/5/2026 4:30:00 PM,7.07
-154,"S","SentinelOne Inc","Technology","Software - Infrastructure","USA",6653.82,,37401,19.41,1.84%,5/28/2026 4:30:00 PM,0.91
-155,"SAN","Banco Santander SA ADR","Financial","Banks - Diversified","Spain",209457.92,11.24,399107,14.27,1.21%,7/22/2026 8:30:00 AM,0.37
-156,"SBRA","Sabra Healthcare REIT Inc","Real Estate","REIT - Healthcare Facilities","USA",5374.17,33.72,1458,21.31,0.66%,8/3/2026 4:30:00 PM,0.56
-157,"SBUX","Starbucks Corp","Consumer Cyclical","Restaurants","USA",122208.00,61.81,21157,107.20,1.85%,7/29/2026 4:30:00 PM,2.94
-158,"SCHB","Schwab U.S. Broad Market ETF","Financial","Exchange Traded Fund","USA",,,13412,29.03,0.62%,,0.37
-159,"SCHD","Schwab US Dividend Equity ETF","Financial","Exchange Traded Fund","USA",,,563667,33.72,0.74%,,0.41
-160,"SCHE","Schwab Emerging Markets Equity ETF","Financial","Exchange Traded Fund","USA",,,754,36.03,0.00%,,0.65
-161,"SCHF","Schwab International Equity ETF","Financial","Exchange Traded Fund","USA",,,17172,27.68,0.93%,,0.43
-162,"SCHG","Schwab U.S. Large-Cap Growth ETF","Financial","Exchange Traded Fund","USA",,,51408,34.43,0.76%,,0.48
-163,"SCHH","Schwab U.S. REIT ETF","Financial","Exchange Traded Fund","USA",,,1882,24.45,0.70%,,0.32
-164,"SCHV","Schwab U.S. Large-Cap Value ETF","Financial","Exchange Traded Fund","USA",,,318,34.31,0.70%,,0.40
-165,"SCHW","Charles Schwab Corp","Financial","Capital Markets","USA",184348.37,19.28,5999,106.00,0.72%,7/21/2026 8:30:00 AM,2.24
-166,"SCHX","Schwab U.S. Large-Cap ETF","Financial","Exchange Traded Fund","USA",,,23447,29.63,0.65%,,0.38
-167,"SEUS","SEI QiM U.S. Equity Factor Allocation Active ETF","Financial","Exchange Traded Fund","USA",,,0,25.42,0.00%,,0.40
-168,"SHC","Sotera Health Co","Healthcare","Diagnostics & Research","USA",5130.49,43.85,3,17.99,0.73%,8/6/2026 8:30:00 AM,0.48
-169,"SHEL","Shell Plc ADR","Energy","Oil & Gas Integrated","United Kingdom",252712.48,10.01,175102,90.64,-1.46%,7/30/2026 8:30:00 AM,1.67
-170,"SHO","Sunstone Hotel Investors Inc","Real Estate","REIT - Hotel & Motel","USA",2192.65,98.41,6,11.77,0.00%,8/6/2026 8:30:00 AM,0.21
-171,"SHW","Sherwin-Williams Co","Basic Materials","Specialty Chemicals","USA",84290.49,32.01,2497,347.22,1.87%,7/28/2026 8:30:00 AM,10.61
-172,"SNOW","Snowflake Inc","Technology","Software - Application","USA",105359.47,,426940,303.98,3.65%,5/27/2026 4:30:00 PM,13.92
-173,"SPLV","Invesco S&P 500 Low Volatility ETF","Financial","Exchange Traded Fund","USA",,,3134,76.46,0.30%,,0.94
-174,"SPXL","Direxion Daily S&P 500 Bull 3X ETF","Financial","Exchange Traded Fund","USA",,,89374,272.68,1.67%,,9.18
-175,"SPY","SPDR S&P 500 ETF Trust","Financial","Exchange Traded Fund","USA",,,990632,751.30,0.57%,,8.71
-176,"SPYG","State Street SPDR Portfolio S&P 500 Growth ETF","Financial","Exchange Traded Fund","USA",,,6406,117.88,0.63%,,2.13
-177,"SPYI","NEOS S&P 500 High Income ETF","Financial","Exchange Traded Fund","USA",,,51598,53.15,0.55%,,0.57
-178,"SPYM","State Street SPDR Portfolio S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,67142,88.44,0.61%,,1.01
-179,"SPYV","State Street SPDR Portfolio S&P 500 Value ETF","Financial","Exchange Traded Fund","USA",,,9828,62.49,0.69%,,0.61
-180,"SSO","ProShares Ultra S&P500 2x Shares","Financial","Exchange Traded Fund","USA",,,79965,67.77,1.17%,,1.53
-181,"SSPC","Leverage Shares 2X Short SPCX Daily ETF","Financial","Exchange Traded Fund","USA",,,708412,23.95,3.36%,,2.30
-182,"STT","State Street Corp","Financial","Asset Management","USA",51091.78,16.40,367,185.99,0.99%,7/16/2026 8:30:00 AM,4.75
-183,"SU","Suncor Energy Inc","Energy","Oil & Gas Integrated","Canada",77953.11,17.34,11803,66.02,-1.87%,8/4/2026 4:30:00 PM,1.64
-184,"SVIX","-1x Short VIX Futures ETF","Financial","Exchange Traded Fund","USA",,,28715,24.53,1.32%,,1.01
-185,"SYY","Sysco Corp","Consumer Defensive","Food Distribution","USA",41372.35,24.00,284,86.52,1.50%,8/4/2026 8:30:00 AM,2.01
-186,"TAK","Takeda Pharmaceutical Co ADR","Healthcare","Drug Manufacturers - Specialty & Generic","Japan",54128.37,,758,17.01,-0.47%,7/30/2026 4:30:00 PM,0.34
-187,"TAL","TAL Education Group ADR","Consumer Defensive","Education & Training Services","China",5001.67,7.61,4304,12.32,-1.44%,7/30/2026 8:30:00 AM,0.40
-188,"TEVA","Teva- Pharmaceutical Industries Ltd ADR","Healthcare","Drug Manufacturers - Specialty & Generic","Israel",41065.20,59.29,31463,35.26,0.71%,7/29/2026 8:30:00 AM,1.19
-189,"TGT","Target Corp","Consumer Defensive","Discount Stores","USA",66611.67,19.35,13039,146.66,1.50%,8/19/2026 8:30:00 AM,4.28
-190,"TJX","TJX Companies Inc","Consumer Cyclical","Apparel Retail","USA",175095.66,30.79,894,158.50,0.74%,8/19/2026 8:30:00 AM,3.41
-191,"TMHC","Taylor Morrison Home Corp","Consumer Cyclical","Residential Construction","USA",6665.40,10.80,0,72.45,0.00%,4/22/2026 8:30:00 AM,0.34
-192,"TPR","Tapestry Inc","Consumer Cyclical","Luxury Goods","USA",30785.55,48.95,44,152.37,0.00%,8/13/2026 8:30:00 AM,4.29
-193,"TRVI","Trevi Therapeutics Inc","Healthcare","Biotechnology","USA",2639.40,,1419,18.59,1.86%,8/6/2026 4:30:00 PM,1.06
-194,"TTWO","Take-Two Interactive Software Inc","Communication Services","Electronic Gaming & Multimedia","USA",46333.76,,9695,247.80,2.01%,8/7/2026 8:30:00 AM,7.10
-195,"TXG","10x Genomics Inc","Healthcare","Health Information Services","USA",6069.79,,3724,47.81,1.14%,8/6/2026 4:30:00 PM,2.80
-196,"UAL","United Airlines Holdings Inc","Industrials","Airlines","USA",40654.12,11.71,42063,125.25,3.23%,7/15/2026 4:30:00 PM,4.75
-197,"UBS","UBS Group AG","Financial","Banks - Diversified","Switzerland",161384.84,17.92,11325,52.71,-0.06%,7/29/2026 8:30:00 AM,1.07
-198,"UDOW","ProShares UltraPro Dow30 3x Shares","Financial","Exchange Traded Fund","USA",,,116011,72.66,3.65%,,2.44
-199,"UNP","Union Pacific Corp","Industrials","Railroads","USA",175365.15,23.90,80031,295.19,1.05%,7/23/2026 8:30:00 AM,7.50
-200,"UPRO","ProShares UltraPro S&P 500 ETF 3x Shares","Financial","Exchange Traded Fund","USA",,,117351,142.71,1.73%,,4.81
-201,"USB","U.S. Bancorp","Financial","Banks - Regional","USA",99143.80,12.70,2914,63.64,0.99%,7/16/2026 8:30:00 AM,1.21
-202,"USMV","iShares MSCI USA Min Vol Factor ETF","Financial","Exchange Traded Fund","USA",,,298,98.90,0.99%,,0.90
-203,"UTZ","Utz Brands Inc","Consumer Defensive","Packaged Foods","USA",2037.07,,46651,14.15,0.21%,8/5/2026 8:30:00 AM,0.44
-204,"V","Visa Inc","Financial","Credit Services","USA",663179.66,31.99,20338,372.74,1.81%,7/28/2026 4:30:00 PM,8.10
-205,"VEU","Vanguard FTSE All-World ex-US ETF","Financial","Exchange Traded Fund","USA",,,3329,83.30,0.54%,,1.29
-206,"VLO","Valero Energy Corp","Energy","Oil & Gas Refining & Marketing","USA",88624.07,12.77,8040,307.80,-1.63%,7/30/2026 8:30:00 AM,10.93
-207,"VNQ","Vanguard Real Estate Index Fund ETF","Financial","Exchange Traded Fund","USA",,,6816,99.59,0.65%,,1.57
-208,"VO","Vanguard Morningstar Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,592,81.32,0.46%,,0.92
-209,"VOD","Vodafone Group plc ADR","Communication Services","Telecom Services","United Kingdom",36913.47,,5080,16.03,1.58%,,0.43
-210,"VOO","Vanguard S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,97312,690.62,0.58%,,7.88
-211,"VSXY","Victoria's Secret & Co","Consumer Cyclical","Apparel Retail","USA",7137.57,36.77,794,89.79,1.25%,6/2/2026 8:30:00 AM,4.15
-212,"VT","Vanguard Total World Stock ETF","Financial","Exchange Traded Fund","USA",,,13127,156.63,0.49%,,1.98
-213,"VTI","Vanguard Morningstar Total Stock Market ETF","Financial","Exchange Traded Fund","USA",,,22525,370.61,0.65%,,4.26
-214,"VTRS","Viatris Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",20785.91,,2408,17.71,0.85%,8/6/2026 8:30:00 AM,0.46
-215,"VTV","Vanguard Morningstar Value ETF","Financial","Exchange Traded Fund","USA",,,1413,221.45,0.68%,,2.23
-216,"VZ","Verizon Communications Inc","Communication Services","Telecom Services","USA",197879.75,12.34,57551,47.39,1.24%,7/24/2026 8:30:00 AM,1.41
-217,"WBS","Webster Financial Corp","Financial","Banks - Regional","USA",12508.98,12.56,5227,77.20,-0.03%,7/21/2026 4:30:00 PM,0.96
-218,"WT","WisdomTree Inc","Financial","Asset Management","USA",3028.23,38.25,130,19.80,2.22%,7/31/2026 8:30:00 AM,0.78
-219,"WY","Weyerhaeuser Co","Real Estate","REIT - Specialty","USA",18170.29,38.54,5917,25.20,0.68%,7/30/2026 4:30:00 PM,0.69
-220,"XLE","State Street Energy Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,541995,58.71,-1.41%,,1.20
-221,"XLF","State Street Financial Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,61356,57.53,1.04%,,0.74
-222,"XLI","State Street Industrial Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,4759,181.12,0.71%,,3.06
-223,"XLP","State Street Consumer Staples Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,155660,85.88,0.98%,,1.59
-224,"XLRE","State Street Real Estate Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,13107,45.29,0.49%,,0.63
-225,"XLV","State Street Health Care Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,18308,164.45,1.17%,,2.83
-226,"XLY","State Street Consumer Discretionary Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,5476,117.50,1.21%,,2.14
-227,"XOP","State Street SPDR S&P Oil & Gas Exploration & Production ETF","Financial","Exchange Traded Fund","USA",,,80506,173.42,-2.24%,,4.47
-228,"XRAY","DENTSPLY Sirona Inc","Healthcare","Medical Instruments & Supplies","USA",2784.68,,705,13.90,3.97%,8/6/2026 4:30:00 PM,0.62
-229,"XRT","State Street SPDR S&P Retail ETF","Financial","Exchange Traded Fund","USA",,,0,89.78,0.00%,,1.82
-230,"XYZ","Block Inc","Technology","Software - Infrastructure","USA",48880.66,63.80,8297,82.13,1.09%,8/5/2026 4:30:00 PM,2.73
-231,"ZBH","Zimmer Biomet Holdings Inc","Healthcare","Medical Devices","USA",18986.41,25.48,45,98.14,4.48%,8/5/2026 8:30:00 AM,3.15
+1,"ABNB","Airbnb Inc","Consumer Cyclical","Travel Services","USA",91141.04,37.25,1650985,151.22,-0.20%,8/6/2026 4:30:00 PM,4.35
+2,"ACWI","iShares MSCI ACWI ETF","Financial","Exchange Traded Fund","USA",,,1638000,157.91,0.95%,,2.04
+3,"ACWX","iShares MSCI ACWI ex US ETF","Financial","Exchange Traded Fund","USA",,,3682557,75.59,0.45%,,1.15
+4,"ADPT","Adaptive Biotechnologies Corp","Healthcare","Diagnostics & Research","USA",3742.64,,1321719,23.39,3.61%,7/29/2026 4:30:00 PM,1.39
+5,"AEG","Aegon Ltd","Financial","Insurance - Diversified","Netherlands",14246.01,13.41,2236004,9.47,0.32%,2/19/2026 8:30:00 AM,0.15
+6,"AER","Aercap Holdings NV","Industrials","Rental & Leasing Services","Ireland",24250.77,7.57,430464,153.79,1.92%,7/29/2026 8:30:00 AM,4.28
+7,"AFL","Aflac Inc","Financial","Insurance - Life","USA",64447.67,14.37,762941,126.62,-0.67%,8/6/2026 4:30:00 PM,2.08
+8,"AKR","Acadia Realty Trust","Real Estate","REIT - Retail","USA",3127.45,66.23,419830,22.40,-0.31%,7/28/2026 4:30:00 PM,0.45
+9,"ALL","Allstate Corp","Financial","Insurance - Property & Casualty","USA",67508.18,5.79,587567,262.25,-0.69%,8/5/2026 4:30:00 PM,6.51
+10,"AME","Ametek Inc","Industrials","Specialty Industrial Machinery","USA",55483.17,36.57,809427,242.07,0.15%,8/4/2026 8:30:00 AM,5.22
+11,"AMGN","AMGEN Inc","Healthcare","Drug Manufacturers - General","USA",204517.04,26.35,1766101,378.94,-1.61%,8/4/2026 4:30:00 PM,10.04
+12,"AMH","American Homes 4 Rent","Real Estate","REIT - Residential","USA",12352.45,27.15,1287316,34.33,2.72%,7/30/2026 4:30:00 PM,0.64
+13,"AMLP","Alerian MLP ETF","Financial","Exchange Traded Fund","USA",,,1054546,54.87,-0.81%,,0.71
+14,"AMLX","Amylyx Pharmaceuticals Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",2205.93,,953612,19.84,-2.31%,5/7/2026 8:30:00 AM,1.18
+15,"AMRX","Amneal Pharmaceuticals Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",5979.48,38.73,1334433,18.73,2.21%,7/30/2026 8:30:00 AM,0.61
+16,"AMZU","Direxion Daily AMZN Bull 2X ETF","Financial","Exchange Traded Fund","USA",,,5288126,45.55,9.18%,,2.77
+17,"ANET","Arista Networks Inc","Technology","Computer Hardware","USA",233330.25,63.45,5351969,185.30,2.74%,8/4/2026 4:30:00 PM,10.37
+18,"APGE","Apogee Therapeutics Inc","Healthcare","Biotechnology","USA",10104.84,,775519,134.08,-0.01%,5/11/2026 8:30:00 AM,1.13
+19,"APH","Amphenol Corp","Technology","Electronic Components","USA",200380.60,40.78,3937944,162.88,1.36%,7/29/2026 8:30:00 AM,7.65
+20,"ARXS","Arxis Inc","Industrials","Aerospace & Defense","USA",22240.95,,748763,53.28,-1.89%,7/29/2026 4:30:00 PM,3.33
+21,"ASB","Associated Banc-Corp","Financial","Banks - Regional","USA",5940.43,11.02,550369,31.48,1.94%,7/23/2026 4:30:00 PM,0.61
+22,"ASH","Ashland Inc","Basic Materials","Specialty Chemicals","USA",3271.48,63.20,309111,71.44,-1.61%,7/28/2026 4:30:00 PM,2.53
+23,"ATAI","AtaiBeckley Inc","Healthcare","Biotechnology","USA",2652.57,,11916710,7.17,-0.14%,5/12/2026 8:30:00 AM,0.24
+24,"ATI","ATI Inc","Industrials","Metal Fabrication","USA",26117.71,63.11,483150,191.38,2.10%,8/6/2026 8:30:00 AM,8.64
+25,"AUB","Atlantic Union Bankshares Corp","Financial","Banks - Regional","USA",6099.90,12.86,435296,42.98,1.30%,7/21/2026 8:30:00 AM,0.87
+26,"AVAH","Aveanna Healthcare Holdings Inc","Healthcare","Medical Care Facilities","USA",2113.31,8.23,849641,9.70,3.35%,8/13/2026 8:30:00 AM,0.38
+27,"AVDE","Avantis International Equity ETF","Financial","Exchange Traded Fund","USA",,,450803,91.54,0.36%,,1.12
+28,"AVNS","Avanos Medical Inc","Healthcare","Medical Devices","USA",1170.73,,0,24.99,0.00%,5/5/2026 8:30:00 AM,0.06
+29,"AVT","Avnet Inc","Technology","Electronics & Computer Distribution","USA",7255.83,34.45,401183,88.46,-0.43%,8/5/2026 8:30:00 AM,3.14
+30,"AXGN","Axogen Inc","Healthcare","Medical Devices","USA",2463.62,,795502,45.83,8.56%,7/29/2026 8:30:00 AM,2.65
+31,"AXTA","Axalta Coating Systems Ltd","Basic Materials","Specialty Chemicals","USA",7777.49,22.39,832010,36.34,1.48%,7/28/2026 8:30:00 AM,1.11
+32,"BA","Boeing Co","Industrials","Aerospace & Defense","USA",183768.92,105.89,7613560,232.51,7.57%,7/28/2026 8:30:00 AM,7.98
+33,"BAC","Bank Of America Corp","Financial","Banks - Diversified","USA",441727.26,14.33,14383683,62.24,0.48%,7/14/2026 8:30:00 AM,1.11
+34,"BALL","Ball Corp","Consumer Cyclical","Packaging & Containers","USA",17413.85,18.95,883183,65.40,0.78%,8/4/2026 8:30:00 AM,1.60
+35,"BAX","Baxter International Inc","Healthcare","Medical Instruments & Supplies","USA",14496.61,,5450610,28.04,7.19%,7/30/2026 8:30:00 AM,1.19
+36,"BCS","Barclays plc ADR","Financial","Banks - Diversified","United Kingdom",93479.83,10.23,2791281,27.73,0.82%,7/28/2026 8:30:00 AM,0.82
+37,"BDX","Becton Dickinson & Co","Healthcare","Medical Instruments & Supplies","USA",46693.09,42.97,838726,169.46,2.32%,8/6/2026 8:30:00 AM,4.42
+38,"BEN","Franklin Resources Inc","Financial","Asset Management","USA",18062.64,23.70,4611106,34.76,2.66%,7/31/2026 8:30:00 AM,1.01
+39,"BFLX","iShares Flexible Equity Active ETF","Financial","Exchange Traded Fund","USA",,,425158,25.72,0.82%,,0.34
+40,"BLFS","Biolife Solutions Inc","Healthcare","Medical Instruments & Supplies","USA",1564.11,,314300,31.97,2.21%,8/6/2026 4:30:00 PM,1.28
+41,"BLMN","Bloomin Brands Inc","Consumer Cyclical","Restaurants","USA",776.09,36.12,1008674,9.06,4.68%,8/5/2026 8:30:00 AM,0.44
+42,"BMRN","Biomarin Pharmaceutical Inc","Healthcare","Biotechnology","USA",11599.00,43.79,867849,60.01,-0.02%,8/6/2026 4:30:00 PM,1.54
+43,"BMY","Bristol-Myers Squibb Co","Healthcare","Drug Manufacturers - General","USA",132837.73,14.33,18919804,65.03,-0.43%,7/30/2026 8:30:00 AM,1.84
+44,"BNS","Bank Of Nova Scotia","Financial","Banks - Diversified","Canada",108494.56,16.79,351008,88.03,0.29%,8/25/2026 8:30:00 AM,1.52
+45,"BOX","Box Inc","Technology","Software - Infrastructure","USA",4397.71,48.65,1152571,31.75,0.62%,5/26/2026 4:30:00 PM,1.20
+46,"BOXX","Alpha Architect 1-3 Month Box ETF","Financial","Exchange Traded Fund","USA",,,2781693,117.70,0.00%,,0.04
+47,"BP","BP plc ADR","Energy","Oil & Gas Integrated","United Kingdom",114203.23,36.96,8214735,44.35,-1.93%,8/4/2026 8:30:00 AM,1.07
+48,"BRK-B","Berkshire Hathaway Inc","Financial","Insurance - Diversified","USA",993233.89,15.24,2247400,511.86,0.06%,5/2/2026 4:30:00 PM,7.25
+49,"BRKR","Bruker Corp","Healthcare","Medical Devices","USA",9706.67,,1193406,63.76,1.47%,8/4/2026 8:30:00 AM,2.96
+50,"BRTMU","B&R Technology Merger Corp","Financial","Shell Companies","USA",330.65,,237839,9.96,0.23%,,0.02
+51,"BUD","Anheuser-Busch InBev SA/NV ADR","Consumer Defensive","Beverages - Brewers","Belgium",145419.93,18.12,1067812,84.12,-2.73%,7/30/2026 8:30:00 AM,1.89
+52,"BUFR","FT Vest Laddered Buffer ETF","Financial","Exchange Traded Fund","USA",,,840978,37.03,0.71%,,0.24
+53,"BUG","Global X Cybersecurity ETF","Financial","Exchange Traded Fund","USA",,,1194860,39.34,3.31%,,1.32
+54,"CAH","Cardinal Health Inc","Healthcare","Medical Distribution","USA",54725.71,35.73,977465,233.66,1.58%,8/11/2026 8:30:00 AM,5.17
+55,"CALY","Callaway Golf Co","Consumer Cyclical","Leisure","USA",3424.38,,1028261,19.05,3.20%,8/4/2026 4:30:00 PM,0.60
+56,"CARG","CarGurus Inc","Consumer Cyclical","Auto & Truck Dealerships","USA",3345.94,24.33,557480,37.10,2.37%,8/6/2026 4:30:00 PM,1.44
+57,"CBRL","Cracker Barrel Old Country Store Inc","Consumer Cyclical","Restaurants","USA",1287.67,49.90,672313,57.61,2.16%,6/9/2026 4:30:00 PM,2.71
+58,"CBSH","Commerce Bancshares Inc","Financial","Banks - Regional","USA",8697.06,14.62,446309,59.66,0.66%,7/16/2026 8:30:00 AM,1.02
+59,"CCEP","Coca-Cola Europacific Partners Plc","Consumer Defensive","Beverages - Non-Alcoholic","United Kingdom",47871.94,22.41,1288767,108.01,-1.32%,2/17/2026 8:30:00 AM,2.52
+60,"CCK","Crown Holdings Inc","Consumer Cyclical","Packaging & Containers","USA",13056.70,17.27,445868,120.05,1.87%,7/20/2026 4:30:00 PM,3.31
+61,"CDP","COPT Defense Properties","Real Estate","REIT - Office","USA",8559.40,26.38,323241,37.86,-0.26%,7/27/2026 4:30:00 PM,0.74
+62,"CFG","Citizens Financial Group Inc","Financial","Banks - Regional","USA",30694.88,15.77,1151932,72.58,1.30%,7/16/2026 8:30:00 AM,1.67
+63,"CGBL","Capital Group Core Balanced ETF","Financial","Exchange Traded Fund","USA",,,945328,37.59,0.97%,,0.34
+64,"CGNX","Cognex Corp","Technology","Scientific & Technical Instruments","USA",11125.97,79.11,637197,66.86,2.48%,8/5/2026 4:30:00 PM,3.22
+65,"CHD","Church & Dwight Co Inc","Consumer Defensive","Household & Personal Products","USA",23690.81,32.17,861102,99.99,1.19%,7/31/2026 8:30:00 AM,2.55
+66,"CIBR","First Trust NASDAQ Cybersecurity ETF","Financial","Exchange Traded Fund","USA",,,1194016,94.06,2.43%,,2.43
+67,"CLBK","Columbia Financial Inc","Financial","Banks - Regional","USA",2887.90,41.38,3379963,10.71,-0.89%,7/30/2026 4:30:00 PM,0.27
+68,"CM","Canadian Imperial Bank Of Commerce","Financial","Banks - Diversified","USA",110238.79,16.28,114784,118.97,0.35%,5/28/2026 8:30:00 AM,2.25
+69,"CMBT","CMB.Tech NV","Energy","Oil & Gas Midstream","Belgium",4716.71,9.55,482734,16.25,0.59%,5/19/2026 8:30:00 AM,0.49
+70,"CNQ","Canadian Natural Resources Ltd","Energy","Oil & Gas E&P","Canada",96530.10,13.88,3459227,46.40,-2.68%,8/6/2026 8:30:00 AM,1.23
+71,"CORT","Corcept Therapeutics Inc","Healthcare","Biotechnology","USA",12347.00,272.80,957300,114.22,-0.24%,7/29/2026 4:30:00 PM,6.06
+72,"CRI","Carters Inc","Consumer Cyclical","Apparel Retail","USA",1498.35,7.61,1826781,40.66,5.42%,7/31/2026 8:30:00 AM,1.98
+73,"CRNX","Crinetics Pharmaceuticals Inc","Healthcare","Biotechnology","USA",8879.06,,941399,83.79,0.32%,8/4/2026 4:30:00 PM,1.32
+74,"CROX","Crocs Inc","Consumer Cyclical","Footwear & Accessories","USA",6498.71,11.71,612590,135.54,5.89%,7/30/2026 8:30:00 AM,6.07
+75,"CRWD","Crowdstrike Holdings Inc","Technology","Software - Infrastructure","USA",205484.73,,6267047,201.80,5.73%,6/3/2026 4:30:00 PM,9.53
+76,"CTAS","Cintas Corp","Industrials","Specialty Business Services","USA",81853.48,41.67,791256,204.55,-0.04%,7/15/2026 8:30:00 AM,5.84
+77,"CUBE","CubeSmart","Real Estate","REIT - Industrial","USA",9474.53,28.48,1055574,41.67,0.49%,7/30/2026 4:30:00 PM,0.97
+78,"CUZ","Cousins Properties Inc","Real Estate","REIT - Office","USA",5183.32,805.37,1740009,31.49,-0.19%,7/30/2026 4:30:00 PM,0.77
+79,"CVBF","CVB Financial Corp","Financial","Banks - Regional","USA",4054.94,15.88,934167,22.98,2.73%,7/22/2026 4:30:00 PM,0.46
+80,"CVE","Cenovus Energy Inc","Energy","Oil & Gas Integrated","Canada",54266.76,11.35,3531670,29.42,-2.53%,7/29/2026 8:30:00 AM,1.01
+81,"DAL","Delta Air Lines Inc","Industrials","Airlines","USA",60034.41,15.17,3399767,91.29,4.40%,7/10/2026 8:30:00 AM,2.86
+82,"DB","Deutsche Bank AG","Financial","Banks - Regional","Germany",69648.10,9.62,1278479,37.06,0.99%,7/29/2026 8:30:00 AM,0.94
+83,"DBC","Invesco DB Commodity Index Tracking Fund","Financial","Exchange Traded Fund","USA",,,1050245,28.89,-1.91%,,0.51
+84,"DBRG","DigitalBridge Group Inc","Financial","Asset Management","USA",2975.03,32.58,2351901,15.84,-0.21%,4/28/2026 4:30:00 PM,0.05
+85,"DBX","Dropbox Inc","Technology","Software - Infrastructure","USA",7481.26,18.14,1805109,33.24,2.10%,8/6/2026 4:30:00 PM,1.15
+86,"DDOG","Datadog Inc","Technology","Software - Application","USA",98629.44,739.47,3312997,277.08,3.40%,8/6/2026 8:30:00 AM,13.00
+87,"DELL","Dell Technologies Inc","Technology","Computer Hardware","USA",278193.60,34.10,3065557,429.12,5.86%,5/28/2026 4:30:00 PM,34.30
+88,"DFAI","Dimensional International Core Equity Market ETF","Financial","Exchange Traded Fund","USA",,,1373841,42.25,0.35%,,0.50
+89,"DFIC","Dimensional International Core Equity 2 ETF","Financial","Exchange Traded Fund","USA",,,970779,38.22,0.34%,,0.45
+90,"DFIV","Dimensional International Value ETF","Financial","Exchange Traded Fund","USA",,,1067565,57.21,-0.11%,,0.63
+91,"DGRO","iShares Core Dividend Growth ETF","Financial","Exchange Traded Fund","USA",,,1256336,78.16,0.19%,,0.73
+92,"DHT","DHT Holdings Inc","Energy","Oil & Gas Midstream","Bermuda",2996.98,9.04,1417222,18.61,0.22%,8/5/2026 4:30:00 PM,0.68
+93,"DIA","Spdr Dow Jones Industrial Average ETF Trust","Financial","Exchange Traded Fund","USA",,,3488163,530.76,1.23%,,6.21
+94,"DINO","HF Sinclair Corp","Energy","Oil & Gas Refining & Marketing","USA",15786.32,8.47,1858593,88.79,-2.92%,7/28/2026 8:30:00 AM,3.35
+95,"DK","Delek US Holdings Inc","Energy","Oil & Gas Refining & Marketing","USA",4067.05,,697816,66.36,-2.22%,8/5/2026 8:30:00 AM,2.91
+96,"DLO","DLocal Limited","Technology","Software - Infrastructure","Uruguay",4525.73,22.85,1220922,15.35,1.76%,8/13/2026 4:30:00 PM,0.56
+97,"DLR","Digital Realty Trust Inc","Real Estate","REIT - Specialty","USA",70845.82,93.14,1010418,191.47,1.56%,7/23/2026 4:30:00 PM,6.68
+98,"DLTR","Dollar Tree Inc","Consumer Defensive","Discount Stores","USA",24921.20,20.27,843082,129.68,1.94%,5/28/2026 8:30:00 AM,4.20
+99,"DNTH","Dianthus Therapeutics Inc","Healthcare","Biotechnology","USA",5716.44,,547665,104.57,-2.20%,5/5/2026 4:30:00 PM,5.98
+100,"DRH","Diamondrock Hospitality Co","Real Estate","REIT - Hotel & Motel","USA",2763.48,18.67,2781355,13.47,1.70%,7/30/2026 4:30:00 PM,0.33
+101,"DRI","Darden Restaurants Inc","Consumer Cyclical","Restaurants","USA",23506.33,19.83,599689,206.05,1.22%,6/25/2026 8:30:00 AM,6.03
+102,"DYN","Dyne Therapeutics Inc","Healthcare","Biotechnology","USA",4694.81,,1257923,25.14,-0.16%,7/29/2026 4:30:00 PM,1.41
+103,"EA","Electronic Arts Inc","Communication Services","Electronic Gaming & Multimedia","USA",52982.93,60.02,2249114,209.93,0.03%,7/29/2026 4:30:00 PM,0.70
+104,"EBC","Eastern Bankshares Inc","Financial","Banks - Regional","USA",5348.66,13.12,950125,23.14,0.78%,7/23/2026 4:30:00 PM,0.53
+105,"EC","Ecopetrol SA ADR","Energy","Oil & Gas Integrated","Colombia",34008.53,15.10,1599564,16.54,-1.36%,8/3/2026 4:30:00 PM,0.59
+106,"EFA","iShares MSCI EAFE ETF","Financial","Exchange Traded Fund","USA",,,5621938,106.00,0.40%,,1.37
+107,"EFV","iShares MSCI EAFE Value ETF","Financial","Exchange Traded Fund","USA",,,2014774,81.07,0.24%,,0.93
+108,"ELAN","Elanco Animal Health Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",12750.95,,3432240,25.53,-3.19%,8/5/2026 8:30:00 AM,0.89
+109,"ELS","Equity Lifestyle Properties Inc","Real Estate","REIT - Residential","USA",13130.41,31.82,808520,65.48,0.64%,7/22/2026 4:30:00 PM,1.52
+110,"EMR","Emerson Electric Co","Industrials","Specialty Industrial Machinery","USA",85989.80,35.42,1661995,153.53,2.47%,8/4/2026 4:30:00 PM,4.23
+111,"ENOV","Enovis Corp","Healthcare","Medical Devices","USA",1800.55,,914183,31.28,7.31%,8/6/2026 8:30:00 AM,1.51
+112,"EOG","EOG Resources Inc","Energy","Oil & Gas E&P","USA",77390.92,14.29,1386166,145.30,-2.28%,8/5/2026 8:30:00 AM,3.96
+113,"EQNR","Equinor ASA ADR","Energy","Oil & Gas Integrated","Norway",95331.16,10.85,1699108,39.88,-2.98%,7/22/2026 8:30:00 AM,1.29
+114,"ET","Energy Transfer LP","Energy","Oil & Gas Midstream","USA",69786.71,17.04,7415295,20.28,-0.39%,8/4/2026 8:30:00 AM,0.32
+115,"ETN","Eaton Corp Plc","Industrials","Specialty Industrial Machinery","Ireland",169302.68,44.36,2219153,436.01,5.01%,7/31/2026 8:30:00 AM,20.01
+116,"ETSY","Etsy Inc","Consumer Cyclical","Internet Retail","USA",7909.60,34.06,1104304,83.35,2.04%,8/5/2026 4:30:00 PM,2.90
+117,"EW","Edwards Lifesciences Corp","Healthcare","Medical Devices","USA",50987.09,52.55,2109346,88.55,2.88%,7/23/2026 4:30:00 PM,2.55
+118,"EWA","iShares MSCI Australia ETF","Financial","Exchange Traded Fund","USA",,,1392629,29.39,0.17%,,0.40
+119,"EWAVU","East West Ave Acquisition Corp","Financial","Shell Companies","USA",102.22,,313065,9.95,0.42%,,0.06
+120,"EWC","iShares MSCI Canada ETF","Financial","Exchange Traded Fund","USA",,,2197872,59.60,0.36%,,0.63
+121,"EWG","iShares MSCI Germany ETF","Financial","Exchange Traded Fund","USA",,,773129,43.39,1.26%,,0.59
+122,"EWH","iShares MSCI Hong Kong ETF","Financial","Exchange Traded Fund","USA",,,2038742,22.91,-0.76%,,0.28
+123,"EWJ","iShares MSCI Japan ETF","Financial","Exchange Traded Fund","USA",,,3106666,92.90,0.56%,,1.80
+124,"EWU","iShares MSCI United Kingdom ETF","Financial","Exchange Traded Fund","USA",,,1313662,48.20,-0.43%,,0.56
+125,"EWW","iShares MSCI Mexico ETF","Financial","Exchange Traded Fund","USA",,,856357,76.38,-0.57%,,1.43
+126,"EXPE","Expedia Group Inc","Consumer Cyclical","Travel Services","USA",35900.15,26.34,907159,299.11,1.48%,8/5/2026 4:30:00 PM,11.94
+127,"EXR","Extra Space Storage Inc","Real Estate","REIT - Industrial","USA",32941.22,33.42,510739,149.27,0.83%,7/28/2026 4:30:00 PM,3.64
+128,"EZU","iShares MSCI EMU ETF","Financial","Exchange Traded Fund","USA",,,428735,70.23,0.95%,,0.99
+129,"FANG","Diamondback Energy Inc","Energy","Oil & Gas E&P","USA",55700.04,223.25,978070,198.00,-2.44%,8/3/2026 4:30:00 PM,6.24
+130,"FAST","Fastenal Co","Industrials","Industrial Distribution","USA",55108.57,40.87,3683301,48.03,0.66%,7/14/2026 8:30:00 AM,1.28
+131,"FBP","First Bancorp PR","Financial","Banks - Regional","USA",4462.67,12.32,553956,29.23,1.04%,7/22/2026 8:30:00 AM,0.54
+132,"FENI","Fidelity Enhanced International ETF","Financial","Exchange Traded Fund","USA",,,887776,40.78,0.28%,,0.53
+133,"FENY","Fidelity MSCI Energy Index ETF","Financial","Exchange Traded Fund","USA",,,836674,32.56,-1.50%,,0.66
+134,"FERG","Ferguson Enterprises Inc","Industrials","Industrial Distribution","USA",48943.12,27.67,8580917,252.37,7.70%,8/10/2026 8:30:00 AM,7.88
+135,"FHN","First Horizon Corp","Financial","Banks - Regional","USA",12254.63,12.41,1551845,25.82,0.70%,7/15/2026 8:30:00 AM,0.52
+136,"FLR","Fluor Corp","Industrials","Engineering & Construction","USA",7022.60,40.14,1146259,50.28,0.22%,8/7/2026 8:30:00 AM,2.13
+137,"FNB","F.N.B. Corp","Financial","Banks - Regional","USA",6829.17,11.40,1197905,19.18,1.51%,7/16/2026 4:30:00 PM,0.37
+138,"FNDA","Schwab Fundamental U.S. Small Company ETF","Financial","Exchange Traded Fund","USA",,,354521,37.71,1.47%,,0.49
+139,"FNDF","Schwab Fundamental International Equity ETF","Financial","Exchange Traded Fund","USA",,,990930,54.05,0.07%,,0.70
+140,"FRO","Frontline Plc","Energy","Oil & Gas Midstream","Cyprus",8842.58,9.77,1542510,39.72,0.89%,5/22/2026 8:30:00 AM,1.43
+141,"FTNT","Fortinet Inc","Technology","Software - Infrastructure","USA",120152.94,57.70,3505526,163.76,1.12%,7/29/2026 4:30:00 PM,7.19
+142,"FTXN","First Trust Nasdaq Oil & Gas ETF","Financial","Exchange Traded Fund","USA",,,51869,36.85,-1.67%,,0.76
+143,"FULT","Fulton Financial Corp","Financial","Banks - Regional","USA",4724.82,11.82,1049323,24.72,1.60%,7/22/2026 4:30:00 PM,0.50
+144,"FXN","First Trust Energy AlphaDEX Fund","Financial","Exchange Traded Fund","USA",,,290429,21.90,-0.97%,,0.45
+145,"GBTG","Global Business Travel Group Inc","Consumer Cyclical","Travel Services","USA",4933.81,59.33,397499,9.44,0.05%,5/4/2026 8:30:00 AM,0.03
+146,"GD","General Dynamics Corp","Industrials","Aerospace & Defense","USA",103714.04,23.37,481629,383.33,-0.02%,7/29/2026 8:30:00 AM,8.39
+147,"GE","GE Aerospace","Industrials","Aerospace & Defense","USA",380961.84,43.28,1784722,367.17,1.97%,7/16/2026 8:30:00 AM,10.16
+148,"GEO","Geo Group Inc","Industrials","Security & Protection Services","USA",4192.94,15.95,523024,31.38,1.59%,8/6/2026 8:30:00 AM,1.03
+149,"GGOV","iShares Global Government Bond USD Hedged Active ETF","Financial","Exchange Traded Fund","USA",,,481916,50.13,0.12%,,0.28
+150,"GH","Guardant Health Inc","Healthcare","Diagnostics & Research","USA",21703.55,,1081078,161.73,-0.16%,7/30/2026 4:30:00 PM,8.81
+151,"GKOS","Glaukos Corp","Healthcare","Medical Devices","USA",10119.00,,628596,171.56,2.90%,7/29/2026 4:30:00 PM,7.86
+152,"GLBE","Global E Online Ltd","Consumer Cyclical","Internet Retail","Israel",6727.03,60.30,545662,40.15,2.12%,8/12/2026 8:30:00 AM,1.56
+153,"GM","General Motors Company","Consumer Cyclical","Auto Manufacturers","USA",77084.11,44.31,2693212,87.85,-1.14%,7/21/2026 8:30:00 AM,2.80
+154,"GNW","Genworth Financial Inc","Financial","Insurance - Life","USA",3805.43,18.84,1233180,9.94,1.07%,8/5/2026 4:30:00 PM,0.21
+155,"GOOG","Alphabet Inc","Communication Services","Internet Content & Information","USA",4565478.06,18.77,18031775,373.60,4.75%,7/22/2026 4:30:00 PM,12.68
+156,"GOOGL","Alphabet Inc","Communication Services","Internet Content & Information","USA",4587073.50,18.83,26321464,374.82,5.25%,7/22/2026 4:30:00 PM,12.86
+157,"GPN","Global Payments Inc","Technology","Software - Infrastructure","USA",23454.99,22.84,1369572,85.75,1.98%,8/5/2026 8:30:00 AM,3.08
+158,"GRND","Grindr Inc","Technology","Software - Application","USA",3238.17,36.63,1082938,18.22,5.07%,8/6/2026 4:30:00 PM,0.75
+159,"GRNY","Fundstrat Granny Shots US Large Cap ETF","Financial","Exchange Traded Fund","USA",,,1263641,27.36,1.30%,,0.41
+160,"GSAT","Globalstar Inc","Communication Services","Telecom Services","USA",10832.44,,1322856,84.11,0.88%,5/7/2026 4:30:00 PM,1.29
+161,"GTES","Gates Industrial Corp Ltd","Industrials","Specialty Industrial Machinery","USA",7331.13,20.44,1549124,28.86,3.15%,7/31/2026 8:30:00 AM,1.20
+162,"HALO","Halozyme Therapeutics Inc","Healthcare","Biotechnology","USA",9747.04,29.55,610795,82.18,-0.44%,8/6/2026 4:30:00 PM,2.30
+163,"HAPN","Happen Inc","Financial","Banks - Regional","USA",2365.85,12.35,891990,20.50,7.11%,7/27/2026 4:30:00 PM,0.83
+164,"HDV","iShares Core High Dividend ETF","Financial","Exchange Traded Fund","USA",,,3227954,28.59,-0.49%,,0.41
+165,"HESM","Hess Midstream LP","Energy","Oil & Gas Midstream","USA",8427.54,14.14,961196,40.88,0.11%,8/3/2026 8:30:00 AM,0.83
+166,"HIG","Hartford Insurance Group Inc","Financial","Insurance - Diversified","USA",38529.57,9.19,1116460,142.24,0.23%,7/23/2026 4:30:00 PM,3.19
+167,"HIW","Highwoods Properties Inc","Real Estate","REIT - Office","USA",3672.09,22.27,661627,33.29,0.48%,7/28/2026 4:30:00 PM,0.86
+168,"HOMB","Home Bancshares Inc","Financial","Banks - Regional","USA",6323.37,12.98,1044295,31.40,1.05%,7/15/2026 4:30:00 PM,0.53
+169,"HON","Honeywell International Inc","Industrials","Conglomerates","USA",77533.04,9.05,1578890,244.63,0.65%,7/23/2026 8:30:00 AM,7.57
+170,"HOPE","Hope Bancorp Inc","Financial","Banks - Regional","USA",1818.51,14.31,944887,14.23,1.53%,7/27/2026 8:30:00 AM,0.30
+171,"HPQ","HP Inc","Technology","Computer Hardware","USA",24963.54,10.07,6134663,27.30,0.10%,5/27/2026 4:30:00 PM,1.17
+172,"HSIC","Henry Schein Inc","Healthcare","Medical Distribution","USA",9874.87,26.18,1039808,86.68,1.09%,8/4/2026 8:30:00 AM,1.94
+173,"HST","Host Hotels & Resorts Inc","Real Estate","REIT - Hotel & Motel","USA",17200.75,17.15,4390116,25.11,-0.06%,8/5/2026 4:30:00 PM,0.56
+174,"HWM","Howmet Aerospace Inc","Industrials","Aerospace & Defense","USA",114170.67,66.20,654432,285.35,1.09%,8/6/2026 8:30:00 AM,8.72
+175,"IALT","iShares Systematic Alternatives Active ETF","Financial","Exchange Traded Fund","USA",,,587755,28.72,0.17%,,0.32
+176,"IDEV","iShares Core MSCI International Developed Markets ETF","Financial","Exchange Traded Fund","USA",,,1133656,90.93,0.49%,,1.12
+177,"IEFA","iShares Core MSCI EAFE ETF","Financial","Exchange Traded Fund","USA",,,5462848,98.64,0.40%,,1.26
+178,"IFF","International Flavors & Fragrances Inc","Basic Materials","Specialty Chemicals","USA",20366.83,24.44,688845,79.78,0.70%,8/4/2026 4:30:00 PM,2.36
+179,"IJH","iShares Core S&P Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,4145426,75.97,0.94%,,0.98
+180,"IJR","iShares Core S&P Small-Cap ETF","Financial","Exchange Traded Fund","USA",,,2450125,147.60,1.47%,,1.93
+181,"ILF","iShares Latin America 40 ETF","Financial","Exchange Traded Fund","USA",,,1993362,35.13,-0.66%,,0.56
+182,"ILMN","Illumina Inc","Healthcare","Diagnostics & Research","USA",30194.90,37.19,1439878,199.57,-2.70%,7/30/2026 4:30:00 PM,7.77
+183,"INVH","Invitation Homes Inc","Real Estate","REIT - Residential","USA",17948.98,54.29,2243302,30.39,2.25%,7/29/2026 4:30:00 PM,0.59
+184,"IOND","Ionic Digital Inc","Financial","Capital Markets","USA",752.92,,1260290,69.71,-0.42%,,9.17
+185,"IQLT","iShares MSCI Intl Quality Factor ETF","Financial","Exchange Traded Fund","USA",,,978500,50.34,0.34%,,0.58
+186,"IQMM","ProShares GENIUS Money Market ETF","Financial","Exchange Traded Fund","USA",,,361996,100.13,0.03%,,0.04
+187,"IQQ","iShares Nasdaq 100 ETF","Financial","Exchange Traded Fund","USA",,,686921,23.68,1.76%,,0.48
+188,"IQV","IQVIA Holdings Inc","Healthcare","Diagnostics & Research","USA",38383.07,28.93,1000696,233.19,-0.78%,7/28/2026 8:30:00 AM,8.83
+189,"ITOT","iShares Core S&P Total U.S. Stock Market ETF","Financial","Exchange Traded Fund","USA",,,608156,166.05,1.49%,,1.98
+190,"ITW","Illinois Tool Works Inc","Industrials","Specialty Industrial Machinery","USA",82450.45,25.97,587671,286.58,-0.13%,7/28/2026 8:30:00 AM,7.12
+191,"IVE","iShares S&P 500 Value ETF","Financial","Exchange Traded Fund","USA",,,454373,232.79,0.46%,,2.01
+192,"IVV","iShares Core S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,2366137,761.54,1.49%,,9.14
+193,"IVW","iShares S&P 500 Growth ETF","Financial","Exchange Traded Fund","USA",,,907451,138.49,2.40%,,2.58
+194,"IVZ","Invesco Ltd","Financial","Asset Management","USA",13524.98,,1996439,30.51,3.07%,7/28/2026 8:30:00 AM,0.99
+195,"IWM","iShares Russell 2000 Index Fund","Financial","Exchange Traded Fund","USA",,,17196135,295.80,1.58%,,4.52
+196,"IWR","iShares Russell Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,1158674,110.93,1.13%,,1.23
+197,"IXC","iShares Global Energy ETF","Financial","Exchange Traded Fund","USA",,,422844,54.91,-1.47%,,1.02
+198,"IYE","iShares U.S. Energy ETF","Financial","Exchange Traded Fund","USA",,,586387,62.31,-1.31%,,1.24
+199,"IYR","iShares U.S. Real Estate ETF","Financial","Exchange Traded Fund","USA",,,2926105,105.11,0.02%,,1.45
+200,"JCI","Johnson Controls International plc","Industrials","Building Products & Equipment","Ireland",88699.45,25.46,1730884,146.43,-0.16%,7/29/2026 8:30:00 AM,5.05
+201,"JEPI","JPMorgan Equity Premium Income ETF","Financial","Exchange Traded Fund","USA",,,3980836,57.31,-0.20%,,0.43
+202,"JETS","ESS U.S.Global Jets ETF","Financial","Exchange Traded Fund","USA",,,3222376,32.53,4.01%,,0.90
+203,"JHX","James Hardie Industries plc","Basic Materials","Building Materials","Ireland",15996.98,128.15,3969725,27.57,4.85%,8/6/2026 4:30:00 PM,0.99
+204,"JPM","JPMorgan Chase & Co","Financial","Banks - Diversified","USA",941365.99,15.05,2819868,351.32,-0.13%,7/14/2026 8:30:00 AM,7.27
+205,"KBE","State Street SPDR S&P Bank ETF","Financial","Exchange Traded Fund","USA",,,729287,70.59,1.35%,,1.09
+206,"KBWB","Invesco KBW Bank ETF","Financial","Exchange Traded Fund","USA",,,1747919,96.63,0.58%,,1.64
+207,"KHC","Kraft Heinz Co","Consumer Defensive","Packaged Foods","USA",31079.23,,5608771,26.21,1.39%,8/5/2026 8:30:00 AM,0.78
+208,"KIE","State Street SPDR S&P Insurance ETF","Financial","Exchange Traded Fund","USA",,,873705,64.61,0.58%,,1.14
+209,"KMX","Carmax Inc","Consumer Cyclical","Auto & Truck Dealerships","USA",8240.71,38.22,585808,58.07,1.41%,6/17/2026 8:30:00 AM,2.15
+210,"KO","Coca-Cola Co","Consumer Defensive","Beverages - Non-Alcoholic","USA",373609.69,26.16,7838292,86.83,-0.86%,7/28/2026 8:30:00 AM,2.00
+211,"KRE","State Street SPDR S&P Regional Banking ETF","Financial","Exchange Traded Fund","USA",,,7568090,77.18,1.47%,,1.25
+212,"LEVI","Levi Strauss & Co","Consumer Cyclical","Apparel Manufacturing","USA",9440.31,20.07,759095,24.53,0.04%,7/8/2026 4:30:00 PM,0.85
+213,"LILAK","Liberty Latin America Ltd","Communication Services","Telecom Services","USA",1660.53,,687514,8.24,2.11%,8/5/2026 4:30:00 PM,0.34
+214,"LNC","Lincoln National Corp","Financial","Insurance - Life","USA",8813.27,3.98,1023732,46.03,0.93%,7/30/2026 8:30:00 AM,1.42
+215,"LQDA","Liquidia Corp","Healthcare","Drug Manufacturers - Specialty & Generic","USA",7395.70,587.32,756538,83.17,-1.12%,8/12/2026 8:30:00 AM,5.14
+216,"LTH","Life Time Group Holdings Inc","Consumer Cyclical","Leisure","USA",9953.22,24.35,1867296,44.54,-1.24%,7/30/2026 8:30:00 AM,1.54
+217,"LYV","Live Nation Entertainment Inc","Communication Services","Entertainment","USA",42185.11,,1533677,181.28,4.10%,7/30/2026 4:30:00 PM,5.39
+218,"M","Macy's Inc","Consumer Cyclical","Department Stores","USA",6803.47,10.64,2436361,25.86,4.21%,6/3/2026 8:30:00 AM,0.94
+219,"MA","Mastercard Incorporated","Financial","Credit Services","USA",507662.25,31.59,1983548,574.26,0.20%,7/30/2026 8:30:00 AM,12.73
+220,"MAC","Macerich Co","Real Estate","REIT - Retail","USA",7629.65,,851902,25.87,0.12%,8/4/2026 4:30:00 PM,0.62
+221,"MAGS","Roundhill Magnificent Seven ETF","Financial","Exchange Traded Fund","USA",,,8559798,68.66,4.09%,,1.51
+222,"MAN","ManpowerGroup","Industrials","Staffing & Employment Services","USA",2511.62,24.35,596081,54.01,3.02%,7/16/2026 8:30:00 AM,2.76
+223,"MDLZ","Mondelez International Inc","Consumer Defensive","Confectioners","USA",78620.57,22.59,5307239,61.60,-1.14%,7/28/2026 4:30:00 PM,1.80
+224,"MET","Metlife Inc","Financial","Insurance - Life","USA",61950.09,18.62,2307010,96.28,0.16%,8/5/2026 4:30:00 PM,1.75
+225,"MFC","Manulife Financial Corp","Financial","Insurance - Life","Canada",74515.94,17.73,591593,44.65,0.47%,8/5/2026 4:30:00 PM,0.67
+226,"MFP","Midera Food Processing Inc","Industrials","Specialty Industrial Machinery","USA",,,188878,47.54,-0.86%,8/13/2026 4:30:00 PM,3.43
+227,"MGA","Magna International Inc","Consumer Cyclical","Auto Parts","Canada",18504.83,24.70,543752,67.97,-0.91%,7/31/2026 8:30:00 AM,2.03
+228,"MGK","Vanguard Morningstar Mega Cap Growth ETF","Financial","Exchange Traded Fund","USA",,,920662,88.46,2.46%,,1.67
+229,"MICC","Magnum Ice Cream Company NV","Consumer Defensive","Packaged Foods","Netherlands",11268.65,54.15,341027,18.41,-1.10%,7/30/2026 8:30:00 AM,0.45
+230,"MLI","Mueller Industries Inc","Industrials","Metal Fabrication","USA",14609.03,17.22,432901,66.05,-0.54%,7/21/2026 8:30:00 AM,2.06
+231,"MMED","MiniMed Group Inc","Healthcare","Medical Instruments & Supplies","USA",5324.66,,469449,18.96,5.04%,6/3/2026 8:30:00 AM,0.87
+232,"MMM","3M Co","Industrials","Conglomerates","USA",91134.50,31.38,1382951,176.71,0.25%,7/21/2026 8:30:00 AM,4.66
+233,"MPC","Marathon Petroleum Corp","Energy","Oil & Gas Refining & Marketing","USA",90208.41,20.19,1169906,309.00,-2.36%,8/4/2026 8:30:00 AM,8.96
+234,"MPLX","MPLX LP","Energy","Oil & Gas Midstream","USA",59304.49,12.67,809836,58.44,-0.01%,8/4/2026 8:30:00 AM,1.04
+235,"MRK","Merck & Co Inc","Healthcare","Drug Manufacturers - General","USA",314680.35,35.86,5484295,127.41,-2.14%,8/4/2026 8:30:00 AM,3.38
+236,"MRSH","Marsh","Financial","Insurance Brokers","USA",91966.25,23.58,1305014,192.72,1.60%,7/21/2026 8:30:00 AM,5.19
+237,"MT","ArcelorMittal","Basic Materials","Steel","Luxembourg",54411.04,30.11,1001197,71.49,1.92%,7/30/2026 8:30:00 AM,2.13
+238,"MTAKU","Market Technology Acquisition Corp","Financial","Shell Companies","USA",272.58,,922,9.96,0.05%,,0.03
+239,"MTB","M & T Bank Corp","Financial","Banks - Regional","USA",36028.17,13.13,622207,248.59,0.93%,7/15/2026 8:30:00 AM,4.53
+240,"MTCH","Match Group Inc","Communication Services","Internet Content & Information","USA",9456.62,15.47,2545295,40.54,2.87%,8/4/2026 4:30:00 PM,1.12
+241,"MTG","MGIC Investment Corp","Financial","Insurance - Specialty","USA",6253.23,9.53,994592,30.49,1.48%,7/29/2026 4:30:00 PM,0.73
+242,"MUFG","Mitsubishi UFJ Financial Group Inc ADR","Financial","Banks - Diversified","Japan",254022.93,15.92,2729750,22.50,0.24%,8/3/2026 4:30:00 PM,0.49
+243,"NAVN","Navan Inc","Technology","Software - Application","USA",6973.76,,1605973,27.42,3.01%,6/10/2026 4:30:00 PM,1.64
+244,"NDAQ","Nasdaq Inc","Financial","Financial Data & Stock Exchanges","USA",52795.41,27.52,1301420,94.45,0.28%,7/23/2026 8:30:00 AM,2.53
+245,"NEO","Neogenomics Inc","Healthcare","Diagnostics & Research","USA",2037.84,,1252583,15.86,3.74%,7/28/2026 4:30:00 PM,0.87
+246,"NEOG","Neogen Corp","Healthcare","Medical Devices","USA",2622.12,,2764463,12.02,-0.12%,7/30/2026 8:30:00 AM,0.54
+247,"NESR","National Energy Services Reunited Corp","Energy","Oil & Gas Equipment & Services","USA",2790.13,43.26,940644,27.67,2.62%,5/11/2026 8:30:00 AM,1.54
+248,"NET","Cloudflare Inc","Technology","Software - Infrastructure","USA",101061.65,,2104538,284.58,2.01%,8/6/2026 4:30:00 PM,14.01
+249,"NLY","Annaly Capital Management Inc","Real Estate","REIT - Mortgage","USA",17218.60,5.73,4320607,22.84,0.55%,7/21/2026 4:30:00 PM,0.44
+250,"NOBL","ProShares S&P 500 Dividend Aristocrats ETF","Financial","Exchange Traded Fund","USA",,,1286292,57.29,0.38%,,0.78
+251,"NSC","Norfolk Southern Corp","Industrials","Railroads","USA",75182.82,28.58,367890,334.73,-0.22%,7/23/2026 8:30:00 AM,7.25
+252,"NTAP","Netapp Inc","Technology","Software - Infrastructure","USA",36058.46,28.90,1147751,183.75,2.94%,5/28/2026 4:30:00 PM,7.10
+253,"NTRA","Natera Inc","Healthcare","Diagnostics & Research","USA",38695.36,,709835,270.19,0.91%,8/6/2026 4:30:00 PM,11.48
+254,"NUE","Nucor Corp","Basic Materials","Steel","USA",59077.14,20.70,667186,259.40,0.82%,7/27/2026 4:30:00 PM,8.21
+255,"NWBI","Northwest Bancshares Inc","Financial","Banks - Regional","USA",2329.90,15.31,644643,15.91,1.11%,7/27/2026 4:30:00 PM,0.27
+256,"NWG","NatWest Group Plc ADR","Financial","Banks - Regional","United Kingdom",76765.75,9.65,5678750,19.31,1.93%,7/31/2026 8:30:00 AM,0.49
+257,"OGN","Organon & Co","Healthcare","Drug Manufacturers - General","USA",3559.67,17.36,1056904,13.56,0.04%,4/30/2026 8:30:00 AM,0.05
+258,"OII","Oceaneering International Inc","Energy","Oil & Gas Equipment & Services","USA",4880.54,14.12,359690,49.04,0.52%,7/22/2026 4:30:00 PM,2.38
+259,"OKTA","Okta Inc","Technology","Software - Infrastructure","USA",25040.97,104.64,1126536,144.07,1.51%,5/28/2026 4:30:00 PM,7.00
+260,"ONB","Old National Bancorp","Financial","Banks - Regional","USA",10289.22,11.98,2108945,26.90,0.96%,7/22/2026 8:30:00 AM,0.53
+261,"OPLN","Openlane Inc","Consumer Cyclical","Auto & Truck Dealerships","USA",4330.13,,851703,40.87,2.79%,8/4/2026 8:30:00 AM,1.21
+262,"ORI","Old Republic International Corp","Financial","Insurance - Property & Casualty","USA",10498.40,9.44,589627,43.10,-0.24%,7/23/2026 8:30:00 AM,1.00
+263,"ORKA","Oruka Therapeutics Inc","Healthcare","Biotechnology","USA",5638.88,,405592,93.50,-3.12%,5/13/2026 4:30:00 PM,5.52
+264,"OSCR","Oscar Health Inc","Healthcare","Healthcare Plans","USA",9266.72,,2037832,30.74,-1.55%,8/6/2026 8:30:00 AM,1.69
+265,"OVV","Ovintiv Inc","Energy","Oil & Gas E&P","USA",16896.63,17.15,1383848,61.33,-1.81%,7/23/2026 4:30:00 PM,1.93
+266,"OZK","Bank OZK","Financial","Banks - Regional","USA",5873.12,8.43,359597,51.78,0.93%,7/21/2026 4:30:00 PM,1.08
+267,"PAA","Plains All American Pipeline LP","Energy","Oil & Gas Midstream","USA",16985.67,18.03,1752494,24.08,-2.01%,8/7/2026 8:30:00 AM,0.47
+268,"PAGP","Plains GP Holdings LP","Energy","Oil & Gas Midstream","USA",19732.50,28.09,697508,25.90,-1.63%,8/7/2026 8:30:00 AM,0.42
+269,"PANW","Palo Alto Networks Inc","Technology","Software - Infrastructure","USA",281443.94,284.06,4198184,345.33,4.07%,6/2/2026 4:30:00 PM,15.31
+270,"PARR","Par Pacific Holdings Inc","Energy","Oil & Gas Refining & Marketing","USA",4186.51,9.32,511364,83.49,-2.95%,8/4/2026 4:30:00 PM,3.61
+271,"PAVE","Global X U.S. Infrastructure Development ETF","Financial","Exchange Traded Fund","USA",,,1042449,57.32,1.71%,,1.14
+272,"PB","Prosperity Bancshares Inc","Financial","Banks - Regional","USA",9022.06,13.04,299390,75.28,0.54%,7/29/2026 8:30:00 AM,1.57
+273,"PBF","PBF Energy Inc","Energy","Oil & Gas Refining & Marketing","USA",8113.25,6.05,3099345,68.44,-5.31%,7/30/2026 8:30:00 AM,3.98
+274,"PBI","Pitney Bowes Inc","Industrials","Integrated Freight & Logistics","USA",2494.35,14.82,1306699,18.19,3.79%,7/29/2026 4:30:00 PM,0.66
+275,"PCAR","Paccar Inc","Industrials","Farm & Heavy Construction Machinery","USA",69618.44,27.84,1422278,132.26,-0.31%,7/28/2026 8:30:00 AM,3.63
+276,"PDBC","Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF","Financial","Exchange Traded Fund","USA",,,11602239,17.24,-1.85%,,0.31
+277,"PDM","Piedmont Realty Trust Inc","Real Estate","REIT - Office","USA",1235.06,,406930,9.87,1.86%,7/28/2026 4:30:00 PM,0.29
+278,"PEB","Pebblebrook Hotel Trust","Real Estate","REIT - Hotel & Motel","USA",2169.50,,957752,19.23,0.66%,7/29/2026 4:30:00 PM,0.60
+279,"PFG","Principal Financial Group Inc","Financial","Asset Management","USA",24596.34,16.30,549777,114.88,1.04%,7/27/2026 4:30:00 PM,2.50
+280,"PFGC","Performance Food Group Company","Consumer Defensive","Food Distribution","USA",17860.16,54.26,532463,113.69,-0.61%,8/12/2026 8:30:00 AM,2.89
+281,"PFS","Provident Financial Services Inc","Financial","Banks - Regional","USA",3279.99,10.51,410530,25.17,1.99%,7/29/2026 4:30:00 PM,0.54
+282,"PGNY","Progyny Inc","Healthcare","Healthcare Plans","USA",2482.47,41.16,367421,31.69,1.80%,8/6/2026 4:30:00 PM,0.97
+283,"PK","Park Hotels & Resorts Inc","Real Estate","REIT - Hotel & Motel","USA",3034.34,,1008906,15.07,0.06%,8/6/2026 4:30:00 PM,0.42
+284,"PNC","PNC Financial Services Group Inc","Financial","Banks - Regional","USA",100248.75,13.82,644173,251.25,0.55%,7/15/2026 8:30:00 AM,4.44
+285,"PR","Permian Resources Holdings Inc","Energy","Oil & Gas E&P","USA",17394.66,24.17,4155267,20.77,-2.51%,8/5/2026 4:30:00 PM,0.64
+286,"PRU","Prudential Financial Inc","Financial","Insurance - Life","USA",42745.19,12.66,855479,123.18,0.91%,8/4/2026 4:30:00 PM,2.22
+287,"PSA","Public Storage","Real Estate","REIT - Industrial","USA",5879.74,31.14,358318,326.52,0.73%,7/29/2026 4:30:00 PM,8.59
+288,"PSX","Phillips 66","Energy","Oil & Gas Refining & Marketing","USA",82993.50,20.37,939764,207.00,-2.21%,8/5/2026 8:30:00 AM,5.98
+289,"RAMP","LiveRamp Holdings Inc","Technology","Software - Infrastructure","USA",2302.89,16.81,263023,37.88,0.04%,8/5/2026 4:30:00 PM,0.23
+290,"RBA","RB Global Inc","Industrials","Specialty Business Services","USA",20912.18,52.02,410907,112.25,2.29%,8/4/2026 4:30:00 PM,2.95
+291,"RDN","Radian Group Inc","Financial","Insurance - Specialty","USA",5227.25,9.67,234252,39.31,0.82%,8/5/2026 4:30:00 PM,0.93
+292,"REET","iShares Global REIT ETF","Financial","Exchange Traded Fund","USA",,,2179639,28.37,-0.04%,,0.32
+293,"REF","Reformation Inc","Consumer Cyclical","Apparel Retail","USA",5.62,,550601,16.07,-0.94%,,1.12
+294,"REGN","Regeneron Pharmaceuticals Inc","Healthcare","Biotechnology","USA",78280.12,18.79,459606,760.46,-0.28%,7/30/2026 8:30:00 AM,20.56
+295,"RELY","Remitly Global Inc","Technology","Software - Infrastructure","USA",5084.00,49.51,1205104,24.15,6.04%,8/5/2026 4:30:00 PM,0.92
+296,"REPL","Replimune Group Inc","Healthcare","Biotechnology","USA",1023.02,,5841917,12.18,8.71%,6/29/2026 8:30:00 AM,1.55
+297,"RF","Regions Financial Corp","Financial","Banks - Regional","USA",26783.32,12.77,4425253,31.39,1.41%,7/17/2026 8:30:00 AM,0.61
+298,"RHI","Robert Half Inc","Industrials","Staffing & Employment Services","USA",3975.64,33.85,653796,38.87,2.82%,7/23/2026 4:30:00 PM,2.27
+299,"RJF","Raymond James Financial Inc","Financial","Asset Management","USA",34020.91,15.44,347988,177.10,0.64%,7/22/2026 4:30:00 PM,3.96
+300,"RLJ","RLJ Lodging Trust","Real Estate","REIT - Hotel & Motel","USA",1882.03,,1116824,12.32,0.61%,8/6/2026 4:30:00 PM,0.33
+301,"RNG","RingCentral Inc","Technology","Software - Application","USA",4803.46,45.81,917021,57.52,3.42%,7/23/2026 4:30:00 PM,3.23
+302,"ROKU","Roku Inc","Communication Services","Entertainment","USA",21678.73,109.90,1257868,146.14,0.78%,8/6/2026 4:30:00 PM,2.19
+303,"ROST","Ross Stores Inc","Consumer Cyclical","Apparel Retail","USA",81009.75,35.20,987782,252.54,0.59%,5/21/2026 4:30:00 PM,5.73
+304,"RSP","Invesco S&P 500 Equal Weight ETF","Financial","Exchange Traded Fund","USA",,,6806296,216.79,0.83%,,2.23
+305,"RTX","RTX Corp","Industrials","Aerospace & Defense","USA",291843.55,38.13,1722064,216.54,0.61%,7/23/2026 8:30:00 AM,5.41
+306,"RVTY","Revvity Inc","Healthcare","Diagnostics & Research","USA",12837.19,54.54,1364484,115.07,2.27%,8/4/2026 8:30:00 AM,3.82
+307,"S","SentinelOne Inc","Technology","Software - Infrastructure","USA",6848.98,,3195378,19.98,4.82%,5/28/2026 4:30:00 PM,0.91
+308,"SBLK","Star Bulk Carriers Corp","Industrials","Marine Shipping","Greece",3275.39,22.88,881658,28.77,0.07%,8/5/2026 4:30:00 PM,0.95
+309,"SCHB","Schwab U.S. Broad Market ETF","Financial","Exchange Traded Fund","USA",,,5296013,29.28,1.49%,,0.35
+310,"SCHD","Schwab US Dividend Equity ETF","Financial","Exchange Traded Fund","USA",,,20557912,33.51,0.10%,,0.42
+311,"SCHE","Schwab Emerging Markets Equity ETF","Financial","Exchange Traded Fund","USA",,,2279548,36.15,0.33%,,0.56
+312,"SCHF","Schwab International Equity ETF","Financial","Exchange Traded Fund","USA",,,5825525,27.53,0.36%,,0.42
+313,"SCHG","Schwab U.S. Large-Cap Growth ETF","Financial","Exchange Traded Fund","USA",,,6148506,34.92,2.18%,,0.51
+314,"SCHV","Schwab U.S. Large-Cap Value ETF","Financial","Exchange Traded Fund","USA",,,2324607,34.19,0.34%,,0.37
+315,"SCHW","Charles Schwab Corp","Financial","Capital Markets","USA",183687.50,19.21,3057658,105.62,0.36%,7/21/2026 8:30:00 AM,2.28
+316,"SCHX","Schwab U.S. Large-Cap ETF","Financial","Exchange Traded Fund","USA",,,6162913,29.89,1.51%,,0.35
+317,"SCI","Service Corp International","Consumer Cyclical","Personal Services","USA",11771.13,22.48,548067,86.16,-0.03%,7/29/2026 4:30:00 PM,2.28
+318,"SCZ","iShares MSCI EAFE Small-Cap ETF","Financial","Exchange Traded Fund","USA",,,1090395,84.31,0.49%,,1.09
+319,"SEUS","SEI QiM U.S. Equity Factor Allocation Active ETF","Financial","Exchange Traded Fund","USA",,,13206,25.72,1.20%,,0.40
+320,"SF","Stifel Financial Corp","Financial","Capital Markets","USA",12556.87,14.83,424989,82.83,-0.09%,7/22/2026 8:30:00 AM,2.09
+321,"SFL","SFL Corp Ltd","Industrials","Marine Shipping","Bermuda",1786.50,53.63,629733,12.34,0.01%,5/12/2026 8:30:00 AM,0.31
+322,"SHC","Sotera Health Co","Healthcare","Diagnostics & Research","USA",5154.22,44.05,611801,18.07,1.20%,8/6/2026 8:30:00 AM,0.50
+323,"SHEL","Shell Plc ADR","Energy","Oil & Gas Integrated","United Kingdom",254574.09,10.08,4909154,91.31,-0.73%,7/30/2026 8:30:00 AM,1.63
+324,"SHO","Sunstone Hotel Investors Inc","Real Estate","REIT - Hotel & Motel","USA",2188.81,98.24,1077394,11.75,-0.18%,8/6/2026 8:30:00 AM,0.22
+325,"SHOO","Steven Madden Ltd","Consumer Cyclical","Footwear & Accessories","USA",3501.45,24.02,663542,47.91,3.97%,7/30/2026 8:30:00 AM,1.90
+326,"SHW","Sherwin-Williams Co","Basic Materials","Specialty Chemicals","USA",85330.54,32.41,1143898,351.50,3.13%,7/28/2026 8:30:00 AM,10.89
+327,"SJM","J.M. Smucker Co","Consumer Defensive","Packaged Foods","USA",12586.80,,618751,117.76,-1.25%,6/9/2026 8:30:00 AM,3.50
+328,"SN","SharkNinja Inc","Consumer Cyclical","Furnishings, Fixtures & Appliances","USA",22761.09,32.42,1124228,160.83,-0.58%,8/5/2026 8:30:00 AM,5.29
+329,"SNK","GraniteShares 2x Short SpaceX Daily ETF","Financial","Exchange Traded Fund","USA",,,1364789,37.10,-3.12%,,3.94
+330,"SOLV","Solventum Corp","Healthcare","Medical Instruments & Supplies","USA",15172.31,10.73,757873,87.61,2.54%,8/5/2026 4:30:00 PM,2.55
+331,"SON","Sonoco Products Co","Consumer Cyclical","Packaging & Containers","USA",5587.06,8.71,740538,56.51,0.26%,7/22/2026 4:30:00 PM,1.86
+332,"SPCG","Tradr 2X Short SpaceX Daily ETF","Financial","Exchange Traded Fund","USA",,,1264454,37.94,-2.92%,,4.04
+333,"SPCQ","Defiance Daily Target 2X Short SPCX ETF","Financial","Exchange Traded Fund","USA",,,866506,28.68,-2.93%,,3.13
+334,"SPDW","State Street SPDR Portfolio Developed World ex-US ETF","Financial","Exchange Traded Fund","USA",,,1540679,50.31,0.49%,,0.75
+335,"SPG","Simon Property Group Inc","Real Estate","REIT - Retail","USA",74317.52,41.93,496961,229.17,-0.09%,8/10/2026 4:30:00 PM,4.26
+336,"SPMD","State Street SPDR Portfolio S&P 400TM Mid Cap ETF","Financial","Exchange Traded Fund","USA",,,1462549,66.57,0.90%,,0.85
+337,"SPSM","State Street SPDR Portfolio S&P 600TM Small Cap ETF","Financial","Exchange Traded Fund","USA",,,1390596,57.40,1.47%,,0.74
+338,"SPXL","Direxion Daily S&P 500 Bull 3X ETF","Financial","Exchange Traded Fund","USA",,,1753911,279.97,4.39%,,9.70
+339,"SPY","SPDR S&P 500 ETF Trust","Financial","Exchange Traded Fund","USA",,,40250670,757.94,1.46%,,9.19
+340,"SPYD","State Street SPDR Portfolio S&P 500 High Dividend ETF","Financial","Exchange Traded Fund","USA",,,946588,49.71,0.42%,,0.60
+341,"SPYG","State Street SPDR Portfolio S&P 500 Growth ETF","Financial","Exchange Traded Fund","USA",,,1434173,119.90,2.36%,,2.24
+342,"SPYI","NEOS S&P 500 High Income ETF","Financial","Exchange Traded Fund","USA",,,2649058,53.46,1.14%,,0.59
+343,"SPYM","State Street SPDR Portfolio S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,7936399,89.21,1.50%,,1.06
+344,"SPYV","State Street SPDR Portfolio S&P 500 Value ETF","Financial","Exchange Traded Fund","USA",,,1070658,62.33,0.44%,,0.54
+345,"SSO","ProShares Ultra S&P500 2x Shares","Financial","Exchange Traded Fund","USA",,,2710216,68.97,2.96%,,1.62
+346,"SSPC","Leverage Shares 2X Short SPCX Daily ETF","Financial","Exchange Traded Fund","USA",,,9327484,22.49,-2.93%,,2.44
+347,"STT","State Street Corp","Financial","Asset Management","USA",50313.00,16.15,698818,183.15,-0.55%,7/16/2026 8:30:00 AM,4.85
+348,"SU","Suncor Energy Inc","Energy","Oil & Gas Integrated","Canada",77944.26,17.34,1753726,66.01,-1.88%,8/4/2026 4:30:00 PM,1.65
+349,"SVIX","-1x Short VIX Futures ETF","Financial","Exchange Traded Fund","USA",,,963862,24.43,0.91%,,1.02
+350,"SVXY","ProShares Short VIX Short-Term Futures ETF -0.5x Shares","Financial","Exchange Traded Fund","USA",,,865526,58.34,0.48%,,1.26
+351,"SYY","Sysco Corp","Consumer Defensive","Food Distribution","USA",40291.76,23.37,5299919,84.26,-1.15%,8/4/2026 8:30:00 AM,1.99
+352,"TAL","TAL Education Group ADR","Consumer Defensive","Education & Training Services","China",4908.34,7.47,5876856,12.09,-3.28%,7/30/2026 8:30:00 AM,0.45
+353,"TD","Toronto Dominion Bank","Financial","Banks - Diversified","Canada",204073.19,19.66,460223,120.79,0.72%,8/27/2026 8:30:00 AM,2.14
+354,"TECH","Bio-Techne Corp","Healthcare","Biotechnology","USA",11295.79,103.63,2355844,72.15,0.08%,5/6/2026 8:30:00 AM,0.76
+355,"TEVA","Teva- Pharmaceutical Industries Ltd ADR","Healthcare","Drug Manufacturers - Specialty & Generic","Israel",39725.87,57.36,2957556,34.11,-2.57%,7/29/2026 8:30:00 AM,1.25
+356,"THC","Tenet Healthcare Corp","Healthcare","Medical Care Facilities","USA",20102.83,9.63,625585,249.67,-2.01%,7/23/2026 4:30:00 PM,10.78
+357,"THRO","iShares U.S. Thematic Rotation Active ETF","Financial","Exchange Traded Fund","USA",,,369648,43.24,1.49%,,0.60
+358,"TKR","Timken Co","Industrials","Tools & Accessories","USA",9783.35,32.03,617993,140.78,2.35%,8/4/2026 8:30:00 AM,4.76
+359,"TMHC","Taylor Morrison Home Corp","Consumer Cyclical","Residential Construction","USA",6665.40,10.80,0,72.45,0.00%,4/22/2026 8:30:00 AM,0.34
+360,"TNA","Direxion Small Cap Bull 3X ETF","Financial","Exchange Traded Fund","USA",,,3844434,70.72,4.62%,,3.17
+361,"TPR","Tapestry Inc","Consumer Cyclical","Luxury Goods","USA",31333.09,49.82,794053,155.08,1.78%,8/13/2026 8:30:00 AM,4.60
+362,"TRIN","Trinity Capital Inc","Financial","Asset Management","USA",1602.27,9.46,624852,17.83,1.57%,8/5/2026 8:30:00 AM,0.34
+363,"TRV","Travelers Companies Inc","Financial","Insurance - Property & Casualty","USA",77783.88,9.99,962565,372.93,-0.38%,7/17/2026 8:30:00 AM,9.46
+364,"TTE","TotalEnergies SE","Energy","Oil & Gas Integrated","France",194633.75,10.80,886506,87.51,-0.40%,7/23/2026 8:30:00 AM,1.77
+365,"TTWO","Take-Two Interactive Software Inc","Communication Services","Electronic Gaming & Multimedia","USA",46015.89,,892917,246.10,1.31%,8/7/2026 8:30:00 AM,7.13
+366,"TWST","Twist Bioscience Corp","Healthcare","Diagnostics & Research","USA",6074.57,,1969898,97.55,6.55%,8/3/2026 8:30:00 AM,7.49
+367,"TXG","10x Genomics Inc","Healthcare","Health Information Services","USA",6022.80,,1435930,47.44,0.36%,8/6/2026 4:30:00 PM,2.87
+368,"UAL","United Airlines Holdings Inc","Industrials","Airlines","USA",41554.61,11.97,2707205,128.02,5.52%,7/15/2026 4:30:00 PM,5.05
+369,"UBS","UBS Group AG","Financial","Banks - Diversified","Switzerland",160940.88,17.87,1012108,52.56,-0.33%,7/29/2026 8:30:00 AM,1.08
+370,"UDOW","ProShares UltraPro Dow30 3x Shares","Financial","Exchange Traded Fund","USA",,,1525227,72.63,3.61%,,2.45
+371,"ULCC","Frontier Group Holdings Inc","Industrials","Airlines","USA",1745.04,,2966531,7.58,12.30%,7/29/2026 8:30:00 AM,0.52
+372,"UNM","Unum Group","Financial","Insurance - Life","USA",14300.52,21.08,998961,90.33,4.91%,7/28/2026 4:30:00 PM,2.43
+373,"UPRO","ProShares UltraPro S&P 500 ETF 3x Shares","Financial","Exchange Traded Fund","USA",,,2292413,146.49,4.43%,,5.08
+374,"URBN","Urban Outfitters Inc","Consumer Cyclical","Apparel Retail","USA",6598.61,14.79,423002,77.06,3.88%,5/20/2026 4:30:00 PM,2.78
+375,"USB","U.S. Bancorp","Financial","Banks - Regional","USA",99213.13,12.71,2527649,63.68,1.06%,7/16/2026 8:30:00 AM,1.20
+376,"USFD","US Foods Holding Corp","Consumer Defensive","Food Distribution","USA",22018.86,33.68,1505253,99.99,-0.60%,8/6/2026 8:30:00 AM,2.79
+377,"USMV","iShares MSCI USA Min Vol Factor ETF","Financial","Exchange Traded Fund","USA",,,2160846,98.26,0.33%,,0.88
+378,"UTZ","Utz Brands Inc","Consumer Defensive","Packaged Foods","USA",2039.95,,1690514,14.17,0.35%,8/5/2026 8:30:00 AM,0.43
+379,"V","Visa Inc","Financial","Credit Services","USA",673640.27,31.42,3198486,366.07,-0.02%,7/28/2026 4:30:00 PM,8.15
+380,"VEA","Vanguard FTSE Developed Markets ETF","Financial","Exchange Traded Fund","USA",,,6073671,70.99,0.52%,,1.06
+381,"VEU","Vanguard FTSE All-World ex-US ETF","Financial","Exchange Traded Fund","USA",,,2163052,83.15,0.36%,,1.22
+382,"VFLO","VictoryShares Free Cash Flow ETF","Financial","Exchange Traded Fund","USA",,,1152904,50.03,0.58%,,0.76
+383,"VGK","Vanguard FTSE Europe ETF","Financial","Exchange Traded Fund","USA",,,2144666,90.91,0.35%,,1.09
+384,"VIG","Vanguard Dividend Appreciation FTF","Financial","Exchange Traded Fund","USA",,,883902,239.79,0.26%,,2.03
+385,"VLO","Valero Energy Corp","Energy","Oil & Gas Refining & Marketing","USA",88465.71,12.75,1622993,307.25,-1.81%,7/30/2026 8:30:00 AM,10.95
+386,"VNO","Vornado Realty Trust","Real Estate","REIT - Office","USA",8172.05,10.94,508661,39.85,1.18%,8/3/2026 4:30:00 PM,1.21
+387,"VO","Vanguard Morningstar Mid-Cap ETF","Financial","Exchange Traded Fund","USA",,,2558825,81.69,0.92%,,0.90
+388,"VOD","Vodafone Group plc ADR","Communication Services","Telecom Services","United Kingdom",35934.57,,8004584,15.60,-1.11%,,0.44
+389,"VOO","Vanguard S&P 500 ETF","Financial","Exchange Traded Fund","USA",,,5293194,696.70,1.46%,,8.32
+390,"VOOG","Vanguard S&P 500 Growth ETF","Financial","Exchange Traded Fund","USA",,,1274518,83.24,2.40%,,1.56
+391,"VOYA","Voya Financial Inc","Financial","Financial Conglomerates","USA",9070.71,15.13,535029,100.04,0.62%,8/4/2026 4:30:00 PM,2.17
+392,"VSXY","Victoria's Secret & Co","Consumer Cyclical","Apparel Retail","USA",6959.50,35.85,748190,87.55,-1.27%,6/2/2026 8:30:00 AM,4.14
+393,"VT","Vanguard Total World Stock ETF","Financial","Exchange Traded Fund","USA",,,2084936,157.58,1.10%,,1.99
+394,"VTI","Vanguard Morningstar Total Stock Market ETF","Financial","Exchange Traded Fund","USA",,,2762857,373.92,1.55%,,4.48
+395,"VTRS","Viatris Inc","Healthcare","Drug Manufacturers - Specialty & Generic","USA",20510.10,,4932623,17.48,-0.48%,8/6/2026 8:30:00 AM,0.46
+396,"VTV","Vanguard Morningstar Value ETF","Financial","Exchange Traded Fund","USA",,,2481906,220.55,0.27%,,2.02
+397,"VTWO","Vanguard Russell 2000 Index ETF","Financial","Exchange Traded Fund","USA",,,761230,119.56,1.56%,,1.80
+398,"VUG","Vanguard Morningstar Growth ETF","Financial","Exchange Traded Fund","USA",,,5819577,87.29,2.46%,,1.59
+399,"VXUS","Vanguard Total International Stock ETF","Financial","Exchange Traded Fund","USA",,,4037139,84.97,0.45%,,1.26
+400,"VYM","Vanguard High Dividend Yield Indx ETF","Financial","Exchange Traded Fund","USA",,,1138056,162.39,0.27%,,1.43
+401,"VZ","Verizon Communications Inc","Communication Services","Telecom Services","USA",198151.17,12.36,13131523,47.46,1.38%,7/24/2026 8:30:00 AM,1.40
+402,"WCLD","WisdomTree Cloud Computing Fund","Financial","Exchange Traded Fund","USA",,,974429,36.74,3.52%,,1.34
+403,"WKC","World Kinect Corp","Energy","Oil & Gas Refining & Marketing","USA",2002.84,,404203,39.15,-1.77%,7/23/2026 4:30:00 PM,1.20
+404,"WRBY","Warby Parker Inc","Healthcare","Medical Instruments & Supplies","USA",3504.13,3005.79,1704315,28.56,6.99%,8/6/2026 8:30:00 AM,1.56
+405,"WSBC","Wesbanco Inc","Financial","Banks - Regional","USA",4015.58,12.15,367756,41.87,1.18%,7/21/2026 4:30:00 PM,0.93
+406,"WSM","Williams-Sonoma Inc","Consumer Cyclical","Specialty Retail","USA",28183.40,26.79,395256,239.36,4.68%,5/21/2026 8:30:00 AM,7.23
+407,"WT","WisdomTree Inc","Financial","Asset Management","USA",3227.06,40.77,2348772,21.10,8.93%,7/31/2026 8:30:00 AM,0.86
+408,"WY","Weyerhaeuser Co","Real Estate","REIT - Specialty","USA",18137.34,38.47,2711174,25.15,0.50%,7/30/2026 4:30:00 PM,0.73
+409,"XIIIU","Churchill Capital Corp XIII","Financial","Shell Companies","USA",,,619838,10.41,0.48%,,0.14
+410,"XLE","State Street Energy Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,18054350,58.65,-1.51%,,1.21
+411,"XLF","State Street Financial Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,20668938,57.24,0.52%,,0.71
+412,"XLG","Invesco S&P 500 Top 50 ETF","Financial","Exchange Traded Fund","USA",,,597320,61.92,1.88%,,0.96
+413,"XLI","State Street Industrial Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,5315674,182.50,1.48%,,3.13
+414,"XLP","State Street Consumer Staples Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,8618480,84.80,-0.29%,,1.56
+415,"XLRE","State Street Real Estate Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,6151253,45.12,0.10%,,0.64
+416,"XLV","State Street Health Care Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,7933216,161.99,-0.34%,,2.89
+417,"XLY","State Street Consumer Discretionary Select Sector SPDR ETF","Financial","Exchange Traded Fund","USA",,,7201610,118.25,1.86%,,2.23
+418,"XMAX","XMax Inc","Consumer Cyclical","Furnishings, Fixtures & Appliances","USA",557.79,,341556,8.77,1.74%,,0.27
+419,"XOP","State Street SPDR S&P Oil & Gas Exploration & Production ETF","Financial","Exchange Traded Fund","USA",,,1912590,174.26,-1.77%,,4.51
+420,"XRAY","DENTSPLY Sirona Inc","Healthcare","Medical Instruments & Supplies","USA",2785.54,,4812942,13.90,4.00%,8/6/2026 4:30:00 PM,0.64
+421,"XRT","State Street SPDR S&P Retail ETF","Financial","Exchange Traded Fund","USA",,,2476433,91.37,1.77%,,1.85
+422,"XYZ","Block Inc","Technology","Software - Infrastructure","USA",48772.64,63.66,2589467,81.95,0.87%,8/5/2026 4:30:00 PM,2.70
+423,"YETI","YETI Holdings Inc","Consumer Cyclical","Leisure","USA",3816.70,25.58,400724,50.38,2.94%,8/13/2026 8:30:00 AM,1.76
+424,"ZGN","Ermenegildo Zegna NV","Consumer Cyclical","Apparel Manufacturing","Italy",6362.10,35.18,622147,15.03,2.18%,3/20/2026 8:30:00 AM,0.56
+425,"ZION","Zions Bancorporation N.A","Financial","Banks - Regional","USA",10320.81,9.01,635549,70.72,1.46%,7/20/2026 4:30:00 PM,1.52
+426,"ZTO","ZTO Express (Cayman) Inc ADR","Industrials","Integrated Freight & Logistics","China",13774.76,15.36,704501,24.58,2.34%,8/18/2026 4:30:00 PM,0.47
