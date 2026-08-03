@@ -78,5 +78,21 @@
     "stop_order_id": "6a6cd051-6bec-462d-93bd-ab9e5316eb1a",
     "stop_price": 44.75,
     "symbol": "XLRE"
+  },
+  {
+    "closed_at": "2026-08-03T14:37:21.147319+00:00",
+    "entry_order_id": "6a6cfb7b-7af7-472e-8211-dad642e5245b",
+    "entry_price": 17.5887,
+    "entry_time": "2026-07-31T19:46:03.507Z",
+    "exit_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06",
+    "exit_price": 17.39,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-08-03T14:13:39.781Z",
+    "pnl_pct": -1.129702593142179,
+    "pnl_usd": -1.1921999999999926,
+    "qty": 6,
+    "stop_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06",
+    "stop_price": 17.39,
+    "symbol": "VTRS"
   }
 ]
