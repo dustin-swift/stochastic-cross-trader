@@ -1,37 +1,5 @@
 [
   {
-    "closed_at": "2026-07-31T14:15:47.905965+00:00",
-    "entry_order_id": "6a6b9b28-615d-41df-9a0d-58e74ab0cbde",
-    "entry_price": 26.4499,
-    "entry_time": "2026-07-30T18:42:54Z",
-    "exit_order_id": "6a6cadbc-15f2-4870-a29a-800696ebbfd9",
-    "exit_price": 25.93,
-    "exit_reason": "manual_stop_out",
-    "exit_time": "2026-07-31T14:14:20Z",
-    "pnl_pct": -1.9656028945289061,
-    "pnl_usd": -0.39312030539999987,
-    "qty": 0.756146,
-    "stop_order_id": null,
-    "stop_price": null,
-    "symbol": "JHX"
-  },
-  {
-    "closed_at": "2026-07-31T19:36:42.062742+00:00",
-    "entry_order_id": "6a6cca79-4bad-40ac-a7b8-ea514fd4b9d4",
-    "entry_price": 83.7399,
-    "entry_time": "2026-07-31T16:16:57.899Z",
-    "exit_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
-    "exit_price": 83.63,
-    "exit_reason": "stop_out",
-    "exit_time": "2026-07-31T19:05:22.985Z",
-    "pnl_pct": -0.13123970771401483,
-    "pnl_usd": -0.10990000000001032,
-    "qty": 1.0,
-    "stop_order_id": "6a6ccaa3-f8ce-4ef9-93ca-523f7a4e7101",
-    "stop_price": 83.63,
-    "symbol": "CRNX"
-  },
-  {
     "closed_at": "2026-07-31T19:45:50.110873+00:00",
     "entry_order_id": "6a6cca78-c63f-4bbe-8f1e-b99978653f0d",
     "entry_price": 72.1099,
@@ -78,21 +46,5 @@
     "stop_order_id": "6a6cd051-6bec-462d-93bd-ab9e5316eb1a",
     "stop_price": 44.75,
     "symbol": "XLRE"
-  },
-  {
-    "closed_at": "2026-08-03T14:37:21.147319+00:00",
-    "entry_order_id": "6a6cfb7b-7af7-472e-8211-dad642e5245b",
-    "entry_price": 17.5887,
-    "entry_time": "2026-07-31T19:46:03.507Z",
-    "exit_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06",
-    "exit_price": 17.39,
-    "exit_reason": "stop_out",
-    "exit_time": "2026-08-03T14:13:39.781Z",
-    "pnl_pct": -1.129702593142179,
-    "pnl_usd": -1.1921999999999926,
-    "qty": 6,
-    "stop_order_id": "6a6cfb8e-8d43-45c6-a930-2a3799b41d06",
-    "stop_price": 17.39,
-    "symbol": "VTRS"
   }
 ]
