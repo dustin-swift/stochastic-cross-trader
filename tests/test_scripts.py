@@ -401,8 +401,13 @@ def test_check_hourly_signals_force_exits_position_when_earnings_too_close(tmp_p
     # what the oscillator says, not just alongside a signal that would fire anyway.
     flat_closes = [20, 20, 22, 23, 25]
     # Reports tomorrow, BMO (bare string = conservative default) -> exit_date
-    # is today -> forced exit fires today.
-    tomorrow = (date.today() + timedelta(days=1)).isoformat()
+    # is today -> forced exit fires today, but only once near_close (see
+    # test below for the "not yet near close" case) -- pin --now to today at
+    # a late UTC hour so this test is deterministic regardless of when it
+    # actually runs, matching the real default forced_exit_utc_hour=19.
+    today = date.today()
+    tomorrow = (today + timedelta(days=1)).isoformat()
+    now_near_close = f"{today.isoformat()}T20:00:00Z"
 
     payload = {
         "candidates": [],
@@ -421,12 +426,59 @@ def test_check_hourly_signals_force_exits_position_when_earnings_too_close(tmp_p
     result = _run(
         "check_hourly_signals.py",
         payload,
-        ["--config", str(config_path), "--data-dir", str(tmp_path / "data")],
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data"), "--now", now_near_close],
     )
 
     output = json.loads(result.stdout)
     assert [e["symbol"] for e in output["exits"]] == ["MSFT"]
     assert output["exits"][0]["exit_reason"] == "earnings_exit"
+
+
+def test_check_hourly_signals_does_not_force_exit_before_near_close(tmp_path):
+    # This is the exact bug confirmed live on BALL (2026-08-03): the forced
+    # exit fired on the FIRST regular-session check of exit_date instead of
+    # the last, forfeiting most of that day's run-up. Same setup as the test
+    # above, but --now pinned to early in the session -- must NOT force-exit.
+    from datetime import date, timedelta
+
+    cfg = {
+        **BASE_CFG,
+        "stochastic": {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80},
+    }
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    def bar(close):
+        return {"high": 50, "low": 0, "close": close}
+
+    flat_closes = [20, 20, 22, 23, 25]
+    today = date.today()
+    tomorrow = (today + timedelta(days=1)).isoformat()
+    now_first_check_of_day = f"{today.isoformat()}T13:45:00Z"  # 9:45am ET, first hourly cycle
+
+    payload = {
+        "candidates": [],
+        "open_positions": [
+            {
+                "symbol": "MSFT",
+                "entry_price": 20.0,
+                "qty": 5.0,
+                "stochastic_state": "NORMAL",
+                "earnings_report_dates": [tomorrow],
+                "bars": [bar(c) for c in flat_closes],
+            }
+        ],
+    }
+
+    result = _run(
+        "check_hourly_signals.py",
+        payload,
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data"), "--now", now_first_check_of_day],
+    )
+
+    output = json.loads(result.stdout)
+    assert output["exits"] == []
 
 
 def test_check_hourly_signals_earnings_field_absent_does_not_force_exit(tmp_path):

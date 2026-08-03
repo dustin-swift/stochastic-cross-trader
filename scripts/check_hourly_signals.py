@@ -74,10 +74,18 @@ purpose:
   earnings-filtered by the daily screen when that ran with --earnings-input;
   this is a defense-in-depth re-check, not the primary gate).
 - Open positions: if present and today is on-or-after the nearest upcoming
-  report's exit_date (`is_forced_exit_day`), the position is force-exited
-  (reason "earnings_exit") regardless of stochastic state — including while
-  OVERBOUGHT_HOLD, since a stock can easily be holding overbought right into
-  its earnings date. Absent field -> falls through to normal signal logic,
+  report's exit_date, the position is force-exited (reason "earnings_exit")
+  regardless of stochastic state — including while OVERBOUGHT_HOLD, since a
+  stock can easily be holding overbought right into its earnings date.
+  **Gated to the last regular-session check of exit_date, not the first**
+  (`is_forced_exit_day`'s `near_close` param, fixed 2026-08-04 — confirmed
+  live on BALL: exiting on the first check of the day forfeited most of that
+  day's run-up, exactly the outcome this rule exists to avoid). `near_close`
+  is derived from `now` (real wall-clock UTC, or the optional `now` param for
+  tests) compared against `config["catalysts"]["forced_exit_utc_hour"]`
+  (default 19). A day already past exit_date (a missed close-of-day check)
+  still force-exits immediately regardless of `near_close` — waiting further
+  only adds gap risk. Absent field -> falls through to normal signal logic,
   NOT a forced exit — an existing position shouldn't get liquidated because a
   data fetch happened to fail this cycle; that's a materially more disruptive
   default than skipping a not-yet-opened candidate.
@@ -97,7 +105,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -147,7 +155,13 @@ def _trend_intact(bars: list[dict], sma_period: int) -> bool | None:
     return bool(df["close"].iloc[-1] > latest_sma)
 
 
-def run(payload: dict, config: dict, logger: EventLogger, today: date | None = None) -> dict:
+def run(
+    payload: dict,
+    config: dict,
+    logger: EventLogger,
+    today: date | None = None,
+    now: datetime | None = None,
+) -> dict:
     stoch_cfg = config["stochastic"]
     oversold = stoch_cfg["oversold_threshold"]
     overbought = stoch_cfg["overbought_threshold"]
@@ -156,10 +170,26 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
     sizing_cfg = config["sizing"]
     catalysts_cfg = config.get("catalysts", {})
     catalysts_enabled = catalysts_cfg.get("enabled", True)
+    # near_close (2026-08-04, spec §4b fix): the earnings force-exit must
+    # only fire on the LAST regular-session check of the exit_date, not the
+    # first -- see lib.catalysts.is_forced_exit_day's docstring. This
+    # threshold is a config value, not a market-close lookup, because the
+    # cron schedule that drives how often this script even runs is external
+    # to it; forced_exit_utc_hour should match the UTC hour of the last
+    # scheduled hourly-signal-check slot (default 19, i.e. the 19:30 UTC
+    # slot on the current "30 13-19 * * 1-5" cron). Known limitation: the
+    # cron is fixed UTC and doesn't shift for US daylight saving, so this
+    # threshold's true proximity to the 4pm ET close can drift by an hour
+    # across DST transitions -- same class of gap as the Finviz freshness
+    # check's weekend-only handling (see providers/finviz.py), flagged
+    # rather than silently assumed away.
+    forced_exit_utc_hour = catalysts_cfg.get("forced_exit_utc_hour", 19)
+    now = now or datetime.now(timezone.utc)
+    near_close = now.hour >= forced_exit_utc_hour
     trend_filter_cfg = config.get("trend_filter", {})
     trend_filter_enabled = trend_filter_cfg.get("enabled", True)
     trend_filter_sma_period = trend_filter_cfg.get("sma_period", 50)
-    today = today or date.today()
+    today = today or now.date()
 
     entries = []
     for c in payload.get("candidates", []):
@@ -223,7 +253,7 @@ def run(payload: dict, config: dict, logger: EventLogger, today: date | None = N
         prior_state = p.get("stochastic_state") or STATE_NORMAL
 
         earnings_dates = p.get("earnings_report_dates")
-        if catalysts_enabled and earnings_dates is not None and is_forced_exit_day(earnings_dates, today):
+        if catalysts_enabled and earnings_dates is not None and is_forced_exit_day(earnings_dates, today, near_close):
             logger.log(
                 "signal_check",
                 symbol=symbol,
@@ -290,13 +320,20 @@ def main() -> None:
     parser.add_argument("--input", default="-", help="JSON input file, or '-' for stdin (default)")
     parser.add_argument("--config", default="config/strategy.yaml")
     parser.add_argument("--data-dir", default="data")
+    parser.add_argument(
+        "--now",
+        default=None,
+        help="Override current UTC datetime (ISO8601, e.g. 2026-08-04T20:00:00Z) -- "
+        "for tests that need to pin the earnings near_close gate. Defaults to the real current time.",
+    )
     args = parser.parse_args()
 
     config = load_config(args.config)
     payload = _load_input(args.input)
     logger = EventLogger(args.data_dir)
+    now = datetime.fromisoformat(args.now.replace("Z", "+00:00")) if args.now else None
 
-    result = run(payload, config, logger)
+    result = run(payload, config, logger, now=now)
 
     json.dump(result, sys.stdout, indent=2, default=str)
     sys.stdout.write("\n")

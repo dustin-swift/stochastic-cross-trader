@@ -26,13 +26,19 @@ reported:
   against an unprotected gap and we'd rather close a day early on an unknown
   than a day late.
 
-A held position is force-exited (regardless of stochastic state) on any
-check where today is on-or-after its nearest upcoming exit_date
-(`is_forced_exit_day`). A new entry is blocked only on the exit_date itself
+A held position is force-exited (regardless of stochastic state) on the
+LAST regular-session check of its nearest upcoming exit_date (`near_close`
+gating, see `is_forced_exit_day` — fixed 2026-08-04, previously fired on the
+FIRST check of that day instead: confirmed live on BALL, exited ~9:45am ET
+on its exit_date rather than holding through the full session as intended,
+forfeiting most of that day's run-up). A day already past its exit_date
+(the check was somehow missed at close, e.g. a routine failure) still force-
+exits immediately regardless of time of day — better to close late than not
+at all. A new entry is blocked only on the exit_date itself
 (`is_entry_blocked_day`) — entering earlier still captures the run-up into
-the report; entering exactly on the exit_date would get force-closed within
-the same trading day, which is a near-zero-value trade not worth taking.
-There is deliberately no wider entry-avoidance window beyond that single day.
+the report; entering exactly on the exit_date would get force-closed later
+that same day, which is a near-zero-value trade not worth taking. There is
+deliberately no wider entry-avoidance window beyond that single day.
 """
 from __future__ import annotations
 
@@ -79,12 +85,30 @@ def next_forced_exit_date(reports: list[dict | str], as_of: date) -> date | None
     return min(earnings_exit_date(report_date, timing) for report_date, timing in upcoming)
 
 
-def is_forced_exit_day(reports: list[dict | str], as_of: date) -> bool:
-    """True iff a held position should be force-exited today, regardless of
-    stochastic state — i.e. `as_of` is on or after the nearest upcoming
-    report's exit_date."""
+def is_forced_exit_day(reports: list[dict | str], as_of: date, near_close: bool = True) -> bool:
+    """True iff a held position should be force-exited on this check,
+    regardless of stochastic state.
+
+    `near_close` (2026-08-04): the caller's own signal for "this is the last
+    regular-session check of the day", since this module has no wall-clock
+    awareness of its own. When `as_of` is exactly the exit_date, the exit
+    only fires if `near_close` is true — the whole point of the exit_date
+    rule is to let the position hold through as much of that day's session
+    as safely possible (D-1 for BMO, D itself for AMC), so exiting on the
+    FIRST check of that day instead of the last one forfeits most of the
+    intended run-up. `as_of` already past the exit_date (overdue — e.g. a
+    prior day's close check was missed) always forces the exit regardless
+    of `near_close`, since waiting further only adds gap risk. Defaults to
+    `True` so existing callers that haven't been updated to pass real
+    wall-clock timing keep the old (safe, if early) behavior rather than
+    silently never firing.
+    """
     exit_date = next_forced_exit_date(reports, as_of)
-    return exit_date is not None and as_of >= exit_date
+    if exit_date is None:
+        return False
+    if as_of > exit_date:
+        return True
+    return as_of == exit_date and near_close
 
 
 def is_entry_blocked_day(reports: list[dict | str], as_of: date) -> bool:

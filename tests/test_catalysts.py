@@ -86,6 +86,35 @@ def test_is_forced_exit_day_false_when_no_upcoming_report():
     assert is_forced_exit_day(reports, as_of=date(2026, 7, 29)) is False
 
 
+def test_is_forced_exit_day_near_close_false_on_first_check_of_exit_day():
+    # This is the exact bug confirmed live on BALL: the first regular-session
+    # check of the exit_date must NOT force the exit -- only the last one.
+    reports = [{"date": "2026-08-04", "timing": "am"}]  # exit_date = 2026-08-03
+    assert is_forced_exit_day(reports, as_of=date(2026, 8, 3), near_close=False) is False
+
+
+def test_is_forced_exit_day_near_close_true_on_last_check_of_exit_day():
+    reports = [{"date": "2026-08-04", "timing": "am"}]  # exit_date = 2026-08-03
+    assert is_forced_exit_day(reports, as_of=date(2026, 8, 3), near_close=True) is True
+
+
+def test_is_forced_exit_day_fires_when_overdue_regardless_of_near_close():
+    # A missed close-of-day check (e.g. a prior routine failure) shouldn't
+    # keep waiting for another "near close" moment that already passed --
+    # once as_of is strictly past exit_date, exit immediately either way.
+    # (as_of stays <= the report's own date, since next_forced_exit_date
+    # only tracks reports whose date hasn't itself passed yet.)
+    reports = [{"date": "2026-08-04", "timing": "am"}]  # exit_date = 2026-08-03
+    assert is_forced_exit_day(reports, as_of=date(2026, 8, 4), near_close=False) is True
+
+
+def test_is_forced_exit_day_default_near_close_true_for_unmigrated_callers():
+    # Backward compatibility: a caller that hasn't been updated to pass real
+    # wall-clock timing gets the old (safe-if-early) behavior, not silence.
+    reports = [{"date": "2026-08-04", "timing": "am"}]  # exit_date = 2026-08-03
+    assert is_forced_exit_day(reports, as_of=date(2026, 8, 3)) is True
+
+
 def test_is_entry_blocked_day_true_exactly_on_exit_date():
     reports = [{"date": "2026-08-06", "timing": "am"}]
     assert is_entry_blocked_day(reports, as_of=date(2026, 8, 5)) is True

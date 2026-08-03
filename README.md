@@ -210,9 +210,16 @@ Both sides of the check read off the same exit_date:
   "earnings_exit"`) regardless of stochastic state — including while
   `OVERBOUGHT_HOLD`, since a stock can easily be holding overbought right
   into its earnings date — on or after the nearest upcoming report's
-  exit_date. Re-checked fresh every cycle, not just at entry, since a
-  position can be held for days after the daily screen last looked at it and
-  drift into an earnings date that was safely far away at entry time.
+  exit_date. **On the exit_date itself, only on the last regular-session
+  check of that day, not the first** (`config["catalysts"]
+  ["forced_exit_utc_hour"]`, default 19 — 2026-08-04 fix, confirmed live on
+  BALL: firing on the first check of exit_date instead of the last
+  forfeited most of that day's run-up, exactly what holding through
+  exit_date is meant to capture). A day already past exit_date (a missed
+  close-of-day check) still force-exits immediately regardless of time.
+  Re-checked fresh every cycle, not just at entry, since a position can be
+  held for days after the daily screen last looked at it and drift into an
+  earnings date that was safely far away at entry time.
 - **Daily screen + hourly-check defense-in-depth (candidates)**: blocked
   only on the exit_date itself — a **single-day buffer**, not a multi-day
   window. Entering on the exit_date would get force-exited again almost

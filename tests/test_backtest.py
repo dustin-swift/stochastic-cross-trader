@@ -477,9 +477,13 @@ def test_earnings_force_exits_open_position_regardless_of_price():
     # later bar (no bars need exist in between -- the engine just walks the
     # array, bar-count-based, not calendar-based) is dated 2026-07-27, one day
     # before the same earnings date -> within the default 1-day forced-exit
-    # window. close=400 is an arbitrary big jump on that bar -- the forced
-    # exit must fire regardless of what price/oscillator would otherwise say.
-    later_bar = _bar("2026-07-27T14:00:00Z", 400)
+    # window, timestamped 19:00 UTC to land at/after the default
+    # forced_exit_utc_hour=19 near_close threshold (2026-08-04 fix -- the
+    # force-exit only fires on the LAST regular-session bar of exit_date, not
+    # the first; see test below for the "too early in the day" case).
+    # close=400 is an arbitrary big jump on that bar -- the forced exit must
+    # fire regardless of what price/oscillator would otherwise say.
+    later_bar = _bar("2026-07-27T19:00:00Z", 400)
     bars = _entry_bars() + [later_bar]
     data = {
         "XXX": {
@@ -494,8 +498,31 @@ def test_earnings_force_exits_open_position_regardless_of_price():
     assert len(result["trades"]) == 1
     trade = result["trades"][0]
     assert trade["exit_reason"] == "earnings_exit"
-    assert trade["exit_time"] == "2026-07-27T14:00:00Z"
+    assert trade["exit_time"] == "2026-07-27T19:00:00Z"
     assert trade["exit_price"] == pytest.approx(400.0)
+
+
+def test_earnings_does_not_force_exit_before_near_close_bar():
+    # This is the exact bug confirmed live on BALL (2026-08-03): the forced
+    # exit must NOT fire on an early-session bar of exit_date, only the last
+    # regular-session bar (hour >= forced_exit_utc_hour, default 19). Same
+    # setup as the test above, but the only bar on exit_date is timestamped
+    # 14:00 UTC (well before the threshold) -- position must stay open.
+    early_bar = _bar("2026-07-27T14:00:00Z", 400)
+    bars = _entry_bars() + [early_bar]
+    data = {
+        "XXX": {
+            "bars": bars,
+            "atr_series": [{"begins_at": _T[4], "value": 150.0}],
+            "earnings_report_dates": ["2026-07-28"],
+        }
+    }
+
+    result = run_backtest(data, CFG)
+
+    assert result["trades"] == []
+    assert len(result["open_positions"]) == 1
+    assert result["open_positions"][0]["exit_reason"] == "open_at_end"
 
 
 def test_earnings_absent_key_does_not_restrict_backtest():

@@ -169,3 +169,16 @@ risk:
 #   2026-07-30 change, at the user's direction).
 catalysts:
   enabled: true   # set false to disable earnings avoidance entirely (both sides)
+  # UTC hour of the LAST scheduled hourly-signal-check slot -- the earnings
+  # force-exit on exit_date itself only fires once now.hour >= this (a day
+  # already past exit_date always force-exits immediately regardless).
+  # 2026-08-04 fix: previously the force-exit fired on the FIRST check of
+  # exit_date instead of the last, confirmed live on BALL (exited ~9:45am ET
+  # instead of holding the session, forfeiting most of that day's run-up).
+  # Default 19 matches the 19:30 UTC slot on the current
+  # "30 13-19 * * 1-5" hourly-signal-check cron. Known limitation: that cron
+  # is fixed UTC and doesn't shift for US daylight saving, so this
+  # threshold's true proximity to the 4pm ET close can drift by an hour
+  # across DST transitions -- same class of gap as the Finviz freshness
+  # check's weekend-only handling, flagged rather than silently assumed away.
+  forced_exit_utc_hour: 19

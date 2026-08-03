@@ -30,9 +30,13 @@ stays a faithful simulator of the live behavior): if a symbol's
 backward compat), entries are skipped on the exact bar-date that is the
 report's BMO/AMC-aware exit_date (see lib.catalysts module docstring), and
 open positions are force-exited (exit_reason "earnings_exit", at that bar's
-close) on or after that same exit_date — checked before the stop/trailing-
-stop check each bar, since it's a scheduled, date-driven decision, not a
-reactive one. A symbol with no `earnings_report_dates` key is never
+close) on the LAST regular-session bar of that exit_date, mirroring the live
+near_close gate (config["catalysts"]["forced_exit_utc_hour"], default 19 —
+2026-08-04 fix; a bar's own hour stands in for live's wall-clock check,
+confirmed live on BALL that firing on the first bar of exit_date instead of
+the last forfeits most of that day's run-up) — checked before the stop/
+trailing-stop check each bar, since it's a scheduled, date-driven decision,
+not a reactive one. A symbol with no `earnings_report_dates` key is never
 restricted (backtest default is "don't know, don't filter" — unlike the live
 daily-screen's conservative "unknown -> exclude," since a missing key here
 almost always just means the caller didn't fetch earnings for that symbol,
@@ -210,6 +214,12 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
 
     catalysts_cfg = config.get("catalysts", {})
     catalysts_enabled = catalysts_cfg.get("enabled", True)
+    # Mirrors the live near_close gate (2026-08-04 fix, see
+    # lib.catalysts.is_forced_exit_day and scripts/check_hourly_signals.py) --
+    # a bar's own hour stands in for "is this the last regular-session check
+    # of the day" so the backtest stays a faithful simulator of live timing,
+    # not just live's date-level logic.
+    forced_exit_utc_hour = catalysts_cfg.get("forced_exit_utc_hour", 19)
     earnings_by_symbol = {
         symbol: data["earnings_report_dates"] for symbol, data in symbol_data.items() if "earnings_report_dates" in data
     }
@@ -246,8 +256,9 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
 
             pos.trade.update_excursion(float(bar["high"]), float(bar["low"]))
 
+            bar_near_close = pd.Timestamp(t).hour >= forced_exit_utc_hour
             if catalysts_enabled and symbol in earnings_by_symbol and is_forced_exit_day(
-                earnings_by_symbol[symbol], pd.Timestamp(t).date()
+                earnings_by_symbol[symbol], pd.Timestamp(t).date(), bar_near_close
             ):
                 pos.trade.exit_time = t
                 pos.trade.exit_price = float(bar["close"])
