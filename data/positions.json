@@ -4,7 +4,7 @@
     "entry_price": 25.6899,
     "entry_time": "2026-07-31T16:40:56.074Z",
     "qty": 4,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a70cf00-b5bb-4132-ae1d-1f0f6be15ca9",
     "stop_price": 24.91
   },
@@ -17,14 +17,23 @@
     "stop_order_id": "6a70cf1c-c3c9-429c-8ef7-7219d6f39c5d",
     "stop_price": 81.68
   },
-  "HDV": {
-    "entry_order_id": "6a6cee91-30aa-4d32-b8e1-37be520f0478",
-    "entry_price": 28.71,
-    "entry_time": "2026-07-31T18:50:57.968Z",
-    "qty": 3,
+  "LEVI": {
+    "entry_order_id": "6a70e114-9fa2-4cc0-8020-61fa4163070f",
+    "entry_price": 24.5499,
+    "entry_time": "2026-08-03T18:42:29.157Z",
+    "qty": 4,
     "stochastic_state": "NORMAL",
-    "stop_order_id": "6a70cf36-2941-468f-b7f8-c4d5c8693511",
-    "stop_price": 28.1
+    "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
+    "stop_price": 23.26
+  },
+  "NDAQ": {
+    "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b",
+    "entry_price": 94.4399,
+    "entry_time": "2026-08-03T18:43:02.749Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0",
+    "stop_price": 90.7
   },
   "TGT": {
     "entry_order_id": "6a6ceea9-dbcb-4741-921a-5fa67e348542",
@@ -53,23 +62,5 @@
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
-  },
-  "LEVI": {
-    "entry_price": 24.5499,
-    "qty": 4,
-    "entry_time": "2026-08-03T18:42:29.157Z",
-    "entry_order_id": "6a70e114-9fa2-4cc0-8020-61fa4163070f",
-    "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
-    "stop_price": 23.26,
-    "stochastic_state": "NORMAL"
-  },
-  "NDAQ": {
-    "entry_price": 94.4399,
-    "qty": 1,
-    "entry_time": "2026-08-03T18:43:02.749Z",
-    "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b",
-    "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0",
-    "stop_price": 90.7,
-    "stochastic_state": "NORMAL"
   }
 }

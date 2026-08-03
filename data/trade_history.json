@@ -46,5 +46,21 @@
     "stop_order_id": "6a6cd051-6bec-462d-93bd-ab9e5316eb1a",
     "stop_price": 44.75,
     "symbol": "XLRE"
+  },
+  {
+    "closed_at": "2026-08-03T22:59:05.491197+00:00",
+    "entry_order_id": "6a6cee91-30aa-4d32-b8e1-37be520f0478",
+    "entry_price": 28.71,
+    "entry_time": "2026-07-31T18:50:57.968Z",
+    "exit_order_id": "6a70eed9-c1ad-488e-922e-8465a2d4df93",
+    "exit_price": 28.6005,
+    "exit_reason": "reconciled_unrecorded_exit",
+    "exit_time": "2026-08-03T19:41:13.236Z",
+    "pnl_pct": -0.38140020898641547,
+    "pnl_usd": -0.3285000000000018,
+    "qty": 3,
+    "stop_order_id": "6a70cf36-2941-468f-b7f8-c4d5c8693511",
+    "stop_price": 28.1,
+    "symbol": "HDV"
   }
 ]
