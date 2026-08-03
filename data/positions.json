@@ -31,7 +31,7 @@
     "entry_price": 144.6211,
     "entry_time": "2026-07-31T18:51:21.97Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a70cf51-999e-4ede-b96c-40c7ba59b6e9",
     "stop_price": 138.37
   },
@@ -53,5 +53,23 @@
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+  },
+  "LEVI": {
+    "entry_price": 24.5499,
+    "qty": 4,
+    "entry_time": "2026-08-03T18:42:29.157Z",
+    "entry_order_id": "6a70e114-9fa2-4cc0-8020-61fa4163070f",
+    "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
+    "stop_price": 23.26,
+    "stochastic_state": "NORMAL"
+  },
+  "NDAQ": {
+    "entry_price": 94.4399,
+    "qty": 1,
+    "entry_time": "2026-08-03T18:43:02.749Z",
+    "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b",
+    "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0",
+    "stop_price": 90.7,
+    "stochastic_state": "NORMAL"
   }
 }
