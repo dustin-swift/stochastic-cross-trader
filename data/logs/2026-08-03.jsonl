@@ -1119,3 +1119,4 @@
 {"event": "entry_executed", "fill_price": 94.4399, "order_id": "6a70e136-daa3-423a-9be6-920843da0b9b", "qty": 1, "symbol": "NDAQ", "timestamp": "2026-08-03T18:43:31.238339+00:00"}
 {"event": "stop_placed", "qty": 1, "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0", "stop_price": 90.7, "symbol": "NDAQ", "timestamp": "2026-08-03T18:43:31.238378+00:00"}
 {"drift_found": false, "event": "reconciliation_check", "positions_checked": 6, "stop_outs_found": 0, "timestamp": "2026-08-03T18:43:31.238428+00:00"}
+{"candidates_checked": 212, "candidates_skipped_data_issue": 3, "circuit_breaker_tripped": false, "entries_proposed": 2, "entries_taken": 2, "event": "cycle_summary", "exits_taken": 0, "overbought_hold_transitions": ["TGT"], "slots_remaining": 0, "stop_outs_reconciled": 0, "timestamp": "2026-08-03T18:43:48.352294+00:00"}
