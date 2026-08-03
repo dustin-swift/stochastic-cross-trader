@@ -453,3 +453,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 1.0, "needs_cancel": false, "order_id": "6a70a9a2-032c-40ff-a582-5f9f61afd8c5", "order_state": "filled", "symbol": "GPN", "timestamp": "2026-08-03T14:46:02.060986+00:00"}
 {"d": 19.198139287612868, "entry_order_id": "6a70a9a2-032c-40ff-a582-5f9f61afd8c5", "entry_price": 86.2959, "event": "entry_executed", "k": 25.69776714513543, "qty": 1, "symbol": "GPN", "timestamp": "2026-08-03T14:46:26.004440+00:00"}
 {"atr14": 2.88, "atr_stop_multiplier": 1.5, "event": "stop_placed", "stop_order_id": "6a70a9b6-e5e2-45d3-807f-a12b24d4b512", "stop_price": 81.98, "symbol": "GPN", "timestamp": "2026-08-03T14:46:26.004571+00:00"}
+{"candidates_checked": 212, "circuit_breaker_tripped": false, "entries_proposed": 1, "entries_taken": 1, "event": "cycle_summary", "exits_taken": 0, "open_positions": 6, "slots_remaining": 4, "stop_outs_reconciled": 1, "timestamp": "2026-08-03T14:46:36.360641+00:00"}
