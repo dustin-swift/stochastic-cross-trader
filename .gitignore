@@ -1,4 +1,5 @@
 data/
+.bot_state_base
 __pycache__/
 *.pyc
 .venv/
