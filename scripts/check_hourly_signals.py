@@ -77,6 +77,27 @@ letter without the freshness it's meant to guarantee. `pending`/
 actually fires this cycle is affected. Exits are never suppressed by this
 guard.
 
+Execution-lag cron fix (2026-08-04, confirmed live on CUZ): this script only
+ever evaluates the last *fully closed* hourly bar (never a partial/forming
+one) -- correct, but it means the signal it computes is only as fresh as
+however long ago that bar closed. The hourly-signal-check cron used to fire
+at :30 past each hour, so a signal computed off the bar that closed at the
+top of the hour was already up to ~30 minutes stale by the time the routine
+even started, on top of a few more minutes of routine-startup latency before
+the order actually executed. Confirmed live: CUZ fired a bare, marginal
+confirmation (%K=20.66, %D=22.14, barely over the 20 line) using the bar
+that closed at 19:00 UTC; by the time the market order filled a few minutes
+later, real-time price had already fallen enough that the very next bar
+(19:00-20:00 UTC) recomputed to %K=12.15 -- back below the threshold, i.e.
+the setup had already invalidated in the real market before the trade even
+landed. The cron now fires at :02 past each hour instead of :30 (see
+`config/strategy.yaml`'s `catalysts.forced_exit_utc_hour` comment for the
+matching cron string), cutting that lag from ~30+ minutes down to ~2 -- this
+doesn't eliminate the gap between "bar closes" and "order fills" entirely
+(that's inherent to acting on any fully-closed bar), but it substantially
+shrinks the window in which a marginal, barely-over-the-line confirmation
+can reverse before the order lands.
+
 `entries[].qty` (spec update 2026-07-30, see lib.sizing): a whole-share
 quantity, sized off the last bar's close via lib.sizing.entry_share_quantity
 (config["sizing"]) -- entries are no longer dollar-based fractional orders,
@@ -211,8 +232,9 @@ def run(
     # threshold is a config value, not a market-close lookup, because the
     # cron schedule that drives how often this script even runs is external
     # to it; forced_exit_utc_hour should match the UTC hour of the last
-    # scheduled hourly-signal-check slot (default 19, i.e. the 19:30 UTC
-    # slot on the current "30 13-19 * * 1-5" cron). Known limitation: the
+    # scheduled hourly-signal-check slot (default 19, i.e. the 19:02 UTC
+    # slot on the current "2 13-19 * * 1-5" cron -- shifted from :30 to :02
+    # past the hour 2026-08-04, see the execution-lag note below). Known limitation: the
     # cron is fixed UTC and doesn't shift for US daylight saving, so this
     # threshold's true proximity to the 4pm ET close can drift by an hour
     # across DST transitions -- same class of gap as the Finviz freshness

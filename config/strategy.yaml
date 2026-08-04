@@ -211,9 +211,13 @@ catalysts:
   # 2026-08-04 fix: previously the force-exit fired on the FIRST check of
   # exit_date instead of the last, confirmed live on BALL (exited ~9:45am ET
   # instead of holding the session, forfeiting most of that day's run-up).
-  # Default 19 matches the 19:30 UTC slot on the current
-  # "30 13-19 * * 1-5" hourly-signal-check cron. Known limitation: that cron
-  # is fixed UTC and doesn't shift for US daylight saving, so this
+  # Default 19 matches the 19:02 UTC slot on the current
+  # "2 13-19 * * 1-5" hourly-signal-check cron (2026-08-04: shifted from
+  # :30 to :02 past the hour so each cycle checks right after that hour's
+  # bar closes instead of ~30 min later -- see the check_hourly_signals.py
+  # module docstring's "execution-lag" note, confirmed live on CUZ). Known
+  # limitation: that cron is fixed UTC and doesn't shift for US daylight
+  # saving, so this
   # threshold's true proximity to the 4pm ET close can drift by an hour
   # across DST transitions -- same class of gap as the Finviz freshness
   # check's weekend-only handling, flagged rather than silently assumed away.

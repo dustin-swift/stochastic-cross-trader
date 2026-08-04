@@ -466,7 +466,13 @@ Robinhood MCP connector (see prerequisite #3 above):
 - **daily-universe-screen** — once per day, before market open. Requires a
   freshly published Finviz export (`scripts/publish_finviz_export.sh`,
   run locally by you) beforehand.
-- **hourly-signal-check** — hourly during market hours.
+- **hourly-signal-check** — hourly during market hours, timed to fire just
+  after each hourly bar closes (`:02` past the hour, 2026-08-04 — shifted
+  from `:30` after a live incident on CUZ where the extra ~30 minutes of
+  lag between "bar closes" and "order fires" let a marginal, barely-over-
+  the-line confirmation reverse before the trade landed; see
+  `scripts/check_hourly_signals.py`'s "Execution-lag cron fix" docstring
+  note for the full writeup).
 - **dashboard-refresh** — hourly during market hours, a few minutes after
   `hourly-signal-check` — see Dashboard below.
 
