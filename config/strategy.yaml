@@ -65,6 +65,22 @@ stochastic:
   # confirmation arriving that late isn't confirming a reversal anymore, it's
   # just lagging a move that already happened.
   k_invalidate_max: 55
+  # Missed-cycle guard (2026-08-04, confirmed live on DNTH/ILF/PCAR): an MCP
+  # connector naming mismatch silently made two consecutive morning cycles
+  # abort before doing anything (no error surfaced -- the routine reported
+  # "success" while doing nothing). By the time the next cycle finally ran,
+  # the two-bar %K/%D crossing check compared bars hours apart instead of one
+  # hour apart, satisfying the crossing condition on paper while %K/%D had
+  # already been running well past 20 in the real market for a while -- not
+  # the fresh reversal the rule exists to catch. If the gap since this
+  # script's own last recorded run (data/last_cycle_at.json) exceeds this
+  # many minutes, any entry that would otherwise fire this cycle is
+  # suppressed and logged instead (pending state still advances normally) --
+  # see scripts/check_hourly_signals.py's module docstring. 90 = 1.5x the
+  # normal ~60-minute cadence, enough slack for ordinary routine-start jitter
+  # without masking a genuine multi-cycle gap. Exits are never suppressed by
+  # this guard.
+  max_cycle_gap_minutes: 90
 
 # Trend-intact exit filter (spec §4a, 2026-07-30): stochastic is well known
 # to whipsaw repeatedly during a genuinely trending move -- a bearish %K/%D

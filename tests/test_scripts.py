@@ -3,6 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -326,6 +327,135 @@ def test_check_hourly_signals_end_to_end(tmp_path):
     assert len(log_files) == 1
     events = [json.loads(line) for line in log_files[0].read_text().splitlines()]
     assert {(e["symbol"], e["kind"]) for e in events} == {("AAPL", "entry"), ("MSFT", "exit")}
+
+
+def _entry_only_payload():
+    def bar(close):
+        return {"high": 50, "low": 0, "close": close}
+
+    entry_closes = [10, 10, 8, 7, 15]  # same dual-cross fixture as the end-to-end test
+    return {
+        "candidates": [{"symbol": "AAPL", "sector": "Technology", "atr14": 2.0, "bars": [bar(c) for c in entry_closes]}],
+        "open_positions": [],
+    }
+
+
+def _stoch_cfg():
+    return {"k_period": 3, "k_smooth": 1, "d_period": 2, "oversold_threshold": 20, "overbought_threshold": 80}
+
+
+def test_check_hourly_signals_first_run_no_last_cycle_at_fires_normally(tmp_path):
+    # No data/last_cycle_at.json yet (a genuinely fresh setup, or the file
+    # predates this feature) -- the missed-cycle guard must not suppress
+    # anything when there's no prior cycle to compare against.
+    cfg = {**BASE_CFG, "stochastic": _stoch_cfg()}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run(
+        "check_hourly_signals.py",
+        _entry_only_payload(),
+        ["--config", str(config_path), "--data-dir", str(tmp_path / "data"), "--now", "2026-08-04T15:47:00Z"],
+    )
+    output = json.loads(result.stdout)
+
+    assert [e["symbol"] for e in output["entries"]] == ["AAPL"]
+    assert output["stale_cycle"] is False
+    assert output["cycle_gap_minutes"] is None
+
+    # And it must have recorded this run's completion for next time.
+    last_cycle = json.loads((tmp_path / "data" / "last_cycle_at.json").read_text())
+    assert last_cycle["timestamp"] == "2026-08-04T15:47:00+00:00"
+
+
+def test_check_hourly_signals_small_gap_fires_normally(tmp_path):
+    cfg = {**BASE_CFG, "stochastic": _stoch_cfg()}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "last_cycle_at.json").write_text(json.dumps({"timestamp": "2026-08-04T14:50:00+00:00"}))  # 57 min ago
+
+    result = _run(
+        "check_hourly_signals.py",
+        _entry_only_payload(),
+        ["--config", str(config_path), "--data-dir", str(data_dir), "--now", "2026-08-04T15:47:00Z"],
+    )
+    output = json.loads(result.stdout)
+
+    assert [e["symbol"] for e in output["entries"]] == ["AAPL"]
+    assert output["stale_cycle"] is False
+    assert output["cycle_gap_minutes"] == pytest.approx(57.0)
+
+
+def test_check_hourly_signals_large_gap_suppresses_entry(tmp_path):
+    # This is the exact scenario confirmed live on DNTH/ILF/PCAR (2026-08-04):
+    # two scheduled cycles silently did nothing (an MCP connector naming
+    # mismatch), so the next successful run's two-bar crossing check spanned
+    # several real hours instead of one -- must suppress the entry rather
+    # than fire on a stale comparison, but still record k/d/pending normally.
+    cfg = {**BASE_CFG, "stochastic": _stoch_cfg()}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "last_cycle_at.json").write_text(json.dumps({"timestamp": "2026-08-03T23:07:00+00:00"}))  # ~16.7 hours ago
+
+    result = _run(
+        "check_hourly_signals.py",
+        _entry_only_payload(),
+        ["--config", str(config_path), "--data-dir", str(data_dir), "--now", "2026-08-04T15:47:00Z"],
+    )
+    output = json.loads(result.stdout)
+
+    assert output["entries"] == []
+    assert output["stale_cycle"] is True
+    assert output["cycle_gap_minutes"] == pytest.approx(16.67 * 60, abs=1)
+
+    # Pending state still advances normally -- only the entry itself is held back.
+    assert output["candidate_states"] == [{"symbol": "AAPL", "k": 30.0, "d": 22.0, "pending": None}]
+
+    log_files = list((data_dir / "logs").glob("*.jsonl"))
+    events = [json.loads(line) for line in log_files[0].read_text().splitlines()]
+    suppressed = [e for e in events if e["event"] == "entry_suppressed_stale_cycle"]
+    assert len(suppressed) == 1
+    assert suppressed[0]["symbol"] == "AAPL"
+    assert suppressed[0]["k"] == 30.0
+    assert suppressed[0]["d"] == 22.0
+    assert suppressed[0]["max_cycle_gap_minutes"] == 90
+
+    # And the run's own completion time still gets recorded, so the next
+    # cycle (assuming normal cadence resumes) starts measuring fresh.
+    last_cycle = json.loads((data_dir / "last_cycle_at.json").read_text())
+    assert last_cycle["timestamp"] == "2026-08-04T15:47:00+00:00"
+
+
+def test_check_hourly_signals_custom_max_cycle_gap_minutes(tmp_path):
+    # A gap that's well under the default 90-minute threshold still
+    # suppresses when the config lowers the threshold below it.
+    cfg = {**BASE_CFG, "stochastic": {**_stoch_cfg(), "max_cycle_gap_minutes": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "last_cycle_at.json").write_text(json.dumps({"timestamp": "2026-08-04T15:37:00+00:00"}))  # 10 min ago
+
+    result = _run(
+        "check_hourly_signals.py",
+        _entry_only_payload(),
+        ["--config", str(config_path), "--data-dir", str(data_dir), "--now", "2026-08-04T15:47:00Z"],
+    )
+    output = json.loads(result.stdout)
+
+    assert output["entries"] == []
+    assert output["stale_cycle"] is True
 
 
 def test_check_hourly_signals_skips_entry_over_price_cap(tmp_path):

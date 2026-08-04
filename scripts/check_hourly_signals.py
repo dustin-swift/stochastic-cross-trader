@@ -38,7 +38,8 @@ Output (JSON, to stdout):
                  "estimated_stop_price": 202.1, "qty": 1}],
     "exits": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
     "position_states": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
-    "candidate_states": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "pending": null}]
+    "candidate_states": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "pending": null}],
+    "stale_cycle": false, "cycle_gap_minutes": 62.3
   }
 
 `position_states` reports the (possibly just-updated) `stochastic_state` for
@@ -59,6 +60,22 @@ setup (`{"k_at_cross": float}`, passed in/out via each candidate's
 `oversold_threshold` (invalidated, no expiry timer needed), or %D confirms
 too late with %K already past `stochastic.k_invalidate_max` (default 55 —
 invalidated as too-extended, not a real reversal confirmation anymore).
+
+Missed-cycle guard (2026-08-04, confirmed live on DNTH/ILF/PCAR — see `run`'s
+inline comment for the full incident writeup): this script has no visibility
+into wall-clock time between invocations other than what it tracks itself.
+`main()` persists its own completion time to `data/last_cycle_at.json` (live
+or dry-run, no skill-doc step needed for it) and passes the prior value into
+`run(..., last_cycle_at=...)`. If the gap since then exceeds
+`stochastic.max_cycle_gap_minutes` (default 90), any entry that would
+otherwise fire this cycle is suppressed and logged as
+`entry_suppressed_stale_cycle` instead — a scheduled routine that silently
+skipped a cycle or two means the next successful run's two-bar crossing
+check may span several real hours rather than one, satisfying the rule's
+letter without the freshness it's meant to guarantee. `pending`/
+`candidate_states` still advance normally either way; only whether an entry
+actually fires this cycle is affected. Exits are never suppressed by this
+guard.
 
 `entries[].qty` (spec update 2026-07-30, see lib.sizing): a whole-share
 quantity, sized off the last bar's close via lib.sizing.entry_share_quantity
@@ -134,6 +151,7 @@ from lib.indicators import sma, stochastic
 from lib.logging_utils import EventLogger
 from lib.signals import STATE_NORMAL, STATE_OVERBOUGHT_HOLD, advance_pending_entry, exit_signal, stop_price, update_stochastic_state
 from lib.sizing import entry_share_quantity
+from lib.state import StateStore
 
 
 def _load_input(input_arg: str) -> dict:
@@ -177,6 +195,7 @@ def run(
     logger: EventLogger,
     today: date | None = None,
     now: datetime | None = None,
+    last_cycle_at: datetime | None = None,
 ) -> dict:
     stoch_cfg = config["stochastic"]
     oversold = stoch_cfg["oversold_threshold"]
@@ -208,6 +227,29 @@ def run(
     today = today or now.date()
 
     k_invalidate_max = stoch_cfg.get("k_invalidate_max", 55)
+
+    # Missed-cycle guard (2026-08-04, confirmed live on DNTH/ILF/PCAR): this
+    # script has no idea how much real time has passed since it last ran --
+    # if the scheduled routine silently skipped a cycle or two (confirmed
+    # root cause that day: an MCP connector naming mismatch made two morning
+    # runs abort before doing anything), the next successful run's two-bar
+    # crossing check ends up comparing bars that are hours apart instead of
+    # one hour apart. The crossing condition is still literally satisfied,
+    # but by then %K/%D may have already been running well past 20 for a
+    # while in the real market -- not the fresh reversal the rule is meant to
+    # catch. `last_cycle_at` is this script's own record of when it last
+    # completed (persisted to data/last_cycle_at.json by main(), live or
+    # dry-run) -- if the gap since then exceeds max_cycle_gap_minutes
+    # (default 90, i.e. 1.5x the normal hourly cadence), suppress firing any
+    # entry this cycle (still update/persist pending state normally) rather
+    # than trust a comparison that may span a real operational gap. Exits are
+    # deliberately unaffected -- missing a chance to close risk is worse than
+    # a late one, unlike opening new risk on a possibly-stale read.
+    max_cycle_gap_minutes = stoch_cfg.get("max_cycle_gap_minutes", 90)
+    cycle_gap_minutes = None
+    if last_cycle_at is not None:
+        cycle_gap_minutes = (now - last_cycle_at).total_seconds() / 60
+    stale_cycle = cycle_gap_minutes is not None and cycle_gap_minutes > max_cycle_gap_minutes
 
     entries = []
     candidate_states = []
@@ -241,6 +283,17 @@ def run(
 
         logger.log("signal_check", symbol=symbol, kind="entry", signal=signal, k=k, d=d, pending=new_pending)
         candidate_states.append({"symbol": symbol, "k": k, "d": d, "pending": new_pending})
+
+        if signal and stale_cycle:
+            logger.log(
+                "entry_suppressed_stale_cycle",
+                symbol=symbol,
+                k=k,
+                d=d,
+                cycle_gap_minutes=cycle_gap_minutes,
+                max_cycle_gap_minutes=max_cycle_gap_minutes,
+            )
+            signal = False
 
         if signal:
             last_close = float(bars[-1]["close"])
@@ -343,7 +396,14 @@ def run(
             reason = "overbought_hold_exit" if new_state == STATE_OVERBOUGHT_HOLD else "signal_exit"
             exits.append({"symbol": symbol, "k": k, "d": d, "stochastic_state": new_state, "exit_reason": reason})
 
-    return {"entries": entries, "exits": exits, "position_states": position_states, "candidate_states": candidate_states}
+    return {
+        "entries": entries,
+        "exits": exits,
+        "position_states": position_states,
+        "candidate_states": candidate_states,
+        "stale_cycle": stale_cycle,
+        "cycle_gap_minutes": cycle_gap_minutes,
+    }
 
 
 def main() -> None:
@@ -362,9 +422,20 @@ def main() -> None:
     config = load_config(args.config)
     payload = _load_input(args.input)
     logger = EventLogger(args.data_dir)
-    now = datetime.fromisoformat(args.now.replace("Z", "+00:00")) if args.now else None
+    now = datetime.fromisoformat(args.now.replace("Z", "+00:00")) if args.now else datetime.now(timezone.utc)
 
-    result = run(payload, config, logger, now=now)
+    # Missed-cycle guard (2026-08-04, see run()'s docstring comment): this
+    # script tracks its own last-completed-run timestamp directly in data/,
+    # the same way EventLogger writes logs directly rather than routing
+    # through the skill/agent -- no extra skill-doc step needed to keep it
+    # current.
+    store = StateStore(args.data_dir)
+    last_cycle_at_str = store.load_last_cycle_at()
+    last_cycle_at = datetime.fromisoformat(last_cycle_at_str) if last_cycle_at_str else None
+
+    result = run(payload, config, logger, now=now, last_cycle_at=last_cycle_at)
+
+    store.save_last_cycle_at(now.isoformat())
 
     json.dump(result, sys.stdout, indent=2, default=str)
     sys.stdout.write("\n")

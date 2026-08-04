@@ -50,8 +50,9 @@ pip install -r requirements.txt
   triggered manually or by a scheduled cloud agent.
 - `data/` — gitignored on `main`. `finviz_export.csv` (your manual export —
   see below), `candidates.json` (today's list), `pending_entries.json`
-  (intraday dual-cross entry state — see Entry logic below), `positions.json`
-  (open positions only — see `trade_history.json` below for closed trades),
+  (intraday dual-cross entry state — see Entry logic below),
+  `last_cycle_at.json` (missed-cycle guard — see Entry logic below),
+  `positions.json` (open positions only — see `trade_history.json` below for closed trades),
   `trade_history.json` (every closed trade — stop-out, signal exit,
   overbought-hold exit, or earnings-forced exit — with entry/exit price, P&L,
   and exit reason; this is what the dashboard reads for closed-trade
@@ -161,6 +162,26 @@ three things happens (see `lib.signals.advance_pending_entry`):
 Pending state is intraday-only: `scripts/check_universe_screen.py` resets
 `data/pending_entries.json` to `{}` on every successful run, so a setup mid-
 confirmation never silently carries into the next trading day.
+
+**Missed-cycle guard (2026-08-04, confirmed live on DNTH/ILF/PCAR):** the
+crossing check above only ever compares the two most recent bars it was
+handed — it has no way to know how much real time actually separates them.
+On 2026-08-04, an MCP connector naming mismatch made two consecutive
+scheduled cycles silently do nothing (no error, no state change — see the
+incident writeup in `config/strategy.yaml`'s `stochastic.max_cycle_gap_minutes`
+comment). By the time the next cycle ran, its two-bar comparison spanned
+several real hours instead of one, satisfying the crossing condition on
+paper while %K/%D had already been running well past 20 in the real market —
+not the fresh reversal the rule exists to catch. `check_hourly_signals.py`
+now tracks its own last-completed-run time in `data/last_cycle_at.json`
+(read/written directly, no skill-doc step needed); if the gap since then
+exceeds `stochastic.max_cycle_gap_minutes` (default 90 — 1.5x the normal
+hourly cadence), any entry that would otherwise fire this cycle is
+suppressed and logged as `entry_suppressed_stale_cycle` instead. Pending
+state still advances normally either way — only the entry itself is held
+back for that cycle. Exits are never affected by this guard: missing a
+chance to close risk is worse than a late one, unlike opening new risk on a
+possibly-stale read.
 
 ## Exit logic: overbought-hold refinement (spec §4)
 

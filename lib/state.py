@@ -79,6 +79,24 @@ class StateStore:
     def save_pending_entries(self, pending_by_symbol: dict[str, dict]) -> None:
         _atomic_write_json(self.pending_entries_path, pending_by_symbol)
 
+    # -- last successful hourly-signal-check cycle (2026-08-04, missed-cycle
+    # guard) -- a plain ISO8601 UTC timestamp written by check_hourly_signals.py
+    # itself at the end of every invocation, live or dry-run. Used only to
+    # detect an anomalously large gap since the last cycle (e.g. a scheduled
+    # routine that silently failed to fire for a few hours) so a fresh %K/%D
+    # crossing computed off a stale two-bar comparison doesn't get treated as
+    # a real-time signal -- see check_hourly_signals.py's module docstring.
+    @property
+    def last_cycle_at_path(self) -> Path:
+        return self.data_dir / "last_cycle_at.json"
+
+    def load_last_cycle_at(self) -> str | None:
+        data = _read_json(self.last_cycle_at_path, default=None)
+        return data["timestamp"] if data else None
+
+    def save_last_cycle_at(self, timestamp: str) -> None:
+        _atomic_write_json(self.last_cycle_at_path, {"timestamp": timestamp})
+
     # -- daily P&L ----------------------------------------------------------
     @property
     def daily_pnl_path(self) -> Path:
