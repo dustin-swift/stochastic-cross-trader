@@ -94,5 +94,21 @@
     "stop_order_id": "6a70cf6b-01df-4f1d-936c-7af985824f61",
     "stop_price": 73.01,
     "symbol": "TTAN"
+  },
+  {
+    "closed_at": "2026-08-04T17:48:07.167300+00:00",
+    "entry_order_id": "6a72171b-c29a-4672-95fe-9d1ac0a43647",
+    "entry_price": 15.8399,
+    "entry_time": "2026-08-04T16:45:15.590Z",
+    "exit_order_id": "6a7225cc-9d07-48ab-b1d9-57adb14ed462",
+    "exit_price": 15.8336,
+    "exit_reason": "earnings_exit",
+    "exit_time": "2026-08-04T17:47:56.509Z",
+    "pnl_pct": -0.03977297836476046,
+    "pnl_usd": -0.03779999999999717,
+    "qty": 6,
+    "stop_order_id": "6a721744-3601-420f-87c0-dc7eccb7674e",
+    "stop_price": 15.76,
+    "symbol": "DBRG"
   }
 ]

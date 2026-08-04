@@ -8,14 +8,41 @@
     "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
     "stop_price": 68.4
   },
-  "DBRG": {
-    "entry_order_id": "6a72171b-c29a-4672-95fe-9d1ac0a43647",
-    "entry_price": 15.8399,
-    "entry_time": "2026-08-04T16:45:15.590Z",
-    "qty": 6,
+  "CCEP": {
+    "entry_order_id": "6a7225ec-d3b6-4827-94c4-2654d769ccfa",
+    "entry_price": 105.9499,
+    "entry_time": "2026-08-04T17:48:29.13Z",
+    "qty": 1,
     "stochastic_state": "NORMAL",
-    "stop_order_id": "6a721744-3601-420f-87c0-dc7eccb7674e",
-    "stop_price": 15.76
+    "stop_order_id": "6a722600-84da-493f-aca3-5f32267eadb7",
+    "stop_price": 102.17
+  },
+  "CDP": {
+    "entry_order_id": "6a72260f-99fa-4e59-9994-d21837f48a26",
+    "entry_price": 37.8199,
+    "entry_time": "2026-08-04T17:49:03.668Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a72261a-6780-485e-907b-1aa446d711a5",
+    "stop_price": 36.71
+  },
+  "CLBK": {
+    "entry_order_id": "6a722624-4fd2-4ab0-83c3-0f35d96aba9a",
+    "entry_price": 10.7,
+    "entry_time": "2026-08-04T17:49:25.196Z",
+    "qty": 9,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
+    "stop_price": 10.3
+  },
+  "CVE": {
+    "entry_order_id": "6a72263b-fb58-45f9-8726-41deaa4f7b7b",
+    "entry_price": 28.8974,
+    "entry_time": "2026-08-04T17:49:48.211Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a722647-416e-4d16-ab6b-cf216e46d83e",
+    "stop_price": 27.38
   },
   "DNTH": {
     "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
@@ -49,7 +76,7 @@
     "entry_price": 86.2959,
     "entry_time": "2026-08-03T14:45:54.694Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a70cf1c-c3c9-429c-8ef7-7219d6f39c5d",
     "stop_price": 81.68
   },
@@ -94,7 +121,7 @@
     "entry_price": 56.86,
     "entry_time": "2026-07-30T17:40:33Z",
     "qty": 0.351741,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
