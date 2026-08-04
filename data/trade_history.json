@@ -158,5 +158,21 @@
     "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
     "stop_price": 23.26,
     "symbol": "LEVI"
+  },
+  {
+    "closed_at": "2026-08-04T19:41:46.566808+00:00",
+    "entry_order_id": "6a70a9a2-032c-40ff-a582-5f9f61afd8c5",
+    "entry_price": 86.2959,
+    "entry_time": "2026-08-03T14:45:54.694Z",
+    "exit_order_id": "6a72406e-4dc2-4aa2-86ef-a7a6bd5e948c",
+    "exit_price": 87.8901,
+    "exit_reason": "earnings_exit",
+    "exit_time": "2026-08-04T19:41:34.693Z",
+    "pnl_pct": 1.8473647067821286,
+    "pnl_usd": 1.5942000000000007,
+    "qty": 1,
+    "stop_order_id": "6a70cf1c-c3c9-429c-8ef7-7219d6f39c5d",
+    "stop_price": 81.68,
+    "symbol": "GPN"
   }
 ]

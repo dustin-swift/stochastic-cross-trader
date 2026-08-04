@@ -26,14 +26,50 @@
     "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
     "stop_price": 10.3
   },
+  "CNQ": {
+    "entry_order_id": "6a7241f4-56a0-4296-92c5-5802953a620e",
+    "entry_price": 46.1399,
+    "entry_time": "2026-08-04T19:48:04.608Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a72420a-de43-4e63-a00f-062e218561fa",
+    "stop_price": 44.29
+  },
+  "CUZ": {
+    "entry_order_id": "6a72421b-3840-4d4c-8300-42b653e3b7e9",
+    "entry_price": 30.9599,
+    "entry_time": "2026-08-04T19:48:43.244Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a72422a-0107-42bc-ae6d-246688c86e0f",
+    "stop_price": 29.8
+  },
+  "DINO": {
+    "entry_order_id": "6a724239-929f-4c65-8e0c-453450fc60e2",
+    "entry_price": 88.3299,
+    "entry_time": "2026-08-04T19:49:13.334Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a724247-8787-4130-b093-73c05efac4bd",
+    "stop_price": 83.3
+  },
   "DNTH": {
     "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
     "entry_price": 110.46,
     "entry_time": "2026-08-04T15:47:43.584Z",
     "qty": 1.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
     "stop_price": 101.49
+  },
+  "EWH": {
+    "entry_order_id": "6a724253-7df1-46a1-a5f7-ea2d0b879eaa",
+    "entry_price": 22.94,
+    "entry_time": "2026-08-04T19:49:39.888Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a724262-cc74-4377-8ece-15f4444be645",
+    "stop_price": 22.52
   },
   "EWW": {
     "entry_order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46",
@@ -53,15 +89,6 @@
     "stop_order_id": "6a70cf00-b5bb-4132-ae1d-1f0f6be15ca9",
     "stop_price": 24.91
   },
-  "GPN": {
-    "entry_order_id": "6a70a9a2-032c-40ff-a582-5f9f61afd8c5",
-    "entry_price": 86.2959,
-    "entry_time": "2026-08-03T14:45:54.694Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a70cf1c-c3c9-429c-8ef7-7219d6f39c5d",
-    "stop_price": 81.68
-  },
   "ILF": {
     "entry_order_id": "6a7209c6-bb20-496e-a321-3aaa0a541a35",
     "entry_price": 35.308,
@@ -76,7 +103,7 @@
     "entry_price": 134.1557,
     "entry_time": "2026-08-04T15:48:47.119Z",
     "qty": 1.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7209eb-ceae-48be-946b-94700eb00355",
     "stop_price": 128.71
   },
