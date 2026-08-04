@@ -110,5 +110,53 @@
     "stop_order_id": "6a721744-3601-420f-87c0-dc7eccb7674e",
     "stop_price": 15.76,
     "symbol": "DBRG"
+  },
+  {
+    "closed_at": "2026-08-04T18:41:04.754967+00:00",
+    "entry_order_id": "6a7225ec-d3b6-4827-94c4-2654d769ccfa",
+    "entry_price": 105.9499,
+    "entry_time": "2026-08-04T17:48:29.13Z",
+    "exit_order_id": "6a72321d-a166-4658-951b-450b4427f274",
+    "exit_price": 106.27,
+    "exit_reason": "earnings_exit",
+    "exit_time": "2026-08-04T18:40:30.066Z",
+    "pnl_pct": 0.302123928385023,
+    "pnl_usd": 0.3200999999999965,
+    "qty": 1,
+    "stop_order_id": "6a722600-84da-493f-aca3-5f32267eadb7",
+    "stop_price": 102.17,
+    "symbol": "CCEP"
+  },
+  {
+    "closed_at": "2026-08-04T18:41:04.797665+00:00",
+    "entry_order_id": "6a72263b-fb58-45f9-8726-41deaa4f7b7b",
+    "entry_price": 28.8974,
+    "entry_time": "2026-08-04T17:49:48.211Z",
+    "exit_order_id": "6a72321f-75a7-4d96-ac64-22e3e89af924",
+    "exit_price": 28.9001,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-04T18:40:31.213Z",
+    "pnl_pct": 0.009343401136430174,
+    "pnl_usd": 0.00809999999999178,
+    "qty": 3,
+    "stop_order_id": "6a722647-416e-4d16-ab6b-cf216e46d83e",
+    "stop_price": 27.38,
+    "symbol": "CVE"
+  },
+  {
+    "closed_at": "2026-08-04T18:41:04.840882+00:00",
+    "entry_order_id": "6a70e114-9fa2-4cc0-8020-61fa4163070f",
+    "entry_price": 24.5499,
+    "entry_time": "2026-08-03T18:42:29.157Z",
+    "exit_order_id": "6a723220-2015-49af-9b31-d12ab130b18f",
+    "exit_price": 24.5827,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-04T18:40:32.266Z",
+    "pnl_pct": 0.1336054322013558,
+    "pnl_usd": 0.13119999999999266,
+    "qty": 4,
+    "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
+    "stop_price": 23.26,
+    "symbol": "LEVI"
   }
 ]

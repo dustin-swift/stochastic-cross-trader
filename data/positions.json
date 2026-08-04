@@ -8,15 +8,6 @@
     "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
     "stop_price": 68.4
   },
-  "CCEP": {
-    "entry_order_id": "6a7225ec-d3b6-4827-94c4-2654d769ccfa",
-    "entry_price": 105.9499,
-    "entry_time": "2026-08-04T17:48:29.13Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a722600-84da-493f-aca3-5f32267eadb7",
-    "stop_price": 102.17
-  },
   "CDP": {
     "entry_order_id": "6a72260f-99fa-4e59-9994-d21837f48a26",
     "entry_price": 37.8199,
@@ -34,15 +25,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
     "stop_price": 10.3
-  },
-  "CVE": {
-    "entry_order_id": "6a72263b-fb58-45f9-8726-41deaa4f7b7b",
-    "entry_price": 28.8974,
-    "entry_time": "2026-08-04T17:49:48.211Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a722647-416e-4d16-ab6b-cf216e46d83e",
-    "stop_price": 27.38
   },
   "DNTH": {
     "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
@@ -88,15 +70,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a",
     "stop_price": 34.47
-  },
-  "LEVI": {
-    "entry_order_id": "6a70e114-9fa2-4cc0-8020-61fa4163070f",
-    "entry_price": 24.5499,
-    "entry_time": "2026-08-03T18:42:29.157Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
-    "stop_price": 23.26
   },
   "PCAR": {
     "entry_order_id": "6a7209de-e105-4e9d-a0c6-03a737648184",
