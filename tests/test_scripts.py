@@ -458,6 +458,45 @@ def test_check_hourly_signals_custom_max_cycle_gap_minutes(tmp_path):
     assert output["stale_cycle"] is True
 
 
+def test_check_hourly_signals_last_cycle_at_override_takes_precedence(tmp_path):
+    # Sell-first cycle ordering (2026-08-04): the exits call (candidates: [])
+    # always runs first and overwrites data/last_cycle_at.json with THIS
+    # cycle's own timestamp. A subsequent entries call in the same cycle must
+    # use --last-cycle-at to measure the gap against the TRUE prior cycle,
+    # not the exits call's just-written value -- otherwise the guard would
+    # see a near-zero gap every time and never suppress anything.
+    cfg = {**BASE_CFG, "stochastic": _stoch_cfg()}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    # Simulates the exits call having already run moments ago and overwritten
+    # the file with (near-)this cycle's own timestamp.
+    (data_dir / "last_cycle_at.json").write_text(json.dumps({"timestamp": "2026-08-04T15:46:55+00:00"}))
+
+    result = _run(
+        "check_hourly_signals.py",
+        _entry_only_payload(),
+        [
+            "--config", str(config_path),
+            "--data-dir", str(data_dir),
+            "--now", "2026-08-04T15:47:00Z",
+            "--last-cycle-at", "2026-08-03T23:07:00Z",  # the TRUE prior cycle, ~16.7 hours ago
+        ],
+    )
+    output = json.loads(result.stdout)
+
+    assert output["entries"] == []
+    assert output["stale_cycle"] is True
+    assert output["cycle_gap_minutes"] == pytest.approx(16.67 * 60, abs=1)
+
+    # Still writes the new value at the end regardless of the override source.
+    last_cycle = json.loads((data_dir / "last_cycle_at.json").read_text())
+    assert last_cycle["timestamp"] == "2026-08-04T15:47:00+00:00"
+
+
 def test_check_hourly_signals_skips_entry_over_price_cap(tmp_path):
     cfg = {
         **BASE_CFG,

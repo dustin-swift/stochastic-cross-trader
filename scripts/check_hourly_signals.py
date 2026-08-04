@@ -417,6 +417,17 @@ def main() -> None:
         help="Override current UTC datetime (ISO8601, e.g. 2026-08-04T20:00:00Z) -- "
         "for tests that need to pin the earnings near_close gate. Defaults to the real current time.",
     )
+    parser.add_argument(
+        "--last-cycle-at",
+        default=None,
+        help="Override the missed-cycle guard's prior-cycle timestamp (ISO8601), instead of "
+        "reading data/last_cycle_at.json directly -- for a sell-first cycle (2026-08-04) that "
+        "calls this script twice, once for exits (candidates: []) and, only if a slot opened up, "
+        "once more for entries: the exits call already overwrites last_cycle_at.json with THIS "
+        "cycle's own timestamp, so the entries call needs the true prior value passed in "
+        "explicitly rather than reading a file the first call just touched. This script always "
+        "writes the new value at the end regardless of which source was used to read the old one.",
+    )
     args = parser.parse_args()
 
     config = load_config(args.config)
@@ -428,10 +439,13 @@ def main() -> None:
     # script tracks its own last-completed-run timestamp directly in data/,
     # the same way EventLogger writes logs directly rather than routing
     # through the skill/agent -- no extra skill-doc step needed to keep it
-    # current.
+    # current, except when --last-cycle-at overrides it (see above).
     store = StateStore(args.data_dir)
-    last_cycle_at_str = store.load_last_cycle_at()
-    last_cycle_at = datetime.fromisoformat(last_cycle_at_str) if last_cycle_at_str else None
+    if args.last_cycle_at:
+        last_cycle_at = datetime.fromisoformat(args.last_cycle_at.replace("Z", "+00:00"))
+    else:
+        last_cycle_at_str = store.load_last_cycle_at()
+        last_cycle_at = datetime.fromisoformat(last_cycle_at_str) if last_cycle_at_str else None
 
     result = run(payload, config, logger, now=now, last_cycle_at=last_cycle_at)
 
