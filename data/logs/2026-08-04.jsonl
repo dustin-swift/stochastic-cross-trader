@@ -1673,3 +1673,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 4, "needs_cancel": false, "order_id": "6a724253-7df1-46a1-a5f7-ea2d0b879eaa", "order_state": "filled", "symbol": "EWH", "timestamp": "2026-08-04T19:49:47.264925+00:00"}
 {"event": "entry_executed", "fill_price": 22.94, "order_id": "6a724253-7df1-46a1-a5f7-ea2d0b879eaa", "qty": 4, "symbol": "EWH", "timestamp": "2026-08-04T19:50:00.303193+00:00"}
 {"event": "stop_placed", "stop_order_id": "6a724262-cc74-4377-8ece-15f4444be645", "stop_price": 22.52, "symbol": "EWH", "timestamp": "2026-08-04T19:50:00.303292+00:00"}
+{"candidates_checked": 381, "circuit_breaker_tripped": false, "entries_proposed": 4, "entries_taken": 4, "event": "cycle_summary", "exits_taken": 1, "slots_remaining": 0, "slots_total": 15, "stop_outs_reconciled": 0, "timestamp": "2026-08-04T19:50:14.528909+00:00"}
