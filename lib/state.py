@@ -62,6 +62,23 @@ class StateStore:
     def save_positions(self, positions: dict[str, dict]) -> None:
         _atomic_write_json(self.positions_path, positions)
 
+    # -- pending entries (spec §3, 2026-08-04 dual-cross revision) --------
+    # {symbol: {"k_at_cross": float}} for candidates where %K has crossed
+    # above the oversold threshold and the setup is waiting on %D to also
+    # cross before check_hourly_signals.py fires an entry -- see
+    # lib.signals.advance_pending_entry. Intraday-only state: the daily
+    # screen clears this each morning (a pending setup from yesterday's
+    # candidate list/price context shouldn't silently carry into today).
+    @property
+    def pending_entries_path(self) -> Path:
+        return self.data_dir / "pending_entries.json"
+
+    def load_pending_entries(self) -> dict[str, dict]:
+        return _read_json(self.pending_entries_path, default={})
+
+    def save_pending_entries(self, pending_by_symbol: dict[str, dict]) -> None:
+        _atomic_write_json(self.pending_entries_path, pending_by_symbol)
+
     # -- daily P&L ----------------------------------------------------------
     @property
     def daily_pnl_path(self) -> Path:

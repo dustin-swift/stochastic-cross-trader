@@ -2,8 +2,9 @@
 
 Implementation of the strategy in `~/Downloads/hourly-stochastic-strategy-spec (1).md`:
 buy fundamentally strong stocks (near 52-week highs, in confirmed uptrends)
-during a short-term pullback, entering on an hourly stochastic dual-confirmation
-crossover, with an ATR-based resting stop and a state-aware signal exit (see
+during a short-term pullback, entering once an hourly stochastic %K/%D
+dual-cross above 20 confirms the reversal (see Entry logic below), with an
+ATR-based resting stop and a state-aware signal exit (see
 Exit logic below — extended overbought runs are held through whipsaws instead
 of exiting on the first crossover). The daily universe screen is Finviz Elite
 (manual export, which also supplies daily ATR(14) directly — see "Finviz
@@ -48,8 +49,9 @@ pip install -r requirements.txt
   the scripts above). These are what actually run each cycle, whether
   triggered manually or by a scheduled cloud agent.
 - `data/` — gitignored on `main`. `finviz_export.csv` (your manual export —
-  see below), `candidates.json` (today's list), `positions.json` (open
-  positions only — see `trade_history.json` below for closed trades),
+  see below), `candidates.json` (today's list), `pending_entries.json`
+  (intraday dual-cross entry state — see Entry logic below), `positions.json`
+  (open positions only — see `trade_history.json` below for closed trades),
   `trade_history.json` (every closed trade — stop-out, signal exit,
   overbought-hold exit, or earnings-forced exit — with entry/exit price, P&L,
   and exit reason; this is what the dashboard reads for closed-trade
@@ -129,6 +131,36 @@ python3 scripts/check_universe_screen.py
 
 To flip live trading on: edit `live: true` in `config/strategy.yaml`. That's
 the only change needed — no code changes, no redeploy.
+
+## Entry logic: dual %K/%D-cross-20 confirmation (spec §3, 2026-08-04)
+
+An entry used to fire the instant %K crossed above `stochastic.oversold_threshold`
+(default 20) and above %D in the same bar — but %D, a slower trailing average
+of %K, was very often still well below 20 at that exact moment (confirmed
+live on LEVI: entered with %K=20.52 but %D=15.53), meaning a brief %K spike
+alone could trigger without any real confirmation that price was genuinely
+reversing. At the user's direction, entries now require **both** %K and %D to
+independently cross above the threshold before firing — the slower %D
+crossing is what distinguishes a sustained reversal from a quick spike.
+
+Because %D lags, this can't be decided on a single bar: %K crossing above the
+threshold starts a *pending* setup (`data/pending_entries.json`, `{symbol:
+{"k_at_cross": float}}`) that persists across hourly cycles until one of
+three things happens (see `lib.signals.advance_pending_entry`):
+
+- **%D also crosses above the threshold, with %K still at or below
+  `stochastic.k_invalidate_max` (default 55)** — the entry fires.
+- **%D crosses above the threshold, but %K has already run past
+  `k_invalidate_max`** — invalidated as "too extended": a %D confirmation
+  arriving that late isn't confirming a reversal anymore, it's just lagging a
+  move that already happened.
+- **%K drops back below the threshold before %D ever confirms** —
+  invalidated; the reversal attempt failed. No expiry timer — this is the
+  only other way a pending setup un-pends without firing.
+
+Pending state is intraday-only: `scripts/check_universe_screen.py` resets
+`data/pending_entries.json` to `{}` on every successful run, so a setup mid-
+confirmation never silently carries into the next trading day.
 
 ## Exit logic: overbought-hold refinement (spec §4)
 

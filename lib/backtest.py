@@ -69,7 +69,7 @@ from lib.indicators import sma, stochastic
 from lib.signals import (
     STATE_NORMAL,
     STATE_OVERBOUGHT_HOLD,
-    entry_signal,
+    advance_pending_entry,
     exit_signal,
     stop_price,
     update_stochastic_state,
@@ -196,13 +196,15 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
     }
     config: same shape as config/strategy.yaml — uses the stochastic, atr, and
     sizing sections. `stochastic.entry_lookback_bars` is optional (defaults to
-    1, matching lib.signals.entry_signal's default) so older configs without
-    the key still work.
+    1, matching lib.signals.advance_pending_entry's default) so older configs
+    without the key still work. `stochastic.k_invalidate_max` likewise
+    defaults to 55 (see lib.signals.advance_pending_entry) if omitted.
     """
     stoch_cfg = config["stochastic"]
     oversold = stoch_cfg["oversold_threshold"]
     overbought = stoch_cfg["overbought_threshold"]
     lookback_bars = stoch_cfg.get("entry_lookback_bars", 1)
+    k_invalidate_max = stoch_cfg.get("k_invalidate_max", 55)
     atr_mult = config["atr"]["stop_multiplier"]
     per_trade_usd = config["sizing"]["per_trade_usd"]
     max_positions = config["sizing"]["max_positions"]
@@ -241,6 +243,12 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
 
     open_positions: dict[str, _OpenPosition] = {}
     closed_trades: list[Trade] = []
+    # Dual-cross entry state (spec §3, 2026-08-04 revision — see
+    # lib.signals.advance_pending_entry): %K crossing above `oversold` starts
+    # a pending setup that persists across bars until %D also crosses, mirroring
+    # scripts/check_hourly_signals.py's data/pending_entries.json. None if a
+    # symbol has never had %K cross (or its last attempt already resolved).
+    pending_by_symbol: dict[str, dict | None] = {}
 
     for t in all_times:
         symbols_at_t = sorted(s for s, (_, idx) in prepped.items() if t in idx)
@@ -304,12 +312,19 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
                 del open_positions[symbol]
 
         # -- entries ----------------------------------------------------------
+        # Pending state (see pending_by_symbol above) must advance for every
+        # candidate every bar it's seen, even one with no open slot right now
+        # -- otherwise a symbol sidelined while slots were full would resume
+        # with stale pending state once a slot frees up, unlike live's
+        # every-cycle-every-candidate check in scripts/check_hourly_signals.py.
         for symbol in symbols_at_t:
             if symbol in open_positions:
                 continue
-            if len(open_positions) >= max_positions:
-                break
 
+            # Earnings-blocked days freeze pending state rather than advancing
+            # it, matching scripts/check_hourly_signals.py -- a candidate
+            # skipped for this reason shouldn't have its cross-detection
+            # silently consume the bar where %K or %D actually crossed.
             if catalysts_enabled and symbol in earnings_by_symbol and is_entry_blocked_day(
                 earnings_by_symbol[symbol], pd.Timestamp(t).date()
             ):
@@ -320,7 +335,18 @@ def run_backtest(symbol_data: dict[str, dict], config: dict) -> dict:
             bar = df.iloc[i]
 
             sdf_upto = df.iloc[: i + 1][["k", "d"]]
-            if not entry_signal(sdf_upto, oversold_threshold=oversold, lookback_bars=lookback_bars):
+            advance = advance_pending_entry(
+                pending_by_symbol.get(symbol),
+                sdf_upto,
+                oversold_threshold=oversold,
+                k_invalidate_max=k_invalidate_max,
+                lookback_bars=lookback_bars,
+            )
+            pending_by_symbol[symbol] = advance["pending"]
+            if not advance["signal"]:
+                continue
+
+            if len(open_positions) >= max_positions:
                 continue
 
             atr14 = bar["atr14"]

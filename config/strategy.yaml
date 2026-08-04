@@ -49,6 +49,22 @@ stochastic:
   # because it's a useful noise-reduction knob, which an earlier version of
   # this comment incorrectly claimed.
   entry_lookback_bars: 1
+  # Dual-cross entry confirmation (spec §3, 2026-08-04 revision, at the
+  # user's direction): entries used to fire the instant %K crossed above
+  # oversold_threshold and above %D in the same bar, with no requirement on
+  # %D's own level -- confirmed live that %D (a slower, lagging average) was
+  # often still well below 20 at the moment of entry (LEVI: %K=20.52 but
+  # %D=15.53), meaning a brief %K spike alone could trigger without any real
+  # confirmation of a sustained reversal. Entries now require BOTH %K and %D
+  # to independently cross above oversold_threshold before firing -- see
+  # lib.signals.advance_pending_entry and data/pending_entries.json (cleared
+  # each morning by the daily universe screen, since a pending setup is
+  # intraday-only state). k_invalidate_max caps how far %K is allowed to have
+  # run by the time %D finally confirms: if %K > this value when %D crosses,
+  # the setup is invalidated as "too extended" rather than fired -- a %D
+  # confirmation arriving that late isn't confirming a reversal anymore, it's
+  # just lagging a move that already happened.
+  k_invalidate_max: 55
 
 # Trend-intact exit filter (spec §4a, 2026-07-30): stochastic is well known
 # to whipsaw repeatedly during a genuinely trending move -- a bearish %K/%D

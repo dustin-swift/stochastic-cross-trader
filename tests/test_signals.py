@@ -5,7 +5,7 @@ import pytest
 from lib.signals import (
     STATE_NORMAL,
     STATE_OVERBOUGHT_HOLD,
-    entry_signal,
+    advance_pending_entry,
     exit_signal,
     stop_price,
     update_stochastic_state,
@@ -16,46 +16,105 @@ def _stoch_df(k_values, d_values):
     return pd.DataFrame({"k": k_values, "d": d_values})
 
 
-def test_entry_signal_true_dual_confirmation_and_prior_oversold():
-    # prior bar: k=18 (<20, satisfies "was below 20"), k<=d (18<=19)
-    # signal bar: k=22 crosses above 20, and k(22)>d(20) crosses above d
-    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 20])
-    assert entry_signal(df) is True
+def test_advance_pending_entry_starts_pending_when_k_crosses_but_d_hasnt():
+    # prior bar k=18 (<20, satisfies "was below 20"); signal bar k=22 crosses
+    # above 20, but d=15 hasn't -- becomes pending, no entry yet.
+    df = _stoch_df([30, 18, 22], [35, 19, 15])
+    result = advance_pending_entry(None, df)
+    assert result["signal"] is False
+    assert result["pending"] == {"k_at_cross": 22.0}
 
 
-def test_entry_signal_false_no_d_crossover():
-    # k crosses above 20, but k was already above d on prior bar -> no crossover
-    df = _stoch_df([25, 18, 22], [30, 15, 19])
-    assert entry_signal(df) is False
+def test_advance_pending_entry_fires_when_both_cross_on_the_same_bar():
+    # prior bar k=18,d=19 (both <20); signal bar k=22,d=21 (both >=20), k<=55.
+    df = _stoch_df([30, 18, 22], [35, 19, 21])
+    result = advance_pending_entry(None, df)
+    assert result["signal"] is True
+    assert result["pending"] is None
 
 
-def test_entry_signal_false_no_threshold_crossover():
-    # d crossover happens, but k never crosses above 20 (already above it)
+def test_advance_pending_entry_fires_on_a_later_bar_once_d_catches_up():
+    # Simulates two separate hourly cycles: first call starts pending
+    # (k crosses, d doesn't), second call passes a new bar where d finally
+    # crosses too, carrying the pending state returned by the first call.
+    df1 = _stoch_df([30, 18, 22], [35, 19, 15])
+    r1 = advance_pending_entry(None, df1)
+    assert r1["pending"] == {"k_at_cross": 22.0}
+
+    df2 = _stoch_df([18, 22, 24], [19, 15, 21])  # next bar: k=24, d=21
+    r2 = advance_pending_entry(r1["pending"], df2)
+    assert r2["signal"] is True
+    assert r2["pending"] is None
+
+
+def test_advance_pending_entry_invalidates_when_k_drops_back_below_20():
+    pending = {"k_at_cross": 22.0}
+    # k has fallen back under 20 while still pending -- invalidated regardless of d.
+    df = _stoch_df([22, 18], [21, 25])
+    result = advance_pending_entry(pending, df)
+    assert result["signal"] is False
+    assert result["pending"] is None
+
+
+def test_advance_pending_entry_invalidates_when_k_too_extended_at_d_confirm():
+    pending = {"k_at_cross": 22.0}
+    # d finally crosses above 20, but k has run to 60 -- past k_invalidate_max=55.
+    df = _stoch_df([40, 60], [18, 21])
+    result = advance_pending_entry(pending, df, k_invalidate_max=55)
+    assert result["signal"] is False
+    assert result["pending"] is None
+
+
+def test_advance_pending_entry_fires_at_exact_k_invalidate_max_boundary():
+    pending = {"k_at_cross": 22.0}
+    df = _stoch_df([40, 55], [18, 21])
+    result = advance_pending_entry(pending, df, k_invalidate_max=55)
+    assert result["signal"] is True
+    assert result["pending"] is None
+
+
+def test_advance_pending_entry_stays_pending_while_neither_condition_fires():
+    pending = {"k_at_cross": 22.0}
+    df = _stoch_df([22, 25], [15, 17])  # k still >=20, d still <20
+    result = advance_pending_entry(pending, df)
+    assert result["signal"] is False
+    assert result["pending"] == pending
+
+
+def test_advance_pending_entry_false_no_threshold_crossover():
     df = _stoch_df([30, 25, 30], [35, 26, 28])
-    assert entry_signal(df) is False
+    result = advance_pending_entry(None, df)
+    assert result["signal"] is False
+    assert result["pending"] is None
 
 
-def test_entry_signal_false_insufficient_history():
+def test_advance_pending_entry_false_insufficient_history():
     df = _stoch_df([22], [20])
-    assert entry_signal(df) is False
+    result = advance_pending_entry(None, df)
+    assert result["signal"] is False
+    assert result["pending"] is None
 
 
-def test_entry_signal_false_with_nan():
+def test_advance_pending_entry_false_with_nan():
     # NaN in the immediately-preceding bar (the one actually evaluated for
-    # default lookback_bars=1) must short-circuit to False, not raise/compare NaN.
+    # default lookback_bars=1) must short-circuit, not raise/compare NaN.
     df = _stoch_df([30, np.nan, 22], [35, np.nan, 20])
-    assert entry_signal(df) is False
+    result = advance_pending_entry(None, df)
+    assert result["signal"] is False
+    assert result["pending"] is None
 
 
-def test_entry_signal_false_with_nan_outside_lookback_window():
+def test_advance_pending_entry_false_with_nan_outside_lookback_window():
     # NaN further back than the lookback window doesn't matter.
-    df = _stoch_df([np.nan, 18, 22], [np.nan, 19, 20])
-    assert entry_signal(df) is True
+    df = _stoch_df([np.nan, 18, 22], [np.nan, 19, 15])
+    result = advance_pending_entry(None, df)
+    assert result["pending"] == {"k_at_cross": 22.0}
 
 
-def test_entry_signal_wider_lookback_still_true():
-    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 20])
-    assert entry_signal(df, lookback_bars=3) is True
+def test_advance_pending_entry_wider_lookback_still_starts_pending():
+    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 15])
+    result = advance_pending_entry(None, df, lookback_bars=3)
+    assert result["pending"] == {"k_at_cross": 22.0}
 
 
 def test_exit_signal_true_bearish_crossover():

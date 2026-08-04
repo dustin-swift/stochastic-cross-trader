@@ -10,6 +10,24 @@ immediately-preceding bar) so it's harmless when redundant, but can be widened
 to look further back (a genuine oversold dip a few bars ago, not just brushing
 the line) via config without a code change if that's the intended reading.
 
+Entry logic (2026-08-04 dual-cross revision, see `advance_pending_entry`):
+the original rule fired the instant %K crossed above 20 and above %D in the
+same bar, with no requirement on %D's own level — meaning %D, a slower
+3-period average of %K, was very often still below 20 at the exact moment of
+entry (confirmed live: LEVI entered with %K=20.52 but %D=15.53). At the
+user's direction, entries now require BOTH %K and %D to cross above 20
+before firing, since %D crossing is what distinguishes a genuine, sustained
+momentum reversal from a brief %K spike. Because %D lags, this can't be a
+single-bar check anymore: %K crossing 20 starts a *pending* state that
+persists across hourly cycles (see `lib.state`'s pending-entries store) until
+%D also crosses — with a ceiling (`k_invalidate_max`, default 55) on how far
+%K is allowed to have run by the time %D confirms, since a %D confirmation
+arriving long after %K has already pushed well past the oversold zone isn't
+really confirming a *reversal* anymore, it's just lagging a move that's
+already happened. The original "%K crosses %D in the same bar" condition is
+dropped entirely — both lines independently clearing 20 is the new
+confirmation.
+
 Exit logic is a small per-position state machine, not a single stateless
 check (spec §4 overbought-hold refinement): once %K and %D both push above
 `overbought_threshold`, minor whipsaws between the two lines up there don't
@@ -63,29 +81,70 @@ def _last_two_valid(stoch_df: pd.DataFrame, lookback_bars: int) -> bool:
     return True
 
 
-def entry_signal(stoch_df: pd.DataFrame, oversold_threshold: float = 20, lookback_bars: int = 1) -> bool:
-    """True iff, on the last (signal) bar:
-    - %K crosses above `oversold_threshold` (prev %K < threshold <= current %K)
-    - %K crosses above %D in the same bar (prev %K <= prev %D, current %K > current %D)
-    - %K was below `oversold_threshold` at some point in the `lookback_bars`
-      bars strictly before the signal bar (spec §3 condition 1).
+def advance_pending_entry(
+    pending: dict | None,
+    stoch_df: pd.DataFrame,
+    oversold_threshold: float = 20,
+    k_invalidate_max: float = 55,
+    lookback_bars: int = 1,
+) -> dict:
+    """Advance a candidate's pending-entry state by one bar (spec §3,
+    2026-08-04 dual-cross revision — see module docstring for why this
+    replaced the original single-bar "%K crosses %D" rule). Call this on
+    every candidate every cycle, whether or not it's currently pending —
+    same calling convention as `update_stochastic_state` for open positions.
+
+    `pending` is `None` if this symbol isn't currently in a pending setup,
+    or `{"k_at_cross": float}` if %K has already crossed above
+    `oversold_threshold` and the setup is waiting for %D to also cross.
+
+    Returns `{"pending": <new state, None or dict>, "signal": bool}`.
+    `signal=True` means BOTH %K and %D have now crossed above
+    `oversold_threshold`, with %K at or below `k_invalidate_max` — fire the
+    entry. Transitions:
+
+    - Not pending, %K crosses above threshold (prior-bar-oversold confirmed
+      per `lookback_bars`, spec §3 condition 1) -> becomes pending. If %D
+      has *also* already crossed on this same bar, falls through to the
+      pending-evaluation logic below immediately rather than forcing an
+      extra bar of waiting.
+    - Pending, current %K < threshold -> invalidated (reverts to not
+      pending) — the reversal attempt failed, %K never got %D's
+      confirmation before losing the level itself. No expiry timer; this is
+      the only way a pending setup un-pends without firing.
+    - Pending, current %K >= threshold, current %D >= threshold, current
+      %K <= `k_invalidate_max` -> entry fires.
+    - Pending, current %K >= threshold, current %D >= threshold, current
+      %K > `k_invalidate_max` -> invalidated as too-extended: %D confirmed
+      too late, %K has already run further than the setup allows for.
+    - Pending, current %K >= threshold, current %D < threshold -> stays
+      pending, still waiting on %D.
     """
     if not _last_two_valid(stoch_df, lookback_bars):
-        return False
+        return {"pending": pending, "signal": False}
 
     k = stoch_df["k"]
     d = stoch_df["d"]
+    cur_k, cur_d = k.iloc[-1], d.iloc[-1]
 
-    prev_k, cur_k = k.iloc[-2], k.iloc[-1]
-    prev_d, cur_d = d.iloc[-2], d.iloc[-1]
+    if pending is None:
+        prev_k = k.iloc[-2]
+        crossed_above_threshold = prev_k < oversold_threshold <= cur_k
+        lookback_window = k.iloc[-(lookback_bars + 1) : -1]
+        was_oversold_prior = bool((lookback_window < oversold_threshold).any())
+        if not (crossed_above_threshold and was_oversold_prior):
+            return {"pending": None, "signal": False}
+        pending = {"k_at_cross": float(cur_k)}
 
-    crossed_above_threshold = prev_k < oversold_threshold <= cur_k
-    crossed_above_d = prev_k <= prev_d and cur_k > cur_d
+    if cur_k < oversold_threshold:
+        return {"pending": None, "signal": False}
 
-    lookback_window = k.iloc[-(lookback_bars + 1) : -1]
-    was_oversold_prior = (lookback_window < oversold_threshold).any()
+    if cur_d >= oversold_threshold:
+        if cur_k <= k_invalidate_max:
+            return {"pending": None, "signal": True}
+        return {"pending": None, "signal": False}
 
-    return bool(crossed_above_threshold and crossed_above_d and was_oversold_prior)
+    return {"pending": pending, "signal": False}
 
 
 def _latest_k_d(stoch_df: pd.DataFrame) -> tuple[float, float] | None:

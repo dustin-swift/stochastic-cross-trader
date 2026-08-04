@@ -20,6 +20,7 @@ Input (JSON, via --input file or stdin):
   {
     "candidates": [
       {"symbol": "AAPL", "sector": "Technology", "atr14": 3.2,
+       "pending": {"k_at_cross": 22.5},  # optional, see dual-cross entry note below; null/omitted if not pending
        "earnings_report_dates": [{"date": "2026-08-15", "timing": "am"}],  # optional, see catalyst-avoidance note below
        "bars": [{"high": 210.1, "low": 208.5, "close": 209.9}, ...]}   # oldest-first
     ],
@@ -36,13 +37,28 @@ Output (JSON, to stdout):
     "entries": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "atr14": 3.2,
                  "estimated_stop_price": 202.1, "qty": 1}],
     "exits": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
-    "position_states": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}]
+    "position_states": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
+    "candidate_states": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "pending": null}]
   }
 
 `position_states` reports the (possibly just-updated) `stochastic_state` for
 every open position checked this cycle, whether or not it exited — the skill
 must write this back into positions.json every cycle so the state carries
-forward, not just on cycles with an exit.
+forward, not just on cycles with an exit. `candidate_states` is the same idea
+for candidates' `pending` field (see below) — write it back into
+data/pending_entries.json every cycle, whether or not an entry fired.
+
+Entry logic (spec §3, 2026-08-04 dual-cross revision — see
+lib.signals.advance_pending_entry for the full state machine): entries no
+longer fire the instant %K crosses above `oversold_threshold`. Both %K and
+%D must cross above it, since %D — a slower, lagging average — is what
+confirms a genuine sustained reversal rather than a brief %K spike. Because
+%D lags, this is stateful across cycles: %K crossing starts a *pending*
+setup (`{"k_at_cross": float}`, passed in/out via each candidate's
+`pending` field) that persists until %D also crosses, %K falls back below
+`oversold_threshold` (invalidated, no expiry timer needed), or %D confirms
+too late with %K already past `stochastic.k_invalidate_max` (default 55 —
+invalidated as too-extended, not a real reversal confirmation anymore).
 
 `entries[].qty` (spec update 2026-07-30, see lib.sizing): a whole-share
 quantity, sized off the last bar's close via lib.sizing.entry_share_quantity
@@ -116,7 +132,7 @@ from lib.catalysts import is_entry_blocked_day, is_forced_exit_day
 from lib.config import load_config
 from lib.indicators import sma, stochastic
 from lib.logging_utils import EventLogger
-from lib.signals import STATE_NORMAL, STATE_OVERBOUGHT_HOLD, entry_signal, exit_signal, stop_price, update_stochastic_state
+from lib.signals import STATE_NORMAL, STATE_OVERBOUGHT_HOLD, advance_pending_entry, exit_signal, stop_price, update_stochastic_state
 from lib.sizing import entry_share_quantity
 
 
@@ -191,25 +207,40 @@ def run(
     trend_filter_sma_period = trend_filter_cfg.get("sma_period", 50)
     today = today or now.date()
 
+    k_invalidate_max = stoch_cfg.get("k_invalidate_max", 55)
+
     entries = []
+    candidate_states = []
     for c in payload.get("candidates", []):
         symbol = c["symbol"]
         bars = c["bars"]
+        prior_pending = c.get("pending")
 
         earnings_dates = c.get("earnings_report_dates")
         if catalysts_enabled and earnings_dates is not None and is_entry_blocked_day(earnings_dates, today):
             logger.log("signal_check", symbol=symbol, kind="entry", skipped="earnings_too_close")
+            candidate_states.append({"symbol": symbol, "k": None, "d": None, "pending": prior_pending})
             continue
 
         if len(bars) < 2:
             logger.log("signal_check", symbol=symbol, kind="entry", skipped="insufficient_bars")
+            candidate_states.append({"symbol": symbol, "k": None, "d": None, "pending": prior_pending})
             continue
 
         sdf = _stoch(bars, stoch_cfg)
         k, d = sdf["k"].iloc[-1], sdf["d"].iloc[-1]
-        signal = entry_signal(sdf, oversold_threshold=oversold, lookback_bars=lookback_bars)
+        advance = advance_pending_entry(
+            prior_pending,
+            sdf,
+            oversold_threshold=oversold,
+            k_invalidate_max=k_invalidate_max,
+            lookback_bars=lookback_bars,
+        )
+        signal = advance["signal"]
+        new_pending = advance["pending"]
 
-        logger.log("signal_check", symbol=symbol, kind="entry", signal=signal, k=k, d=d)
+        logger.log("signal_check", symbol=symbol, kind="entry", signal=signal, k=k, d=d, pending=new_pending)
+        candidate_states.append({"symbol": symbol, "k": k, "d": d, "pending": new_pending})
 
         if signal:
             last_close = float(bars[-1]["close"])
@@ -312,7 +343,7 @@ def run(
             reason = "overbought_hold_exit" if new_state == STATE_OVERBOUGHT_HOLD else "signal_exit"
             exits.append({"symbol": symbol, "k": k, "d": d, "stochastic_state": new_state, "exit_reason": reason})
 
-    return {"entries": entries, "exits": exits, "position_states": position_states}
+    return {"entries": entries, "exits": exits, "position_states": position_states, "candidate_states": candidate_states}
 
 
 def main() -> None:

@@ -25,6 +25,11 @@ immediately (a single-day buffer, not a multi-day window) — entries on
 earlier days are intentionally allowed through so they still capture the
 run-up into the report.
 
+Also resets data/pending_entries.json to empty on every successful run (spec
+§3, 2026-08-04 dual-cross entry revision, see lib.signals.advance_pending_entry)
+-- a %K/%D crossing setup mid-confirmation from yesterday is stale intraday
+state and shouldn't carry into today's candidate list.
+
 Usage:
   python3 scripts/check_universe_screen.py
   python3 scripts/check_universe_screen.py --config config/strategy.yaml --data-dir data
@@ -168,6 +173,12 @@ def main() -> None:
 
     store = StateStore(args.data_dir)
     store.save_candidates(candidates)
+    # Pending dual-cross entry state (spec §3, 2026-08-04 revision) is
+    # intraday-only -- a %K/%D crossing setup from yesterday's candidate list
+    # and price context shouldn't silently carry into today's. The daily
+    # screen is the natural place to reset it, since it already runs once per
+    # morning before the first hourly check of the day.
+    store.save_pending_entries({})
 
     json.dump(candidates, sys.stdout, indent=2)
     sys.stdout.write("\n")

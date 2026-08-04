@@ -9,6 +9,7 @@ def test_load_defaults_when_no_files(tmp_path):
     assert store.load_positions() == {}
     assert store.load_daily_pnl() == {}
     assert store.load_trade_history() == []
+    assert store.load_pending_entries() == {}
 
 
 def test_save_and_load_candidates_roundtrip(tmp_path):
@@ -16,6 +17,13 @@ def test_save_and_load_candidates_roundtrip(tmp_path):
     candidates = [{"symbol": "AAPL", "sector": "Tech"}, {"symbol": "XOM", "sector": "Energy"}]
     store.save_candidates(candidates)
     assert store.load_candidates() == candidates
+
+
+def test_save_and_load_pending_entries_roundtrip(tmp_path):
+    store = StateStore(tmp_path)
+    pending = {"AAPL": {"k_at_cross": 22.5}, "MSFT": {"k_at_cross": 20.1}}
+    store.save_pending_entries(pending)
+    assert store.load_pending_entries() == pending
 
 
 def test_save_and_load_positions_roundtrip(tmp_path):

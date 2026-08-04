@@ -25,13 +25,16 @@ def _bar(t, close, high=1000, low=100):
 # stop can sit safely below the fixed low without ever spuriously triggering
 # a stop-loss: close = 100 + 9*raw_k, so raw_k = (close-100)/9).
 #
-# Shared entry setup (indices 0-4): closes [150, 150, 244, 226, 316] give
-# raw %K = [NaN, NaN, 16, 14, 24] (k_smooth=1 so %K == raw %K) and, with
-# d_period=2, %D = [NaN, NaN, NaN, 15, 19]. Bar 4: %K(24) crosses above 20
-# with prior %K(14) below 20, and %K(24) crosses above %D(19) -> entry.
-_ENTRY_CLOSES = [150, 150, 244, 226, 316]
+# Shared entry setup (indices 0-4): closes [150, 150, 244, 226, 370] give
+# raw %K = [NaN, NaN, 16, 14, 30] (k_smooth=1 so %K == raw %K) and, with
+# d_period=2, %D = [NaN, NaN, NaN, 15, 22]. Bar 4: dual-cross entry (spec §3,
+# 2026-08-04 revision, see lib.signals.advance_pending_entry) -- %K(30)
+# crosses above 20 from %K(14) on the prior bar, AND %D(22) *also* crosses
+# above 20 on this same bar, with %K(30) under the 55 invalidation cap -> fires
+# in a single one-shot call with no persisted `pending` state needed.
+_ENTRY_CLOSES = [150, 150, 244, 226, 370]
 _ENTRY_TIME = _T[4]
-_ENTRY_PRICE = 316.0
+_ENTRY_PRICE = 370.0
 
 
 def _entry_bars():
@@ -53,18 +56,18 @@ def test_entry_then_stop_loss():
     assert trade["entry_price"] == pytest.approx(_ENTRY_PRICE)
     assert trade["exit_time"] == _T[5]
     assert trade["exit_reason"] == "stop_loss"
-    assert trade["exit_price"] == pytest.approx(314.5)  # 316 - 1.5*1.0
-    assert trade["qty"] == pytest.approx(100 / 316)
-    assert trade["pnl"] == pytest.approx((314.5 - 316) * (100 / 316))
+    assert trade["exit_price"] == pytest.approx(368.5)  # 370 - 1.5*1.0
+    assert trade["qty"] == pytest.approx(100 / 370)
+    assert trade["pnl"] == pytest.approx((368.5 - 370) * (100 / 370))
 
 
 def test_entry_then_signal_exit_bearish_crossover():
-    # Continue past entry: closes [460, 190] -> raw %K = [40, 10], %D = [32, 25].
-    # t6: prev %K(40)>=prev %D(32), cur %K(10)<cur %D(25) -> bearish crossover.
+    # Continue past entry: closes [460, 190] -> raw %K = [40, 10], %D = [35, 25].
+    # t6: prev %K(40)>=prev %D(35), cur %K(10)<cur %D(25) -> bearish crossover.
     bars = _entry_bars() + [_bar(_T[5], 460), _bar(_T[6], 190)]
-    # Large ATR -> stop (316 - 1.5*150 = 91) sits below the fixed low(100), so
+    # Large ATR -> stop (370 - 1.5*200 = 70) sits below the fixed low(100), so
     # the stop-loss check never spuriously fires; only the signal exit can.
-    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 200.0}]}}
 
     result = run_backtest(data, CFG)
 
@@ -73,20 +76,20 @@ def test_entry_then_signal_exit_bearish_crossover():
     assert trade["exit_time"] == _T[6]
     assert trade["exit_reason"] == "signal_exit"
     assert trade["exit_price"] == pytest.approx(190.0)
-    assert trade["stop_price"] == pytest.approx(91.0)
+    assert trade["stop_price"] == pytest.approx(70.0)
     assert result["open_positions"] == []
 
 
 def test_trend_filter_suppresses_signal_exit_while_price_above_sma():
-    # Continue past entry with a shallow pullback: closes [400, 380] ->
-    # k5=33.33, k6=31.11, d5=28.67, d6=32.22 -> prev_k(33.33)>=prev_d(28.67)
-    # and cur_k(31.11)<cur_d(32.22) -> a genuine bearish crossover under
-    # STATE_NORMAL. But close(380) at t6 is still above the 3-bar SMA of
-    # (316, 400, 380) = 365.33 -> trend intact, so the crossover must be
+    # Continue past entry with a shallow pullback: closes [400, 390] ->
+    # k5=33.33, k6=32.22, d5=31.67, d6=32.78 -> prev_k(33.33)>=prev_d(31.67)
+    # and cur_k(32.22)<cur_d(32.78) -> a genuine bearish crossover under
+    # STATE_NORMAL. But close(390) at t6 is still above the 3-bar SMA of
+    # (370, 400, 390) = 386.67 -> trend intact, so the crossover must be
     # suppressed and the position stays open.
-    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 380)]
+    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 390)]
     cfg = {**CFG, "trend_filter": {"enabled": True, "sma_period": 3}}
-    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 200.0}]}}
 
     result = run_backtest(data, cfg)
 
@@ -99,9 +102,9 @@ def test_trend_filter_disabled_reproduces_old_crossover_behavior():
     # Identical bars/crossover to the suppression test above, but with the
     # filter explicitly disabled -- the exit must fire exactly as it did
     # before spec §4a existed.
-    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 380)]
+    bars = _entry_bars() + [_bar(_T[5], 400), _bar(_T[6], 390)]
     cfg = {**CFG, "trend_filter": {"enabled": False}}
-    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 200.0}]}}
 
     result = run_backtest(data, cfg)
 
@@ -109,16 +112,21 @@ def test_trend_filter_disabled_reproduces_old_crossover_behavior():
     trade = result["trades"][0]
     assert trade["exit_time"] == _T[6]
     assert trade["exit_reason"] == "signal_exit"
-    assert trade["exit_price"] == pytest.approx(380.0)
+    assert trade["exit_price"] == pytest.approx(390.0)
 
 
 def test_overbought_hold_suppresses_whipsaw_then_exits_on_double_drop():
     # Ramp into overbought, whipsaw while both lines stay >= 80, then both
-    # drop below 80 together. raw %K sequence from t4: 24, 60, 88, 91, 97, 82,
-    # 70; %D: 19, 42, 74, 89.5, 94, 89.5, 76.
+    # drop below 80 together. raw %K sequence from t4: 30, 60, 88, 91, 97, 82,
+    # 70 (each bar's raw %K depends only on its own close, per the fixed
+    # high/low trick, so this is unaffected by the entry bar's %K moving from
+    # 24 to 30 under the dual-cross revision); %D: 22, 45, 74, 89.5, 94, 89.5, 76.
     extra_closes = [640, 892, 919, 973, 838, 730]  # -> raw %K 60,88,91,97,82,70
     bars = _entry_bars() + [_bar(t, c) for t, c in zip(_T[5:], extra_closes)]
-    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+    # Large ATR -> stop (370 - 1.5*200 = 70) sits below the fixed low(100), so
+    # the stop-loss check never spuriously fires before the overbought-hold
+    # exit gets its chance.
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 200.0}]}}
 
     result = run_backtest(data, CFG)
 
@@ -130,7 +138,7 @@ def test_overbought_hold_suppresses_whipsaw_then_exits_on_double_drop():
     assert trade["exit_time"] == _T[10]
     assert trade["exit_reason"] == "overbought_hold_exit"
     assert trade["exit_price"] == pytest.approx(730.0)
-    assert trade["pnl"] == pytest.approx((730.0 - 316.0) * (100 / 316))
+    assert trade["pnl"] == pytest.approx((730.0 - 370.0) * (100 / 370))
 
 
 def test_missing_atr_at_entry_bar_skips_the_entry():
@@ -171,7 +179,7 @@ def test_trade_excursion_tracking():
 
 def test_backtest_records_mfe_mae_on_closed_trade():
     # Reuses the stop-loss fixture (fixed high=1000/low=100 for every bar --
-    # see the trick explained above). Entry at close 316; the very next bar
+    # see the trick explained above). Entry at close 370; the very next bar
     # both triggers the stop AND is the only post-entry bar tracked, so MFE
     # comes from that bar's high (1000) and MAE from its low (100) -- entry
     # bar itself must be excluded from the excursion (no bar before it exists
@@ -183,8 +191,8 @@ def test_backtest_records_mfe_mae_on_closed_trade():
     result = run_backtest(data, CFG)
 
     trade = result["trades"][0]
-    assert trade["mfe_pct"] == pytest.approx((1000 - 316) / 316 * 100)
-    assert trade["mae_pct"] == pytest.approx((100 - 316) / 316 * 100)
+    assert trade["mfe_pct"] == pytest.approx((1000 - 370) / 370 * 100)
+    assert trade["mae_pct"] == pytest.approx((100 - 370) / 370 * 100)
 
 
 def test_position_still_open_at_end_of_window():
@@ -280,7 +288,7 @@ def test_entry_lookback_bars_has_no_effect_on_signal_quality_given_enough_histor
     # more sustained dip" noise filter it might sound like -- this test
     # isolates the signal-quality claim specifically, with enough padding
     # that the NaN-window effect doesn't confound it.
-    padded_closes = [150, 150, 150, 150, 150, 244, 226, 316]  # 3 extra flat warmup bars
+    padded_closes = [150, 150, 150, 150, 150, 244, 226, 370]  # 3 extra flat warmup bars
     padded_times = _T[:8]
     bars = [_bar(t, c) for t, c in zip(padded_times, padded_closes)]
     data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": padded_times[-1], "value": 150.0}]}}
@@ -328,19 +336,25 @@ def _trail_bar(t, high, low, close):
 
 
 def _trail_bars():
-    # bar0: k=24 (warmup); bar1: k=16 (oversold prior); bar2: k=88 (entry,
-    # crosses above 20 and above %D) -- entry_price=44.
+    # bar0: k=24 (warmup); bar1: k=16 (oversold prior); bar2: k=52, d=34
+    # (entry -- dual-cross, spec §3 2026-08-04 revision: %K(52) crosses above
+    # 20 from %K(16), AND %D(34) also crosses above 20 on the same bar, with
+    # %K(52) under the 55 invalidation cap) -- entry_price=26.
     # bar3-5: tight-range rally bars (high-low=2, less than the trail
-    # distance of 4, so no bar can self-trigger the stop it just set).
+    # distance of 4, so no bar can self-trigger the stop it just set); each
+    # bar's own %K is nudged to a distinct value (90, 92.5, 95) rather than
+    # repeating the same one, since an exact repeat produces a float-level
+    # %K/%D tie in the crossover check that can spuriously fire a same-value
+    # "crossover".
     # bar6: a genuine pullback -- low dips below the ratcheted trail level.
     return [
         _trail_bar(_TRAIL_T[0], 50, 0, 12),
         _trail_bar(_TRAIL_T[1], 50, 0, 8),
-        _trail_bar(_TRAIL_T[2], 50, 0, 44),
-        _trail_bar(_TRAIL_T[3], 50, 48, 49.8),
-        _trail_bar(_TRAIL_T[4], 54, 52, 53.8),
-        _trail_bar(_TRAIL_T[5], 58, 56, 57.8),
-        _trail_bar(_TRAIL_T[6], 55, 53, 53.5),
+        _trail_bar(_TRAIL_T[2], 50, 0, 26),
+        _trail_bar(_TRAIL_T[3], 30, 28, 29.8),
+        _trail_bar(_TRAIL_T[4], 34, 32, 33.85),
+        _trail_bar(_TRAIL_T[5], 38, 36, 37.9),
+        _trail_bar(_TRAIL_T[6], 35, 33, 33.5),
     ]
 
 
@@ -372,7 +386,7 @@ def test_trailing_stop_disabled_by_default_matches_baseline_behavior():
 
     trade = result["trades"][0]
     assert trade["exit_reason"] == "signal_exit"
-    assert trade["exit_price"] == pytest.approx(53.5)
+    assert trade["exit_price"] == pytest.approx(33.5)
 
 
 def test_trailing_stop_ratchets_and_exits_at_trail_level():
@@ -382,18 +396,18 @@ def test_trailing_stop_ratchets_and_exits_at_trail_level():
 
     assert len(result["trades"]) == 1
     trade = result["trades"][0]
-    assert trade["entry_price"] == pytest.approx(44.0)
-    assert trade["stop_price"] == pytest.approx(41.0)  # original fixed stop, untouched
+    assert trade["entry_price"] == pytest.approx(26.0)
+    assert trade["stop_price"] == pytest.approx(23.0)  # original fixed stop, untouched
     assert trade["exit_reason"] == "trailing_stop"
-    # Running high reaches 58 (bar C); trail = 58 - 2.0*ATR(2.0) = 54.
-    assert trade["exit_price"] == pytest.approx(54.0)
-    assert trade["pnl"] == pytest.approx((54.0 - 44.0) * (100 / 44.0))
+    # Running high reaches 38 (bar C); trail = 38 - 2.0*ATR(2.0) = 34.
+    assert trade["exit_price"] == pytest.approx(34.0)
+    assert trade["pnl"] == pytest.approx((34.0 - 26.0) * (100 / 26.0))
 
 
 def test_trailing_stop_beats_waiting_for_the_signal_exit_on_this_path():
     # Same exact price path, trailing off vs on: trailing exits at the trail
-    # level (54.0) reached intrabar on the pullback bar's low, rather than
-    # riding the bar all the way down to its close (53.5) where the ordinary
+    # level (34.0) reached intrabar on the pullback bar's low, rather than
+    # riding the bar all the way down to its close (33.5) where the ordinary
     # bearish crossover finally catches it. Small difference here, but it's
     # the mechanism the MFE/MAE analysis flagged as promising, demonstrated
     # end-to-end on one concrete path.
@@ -416,12 +430,12 @@ def test_trailing_stop_never_loosens_below_the_fixed_stop():
     small_gain_bars = [
         _trail_bar(_TRAIL_T[0], 50, 0, 12),
         _trail_bar(_TRAIL_T[1], 50, 0, 8),
-        _trail_bar(_TRAIL_T[2], 50, 0, 44),
+        _trail_bar(_TRAIL_T[2], 50, 0, 26),
         # close near the bar's own high (not near its low, unlike the entry
         # bar's shape) keeps %K rising rather than dropping, so this doesn't
         # accidentally also trigger an ordinary bearish-crossover signal exit
         # -- the test needs the position to still be open to prove non-arming.
-        _trail_bar(_TRAIL_T[3], 44.6, 44.4, 44.58),  # ~1.36% gain, below the 3% activation
+        _trail_bar(_TRAIL_T[3], 26.35, 26.15, 26.33),  # ~1.35% gain, below the 3% activation
     ]
     data = {"XXX": {"bars": small_gain_bars, "atr_series": _trail_atr_series()}}
 
@@ -429,8 +443,8 @@ def test_trailing_stop_never_loosens_below_the_fixed_stop():
 
     assert result["trades"] == []
     assert len(result["open_positions"]) == 1
-    # Never armed -> still open, not stopped out (44.2 is well above the
-    # fixed stop of 41, and the trail never activated to pull the stop up
+    # Never armed -> still open, not stopped out (26.15 is well above the
+    # fixed stop of 23, and the trail never activated to pull the stop up
     # to somewhere that would have mattered here either).
     assert result["open_positions"][0]["exit_reason"] == "open_at_end"
 
@@ -513,7 +527,10 @@ def test_earnings_does_not_force_exit_before_near_close_bar():
     data = {
         "XXX": {
             "bars": bars,
-            "atr_series": [{"begins_at": _T[4], "value": 150.0}],
+            # Large ATR -> stop (370 - 1.5*200 = 70) sits below the fixed
+            # low(100), so the stop-loss check never spuriously fires and
+            # masks whether the earnings gate itself is doing the right thing.
+            "atr_series": [{"begins_at": _T[4], "value": 200.0}],
             "earnings_report_dates": ["2026-07-28"],
         }
     }
@@ -529,7 +546,7 @@ def test_earnings_absent_key_does_not_restrict_backtest():
     # No "earnings_report_dates" key at all -> must behave exactly like the
     # existing signal-exit baseline test (unrestricted).
     bars = _entry_bars() + [_bar(_T[5], 460), _bar(_T[6], 190)]
-    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 200.0}]}}
 
     result = run_backtest(data, CFG)
 

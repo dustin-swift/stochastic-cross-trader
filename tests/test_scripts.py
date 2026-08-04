@@ -73,6 +73,27 @@ def test_check_universe_screen_end_to_end(tmp_path):
     assert record["output_count"] == 3
 
 
+def test_check_universe_screen_resets_pending_entries(tmp_path):
+    # Pending dual-cross entry state (spec §3, 2026-08-04 revision) is
+    # intraday-only -- a stale %K-crossed-but-%D-hasn't setup from yesterday
+    # must not survive into today's first hourly check.
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text("Ticker,Sector,Price\nA,Tech,10\n")
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "pending_entries.json").write_text(json.dumps({"XYZ": {"k_at_cross": 22.5}}))
+
+    _run("check_universe_screen.py", None, ["--config", str(config_path), "--data-dir", str(data_dir)])
+
+    assert json.loads((data_dir / "pending_entries.json").read_text()) == {}
+
+
 def test_check_universe_screen_parses_atr_from_finviz_column(tmp_path):
     csv_path = tmp_path / "finviz_export.csv"
     csv_path.write_text(
@@ -251,10 +272,12 @@ def test_check_hourly_signals_end_to_end(tmp_path):
     def bar(close):
         return {"high": 50, "low": 0, "close": close}
 
-    # k sequence (from index 2): 16, 14, 24 -> entry: prior bar oversold (14<20),
-    # k crosses above 20, k crosses above d in the same bar (see derivation in
-    # the test suite for lib/signals.py).
-    entry_closes = [10, 10, 8, 7, 12]
+    # k sequence (from index 2): 16, 14, 30 -> dual-cross entry (spec
+    # §3, 2026-08-04 revision, see lib.signals.advance_pending_entry): the
+    # final bar's k crosses above 20 from below (14 -> 30) AND its d (2-period
+    # SMA of k, 15 -> 22) *also* clears 20 on the same bar, so this fires in a
+    # single one-shot call with no persisted `pending` state needed.
+    entry_closes = [10, 10, 8, 7, 15]
     # k sequence: 24, 28, 16 -> bearish crossover (k crosses below d).
     exit_closes = [10, 10, 12, 14, 8]
 
@@ -287,11 +310,11 @@ def test_check_hourly_signals_end_to_end(tmp_path):
 
     assert [e["symbol"] for e in output["entries"]] == ["AAPL"]
     entry = output["entries"][0]
-    assert entry["k"] == 24
-    assert entry["d"] == 19
-    assert entry["last_close"] == 12
-    assert entry["estimated_stop_price"] == 9.0  # 12 - 1.5*2.0
-    assert entry["qty"] == 8  # round(100 / 12)
+    assert entry["k"] == 30
+    assert entry["d"] == 22
+    assert entry["last_close"] == 15
+    assert entry["estimated_stop_price"] == 12.0  # 15 - 1.5*2.0
+    assert entry["qty"] == 7  # round(100 / 15)
 
     assert [e["symbol"] for e in output["exits"]] == ["MSFT"]
     assert output["exits"][0]["stochastic_state"] == "NORMAL"
@@ -314,12 +337,14 @@ def test_check_hourly_signals_skips_entry_over_price_cap(tmp_path):
     with config_path.open("w") as f:
         yaml.safe_dump(cfg, f)
 
-    # Same k-sequence-producing closes as the end-to-end test, scaled up so
-    # the signal bar's close (last_close) lands above max_price_per_share (150).
+    # Same k-sequence-producing closes as the end-to-end test, scaled up
+    # (fixed high=5000/low=0, same ratio as the fixed high=50/low=0 used
+    # there) so the dual-cross still fires on the final bar but the signal
+    # bar's close (last_close) lands above max_price_per_share (150).
     def bar(close):
-        return {"high": close * 5, "low": 0, "close": close}
+        return {"high": 5000, "low": 0, "close": close}
 
-    entry_closes = [1000, 1000, 800, 700, 1200]  # last close 1200 > 150 cap
+    entry_closes = [1000, 1000, 800, 700, 1500]  # last close 1500 > 150 cap
 
     payload = {"candidates": [{"symbol": "EXPENSIVE", "sector": "Technology", "atr14": 20.0, "bars": [bar(c) for c in entry_closes]}]}
 
@@ -332,7 +357,7 @@ def test_check_hourly_signals_skips_entry_over_price_cap(tmp_path):
     skip_events = [e for e in events if e["event"] == "entry_skipped_price_cap"]
     assert len(skip_events) == 1
     assert skip_events[0]["symbol"] == "EXPENSIVE"
-    assert skip_events[0]["last_close"] == 1200
+    assert skip_events[0]["last_close"] == 1500
     assert skip_events[0]["max_price_per_share"] == 150
 
 
@@ -350,7 +375,7 @@ def test_check_hourly_signals_skips_candidate_entry_when_earnings_too_close(tmp_
     def bar(close):
         return {"high": 50, "low": 0, "close": close}
 
-    entry_closes = [10, 10, 8, 7, 12]  # would otherwise signal entry (see earlier derivation)
+    entry_closes = [10, 10, 8, 7, 15]  # would otherwise signal entry (see earlier derivation)
     # Reports tomorrow, BMO (bare string = conservative default) -> exit_date
     # is today -> today is exactly the entry-blocked day.
     soon = (date.today() + timedelta(days=1)).isoformat()
@@ -718,7 +743,7 @@ def test_check_hourly_signals_handles_string_typed_bar_values(tmp_path):
     def bar(close):
         return {"high": "50.000000", "low": "0.000000", "close": f"{close}.000000"}
 
-    entry_closes = [10, 10, 8, 7, 12]
+    entry_closes = [10, 10, 8, 7, 15]
 
     payload = {
         "candidates": [
@@ -735,8 +760,8 @@ def test_check_hourly_signals_handles_string_typed_bar_values(tmp_path):
 
     output = json.loads(result.stdout)
     assert [e["symbol"] for e in output["entries"]] == ["AAPL"]
-    assert output["entries"][0]["last_close"] == 12.0
-    assert output["entries"][0]["estimated_stop_price"] == 9.0
+    assert output["entries"][0]["last_close"] == 15.0
+    assert output["entries"][0]["estimated_stop_price"] == 12.0
 
 
 def _write_cfg(tmp_path, overrides=None):
@@ -962,10 +987,11 @@ def test_run_backtest_end_to_end(tmp_path):
         return {"begins_at": t, "high": high, "low": low, "close": close}
 
     times = [f"2026-07-20T{h:02d}:00:00Z" for h in range(6)]
-    # Same fixed-high/low trick as tests/test_backtest.py: closes ->
-    # entry at t4 (raw %K 16,14,24 -> crosses above 20 and above %D),
-    # then a small ATR forces an immediate stop-loss at t5.
-    closes = [150, 150, 244, 226, 316, 460]
+    # Same fixed-high/low trick as tests/test_backtest.py: closes -> dual-
+    # cross entry at t4 (raw %K 16,14,30 and %D 15,22 both clear 20 on the
+    # same bar, spec §3 2026-08-04 revision), then a small ATR forces an
+    # immediate stop-loss at t5.
+    closes = [150, 150, 244, 226, 370, 460]
     bars = [bar(t, c) for t, c in zip(times, closes)]
 
     payload = {
