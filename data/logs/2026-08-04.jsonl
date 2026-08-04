@@ -410,3 +410,427 @@
 {"event": "stop_placed", "qty": 3, "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a", "stop_price": 34.47, "symbol": "ILF", "timestamp": "2026-08-04T15:49:16.241929+00:00"}
 {"event": "entry_executed", "fill_price": 134.1557, "order_id": "6a7209de-e105-4e9d-a0c6-03a737648184", "qty": 1, "symbol": "PCAR", "timestamp": "2026-08-04T15:49:16.241962+00:00"}
 {"event": "stop_placed", "qty": 1, "stop_order_id": "6a7209eb-ceae-48be-946b-94700eb00355", "stop_price": 128.71, "symbol": "PCAR", "timestamp": "2026-08-04T15:49:16.242020+00:00"}
+{"account_value": 2260.938027785, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-08-04T16:38:15.847596+00:00", "tripped": false, "unrealized_pnl_today": 11.166}
+{"d": 28.199018959688058, "event": "signal_check", "k": 18.643640116995183, "kind": "entry", "pending": null, "signal": false, "symbol": "ABNB", "timestamp": "2026-08-04T16:43:21.055801+00:00"}
+{"d": 98.12129655756716, "event": "signal_check", "k": 98.37216248506559, "kind": "entry", "pending": null, "signal": false, "symbol": "ACWI", "timestamp": "2026-08-04T16:43:21.058954+00:00"}
+{"d": 95.52567098436269, "event": "signal_check", "k": 96.78946043020805, "kind": "entry", "pending": null, "signal": false, "symbol": "ACWX", "timestamp": "2026-08-04T16:43:21.061586+00:00"}
+{"d": 51.18019573978129, "event": "signal_check", "k": 63.03972366148537, "kind": "entry", "pending": null, "signal": false, "symbol": "ADPT", "timestamp": "2026-08-04T16:43:21.064295+00:00"}
+{"d": 76.29629629629646, "event": "signal_check", "k": 71.42857142857159, "kind": "entry", "pending": null, "signal": false, "symbol": "AEG", "timestamp": "2026-08-04T16:43:21.066784+00:00"}
+{"d": 88.41655762445025, "event": "signal_check", "k": 88.32378687993092, "kind": "entry", "pending": null, "signal": false, "symbol": "AER", "timestamp": "2026-08-04T16:43:21.069249+00:00"}
+{"d": 16.081140649859577, "event": "signal_check", "k": 19.26739497112471, "kind": "entry", "pending": null, "signal": false, "symbol": "AFL", "timestamp": "2026-08-04T16:43:21.071683+00:00"}
+{"d": 36.413026398491404, "event": "signal_check", "k": 22.438063063062923, "kind": "entry", "pending": null, "signal": false, "symbol": "AKR", "timestamp": "2026-08-04T16:43:21.074250+00:00"}
+{"d": 24.34569723335072, "event": "signal_check", "k": 25.412475112893446, "kind": "entry", "pending": null, "signal": false, "symbol": "ALL", "timestamp": "2026-08-04T16:43:21.076658+00:00"}
+{"d": 78.93620345382078, "event": "signal_check", "k": 88.64382032172288, "kind": "entry", "pending": null, "signal": false, "symbol": "AME", "timestamp": "2026-08-04T16:43:21.079115+00:00"}
+{"d": 90.36515256431103, "event": "signal_check", "k": 89.52332706132103, "kind": "entry", "pending": null, "signal": false, "symbol": "AMH", "timestamp": "2026-08-04T16:43:21.081539+00:00"}
+{"d": 35.34006734006736, "event": "signal_check", "k": 40.090909090909044, "kind": "entry", "pending": null, "signal": false, "symbol": "AMLP", "timestamp": "2026-08-04T16:43:21.084101+00:00"}
+{"d": 61.46705831969593, "event": "signal_check", "k": 81.13064269437825, "kind": "entry", "pending": null, "signal": false, "symbol": "AMLX", "timestamp": "2026-08-04T16:43:21.086484+00:00"}
+{"d": 75.97116377260436, "event": "signal_check", "k": 62.13592233009706, "kind": "entry", "pending": null, "signal": false, "symbol": "AMRX", "timestamp": "2026-08-04T16:43:21.088791+00:00"}
+{"d": 86.85634954725613, "event": "signal_check", "k": 75.54562943802138, "kind": "entry", "pending": null, "signal": false, "symbol": "AMZU", "timestamp": "2026-08-04T16:43:21.091288+00:00"}
+{"d": 33.63398692810304, "event": "signal_check", "k": 41.98692810457488, "kind": "entry", "pending": null, "signal": false, "symbol": "APGE", "timestamp": "2026-08-04T16:43:21.093638+00:00"}
+{"d": 93.85376250331979, "event": "signal_check", "k": 94.00428566301395, "kind": "entry", "pending": null, "signal": false, "symbol": "APH", "timestamp": "2026-08-04T16:43:21.096126+00:00"}
+{"d": 58.12577656528459, "event": "signal_check", "k": 64.9403702894049, "kind": "entry", "pending": null, "signal": false, "symbol": "ARXS", "timestamp": "2026-08-04T16:43:21.098519+00:00"}
+{"d": 95.63083755579756, "event": "signal_check", "k": 95.75370486510327, "kind": "entry", "pending": null, "signal": false, "symbol": "ASB", "timestamp": "2026-08-04T16:43:21.100928+00:00"}
+{"d": 20.11358975339297, "event": "signal_check", "k": 29.3844984802429, "kind": "entry", "pending": null, "signal": true, "symbol": "ASH", "timestamp": "2026-08-04T16:43:21.103394+00:00"}
+{"d": 14.444444444444192, "event": "signal_check", "k": 16.66666666666637, "kind": "entry", "pending": null, "signal": false, "symbol": "ATAI", "timestamp": "2026-08-04T16:43:21.105812+00:00"}
+{"d": 97.44237446559032, "event": "signal_check", "k": 95.55582166745266, "kind": "entry", "pending": null, "signal": false, "symbol": "ATI", "timestamp": "2026-08-04T16:43:21.108359+00:00"}
+{"d": 87.66543473592606, "event": "signal_check", "k": 89.20218356898232, "kind": "entry", "pending": null, "signal": false, "symbol": "AUB", "timestamp": "2026-08-04T16:43:21.110755+00:00"}
+{"d": 58.56009070294801, "event": "signal_check", "k": 41.91836734693894, "kind": "entry", "pending": null, "signal": false, "symbol": "AVAH", "timestamp": "2026-08-04T16:43:21.113173+00:00"}
+{"d": 92.377524956757, "event": "signal_check", "k": 96.08159551014528, "kind": "entry", "pending": null, "signal": false, "symbol": "AVDE", "timestamp": "2026-08-04T16:43:21.115615+00:00"}
+{"d": 92.29390681003588, "event": "signal_check", "k": 90.13440860215057, "kind": "entry", "pending": null, "signal": false, "symbol": "AXGN", "timestamp": "2026-08-04T16:43:21.118082+00:00"}
+{"d": 73.8426445709439, "event": "signal_check", "k": 83.73925534806811, "kind": "entry", "pending": null, "signal": false, "symbol": "AXTA", "timestamp": "2026-08-04T16:43:21.120563+00:00"}
+{"d": 97.33028690285488, "event": "signal_check", "k": 97.70182819667968, "kind": "entry", "pending": null, "signal": false, "symbol": "BA", "timestamp": "2026-08-04T16:43:21.123681+00:00"}
+{"d": 83.51648192185071, "event": "signal_check", "k": 94.06382691007438, "kind": "entry", "pending": null, "signal": false, "symbol": "BAC", "timestamp": "2026-08-04T16:43:21.126397+00:00"}
+{"d": 46.737128429244194, "event": "signal_check", "k": 28.29565441144862, "kind": "entry", "pending": null, "signal": false, "symbol": "BALL", "timestamp": "2026-08-04T16:43:21.128765+00:00"}
+{"d": 88.30940273382419, "event": "signal_check", "k": 82.01174743024957, "kind": "entry", "pending": null, "signal": false, "symbol": "BAX", "timestamp": "2026-08-04T16:43:21.131215+00:00"}
+{"d": 94.3965470051099, "event": "signal_check", "k": 95.1142427974324, "kind": "entry", "pending": null, "signal": false, "symbol": "BCS", "timestamp": "2026-08-04T16:43:21.133545+00:00"}
+{"d": 87.36635539315206, "event": "signal_check", "k": 89.93097848152672, "kind": "entry", "pending": null, "signal": false, "symbol": "BDX", "timestamp": "2026-08-04T16:43:21.136068+00:00"}
+{"d": 86.69544726423192, "event": "signal_check", "k": 91.88717067583043, "kind": "entry", "pending": null, "signal": false, "symbol": "BEN", "timestamp": "2026-08-04T16:43:21.138428+00:00"}
+{"d": 93.61089820180689, "event": "signal_check", "k": 92.80977911805742, "kind": "entry", "pending": null, "signal": false, "symbol": "BFLX", "timestamp": "2026-08-04T16:43:21.140734+00:00"}
+{"d": 86.14434947768285, "event": "signal_check", "k": 84.3304843304844, "kind": "entry", "pending": null, "signal": false, "symbol": "BLFS", "timestamp": "2026-08-04T16:43:21.143161+00:00"}
+{"d": 59.6274966118219, "event": "signal_check", "k": 68.72234748671126, "kind": "entry", "pending": null, "signal": false, "symbol": "BMRN", "timestamp": "2026-08-04T16:43:21.145524+00:00"}
+{"d": 63.47425926813111, "event": "signal_check", "k": 51.71773444753968, "kind": "entry", "pending": null, "signal": false, "symbol": "BMY", "timestamp": "2026-08-04T16:43:21.147829+00:00"}
+{"d": 49.61941114839402, "event": "signal_check", "k": 43.230269395171184, "kind": "entry", "pending": null, "signal": false, "symbol": "BNS", "timestamp": "2026-08-04T16:43:21.150406+00:00"}
+{"d": 78.627032530257, "event": "signal_check", "k": 77.00009035872391, "kind": "entry", "pending": null, "signal": false, "symbol": "BOX", "timestamp": "2026-08-04T16:43:21.152797+00:00"}
+{"d": 93.12169312169358, "event": "signal_check", "k": 88.88888888889414, "kind": "entry", "pending": null, "signal": false, "symbol": "BOXX", "timestamp": "2026-08-04T16:43:21.155218+00:00"}
+{"d": 26.76092175053954, "event": "signal_check", "k": 14.731954329783067, "kind": "entry", "pending": null, "signal": false, "symbol": "BP", "timestamp": "2026-08-04T16:43:21.157646+00:00"}
+{"d": 61.09279159831298, "event": "signal_check", "k": 36.13479067473758, "kind": "entry", "pending": null, "signal": false, "symbol": "BRKR", "timestamp": "2026-08-04T16:43:21.160076+00:00"}
+{"d": 9.248661261520573, "event": "signal_check", "k": 12.863327149041545, "kind": "entry", "pending": null, "signal": false, "symbol": "BUD", "timestamp": "2026-08-04T16:43:21.162475+00:00"}
+{"d": 97.93894770272583, "event": "signal_check", "k": 98.0784905734746, "kind": "entry", "pending": null, "signal": false, "symbol": "BUFR", "timestamp": "2026-08-04T16:43:21.164840+00:00"}
+{"d": 95.5909541685471, "event": "signal_check", "k": 94.04811139737912, "kind": "entry", "pending": null, "signal": false, "symbol": "BUG", "timestamp": "2026-08-04T16:43:21.167258+00:00"}
+{"d": 94.2075529215714, "event": "signal_check", "k": 91.98477598746115, "kind": "entry", "pending": null, "signal": false, "symbol": "CAH", "timestamp": "2026-08-04T16:43:21.169580+00:00"}
+{"d": 78.25399868384496, "event": "signal_check", "k": 72.78759548512147, "kind": "entry", "pending": null, "signal": false, "symbol": "CARG", "timestamp": "2026-08-04T16:43:21.172005+00:00"}
+{"d": 50.327214082471336, "event": "signal_check", "k": 45.20695970695969, "kind": "entry", "pending": null, "signal": false, "symbol": "CBRL", "timestamp": "2026-08-04T16:43:21.174370+00:00"}
+{"d": 70.1714354580779, "event": "signal_check", "k": 84.16522581831117, "kind": "entry", "pending": null, "signal": false, "symbol": "CBSH", "timestamp": "2026-08-04T16:43:21.176718+00:00"}
+{"d": 17.71981071257561, "event": "signal_check", "k": 19.455776002783534, "kind": "entry", "pending": null, "signal": false, "symbol": "CCEP", "timestamp": "2026-08-04T16:43:21.179128+00:00"}
+{"d": 89.01597803127997, "event": "signal_check", "k": 90.60111658251462, "kind": "entry", "pending": null, "signal": false, "symbol": "CCK", "timestamp": "2026-08-04T16:43:21.181465+00:00"}
+{"d": 18.14955780381615, "event": "signal_check", "k": 26.031267740949076, "kind": "entry", "pending": {"k_at_cross": 26.031267740949076}, "signal": false, "symbol": "CDP", "timestamp": "2026-08-04T16:43:21.183812+00:00"}
+{"d": 92.4104654884405, "event": "signal_check", "k": 96.71998712273871, "kind": "entry", "pending": null, "signal": false, "symbol": "CFG", "timestamp": "2026-08-04T16:43:21.186281+00:00"}
+{"d": 98.25256401689207, "event": "signal_check", "k": 98.34112261785386, "kind": "entry", "pending": null, "signal": false, "symbol": "CGBL", "timestamp": "2026-08-04T16:43:21.188626+00:00"}
+{"d": 97.01450358004045, "event": "signal_check", "k": 96.68929493243286, "kind": "entry", "pending": null, "signal": false, "symbol": "CGNX", "timestamp": "2026-08-04T16:43:21.191045+00:00"}
+{"d": 64.86301019509999, "event": "signal_check", "k": 73.65129330359905, "kind": "entry", "pending": null, "signal": false, "symbol": "CHD", "timestamp": "2026-08-04T16:43:21.193400+00:00"}
+{"d": 95.60786692658417, "event": "signal_check", "k": 94.85483983355505, "kind": "entry", "pending": null, "signal": false, "symbol": "CIBR", "timestamp": "2026-08-04T16:43:21.195760+00:00"}
+{"d": 17.440327651595325, "event": "signal_check", "k": 19.714714714714777, "kind": "entry", "pending": null, "signal": false, "symbol": "CLBK", "timestamp": "2026-08-04T16:43:21.198218+00:00"}
+{"d": 78.51751767663386, "event": "signal_check", "k": 80.25574453805255, "kind": "entry", "pending": null, "signal": false, "symbol": "CM", "timestamp": "2026-08-04T16:43:21.200559+00:00"}
+{"d": 64.62237223631743, "event": "signal_check", "k": 42.41182896379514, "kind": "entry", "pending": null, "signal": false, "symbol": "CMBT", "timestamp": "2026-08-04T16:43:21.203011+00:00"}
+{"d": 10.455599366141426, "event": "signal_check", "k": 14.586154046130751, "kind": "entry", "pending": null, "signal": false, "symbol": "CNQ", "timestamp": "2026-08-04T16:43:21.205396+00:00"}
+{"d": 30.011776689539758, "event": "signal_check", "k": 17.097562711879746, "kind": "entry", "pending": null, "signal": false, "symbol": "CORT", "timestamp": "2026-08-04T16:43:21.207769+00:00"}
+{"d": 67.82306792448783, "event": "signal_check", "k": 58.55951576032714, "kind": "entry", "pending": null, "signal": false, "symbol": "CRI", "timestamp": "2026-08-04T16:43:21.210286+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "earnings_too_close", "symbol": "CRNX", "timestamp": "2026-08-04T16:43:21.210400+00:00"}
+{"d": 93.6078071200377, "event": "signal_check", "k": 94.87318050775734, "kind": "entry", "pending": null, "signal": false, "symbol": "CROX", "timestamp": "2026-08-04T16:43:21.212755+00:00"}
+{"d": 94.3378369681799, "event": "signal_check", "k": 92.06527210684074, "kind": "entry", "pending": null, "signal": false, "symbol": "CRWD", "timestamp": "2026-08-04T16:43:21.215206+00:00"}
+{"d": 16.94908153521268, "event": "signal_check", "k": 23.633446696876888, "kind": "entry", "pending": {"k_at_cross": 23.633446696876888}, "signal": false, "symbol": "CTAS", "timestamp": "2026-08-04T16:43:21.217663+00:00"}
+{"d": 64.80945882667739, "event": "signal_check", "k": 66.66666666666667, "kind": "entry", "pending": null, "signal": false, "symbol": "CUBE", "timestamp": "2026-08-04T16:43:21.220392+00:00"}
+{"d": 9.767493991084892, "event": "signal_check", "k": 11.511758118701012, "kind": "entry", "pending": null, "signal": false, "symbol": "CUZ", "timestamp": "2026-08-04T16:43:21.223086+00:00"}
+{"d": 89.53532569469077, "event": "signal_check", "k": 89.0931627745549, "kind": "entry", "pending": null, "signal": false, "symbol": "CVBF", "timestamp": "2026-08-04T16:43:21.225522+00:00"}
+{"d": 19.691951373988257, "event": "signal_check", "k": 22.619656545077536, "kind": "entry", "pending": {"k_at_cross": 20.651599875737794}, "signal": false, "symbol": "CVE", "timestamp": "2026-08-04T16:43:21.227850+00:00"}
+{"d": 90.50110407798013, "event": "signal_check", "k": 94.22459951890552, "kind": "entry", "pending": null, "signal": false, "symbol": "DAL", "timestamp": "2026-08-04T16:43:21.230284+00:00"}
+{"d": 89.12637295475578, "event": "signal_check", "k": 93.31709361412338, "kind": "entry", "pending": null, "signal": false, "symbol": "DB", "timestamp": "2026-08-04T16:43:21.232642+00:00"}
+{"d": 17.395683421577925, "event": "signal_check", "k": 13.315162395906341, "kind": "entry", "pending": null, "signal": false, "symbol": "DBC", "timestamp": "2026-08-04T16:43:21.235104+00:00"}
+{"d": 22.22222222222337, "event": "signal_check", "k": 20.83333333333407, "kind": "entry", "pending": null, "signal": true, "symbol": "DBRG", "timestamp": "2026-08-04T16:43:21.237446+00:00"}
+{"d": 89.5803026227127, "event": "signal_check", "k": 89.65072765130373, "kind": "entry", "pending": null, "signal": false, "symbol": "DBX", "timestamp": "2026-08-04T16:43:21.239891+00:00"}
+{"d": 83.48231681872927, "event": "signal_check", "k": 85.93044155893011, "kind": "entry", "pending": null, "signal": false, "symbol": "DDOG", "timestamp": "2026-08-04T16:43:21.242284+00:00"}
+{"d": 93.93258250406484, "event": "signal_check", "k": 94.00037329823846, "kind": "entry", "pending": null, "signal": false, "symbol": "DELL", "timestamp": "2026-08-04T16:43:21.244592+00:00"}
+{"d": 79.73647742764814, "event": "signal_check", "k": 90.21885133109494, "kind": "entry", "pending": null, "signal": false, "symbol": "DFAI", "timestamp": "2026-08-04T16:43:21.247140+00:00"}
+{"d": 87.07723171889843, "event": "signal_check", "k": 93.71032763532776, "kind": "entry", "pending": null, "signal": false, "symbol": "DFIC", "timestamp": "2026-08-04T16:43:21.249482+00:00"}
+{"d": 46.50561516909178, "event": "signal_check", "k": 61.75236080380509, "kind": "entry", "pending": null, "signal": false, "symbol": "DFIV", "timestamp": "2026-08-04T16:43:21.251838+00:00"}
+{"d": 86.04964678024014, "event": "signal_check", "k": 95.35102617120016, "kind": "entry", "pending": null, "signal": false, "symbol": "DGRO", "timestamp": "2026-08-04T16:43:21.254259+00:00"}
+{"d": 41.990235044516666, "event": "signal_check", "k": 26.041579810444983, "kind": "entry", "pending": null, "signal": false, "symbol": "DHT", "timestamp": "2026-08-04T16:43:21.256621+00:00"}
+{"d": 95.45361475844402, "event": "signal_check", "k": 97.53450677807704, "kind": "entry", "pending": null, "signal": false, "symbol": "DIA", "timestamp": "2026-08-04T16:43:21.259219+00:00"}
+{"d": 15.77013352427725, "event": "signal_check", "k": 20.91303809469589, "kind": "entry", "pending": {"k_at_cross": 20.91303809469589}, "signal": false, "symbol": "DINO", "timestamp": "2026-08-04T16:43:21.261626+00:00"}
+{"d": 84.87647671051782, "event": "signal_check", "k": 79.26849168008586, "kind": "entry", "pending": null, "signal": false, "symbol": "DLO", "timestamp": "2026-08-04T16:43:21.264140+00:00"}
+{"d": 60.70790474059314, "event": "signal_check", "k": 69.22743844461722, "kind": "entry", "pending": null, "signal": false, "symbol": "DLR", "timestamp": "2026-08-04T16:43:21.266536+00:00"}
+{"d": 64.3382692169741, "event": "signal_check", "k": 71.35895394875024, "kind": "entry", "pending": null, "signal": false, "symbol": "DLTR", "timestamp": "2026-08-04T16:43:21.268939+00:00"}
+{"d": 57.339476876021735, "event": "signal_check", "k": 51.103464641670676, "kind": "entry", "pending": null, "signal": false, "symbol": "DRH", "timestamp": "2026-08-04T16:43:21.271442+00:00"}
+{"d": 29.959867160580743, "event": "signal_check", "k": 25.52494647248811, "kind": "entry", "pending": null, "signal": false, "symbol": "DRI", "timestamp": "2026-08-04T16:43:21.273764+00:00"}
+{"d": 62.03810920693726, "event": "signal_check", "k": 74.14987648602737, "kind": "entry", "pending": null, "signal": false, "symbol": "DYN", "timestamp": "2026-08-04T16:43:21.276184+00:00"}
+{"d": 90.85284433235444, "event": "signal_check", "k": 84.10897435897873, "kind": "entry", "pending": null, "signal": false, "symbol": "EA", "timestamp": "2026-08-04T16:43:21.278606+00:00"}
+{"d": 72.25345185013816, "event": "signal_check", "k": 81.27204865520845, "kind": "entry", "pending": null, "signal": false, "symbol": "EBC", "timestamp": "2026-08-04T16:43:21.280981+00:00"}
+{"d": 21.01076953057489, "event": "signal_check", "k": 20.207816274529304, "kind": "entry", "pending": null, "signal": false, "symbol": "EC", "timestamp": "2026-08-04T16:43:21.283380+00:00"}
+{"d": 77.77404253199863, "event": "signal_check", "k": 88.25225181959836, "kind": "entry", "pending": null, "signal": false, "symbol": "EFA", "timestamp": "2026-08-04T16:43:21.286262+00:00"}
+{"d": 81.40532864067119, "event": "signal_check", "k": 88.47828100398213, "kind": "entry", "pending": null, "signal": false, "symbol": "EFV", "timestamp": "2026-08-04T16:43:21.288633+00:00"}
+{"d": 42.370089845789416, "event": "signal_check", "k": 38.40849054398401, "kind": "entry", "pending": null, "signal": false, "symbol": "ELS", "timestamp": "2026-08-04T16:43:21.291124+00:00"}
+{"d": 92.8712589304631, "event": "signal_check", "k": 90.07533368759965, "kind": "entry", "pending": null, "signal": false, "symbol": "ENOV", "timestamp": "2026-08-04T16:43:21.293471+00:00"}
+{"d": 8.408769260954523, "event": "signal_check", "k": 8.958905238080755, "kind": "entry", "pending": null, "signal": false, "symbol": "EQNR", "timestamp": "2026-08-04T16:43:21.295944+00:00"}
+{"d": 55.90946502057583, "event": "signal_check", "k": 66.40277777777781, "kind": "entry", "pending": null, "signal": false, "symbol": "ET", "timestamp": "2026-08-04T16:43:21.298328+00:00"}
+{"d": 97.2369968719733, "event": "signal_check", "k": 96.44263149310791, "kind": "entry", "pending": null, "signal": false, "symbol": "ETN", "timestamp": "2026-08-04T16:43:21.300651+00:00"}
+{"d": 74.3253697551113, "event": "signal_check", "k": 78.00988832644596, "kind": "entry", "pending": null, "signal": false, "symbol": "ETSY", "timestamp": "2026-08-04T16:43:21.303291+00:00"}
+{"d": 92.59616798359764, "event": "signal_check", "k": 90.57608772233219, "kind": "entry", "pending": null, "signal": false, "symbol": "EW", "timestamp": "2026-08-04T16:43:21.305667+00:00"}
+{"d": 63.35252051832625, "event": "signal_check", "k": 80.72195070125773, "kind": "entry", "pending": null, "signal": false, "symbol": "EWA", "timestamp": "2026-08-04T16:43:21.308048+00:00"}
+{"d": 66.22964220587328, "event": "signal_check", "k": 80.73005093378607, "kind": "entry", "pending": null, "signal": false, "symbol": "EWC", "timestamp": "2026-08-04T16:43:21.310464+00:00"}
+{"d": 93.40988136260289, "event": "signal_check", "k": 94.50769898069824, "kind": "entry", "pending": null, "signal": false, "symbol": "EWG", "timestamp": "2026-08-04T16:43:21.312729+00:00"}
+{"d": 10.03666182011487, "event": "signal_check", "k": 17.5308381408003, "kind": "entry", "pending": null, "signal": false, "symbol": "EWH", "timestamp": "2026-08-04T16:43:21.315117+00:00"}
+{"d": 75.02424784236963, "event": "signal_check", "k": 87.18475432332905, "kind": "entry", "pending": null, "signal": false, "symbol": "EWJ", "timestamp": "2026-08-04T16:43:21.317469+00:00"}
+{"d": 37.251186544673494, "event": "signal_check", "k": 52.97493367982239, "kind": "entry", "pending": null, "signal": false, "symbol": "EWU", "timestamp": "2026-08-04T16:43:21.319738+00:00"}
+{"d": 29.88675780453001, "event": "signal_check", "k": 48.42379106304849, "kind": "entry", "pending": null, "signal": true, "symbol": "EWW", "timestamp": "2026-08-04T16:43:21.322076+00:00"}
+{"d": 70.04238542530851, "event": "signal_check", "k": 78.94411772376667, "kind": "entry", "pending": null, "signal": false, "symbol": "EXPE", "timestamp": "2026-08-04T16:43:21.324744+00:00"}
+{"d": 59.574779570530104, "event": "signal_check", "k": 54.965532070985226, "kind": "entry", "pending": null, "signal": false, "symbol": "EXR", "timestamp": "2026-08-04T16:43:21.327270+00:00"}
+{"d": 94.82527701358005, "event": "signal_check", "k": 95.20795988881089, "kind": "entry", "pending": null, "signal": false, "symbol": "EZU", "timestamp": "2026-08-04T16:43:21.329605+00:00"}
+{"d": 18.607593436508367, "event": "signal_check", "k": 16.250215437695395, "kind": "entry", "pending": null, "signal": false, "symbol": "FANG", "timestamp": "2026-08-04T16:43:21.332021+00:00"}
+{"d": 90.27124263271213, "event": "signal_check", "k": 95.13441645674895, "kind": "entry", "pending": null, "signal": false, "symbol": "FAST", "timestamp": "2026-08-04T16:43:21.334381+00:00"}
+{"d": 77.81512282456501, "event": "signal_check", "k": 74.0121870603155, "kind": "entry", "pending": null, "signal": false, "symbol": "FBP", "timestamp": "2026-08-04T16:43:21.336715+00:00"}
+{"d": 81.20603627420962, "event": "signal_check", "k": 89.5110374538486, "kind": "entry", "pending": null, "signal": false, "symbol": "FENI", "timestamp": "2026-08-04T16:43:21.339088+00:00"}
+{"d": 28.700206007907806, "event": "signal_check", "k": 32.93321819228552, "kind": "entry", "pending": null, "signal": false, "symbol": "FENY", "timestamp": "2026-08-04T16:43:21.341430+00:00"}
+{"d": 91.37445284913849, "event": "signal_check", "k": 92.90836128414236, "kind": "entry", "pending": null, "signal": false, "symbol": "FERG", "timestamp": "2026-08-04T16:43:21.343743+00:00"}
+{"d": 65.52132078145279, "event": "signal_check", "k": 79.30223160013037, "kind": "entry", "pending": null, "signal": false, "symbol": "FLR", "timestamp": "2026-08-04T16:43:21.346161+00:00"}
+{"d": 93.62635390337073, "event": "signal_check", "k": 94.81893004115234, "kind": "entry", "pending": null, "signal": false, "symbol": "FNB", "timestamp": "2026-08-04T16:43:21.348575+00:00"}
+{"d": 97.09180335004218, "event": "signal_check", "k": 97.9076276017867, "kind": "entry", "pending": null, "signal": false, "symbol": "FNDA", "timestamp": "2026-08-04T16:43:21.350960+00:00"}
+{"d": 62.83195742471435, "event": "signal_check", "k": 81.28590342679128, "kind": "entry", "pending": null, "signal": false, "symbol": "FNDF", "timestamp": "2026-08-04T16:43:21.353371+00:00"}
+{"d": 76.31383619994783, "event": "signal_check", "k": 61.21399176954716, "kind": "entry", "pending": null, "signal": false, "symbol": "FRO", "timestamp": "2026-08-04T16:43:21.355697+00:00"}
+{"d": 89.10200783046184, "event": "signal_check", "k": 85.78881512751916, "kind": "entry", "pending": null, "signal": false, "symbol": "FTNT", "timestamp": "2026-08-04T16:43:21.358096+00:00"}
+{"d": 29.766117515786068, "event": "signal_check", "k": 28.834756554307518, "kind": "entry", "pending": null, "signal": false, "symbol": "FTXN", "timestamp": "2026-08-04T16:43:21.360477+00:00"}
+{"d": 91.51609000186244, "event": "signal_check", "k": 90.93814407182742, "kind": "entry", "pending": null, "signal": false, "symbol": "FULT", "timestamp": "2026-08-04T16:43:21.362922+00:00"}
+{"d": 54.72006669293273, "event": "signal_check", "k": 45.25252525252538, "kind": "entry", "pending": null, "signal": false, "symbol": "FXN", "timestamp": "2026-08-04T16:43:21.365305+00:00"}
+{"d": 50.00000000000099, "event": "signal_check", "k": 44.44444444444642, "kind": "entry", "pending": null, "signal": false, "symbol": "GBTG", "timestamp": "2026-08-04T16:43:21.367714+00:00"}
+{"d": 67.84392256811688, "event": "signal_check", "k": 68.83306025851071, "kind": "entry", "pending": null, "signal": false, "symbol": "GD", "timestamp": "2026-08-04T16:43:21.370257+00:00"}
+{"d": 94.6768106143902, "event": "signal_check", "k": 95.38447675348228, "kind": "entry", "pending": null, "signal": false, "symbol": "GE", "timestamp": "2026-08-04T16:43:21.372932+00:00"}
+{"d": 73.06899595192607, "event": "signal_check", "k": 69.3432707364596, "kind": "entry", "pending": null, "signal": false, "symbol": "GEO", "timestamp": "2026-08-04T16:43:21.375542+00:00"}
+{"d": 80.67948131197551, "event": "signal_check", "k": 86.522654462243, "kind": "entry", "pending": null, "signal": false, "symbol": "GGOV", "timestamp": "2026-08-04T16:43:21.378262+00:00"}
+{"d": 65.03465042680378, "event": "signal_check", "k": 49.95868667785127, "kind": "entry", "pending": null, "signal": false, "symbol": "GH", "timestamp": "2026-08-04T16:43:21.380733+00:00"}
+{"d": 64.83292154084563, "event": "signal_check", "k": 57.68998075699567, "kind": "entry", "pending": null, "signal": false, "symbol": "GKOS", "timestamp": "2026-08-04T16:43:21.383212+00:00"}
+{"d": 85.84349554734574, "event": "signal_check", "k": 82.80418250950572, "kind": "entry", "pending": null, "signal": false, "symbol": "GLBE", "timestamp": "2026-08-04T16:43:21.385647+00:00"}
+{"d": 28.3880949726925, "event": "signal_check", "k": 31.186473344007663, "kind": "entry", "pending": null, "signal": false, "symbol": "GM", "timestamp": "2026-08-04T16:43:21.388092+00:00"}
+{"d": 25.214376938514956, "event": "signal_check", "k": 12.880861156723164, "kind": "entry", "pending": null, "signal": false, "symbol": "GNW", "timestamp": "2026-08-04T16:43:21.390533+00:00"}
+{"d": 93.38061418484578, "event": "signal_check", "k": 92.34746560749672, "kind": "entry", "pending": null, "signal": false, "symbol": "GOOG", "timestamp": "2026-08-04T16:43:21.392964+00:00"}
+{"d": 94.67123718732917, "event": "signal_check", "k": 93.77658282300568, "kind": "entry", "pending": null, "signal": false, "symbol": "GOOGL", "timestamp": "2026-08-04T16:43:21.395394+00:00"}
+{"d": 73.13618080329587, "event": "signal_check", "k": 70.08207107628128, "kind": "entry", "pending": null, "signal": false, "symbol": "GRND", "timestamp": "2026-08-04T16:43:21.397777+00:00"}
+{"d": 98.02010642142956, "event": "signal_check", "k": 98.18166778448467, "kind": "entry", "pending": null, "signal": false, "symbol": "GRNY", "timestamp": "2026-08-04T16:43:21.400213+00:00"}
+{"d": 80.75356602953273, "event": "signal_check", "k": 71.74627466321564, "kind": "entry", "pending": null, "signal": false, "symbol": "GSAT", "timestamp": "2026-08-04T16:43:21.402550+00:00"}
+{"d": 96.74775388258531, "event": "signal_check", "k": 95.04504504504503, "kind": "entry", "pending": null, "signal": false, "symbol": "GTES", "timestamp": "2026-08-04T16:43:21.404803+00:00"}
+{"d": 53.629851187179156, "event": "signal_check", "k": 66.77190650271416, "kind": "entry", "pending": null, "signal": false, "symbol": "HALO", "timestamp": "2026-08-04T16:43:21.407204+00:00"}
+{"d": 92.3199716672242, "event": "signal_check", "k": 92.418265548561, "kind": "entry", "pending": null, "signal": false, "symbol": "HAPN", "timestamp": "2026-08-04T16:43:21.409506+00:00"}
+{"d": 29.745156338759994, "event": "signal_check", "k": 39.1759430484546, "kind": "entry", "pending": null, "signal": false, "symbol": "HDV", "timestamp": "2026-08-04T16:43:21.411828+00:00"}
+{"d": 38.16374896440735, "event": "signal_check", "k": 26.07626076260756, "kind": "entry", "pending": null, "signal": false, "symbol": "HESM", "timestamp": "2026-08-04T16:43:21.414200+00:00"}
+{"d": 48.40223653847105, "event": "signal_check", "k": 46.93006562448384, "kind": "entry", "pending": null, "signal": false, "symbol": "HIG", "timestamp": "2026-08-04T16:43:21.416687+00:00"}
+{"d": 25.524565115539428, "event": "signal_check", "k": 21.691662678741906, "kind": "entry", "pending": null, "signal": false, "symbol": "HIW", "timestamp": "2026-08-04T16:43:21.419341+00:00"}
+{"d": 89.30611223712621, "event": "signal_check", "k": 89.1112041022371, "kind": "entry", "pending": null, "signal": false, "symbol": "HOMB", "timestamp": "2026-08-04T16:43:21.421657+00:00"}
+{"d": 84.05846127113084, "event": "signal_check", "k": 94.54958089759049, "kind": "entry", "pending": null, "signal": false, "symbol": "HON", "timestamp": "2026-08-04T16:43:21.424134+00:00"}
+{"d": 86.33478430325347, "event": "signal_check", "k": 87.86531127582505, "kind": "entry", "pending": null, "signal": false, "symbol": "HOPE", "timestamp": "2026-08-04T16:43:21.426634+00:00"}
+{"d": 81.41263833961374, "event": "signal_check", "k": 86.93894341912228, "kind": "entry", "pending": null, "signal": false, "symbol": "HPQ", "timestamp": "2026-08-04T16:43:21.428957+00:00"}
+{"d": 69.82316797894231, "event": "signal_check", "k": 66.66586323255969, "kind": "entry", "pending": null, "signal": false, "symbol": "HSIC", "timestamp": "2026-08-04T16:43:21.431298+00:00"}
+{"d": 50.46887146022204, "event": "signal_check", "k": 51.20085306379403, "kind": "entry", "pending": null, "signal": false, "symbol": "HST", "timestamp": "2026-08-04T16:43:21.433602+00:00"}
+{"d": 90.712616378005, "event": "signal_check", "k": 87.13063859463803, "kind": "entry", "pending": null, "signal": false, "symbol": "HWM", "timestamp": "2026-08-04T16:43:21.435996+00:00"}
+{"d": 89.0949187173444, "event": "signal_check", "k": 91.79479250417448, "kind": "entry", "pending": null, "signal": false, "symbol": "IALT", "timestamp": "2026-08-04T16:43:21.438362+00:00"}
+{"d": 79.66866863667117, "event": "signal_check", "k": 89.56717313784776, "kind": "entry", "pending": null, "signal": false, "symbol": "IDEV", "timestamp": "2026-08-04T16:43:21.440667+00:00"}
+{"d": 80.7776638449924, "event": "signal_check", "k": 89.59943245781761, "kind": "entry", "pending": null, "signal": false, "symbol": "IEFA", "timestamp": "2026-08-04T16:43:21.443036+00:00"}
+{"d": 93.45193751404145, "event": "signal_check", "k": 97.35672284616913, "kind": "entry", "pending": null, "signal": false, "symbol": "IJH", "timestamp": "2026-08-04T16:43:21.445431+00:00"}
+{"d": 96.55560345136143, "event": "signal_check", "k": 97.73635027665408, "kind": "entry", "pending": null, "signal": false, "symbol": "IJR", "timestamp": "2026-08-04T16:43:21.447796+00:00"}
+{"d": 42.51543209876542, "event": "signal_check", "k": 37.03703703703706, "kind": "entry", "pending": null, "signal": false, "symbol": "ILMN", "timestamp": "2026-08-04T16:43:21.450188+00:00"}
+{"d": 83.55167394468707, "event": "signal_check", "k": 83.26055312954877, "kind": "entry", "pending": null, "signal": false, "symbol": "INVH", "timestamp": "2026-08-04T16:43:21.452501+00:00"}
+{"d": 34.54132694760113, "event": "signal_check", "k": 21.989273455827597, "kind": "entry", "pending": null, "signal": false, "symbol": "IOND", "timestamp": "2026-08-04T16:43:21.454830+00:00"}
+{"d": 65.17427423599717, "event": "signal_check", "k": 82.85128063504182, "kind": "entry", "pending": null, "signal": false, "symbol": "IQLT", "timestamp": "2026-08-04T16:43:21.457156+00:00"}
+{"d": 59.426312242117724, "event": "signal_check", "k": 28.530847758548862, "kind": "entry", "pending": null, "signal": false, "symbol": "IQMM", "timestamp": "2026-08-04T16:43:21.459561+00:00"}
+{"d": 95.47285705728996, "event": "signal_check", "k": 96.48369402178804, "kind": "entry", "pending": null, "signal": false, "symbol": "IQQ", "timestamp": "2026-08-04T16:43:21.461954+00:00"}
+{"d": 20.74390502048373, "event": "signal_check", "k": 15.165096396789457, "kind": "entry", "pending": null, "signal": false, "symbol": "IQV", "timestamp": "2026-08-04T16:43:21.464253+00:00"}
+{"d": 98.03063574535156, "event": "signal_check", "k": 98.18521068532857, "kind": "entry", "pending": null, "signal": false, "symbol": "ITOT", "timestamp": "2026-08-04T16:43:21.466612+00:00"}
+{"d": 73.946750003584, "event": "signal_check", "k": 89.2254359442929, "kind": "entry", "pending": null, "signal": false, "symbol": "ITW", "timestamp": "2026-08-04T16:43:21.469106+00:00"}
+{"d": 97.74302622853646, "event": "signal_check", "k": 98.71727241257445, "kind": "entry", "pending": null, "signal": false, "symbol": "IVE", "timestamp": "2026-08-04T16:43:21.471579+00:00"}
+{"d": 97.76579704665392, "event": "signal_check", "k": 97.83023374202605, "kind": "entry", "pending": null, "signal": false, "symbol": "IVV", "timestamp": "2026-08-04T16:43:21.474048+00:00"}
+{"d": 97.08981828878758, "event": "signal_check", "k": 97.12304799139167, "kind": "entry", "pending": null, "signal": false, "symbol": "IVW", "timestamp": "2026-08-04T16:43:21.476365+00:00"}
+{"d": 98.48982305711411, "event": "signal_check", "k": 98.2053453830169, "kind": "entry", "pending": null, "signal": false, "symbol": "IVZ", "timestamp": "2026-08-04T16:43:21.478709+00:00"}
+{"d": 95.34306393607905, "event": "signal_check", "k": 97.25246644696959, "kind": "entry", "pending": null, "signal": false, "symbol": "IWM", "timestamp": "2026-08-04T16:43:21.481194+00:00"}
+{"d": 96.41158416846172, "event": "signal_check", "k": 98.64481280492164, "kind": "entry", "pending": null, "signal": false, "symbol": "IWR", "timestamp": "2026-08-04T16:43:21.483528+00:00"}
+{"d": 16.413966266268975, "event": "signal_check", "k": 20.38234655169524, "kind": "entry", "pending": {"k_at_cross": 20.38234655169524}, "signal": false, "symbol": "IXC", "timestamp": "2026-08-04T16:43:21.486053+00:00"}
+{"d": 29.285318825551258, "event": "signal_check", "k": 32.68738977072328, "kind": "entry", "pending": null, "signal": false, "symbol": "IYE", "timestamp": "2026-08-04T16:43:21.489944+00:00"}
+{"d": 35.489037320289334, "event": "signal_check", "k": 40.34382009452173, "kind": "entry", "pending": null, "signal": false, "symbol": "IYR", "timestamp": "2026-08-04T16:43:21.492279+00:00"}
+{"d": 74.90789933707984, "event": "signal_check", "k": 85.2493374747972, "kind": "entry", "pending": null, "signal": false, "symbol": "JCI", "timestamp": "2026-08-04T16:43:21.494624+00:00"}
+{"d": 49.852064071350384, "event": "signal_check", "k": 45.88854382332645, "kind": "entry", "pending": null, "signal": false, "symbol": "JEPI", "timestamp": "2026-08-04T16:43:21.496970+00:00"}
+{"d": 90.95788123506743, "event": "signal_check", "k": 95.87526029103957, "kind": "entry", "pending": null, "signal": false, "symbol": "JETS", "timestamp": "2026-08-04T16:43:21.499304+00:00"}
+{"d": 95.07331073147867, "event": "signal_check", "k": 96.37729304228928, "kind": "entry", "pending": null, "signal": false, "symbol": "JHX", "timestamp": "2026-08-04T16:43:21.501606+00:00"}
+{"d": 52.80071413112173, "event": "signal_check", "k": 74.45519861479255, "kind": "entry", "pending": null, "signal": false, "symbol": "JPM", "timestamp": "2026-08-04T16:43:21.504122+00:00"}
+{"d": 94.48776960396822, "event": "signal_check", "k": 94.73978130119183, "kind": "entry", "pending": null, "signal": false, "symbol": "KBE", "timestamp": "2026-08-04T16:43:21.506570+00:00"}
+{"d": 91.5373336592254, "event": "signal_check", "k": 98.009496967688, "kind": "entry", "pending": null, "signal": false, "symbol": "KBWB", "timestamp": "2026-08-04T16:43:21.508952+00:00"}
+{"d": 42.97186456843114, "event": "signal_check", "k": 40.13733905579416, "kind": "entry", "pending": null, "signal": false, "symbol": "KIE", "timestamp": "2026-08-04T16:43:21.511344+00:00"}
+{"d": 73.01297313830304, "event": "signal_check", "k": 79.70047467780545, "kind": "entry", "pending": null, "signal": false, "symbol": "KMX", "timestamp": "2026-08-04T16:43:21.513677+00:00"}
+{"d": 13.016938211615772, "event": "signal_check", "k": 12.992680203392192, "kind": "entry", "pending": null, "signal": false, "symbol": "KO", "timestamp": "2026-08-04T16:43:21.516064+00:00"}
+{"d": 92.08528588688942, "event": "signal_check", "k": 92.09130545607121, "kind": "entry", "pending": null, "signal": false, "symbol": "KRE", "timestamp": "2026-08-04T16:43:21.518391+00:00"}
+{"d": 77.20266850701643, "event": "signal_check", "k": 67.32229123533469, "kind": "entry", "pending": null, "signal": false, "symbol": "LILAK", "timestamp": "2026-08-04T16:43:21.520766+00:00"}
+{"d": 70.66950125737252, "event": "signal_check", "k": 83.59019518258152, "kind": "entry", "pending": null, "signal": false, "symbol": "LNC", "timestamp": "2026-08-04T16:43:21.523233+00:00"}
+{"d": 58.35337994231304, "event": "signal_check", "k": 78.15396272607428, "kind": "entry", "pending": null, "signal": false, "symbol": "LQDA", "timestamp": "2026-08-04T16:43:21.525653+00:00"}
+{"d": 26.268104981234618, "event": "signal_check", "k": 29.294026974951787, "kind": "entry", "pending": null, "signal": false, "symbol": "LTH", "timestamp": "2026-08-04T16:43:21.528037+00:00"}
+{"d": 80.79117401090737, "event": "signal_check", "k": 88.14043024528252, "kind": "entry", "pending": null, "signal": false, "symbol": "LYV", "timestamp": "2026-08-04T16:43:21.530333+00:00"}
+{"d": 93.78417599473165, "event": "signal_check", "k": 94.4264229778438, "kind": "entry", "pending": null, "signal": false, "symbol": "M", "timestamp": "2026-08-04T16:43:21.532661+00:00"}
+{"d": 37.08605540933534, "event": "signal_check", "k": 31.363285709846142, "kind": "entry", "pending": null, "signal": false, "symbol": "MA", "timestamp": "2026-08-04T16:43:21.535101+00:00"}
+{"d": 95.29956024625045, "event": "signal_check", "k": 94.78374373427528, "kind": "entry", "pending": null, "signal": false, "symbol": "MAGS", "timestamp": "2026-08-04T16:43:21.537418+00:00"}
+{"d": 68.41817186644772, "event": "signal_check", "k": 66.42036124794744, "kind": "entry", "pending": null, "signal": false, "symbol": "MAN", "timestamp": "2026-08-04T16:43:21.539709+00:00"}
+{"d": 15.356709460453757, "event": "signal_check", "k": 21.294638098283713, "kind": "entry", "pending": {"k_at_cross": 21.294638098283713}, "signal": false, "symbol": "MDLZ", "timestamp": "2026-08-04T16:43:21.542143+00:00"}
+{"d": 26.98585071181667, "event": "signal_check", "k": 33.88815263886641, "kind": "entry", "pending": null, "signal": false, "symbol": "MET", "timestamp": "2026-08-04T16:43:21.544506+00:00"}
+{"d": 50.22298436160393, "event": "signal_check", "k": 53.398058252426836, "kind": "entry", "pending": null, "signal": false, "symbol": "MFC", "timestamp": "2026-08-04T16:43:21.546937+00:00"}
+{"d": 25.19452550251819, "event": "signal_check", "k": 28.314348863199612, "kind": "entry", "pending": null, "signal": false, "symbol": "MFP", "timestamp": "2026-08-04T16:43:21.549243+00:00"}
+{"d": 55.1821631177936, "event": "signal_check", "k": 64.28357316509152, "kind": "entry", "pending": null, "signal": false, "symbol": "MGA", "timestamp": "2026-08-04T16:43:21.551601+00:00"}
+{"d": 96.00098763842213, "event": "signal_check", "k": 95.9361769347828, "kind": "entry", "pending": null, "signal": false, "symbol": "MGK", "timestamp": "2026-08-04T16:43:21.553975+00:00"}
+{"d": 12.14832621082659, "event": "signal_check", "k": 17.64155982906021, "kind": "entry", "pending": null, "signal": false, "symbol": "MICC", "timestamp": "2026-08-04T16:43:21.556269+00:00"}
+{"d": 48.533254561174694, "event": "signal_check", "k": 75.154718612296, "kind": "entry", "pending": null, "signal": false, "symbol": "MLI", "timestamp": "2026-08-04T16:43:21.558584+00:00"}
+{"d": 88.78932547001664, "event": "signal_check", "k": 86.4254208299576, "kind": "entry", "pending": null, "signal": false, "symbol": "MMED", "timestamp": "2026-08-04T16:43:21.560838+00:00"}
+{"d": 65.9992034924544, "event": "signal_check", "k": 82.62280838261222, "kind": "entry", "pending": null, "signal": false, "symbol": "MMM", "timestamp": "2026-08-04T16:43:21.563212+00:00"}
+{"d": 25.684960191365978, "event": "signal_check", "k": 38.575367414565015, "kind": "entry", "pending": null, "signal": true, "symbol": "MPC", "timestamp": "2026-08-04T16:43:21.565450+00:00"}
+{"event": "entry_skipped_price_cap", "last_close": 310.655, "max_price_per_share": 150, "symbol": "MPC", "timestamp": "2026-08-04T16:43:21.565560+00:00"}
+{"d": 89.739513322039, "event": "signal_check", "k": 99.11793773319579, "kind": "entry", "pending": null, "signal": false, "symbol": "MPLX", "timestamp": "2026-08-04T16:43:21.567833+00:00"}
+{"d": 30.42695473251041, "event": "signal_check", "k": 39.66049382716067, "kind": "entry", "pending": null, "signal": false, "symbol": "MRK", "timestamp": "2026-08-04T16:43:21.570206+00:00"}
+{"d": 71.8681853710782, "event": "signal_check", "k": 52.48522766770972, "kind": "entry", "pending": null, "signal": false, "symbol": "MRSH", "timestamp": "2026-08-04T16:43:21.572638+00:00"}
+{"d": 94.65907237399728, "event": "signal_check", "k": 94.89818931731139, "kind": "entry", "pending": null, "signal": false, "symbol": "MT", "timestamp": "2026-08-04T16:43:21.575176+00:00"}
+{"d": 88.4509674837546, "event": "signal_check", "k": 96.33006249362661, "kind": "entry", "pending": null, "signal": false, "symbol": "MTB", "timestamp": "2026-08-04T16:43:21.577529+00:00"}
+{"d": 81.70409760756293, "event": "signal_check", "k": 92.256237986436, "kind": "entry", "pending": null, "signal": false, "symbol": "MTG", "timestamp": "2026-08-04T16:43:21.579971+00:00"}
+{"d": 35.0691147932528, "event": "signal_check", "k": 17.678061402199347, "kind": "entry", "pending": null, "signal": false, "symbol": "MUFG", "timestamp": "2026-08-04T16:43:21.582369+00:00"}
+{"d": 70.10062260809391, "event": "signal_check", "k": 66.61322272716421, "kind": "entry", "pending": null, "signal": false, "symbol": "NAVN", "timestamp": "2026-08-04T16:43:21.584616+00:00"}
+{"d": 62.32558139534899, "event": "signal_check", "k": 71.47286821705443, "kind": "entry", "pending": null, "signal": false, "symbol": "NEO", "timestamp": "2026-08-04T16:43:21.586983+00:00"}
+{"d": 52.095632183261195, "event": "signal_check", "k": 40.35943860272152, "kind": "entry", "pending": null, "signal": false, "symbol": "NEOG", "timestamp": "2026-08-04T16:43:21.589303+00:00"}
+{"d": 91.81089329724314, "event": "signal_check", "k": 94.62982545716147, "kind": "entry", "pending": null, "signal": false, "symbol": "NESR", "timestamp": "2026-08-04T16:43:21.591652+00:00"}
+{"d": 79.15033529208927, "event": "signal_check", "k": 82.45419526901094, "kind": "entry", "pending": null, "signal": false, "symbol": "NET", "timestamp": "2026-08-04T16:43:21.594040+00:00"}
+{"d": 40.087066168414516, "event": "signal_check", "k": 44.929469813025854, "kind": "entry", "pending": null, "signal": false, "symbol": "NLY", "timestamp": "2026-08-04T16:43:21.596359+00:00"}
+{"d": 69.27490871152844, "event": "signal_check", "k": 81.22065727699523, "kind": "entry", "pending": null, "signal": false, "symbol": "NOBL", "timestamp": "2026-08-04T16:43:21.598733+00:00"}
+{"d": 81.89720080260622, "event": "signal_check", "k": 92.44974949550912, "kind": "entry", "pending": null, "signal": false, "symbol": "NSC", "timestamp": "2026-08-04T16:43:21.601199+00:00"}
+{"d": 91.84897348870027, "event": "signal_check", "k": 90.62813656051695, "kind": "entry", "pending": null, "signal": false, "symbol": "NTAP", "timestamp": "2026-08-04T16:43:21.603568+00:00"}
+{"d": 82.33494525042842, "event": "signal_check", "k": 83.04671963903824, "kind": "entry", "pending": null, "signal": false, "symbol": "NTRA", "timestamp": "2026-08-04T16:43:21.605989+00:00"}
+{"d": 95.07785273540468, "event": "signal_check", "k": 95.44615398373371, "kind": "entry", "pending": null, "signal": false, "symbol": "NUE", "timestamp": "2026-08-04T16:43:21.608493+00:00"}
+{"d": 92.52188578646206, "event": "signal_check", "k": 91.75534484665377, "kind": "entry", "pending": null, "signal": false, "symbol": "NWBI", "timestamp": "2026-08-04T16:43:21.610821+00:00"}
+{"d": 89.00775848798536, "event": "signal_check", "k": 82.64027756413546, "kind": "entry", "pending": null, "signal": false, "symbol": "NWG", "timestamp": "2026-08-04T16:43:21.613196+00:00"}
+{"d": 75.92592592592504, "event": "signal_check", "k": 88.88888888888756, "kind": "entry", "pending": null, "signal": false, "symbol": "OGN", "timestamp": "2026-08-04T16:43:21.615627+00:00"}
+{"d": 85.1547764317532, "event": "signal_check", "k": 87.78619325293327, "kind": "entry", "pending": null, "signal": false, "symbol": "OII", "timestamp": "2026-08-04T16:43:21.618064+00:00"}
+{"d": 68.64160163449408, "event": "signal_check", "k": 72.76651367868625, "kind": "entry", "pending": null, "signal": false, "symbol": "OKTA", "timestamp": "2026-08-04T16:43:21.620375+00:00"}
+{"d": 91.37953913703272, "event": "signal_check", "k": 90.51160400677192, "kind": "entry", "pending": null, "signal": false, "symbol": "ONB", "timestamp": "2026-08-04T16:43:21.622659+00:00"}
+{"d": 68.78733572281975, "event": "signal_check", "k": 64.78494623655932, "kind": "entry", "pending": null, "signal": false, "symbol": "OPLN", "timestamp": "2026-08-04T16:43:21.625246+00:00"}
+{"d": 28.466339267444102, "event": "signal_check", "k": 36.10691092371803, "kind": "entry", "pending": null, "signal": false, "symbol": "ORI", "timestamp": "2026-08-04T16:43:21.627605+00:00"}
+{"d": 43.83222910653422, "event": "signal_check", "k": 63.93176320493149, "kind": "entry", "pending": null, "signal": false, "symbol": "ORKA", "timestamp": "2026-08-04T16:43:21.630047+00:00"}
+{"d": 37.93838698511581, "event": "signal_check", "k": 32.191069574247, "kind": "entry", "pending": null, "signal": false, "symbol": "OSCR", "timestamp": "2026-08-04T16:43:21.632357+00:00"}
+{"d": 43.500014204034606, "event": "signal_check", "k": 41.33750902154852, "kind": "entry", "pending": null, "signal": false, "symbol": "OVV", "timestamp": "2026-08-04T16:43:21.634725+00:00"}
+{"d": 95.15441317089069, "event": "signal_check", "k": 96.45238517093567, "kind": "entry", "pending": null, "signal": false, "symbol": "OZK", "timestamp": "2026-08-04T16:43:21.637109+00:00"}
+{"d": 10.622193857419159, "event": "signal_check", "k": 9.95964903892713, "kind": "entry", "pending": null, "signal": false, "symbol": "PAA", "timestamp": "2026-08-04T16:43:21.639623+00:00"}
+{"d": 9.013860190754182, "event": "signal_check", "k": 8.638623068013924, "kind": "entry", "pending": null, "signal": false, "symbol": "PAGP", "timestamp": "2026-08-04T16:43:21.642111+00:00"}
+{"d": 94.5335821947355, "event": "signal_check", "k": 90.67835100750192, "kind": "entry", "pending": null, "signal": false, "symbol": "PANW", "timestamp": "2026-08-04T16:43:21.644515+00:00"}
+{"d": 96.5449310945279, "event": "signal_check", "k": 96.6794798153547, "kind": "entry", "pending": null, "signal": false, "symbol": "PAVE", "timestamp": "2026-08-04T16:43:21.646923+00:00"}
+{"d": 83.36790817246077, "event": "signal_check", "k": 87.04627273008323, "kind": "entry", "pending": null, "signal": false, "symbol": "PB", "timestamp": "2026-08-04T16:43:21.649208+00:00"}
+{"d": 8.168187954635522, "event": "signal_check", "k": 11.378098716933374, "kind": "entry", "pending": null, "signal": false, "symbol": "PBF", "timestamp": "2026-08-04T16:43:21.651588+00:00"}
+{"d": 76.24734383506312, "event": "signal_check", "k": 80.19796111901377, "kind": "entry", "pending": null, "signal": false, "symbol": "PBI", "timestamp": "2026-08-04T16:43:21.654010+00:00"}
+{"d": 19.297376319209587, "event": "signal_check", "k": 14.756802572785995, "kind": "entry", "pending": null, "signal": false, "symbol": "PDBC", "timestamp": "2026-08-04T16:43:21.656368+00:00"}
+{"d": 63.32116153712378, "event": "signal_check", "k": 55.36925255235098, "kind": "entry", "pending": null, "signal": false, "symbol": "PDM", "timestamp": "2026-08-04T16:43:21.658723+00:00"}
+{"d": 84.2207566308753, "event": "signal_check", "k": 83.70502792084473, "kind": "entry", "pending": null, "signal": false, "symbol": "PEB", "timestamp": "2026-08-04T16:43:21.661012+00:00"}
+{"d": 89.10697187646628, "event": "signal_check", "k": 93.30393166299858, "kind": "entry", "pending": null, "signal": false, "symbol": "PFG", "timestamp": "2026-08-04T16:43:21.663403+00:00"}
+{"d": 60.75291737746729, "event": "signal_check", "k": 57.59852319266471, "kind": "entry", "pending": null, "signal": false, "symbol": "PFGC", "timestamp": "2026-08-04T16:43:21.665716+00:00"}
+{"d": 90.91556621035438, "event": "signal_check", "k": 93.68402302654131, "kind": "entry", "pending": null, "signal": false, "symbol": "PFS", "timestamp": "2026-08-04T16:43:21.668107+00:00"}
+{"d": 67.34458935732812, "event": "signal_check", "k": 60.08492569002119, "kind": "entry", "pending": null, "signal": false, "symbol": "PGNY", "timestamp": "2026-08-04T16:43:21.670529+00:00"}
+{"d": 53.54034810126575, "event": "signal_check", "k": 61.886867088607595, "kind": "entry", "pending": null, "signal": false, "symbol": "PK", "timestamp": "2026-08-04T16:43:21.672794+00:00"}
+{"d": 74.61889429664251, "event": "signal_check", "k": 84.93348577650335, "kind": "entry", "pending": null, "signal": false, "symbol": "PNC", "timestamp": "2026-08-04T16:43:21.675176+00:00"}
+{"d": 29.877893968638006, "event": "signal_check", "k": 30.488260882090348, "kind": "entry", "pending": null, "signal": false, "symbol": "PR", "timestamp": "2026-08-04T16:43:21.677518+00:00"}
+{"d": 67.74178188676655, "event": "signal_check", "k": 60.11590013052845, "kind": "entry", "pending": null, "signal": false, "symbol": "PSA", "timestamp": "2026-08-04T16:43:21.679935+00:00"}
+{"d": 75.30864197530694, "event": "signal_check", "k": 80.55555555555347, "kind": "entry", "pending": null, "signal": false, "symbol": "RAMP", "timestamp": "2026-08-04T16:43:21.682239+00:00"}
+{"d": 60.912349773841505, "event": "signal_check", "k": 67.87356321839086, "kind": "entry", "pending": null, "signal": false, "symbol": "RDN", "timestamp": "2026-08-04T16:43:21.684593+00:00"}
+{"d": 36.02467055404012, "event": "signal_check", "k": 35.15516503504002, "kind": "entry", "pending": null, "signal": false, "symbol": "REET", "timestamp": "2026-08-04T16:43:21.687167+00:00"}
+{"d": 79.5454293080004, "event": "signal_check", "k": 73.4384397058474, "kind": "entry", "pending": null, "signal": false, "symbol": "REGN", "timestamp": "2026-08-04T16:43:21.689483+00:00"}
+{"d": 93.67633565992992, "event": "signal_check", "k": 94.64940762479905, "kind": "entry", "pending": null, "signal": false, "symbol": "RELY", "timestamp": "2026-08-04T16:43:21.691927+00:00"}
+{"d": 91.94639616063414, "event": "signal_check", "k": 94.97400925049926, "kind": "entry", "pending": null, "signal": false, "symbol": "RF", "timestamp": "2026-08-04T16:43:21.694352+00:00"}
+{"d": 75.8920317988537, "event": "signal_check", "k": 80.14420410427061, "kind": "entry", "pending": null, "signal": false, "symbol": "RHI", "timestamp": "2026-08-04T16:43:21.696621+00:00"}
+{"d": 72.3042515140476, "event": "signal_check", "k": 81.95744623621583, "kind": "entry", "pending": null, "signal": false, "symbol": "RJF", "timestamp": "2026-08-04T16:43:21.698979+00:00"}
+{"d": 45.84717607973416, "event": "signal_check", "k": 46.0686600221483, "kind": "entry", "pending": null, "signal": false, "symbol": "RLJ", "timestamp": "2026-08-04T16:43:21.701545+00:00"}
+{"d": 90.69959879675123, "event": "signal_check", "k": 91.2627676250283, "kind": "entry", "pending": null, "signal": false, "symbol": "RNG", "timestamp": "2026-08-04T16:43:21.704075+00:00"}
+{"d": 66.22268347119098, "event": "signal_check", "k": 71.64404223227707, "kind": "entry", "pending": null, "signal": false, "symbol": "ROKU", "timestamp": "2026-08-04T16:43:21.706556+00:00"}
+{"d": 67.57616343440812, "event": "signal_check", "k": 68.48039215686248, "kind": "entry", "pending": null, "signal": false, "symbol": "ROST", "timestamp": "2026-08-04T16:43:21.708965+00:00"}
+{"d": 92.93066911183139, "event": "signal_check", "k": 97.25235475153902, "kind": "entry", "pending": null, "signal": false, "symbol": "RSP", "timestamp": "2026-08-04T16:43:21.711373+00:00"}
+{"d": 87.2412391391041, "event": "signal_check", "k": 81.56633319533461, "kind": "entry", "pending": null, "signal": false, "symbol": "RTX", "timestamp": "2026-08-04T16:43:21.713736+00:00"}
+{"d": 65.11743994903784, "event": "signal_check", "k": 49.15890751086287, "kind": "entry", "pending": null, "signal": false, "symbol": "RVTY", "timestamp": "2026-08-04T16:43:21.716255+00:00"}
+{"d": 93.98524680239291, "event": "signal_check", "k": 92.08441563682105, "kind": "entry", "pending": null, "signal": false, "symbol": "S", "timestamp": "2026-08-04T16:43:21.718617+00:00"}
+{"d": 14.956804761595578, "event": "signal_check", "k": 6.894945259725156, "kind": "entry", "pending": null, "signal": false, "symbol": "SBLK", "timestamp": "2026-08-04T16:43:21.720990+00:00"}
+{"d": 97.62011391422926, "event": "signal_check", "k": 97.70080277813089, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHB", "timestamp": "2026-08-04T16:43:21.723347+00:00"}
+{"d": 77.8319628032642, "event": "signal_check", "k": 87.3108157991882, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHD", "timestamp": "2026-08-04T16:43:21.725804+00:00"}
+{"d": 94.51113344206232, "event": "signal_check", "k": 96.05116732776473, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHE", "timestamp": "2026-08-04T16:43:21.728339+00:00"}
+{"d": 90.33657522694519, "event": "signal_check", "k": 95.46515735179626, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHF", "timestamp": "2026-08-04T16:43:21.730673+00:00"}
+{"d": 96.70834393696991, "event": "signal_check", "k": 96.89246605327374, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHG", "timestamp": "2026-08-04T16:43:21.733017+00:00"}
+{"d": 91.47983153871313, "event": "signal_check", "k": 95.96061884669501, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHV", "timestamp": "2026-08-04T16:43:21.735378+00:00"}
+{"d": 62.49800339082029, "event": "signal_check", "k": 69.5177394255191, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHW", "timestamp": "2026-08-04T16:43:21.737689+00:00"}
+{"d": 97.50491654871105, "event": "signal_check", "k": 97.80886952478865, "kind": "entry", "pending": null, "signal": false, "symbol": "SCHX", "timestamp": "2026-08-04T16:43:21.740129+00:00"}
+{"d": 53.77732018069577, "event": "signal_check", "k": 46.93676235737408, "kind": "entry", "pending": null, "signal": false, "symbol": "SCI", "timestamp": "2026-08-04T16:43:21.742646+00:00"}
+{"d": 89.7519610971725, "event": "signal_check", "k": 94.35869081312721, "kind": "entry", "pending": null, "signal": false, "symbol": "SCZ", "timestamp": "2026-08-04T16:43:21.745145+00:00"}
+{"d": 85.312141855982, "event": "signal_check", "k": 97.56364252372157, "kind": "entry", "pending": null, "signal": false, "symbol": "SF", "timestamp": "2026-08-04T16:43:21.747570+00:00"}
+{"d": 56.08496005355593, "event": "signal_check", "k": 36.526115859449305, "kind": "entry", "pending": null, "signal": false, "symbol": "SFL", "timestamp": "2026-08-04T16:43:21.750025+00:00"}
+{"d": 60.73282442748098, "event": "signal_check", "k": 52.162849872773656, "kind": "entry", "pending": null, "signal": false, "symbol": "SHC", "timestamp": "2026-08-04T16:43:21.752328+00:00"}
+{"d": 48.00444738804227, "event": "signal_check", "k": 29.463875205254496, "kind": "entry", "pending": null, "signal": false, "symbol": "SHEL", "timestamp": "2026-08-04T16:43:21.754829+00:00"}
+{"d": 21.52109664843107, "event": "signal_check", "k": 14.563289945293391, "kind": "entry", "pending": null, "signal": false, "symbol": "SHO", "timestamp": "2026-08-04T16:43:21.757200+00:00"}
+{"d": 85.6028754946485, "event": "signal_check", "k": 87.25989867234972, "kind": "entry", "pending": null, "signal": false, "symbol": "SHOO", "timestamp": "2026-08-04T16:43:21.759543+00:00"}
+{"d": 95.15500355122475, "event": "signal_check", "k": 98.9585811940447, "kind": "entry", "pending": null, "signal": false, "symbol": "SHW", "timestamp": "2026-08-04T16:43:21.761831+00:00"}
+{"d": 13.79040244519218, "event": "signal_check", "k": 28.39385260595421, "kind": "entry", "pending": {"k_at_cross": 28.39385260595421}, "signal": false, "symbol": "SJM", "timestamp": "2026-08-04T16:43:21.764392+00:00"}
+{"d": 21.810725137331474, "event": "signal_check", "k": 3.743961107901651, "kind": "entry", "pending": null, "signal": false, "symbol": "SNK", "timestamp": "2026-08-04T16:43:21.766786+00:00"}
+{"d": 80.60692271218575, "event": "signal_check", "k": 77.24039829302968, "kind": "entry", "pending": null, "signal": false, "symbol": "SOLV", "timestamp": "2026-08-04T16:43:21.769170+00:00"}
+{"d": 74.92497671291939, "event": "signal_check", "k": 86.41072632288508, "kind": "entry", "pending": null, "signal": false, "symbol": "SON", "timestamp": "2026-08-04T16:43:21.771512+00:00"}
+{"d": 21.98601780053285, "event": "signal_check", "k": 4.216181406731501, "kind": "entry", "pending": null, "signal": false, "symbol": "SPCG", "timestamp": "2026-08-04T16:43:21.774017+00:00"}
+{"d": 21.054352339703147, "event": "signal_check", "k": 4.565384184607115, "kind": "entry", "pending": null, "signal": false, "symbol": "SPCQ", "timestamp": "2026-08-04T16:43:21.776332+00:00"}
+{"d": 88.47783698784258, "event": "signal_check", "k": 94.34147110241365, "kind": "entry", "pending": null, "signal": false, "symbol": "SPDW", "timestamp": "2026-08-04T16:43:21.778683+00:00"}
+{"d": 30.419881745685483, "event": "signal_check", "k": 29.279110862418264, "kind": "entry", "pending": null, "signal": false, "symbol": "SPG", "timestamp": "2026-08-04T16:43:21.781020+00:00"}
+{"d": 95.22414425326745, "event": "signal_check", "k": 98.4761082584631, "kind": "entry", "pending": null, "signal": false, "symbol": "SPMD", "timestamp": "2026-08-04T16:43:21.783343+00:00"}
+{"d": 96.64174619938353, "event": "signal_check", "k": 97.93990175997374, "kind": "entry", "pending": null, "signal": false, "symbol": "SPSM", "timestamp": "2026-08-04T16:43:21.785637+00:00"}
+{"d": 97.88816544412147, "event": "signal_check", "k": 97.96237565269564, "kind": "entry", "pending": null, "signal": false, "symbol": "SPXL", "timestamp": "2026-08-04T16:43:21.788060+00:00"}
+{"d": 97.52116206073134, "event": "signal_check", "k": 97.63774496272384, "kind": "entry", "pending": null, "signal": false, "symbol": "SPY", "timestamp": "2026-08-04T16:43:21.790409+00:00"}
+{"d": 59.263532763532886, "event": "signal_check", "k": 63.26068376068397, "kind": "entry", "pending": null, "signal": false, "symbol": "SPYD", "timestamp": "2026-08-04T16:43:21.792714+00:00"}
+{"d": 97.21058162790399, "event": "signal_check", "k": 97.06400539575144, "kind": "entry", "pending": null, "signal": false, "symbol": "SPYG", "timestamp": "2026-08-04T16:43:21.795107+00:00"}
+{"d": 97.84170550309352, "event": "signal_check", "k": 97.83025681413555, "kind": "entry", "pending": null, "signal": false, "symbol": "SPYI", "timestamp": "2026-08-04T16:43:21.797475+00:00"}
+{"d": 97.83985343476785, "event": "signal_check", "k": 97.83900825571793, "kind": "entry", "pending": null, "signal": false, "symbol": "SPYM", "timestamp": "2026-08-04T16:43:21.799815+00:00"}
+{"d": 97.16399845011766, "event": "signal_check", "k": 98.239936125966, "kind": "entry", "pending": null, "signal": false, "symbol": "SPYV", "timestamp": "2026-08-04T16:43:21.802205+00:00"}
+{"d": 97.84974017717093, "event": "signal_check", "k": 97.90558454540134, "kind": "entry", "pending": null, "signal": false, "symbol": "SSO", "timestamp": "2026-08-04T16:43:21.804556+00:00"}
+{"d": 21.062464282116554, "event": "signal_check", "k": 3.409454691889321, "kind": "entry", "pending": null, "signal": false, "symbol": "SSPC", "timestamp": "2026-08-04T16:43:21.807358+00:00"}
+{"d": 71.30875203055017, "event": "signal_check", "k": 85.83292755505038, "kind": "entry", "pending": null, "signal": false, "symbol": "STT", "timestamp": "2026-08-04T16:43:21.809718+00:00"}
+{"d": 86.06954307780882, "event": "signal_check", "k": 85.45865336006695, "kind": "entry", "pending": null, "signal": false, "symbol": "SVIX", "timestamp": "2026-08-04T16:43:21.812342+00:00"}
+{"d": 87.31059619970794, "event": "signal_check", "k": 86.1875506237872, "kind": "entry", "pending": null, "signal": false, "symbol": "SVXY", "timestamp": "2026-08-04T16:43:21.814714+00:00"}
+{"d": 68.97051074839112, "event": "signal_check", "k": 64.02074489814039, "kind": "entry", "pending": null, "signal": false, "symbol": "SYY", "timestamp": "2026-08-04T16:43:21.817164+00:00"}
+{"d": 36.59241211277402, "event": "signal_check", "k": 27.354681517577376, "kind": "entry", "pending": null, "signal": false, "symbol": "TAL", "timestamp": "2026-08-04T16:43:21.819501+00:00"}
+{"d": 84.61955524414871, "event": "signal_check", "k": 73.65347774830538, "kind": "entry", "pending": null, "signal": false, "symbol": "TD", "timestamp": "2026-08-04T16:43:21.821812+00:00"}
+{"d": 62.197159565578524, "event": "signal_check", "k": 52.380952380949395, "kind": "entry", "pending": null, "signal": false, "symbol": "TECH", "timestamp": "2026-08-04T16:43:21.824361+00:00"}
+{"d": 31.441957074405988, "event": "signal_check", "k": 36.14891697639491, "kind": "entry", "pending": null, "signal": false, "symbol": "TEVA", "timestamp": "2026-08-04T16:43:21.826760+00:00"}
+{"d": 17.046085215713095, "event": "signal_check", "k": 23.24712643678159, "kind": "entry", "pending": {"k_at_cross": 23.24712643678159}, "signal": false, "symbol": "THC", "timestamp": "2026-08-04T16:43:21.829122+00:00"}
+{"d": 97.82239738943942, "event": "signal_check", "k": 98.01689864763402, "kind": "entry", "pending": null, "signal": false, "symbol": "THRO", "timestamp": "2026-08-04T16:43:21.831479+00:00"}
+{"d": 68.4532010337726, "event": "signal_check", "k": 50.48234088640336, "kind": "entry", "pending": null, "signal": false, "symbol": "TKR", "timestamp": "2026-08-04T16:43:21.833771+00:00"}
+{"d": 93.92858342445517, "event": "signal_check", "k": 96.38477920231357, "kind": "entry", "pending": null, "signal": false, "symbol": "TNA", "timestamp": "2026-08-04T16:43:21.836125+00:00"}
+{"d": 73.55225828965824, "event": "signal_check", "k": 83.75640586528472, "kind": "entry", "pending": null, "signal": false, "symbol": "TPR", "timestamp": "2026-08-04T16:43:21.838519+00:00"}
+{"d": 37.279559624866295, "event": "signal_check", "k": 50.28288543140044, "kind": "entry", "pending": null, "signal": false, "symbol": "TRV", "timestamp": "2026-08-04T16:43:21.840838+00:00"}
+{"d": 20.446159874634898, "event": "signal_check", "k": 8.390314833332146, "kind": "entry", "pending": null, "signal": false, "symbol": "TTE", "timestamp": "2026-08-04T16:43:21.843213+00:00"}
+{"d": 62.45234027355474, "event": "signal_check", "k": 51.19097031181127, "kind": "entry", "pending": null, "signal": false, "symbol": "TTWO", "timestamp": "2026-08-04T16:43:21.845600+00:00"}
+{"d": 78.50147652786798, "event": "signal_check", "k": 85.92107731061712, "kind": "entry", "pending": null, "signal": false, "symbol": "TWST", "timestamp": "2026-08-04T16:43:21.847967+00:00"}
+{"d": 17.285252344748542, "event": "signal_check", "k": 8.387347108412113, "kind": "entry", "pending": null, "signal": false, "symbol": "TXG", "timestamp": "2026-08-04T16:43:21.850380+00:00"}
+{"d": 88.26095820680727, "event": "signal_check", "k": 92.97186983224371, "kind": "entry", "pending": null, "signal": false, "symbol": "UAL", "timestamp": "2026-08-04T16:43:21.853143+00:00"}
+{"d": 51.94106497872193, "event": "signal_check", "k": 70.90511668196477, "kind": "entry", "pending": null, "signal": false, "symbol": "UBS", "timestamp": "2026-08-04T16:43:21.855882+00:00"}
+{"d": 94.80682421797313, "event": "signal_check", "k": 97.06334093452578, "kind": "entry", "pending": null, "signal": false, "symbol": "UDOW", "timestamp": "2026-08-04T16:43:21.858357+00:00"}
+{"d": 91.148001357837, "event": "signal_check", "k": 88.72043662825955, "kind": "entry", "pending": null, "signal": false, "symbol": "ULCC", "timestamp": "2026-08-04T16:43:21.860902+00:00"}
+{"d": 88.01199487188114, "event": "signal_check", "k": 90.66204105232735, "kind": "entry", "pending": null, "signal": false, "symbol": "UNM", "timestamp": "2026-08-04T16:43:21.863392+00:00"}
+{"d": 97.79068093458272, "event": "signal_check", "k": 97.90335468543458, "kind": "entry", "pending": null, "signal": false, "symbol": "UPRO", "timestamp": "2026-08-04T16:43:21.865799+00:00"}
+{"d": 92.20978900819591, "event": "signal_check", "k": 91.88185690943051, "kind": "entry", "pending": null, "signal": false, "symbol": "URBN", "timestamp": "2026-08-04T16:43:21.868452+00:00"}
+{"d": 97.13652959970098, "event": "signal_check", "k": 96.58133899665755, "kind": "entry", "pending": null, "signal": false, "symbol": "USB", "timestamp": "2026-08-04T16:43:21.871166+00:00"}
+{"d": 36.962475492545984, "event": "signal_check", "k": 36.76369124896447, "kind": "entry", "pending": null, "signal": false, "symbol": "USFD", "timestamp": "2026-08-04T16:43:21.873674+00:00"}
+{"d": 84.33554823456133, "event": "signal_check", "k": 91.72017889784968, "kind": "entry", "pending": null, "signal": false, "symbol": "USMV", "timestamp": "2026-08-04T16:43:21.876175+00:00"}
+{"d": 44.638311654412156, "event": "signal_check", "k": 53.43767731330908, "kind": "entry", "pending": null, "signal": false, "symbol": "V", "timestamp": "2026-08-04T16:43:21.878689+00:00"}
+{"d": 87.08808911967033, "event": "signal_check", "k": 93.92868079915227, "kind": "entry", "pending": null, "signal": false, "symbol": "VEA", "timestamp": "2026-08-04T16:43:21.881051+00:00"}
+{"d": 94.83625976737132, "event": "signal_check", "k": 96.8344540772369, "kind": "entry", "pending": null, "signal": false, "symbol": "VEU", "timestamp": "2026-08-04T16:43:21.883437+00:00"}
+{"d": 89.22827512741264, "event": "signal_check", "k": 93.18713450292387, "kind": "entry", "pending": null, "signal": false, "symbol": "VFLO", "timestamp": "2026-08-04T16:43:21.885770+00:00"}
+{"d": 84.93243579033098, "event": "signal_check", "k": 91.72276524644958, "kind": "entry", "pending": null, "signal": false, "symbol": "VGK", "timestamp": "2026-08-04T16:43:21.888148+00:00"}
+{"d": 92.3734925248299, "event": "signal_check", "k": 97.20336249684392, "kind": "entry", "pending": null, "signal": false, "symbol": "VIG", "timestamp": "2026-08-04T16:43:21.890515+00:00"}
+{"d": 37.90600487916952, "event": "signal_check", "k": 45.49469964664322, "kind": "entry", "pending": null, "signal": false, "symbol": "VLO", "timestamp": "2026-08-04T16:43:21.892802+00:00"}
+{"d": 61.80860484727629, "event": "signal_check", "k": 68.45538398817716, "kind": "entry", "pending": null, "signal": false, "symbol": "VNO", "timestamp": "2026-08-04T16:43:21.895164+00:00"}
+{"d": 96.50313106830465, "event": "signal_check", "k": 97.56669892870514, "kind": "entry", "pending": null, "signal": false, "symbol": "VO", "timestamp": "2026-08-04T16:43:21.897478+00:00"}
+{"d": 19.03298707379881, "event": "signal_check", "k": 24.80499796680336, "kind": "entry", "pending": {"k_at_cross": 24.80499796680336}, "signal": false, "symbol": "VOD", "timestamp": "2026-08-04T16:43:21.899793+00:00"}
+{"d": 97.48662043857736, "event": "signal_check", "k": 97.57007329143168, "kind": "entry", "pending": null, "signal": false, "symbol": "VOO", "timestamp": "2026-08-04T16:43:21.902206+00:00"}
+{"d": 96.86430527177917, "event": "signal_check", "k": 96.89490297708107, "kind": "entry", "pending": null, "signal": false, "symbol": "VOOG", "timestamp": "2026-08-04T16:43:21.904535+00:00"}
+{"d": 58.12795058661575, "event": "signal_check", "k": 85.59963662715735, "kind": "entry", "pending": null, "signal": false, "symbol": "VSXY", "timestamp": "2026-08-04T16:43:21.906944+00:00"}
+{"d": 97.1004525831549, "event": "signal_check", "k": 97.80154095701566, "kind": "entry", "pending": null, "signal": false, "symbol": "VT", "timestamp": "2026-08-04T16:43:21.909352+00:00"}
+{"d": 97.86541001309627, "event": "signal_check", "k": 98.10296485515505, "kind": "entry", "pending": null, "signal": false, "symbol": "VTI", "timestamp": "2026-08-04T16:43:21.911682+00:00"}
+{"d": 54.05092592592609, "event": "signal_check", "k": 60.06944444444434, "kind": "entry", "pending": null, "signal": false, "symbol": "VTRS", "timestamp": "2026-08-04T16:43:21.914144+00:00"}
+{"d": 88.64897339588968, "event": "signal_check", "k": 96.30462022869573, "kind": "entry", "pending": null, "signal": false, "symbol": "VTV", "timestamp": "2026-08-04T16:43:21.916483+00:00"}
+{"d": 95.39197455255486, "event": "signal_check", "k": 96.9348451451415, "kind": "entry", "pending": null, "signal": false, "symbol": "VTWO", "timestamp": "2026-08-04T16:43:21.918911+00:00"}
+{"d": 96.04305370775565, "event": "signal_check", "k": 95.99639611203611, "kind": "entry", "pending": null, "signal": false, "symbol": "VUG", "timestamp": "2026-08-04T16:43:21.921200+00:00"}
+{"d": 93.03733998876824, "event": "signal_check", "k": 96.37085091773598, "kind": "entry", "pending": null, "signal": false, "symbol": "VXUS", "timestamp": "2026-08-04T16:43:21.923616+00:00"}
+{"d": 94.22686864483798, "event": "signal_check", "k": 96.96771912111365, "kind": "entry", "pending": null, "signal": false, "symbol": "VYM", "timestamp": "2026-08-04T16:43:21.926190+00:00"}
+{"d": 61.84638478813932, "event": "signal_check", "k": 42.857711442786076, "kind": "entry", "pending": null, "signal": false, "symbol": "VZ", "timestamp": "2026-08-04T16:43:21.928525+00:00"}
+{"d": 92.96183659075648, "event": "signal_check", "k": 92.42955874534829, "kind": "entry", "pending": null, "signal": false, "symbol": "WCLD", "timestamp": "2026-08-04T16:43:21.930916+00:00"}
+{"d": 19.856248005019733, "event": "signal_check", "k": 32.427086717963725, "kind": "entry", "pending": {"k_at_cross": 20.940795231672265}, "signal": false, "symbol": "WKC", "timestamp": "2026-08-04T16:43:21.933199+00:00"}
+{"d": 87.19698639559272, "event": "signal_check", "k": 91.44454410371229, "kind": "entry", "pending": null, "signal": false, "symbol": "WRBY", "timestamp": "2026-08-04T16:43:21.935522+00:00"}
+{"d": 91.3991044617117, "event": "signal_check", "k": 92.93535596056627, "kind": "entry", "pending": null, "signal": false, "symbol": "WSBC", "timestamp": "2026-08-04T16:43:21.937824+00:00"}
+{"d": 94.29453953312925, "event": "signal_check", "k": 95.5524389752634, "kind": "entry", "pending": null, "signal": false, "symbol": "WSM", "timestamp": "2026-08-04T16:43:21.940347+00:00"}
+{"d": 94.22966195826295, "event": "signal_check", "k": 94.88059163059161, "kind": "entry", "pending": null, "signal": false, "symbol": "WT", "timestamp": "2026-08-04T16:43:21.942686+00:00"}
+{"d": 95.59115661043812, "event": "signal_check", "k": 97.76752909379353, "kind": "entry", "pending": null, "signal": false, "symbol": "WY", "timestamp": "2026-08-04T16:43:21.945068+00:00"}
+{"d": 29.184063008932625, "event": "signal_check", "k": 34.24680975895939, "kind": "entry", "pending": null, "signal": false, "symbol": "XLE", "timestamp": "2026-08-04T16:43:21.947455+00:00"}
+{"d": 96.90134942694725, "event": "signal_check", "k": 97.21417616032397, "kind": "entry", "pending": null, "signal": false, "symbol": "XLG", "timestamp": "2026-08-04T16:43:21.949767+00:00"}
+{"d": 96.80792117789174, "event": "signal_check", "k": 96.61066456914837, "kind": "entry", "pending": null, "signal": false, "symbol": "XLI", "timestamp": "2026-08-04T16:43:21.952304+00:00"}
+{"d": 20.138513229230174, "event": "signal_check", "k": 26.58353425758467, "kind": "entry", "pending": null, "signal": true, "symbol": "XLP", "timestamp": "2026-08-04T16:43:21.954696+00:00"}
+{"d": 53.488724800749885, "event": "signal_check", "k": 51.979606188466896, "kind": "entry", "pending": null, "signal": false, "symbol": "XLRE", "timestamp": "2026-08-04T16:43:21.957122+00:00"}
+{"d": 33.274867070861774, "event": "signal_check", "k": 34.354515742499466, "kind": "entry", "pending": null, "signal": false, "symbol": "XLV", "timestamp": "2026-08-04T16:43:21.959517+00:00"}
+{"d": 90.70915323415682, "event": "signal_check", "k": 87.86089136482713, "kind": "entry", "pending": null, "signal": false, "symbol": "XLY", "timestamp": "2026-08-04T16:43:21.961782+00:00"}
+{"d": 66.21290257648941, "event": "signal_check", "k": 69.55138888888877, "kind": "entry", "pending": null, "signal": false, "symbol": "XMAX", "timestamp": "2026-08-04T16:43:21.964178+00:00"}
+{"d": 25.786409863515996, "event": "signal_check", "k": 23.770590776331414, "kind": "entry", "pending": null, "signal": false, "symbol": "XOP", "timestamp": "2026-08-04T16:43:21.966544+00:00"}
+{"d": 85.26396192008173, "event": "signal_check", "k": 90.83289704309031, "kind": "entry", "pending": null, "signal": false, "symbol": "XRAY", "timestamp": "2026-08-04T16:43:21.968933+00:00"}
+{"d": 88.0654886652377, "event": "signal_check", "k": 93.67532724606798, "kind": "entry", "pending": null, "signal": false, "symbol": "XRT", "timestamp": "2026-08-04T16:43:21.971325+00:00"}
+{"d": 71.39628365908008, "event": "signal_check", "k": 83.7634418198668, "kind": "entry", "pending": null, "signal": false, "symbol": "XYZ", "timestamp": "2026-08-04T16:43:21.973647+00:00"}
+{"d": 84.9524056767048, "event": "signal_check", "k": 86.35812958242872, "kind": "entry", "pending": null, "signal": false, "symbol": "YETI", "timestamp": "2026-08-04T16:43:21.976029+00:00"}
+{"d": 80.32958553791885, "event": "signal_check", "k": 79.97685185185183, "kind": "entry", "pending": null, "signal": false, "symbol": "ZGN", "timestamp": "2026-08-04T16:43:21.978441+00:00"}
+{"d": 91.82774232873977, "event": "signal_check", "k": 94.27857270919958, "kind": "entry", "pending": null, "signal": false, "symbol": "ZION", "timestamp": "2026-08-04T16:43:21.980740+00:00"}
+{"d": 72.69593516823484, "event": "signal_check", "k": 51.42113883803818, "kind": "entry", "pending": null, "signal": false, "symbol": "ZTO", "timestamp": "2026-08-04T16:43:21.983170+00:00"}
+{"d": 36.42972997705893, "event": "signal_check", "k": 59.37510058409779, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "DNTH", "timestamp": "2026-08-04T16:43:21.985845+00:00", "trend_intact": true}
+{"d": 88.98642572527852, "event": "signal_check", "k": 88.06903816376071, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "OVERBOUGHT_HOLD", "symbol": "FHN", "timestamp": "2026-08-04T16:43:21.988427+00:00", "trend_intact": true}
+{"d": 77.96223514601358, "event": "signal_check", "k": 86.10125429024491, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "GPN", "timestamp": "2026-08-04T16:43:21.991372+00:00", "trend_intact": true}
+{"d": 34.31372549019643, "event": "signal_check", "k": 47.712418300654036, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "ILF", "timestamp": "2026-08-04T16:43:21.994094+00:00", "trend_intact": true}
+{"d": 48.17256609336901, "event": "signal_check", "k": 63.70322301535788, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "LEVI", "timestamp": "2026-08-04T16:43:21.996787+00:00", "trend_intact": true}
+{"d": 39.65748397797114, "event": "signal_check", "k": 30.900556509075983, "kind": "exit", "signal": true, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "NDAQ", "timestamp": "2026-08-04T16:43:21.999540+00:00", "trend_intact": false}
+{"d": 30.27866470580406, "event": "signal_check", "k": 52.2475088995788, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "PCAR", "timestamp": "2026-08-04T16:43:22.002235+00:00", "trend_intact": true}
+{"d": 88.58269929384319, "event": "signal_check", "k": 85.93041140822051, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "OVERBOUGHT_HOLD", "symbol": "TGT", "timestamp": "2026-08-04T16:43:22.004621+00:00", "trend_intact": true}
+{"d": 79.343775826553, "event": "signal_check", "k": 79.30138210684173, "kind": "exit", "signal": true, "state_transitioned": false, "stochastic_state": "OVERBOUGHT_HOLD", "symbol": "TTAN", "timestamp": "2026-08-04T16:43:22.007145+00:00", "trend_intact": true}
+{"d": 77.14262097240817, "event": "signal_check", "k": 88.33606110201833, "kind": "exit", "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "XLF", "timestamp": "2026-08-04T16:43:22.009734+00:00", "trend_intact": true}
+{"event": "signal_check", "kind": "entry", "skipped": "interpolated_bars", "symbol": "REF", "timestamp": "2026-08-04T16:44:10.075266+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "interpolated_bars", "symbol": "REPL", "timestamp": "2026-08-04T16:44:10.075482+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "interpolated_bars", "symbol": "SEUS", "timestamp": "2026-08-04T16:44:10.075537+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "AVNS", "timestamp": "2026-08-04T16:44:10.075583+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "BRK-B", "timestamp": "2026-08-04T16:44:10.075625+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "BRTMU", "timestamp": "2026-08-04T16:44:10.075655+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "EWAVU", "timestamp": "2026-08-04T16:44:10.075687+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "MTAKU", "timestamp": "2026-08-04T16:44:10.075722+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "TMHC", "timestamp": "2026-08-04T16:44:10.075757+00:00"}
+{"event": "signal_check", "kind": "entry", "skipped": "historicals_not_found", "symbol": "XIIIU", "timestamp": "2026-08-04T16:44:10.075786+00:00"}
+{"closed_at": "2026-08-04T16:44:55.391315+00:00", "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b", "entry_price": 94.4399, "entry_time": "2026-08-03T18:43:02.749Z", "event": "trade_closed", "exit_order_id": "6a7216ef-d908-4956-ada3-3a4dbcce908a", "exit_price": 93.601, "exit_reason": "signal_exit", "exit_time": "2026-08-04T16:44:31.929Z", "pnl_pct": -0.888289801238662, "pnl_usd": -0.8388999999999953, "qty": 1, "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0", "stop_price": 90.7, "symbol": "NDAQ", "timestamp": "2026-08-04T16:44:55.392074+00:00"}
+{"closed_at": "2026-08-04T16:44:55.432648+00:00", "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9", "entry_price": 80.865, "entry_time": "2026-07-31T13:40:01.263Z", "event": "trade_closed", "exit_order_id": "6a7216f1-e841-4eb2-a550-b37981933881", "exit_price": 84.6001, "exit_reason": "overbought_hold_exit", "exit_time": "2026-08-04T16:44:33.433Z", "pnl_pct": 4.61893278921659, "pnl_usd": 3.7351000000000028, "qty": 1.0, "stop_order_id": "6a70cf6b-01df-4f1d-936c-7af985824f61", "stop_price": 73.01, "symbol": "TTAN", "timestamp": "2026-08-04T16:44:55.433312+00:00"}
+{"event": "exit_executed", "order_id": "6a7216ef-d908-4956-ada3-3a4dbcce908a", "qty": 1, "symbol": "NDAQ", "timestamp": "2026-08-04T16:44:59.768816+00:00"}
+{"event": "exit_executed", "order_id": "6a7216f1-e841-4eb2-a550-b37981933881", "qty": 1, "symbol": "TTAN", "timestamp": "2026-08-04T16:44:59.768943+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 1, "needs_cancel": false, "order_id": "6a72171a-bd5e-4ea2-8e5a-f2525ba7b607", "order_state": "filled", "symbol": "ASH", "timestamp": "2026-08-04T16:45:33.875440+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 6, "needs_cancel": false, "order_id": "6a72171b-c29a-4672-95fe-9d1ac0a43647", "order_state": "filled", "symbol": "DBRG", "timestamp": "2026-08-04T16:45:34.044012+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 1, "needs_cancel": false, "order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46", "order_state": "filled", "symbol": "EWW", "timestamp": "2026-08-04T16:45:34.199408+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 1, "needs_cancel": false, "order_id": "6a72171d-611e-45d1-b26b-9b73b430573a", "order_state": "filled", "symbol": "XLP", "timestamp": "2026-08-04T16:45:34.360875+00:00"}
+{"event": "entry_executed", "order_id": "6a72171a-bd5e-4ea2-8e5a-f2525ba7b607", "qty": 1, "symbol": "ASH", "timestamp": "2026-08-04T16:46:17.961237+00:00"}
+{"event": "stop_placed", "order_id": "6a721742-3ba6-407a-8591-e21731ee5d79", "qty": 1, "symbol": "ASH", "timestamp": "2026-08-04T16:46:17.961356+00:00"}
+{"event": "entry_executed", "order_id": "6a72171b-c29a-4672-95fe-9d1ac0a43647", "qty": 6, "symbol": "DBRG", "timestamp": "2026-08-04T16:46:17.961412+00:00"}
+{"event": "stop_placed", "order_id": "6a721744-3601-420f-87c0-dc7eccb7674e", "qty": 6, "symbol": "DBRG", "timestamp": "2026-08-04T16:46:17.961476+00:00"}
+{"event": "entry_executed", "order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46", "qty": 1, "symbol": "EWW", "timestamp": "2026-08-04T16:46:17.961516+00:00"}
+{"event": "stop_placed", "order_id": "6a721745-2914-40c9-8cac-a75dce267d7c", "qty": 1, "symbol": "EWW", "timestamp": "2026-08-04T16:46:17.961552+00:00"}
+{"event": "entry_executed", "order_id": "6a72171d-611e-45d1-b26b-9b73b430573a", "qty": 1, "symbol": "XLP", "timestamp": "2026-08-04T16:46:17.961600+00:00"}
+{"event": "stop_placed", "order_id": "6a721747-1d51-431b-bd48-1d4757b63a6a", "qty": 1, "symbol": "XLP", "timestamp": "2026-08-04T16:46:17.961636+00:00"}

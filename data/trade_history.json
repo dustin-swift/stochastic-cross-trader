@@ -62,5 +62,37 @@
     "stop_order_id": "6a70cf36-2941-468f-b7f8-c4d5c8693511",
     "stop_price": 28.1,
     "symbol": "HDV"
+  },
+  {
+    "closed_at": "2026-08-04T16:44:55.391315+00:00",
+    "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b",
+    "entry_price": 94.4399,
+    "entry_time": "2026-08-03T18:43:02.749Z",
+    "exit_order_id": "6a7216ef-d908-4956-ada3-3a4dbcce908a",
+    "exit_price": 93.601,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-04T16:44:31.929Z",
+    "pnl_pct": -0.888289801238662,
+    "pnl_usd": -0.8388999999999953,
+    "qty": 1,
+    "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0",
+    "stop_price": 90.7,
+    "symbol": "NDAQ"
+  },
+  {
+    "closed_at": "2026-08-04T16:44:55.432648+00:00",
+    "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
+    "entry_price": 80.865,
+    "entry_time": "2026-07-31T13:40:01.263Z",
+    "exit_order_id": "6a7216f1-e841-4eb2-a550-b37981933881",
+    "exit_price": 84.6001,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-04T16:44:33.433Z",
+    "pnl_pct": 4.61893278921659,
+    "pnl_usd": 3.7351000000000028,
+    "qty": 1.0,
+    "stop_order_id": "6a70cf6b-01df-4f1d-936c-7af985824f61",
+    "stop_price": 73.01,
+    "symbol": "TTAN"
   }
 ]

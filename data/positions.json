@@ -1,4 +1,22 @@
 {
+  "ASH": {
+    "entry_order_id": "6a72171a-bd5e-4ea2-8e5a-f2525ba7b607",
+    "entry_price": 72.1999,
+    "entry_time": "2026-08-04T16:45:14.535Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
+    "stop_price": 68.4
+  },
+  "DBRG": {
+    "entry_order_id": "6a72171b-c29a-4672-95fe-9d1ac0a43647",
+    "entry_price": 15.8399,
+    "entry_time": "2026-08-04T16:45:15.590Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a721744-3601-420f-87c0-dc7eccb7674e",
+    "stop_price": 15.76
+  },
   "DNTH": {
     "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
     "entry_price": 110.46,
@@ -7,6 +25,15 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
     "stop_price": 101.49
+  },
+  "EWW": {
+    "entry_order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46",
+    "entry_price": 77.01,
+    "entry_time": "2026-08-04T16:45:17.097Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a721745-2914-40c9-8cac-a75dce267d7c",
+    "stop_price": 74.86
   },
   "FHN": {
     "entry_order_id": "6a6cd017-68ff-45e0-94a6-a795a7586d6d",
@@ -44,15 +71,6 @@
     "stop_order_id": "6a70e128-0352-4b9d-af55-7ed638a135ec",
     "stop_price": 23.26
   },
-  "NDAQ": {
-    "entry_order_id": "6a70e136-daa3-423a-9be6-920843da0b9b",
-    "entry_price": 94.4399,
-    "entry_time": "2026-08-03T18:43:02.749Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a70e144-4fec-4495-8e68-172e91d0a8d0",
-    "stop_price": 90.7
-  },
   "PCAR": {
     "entry_order_id": "6a7209de-e105-4e9d-a0c6-03a737648184",
     "entry_price": 134.1557,
@@ -71,15 +89,6 @@
     "stop_order_id": "6a70cf51-999e-4ede-b96c-40c7ba59b6e9",
     "stop_price": 138.37
   },
-  "TTAN": {
-    "entry_order_id": "6a6ca5b1-0dc2-40dd-bc73-1d241f0fb3c9",
-    "entry_price": 80.865,
-    "entry_time": "2026-07-31T13:40:01.263Z",
-    "qty": 1.0,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a70cf6b-01df-4f1d-936c-7af985824f61",
-    "stop_price": 73.01
-  },
   "XLF": {
     "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
     "entry_price": 56.86,
@@ -89,5 +98,14 @@
     "stop_order_id": null,
     "stop_price": null,
     "unprotected_reason": "stop_placement_failed: Invalid trigger for fractional order (2026-07-30T17:41:12Z); manually managed by user, tracked here for reporting/exit-signal purposes only"
+  },
+  "XLP": {
+    "entry_order_id": "6a72171d-611e-45d1-b26b-9b73b430573a",
+    "entry_price": 84.8574,
+    "entry_time": "2026-08-04T16:45:18.151Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a721747-1d51-431b-bd48-1d4757b63a6a",
+    "stop_price": 82.52
   }
 }
