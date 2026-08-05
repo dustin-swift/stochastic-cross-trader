@@ -238,5 +238,53 @@
     "stop_order_id": "6a724247-8787-4130-b093-73c05efac4bd",
     "stop_price": 83.3,
     "symbol": "DINO"
+  },
+  {
+    "closed_at": "2026-08-05T16:14:11.305986+00:00",
+    "entry_order_id": "6a7209de-e105-4e9d-a0c6-03a737648184",
+    "entry_price": 134.1557,
+    "entry_time": "2026-08-04T15:48:47.119Z",
+    "exit_order_id": "6a736139-4576-4ca3-beb5-8eb26b548015",
+    "exit_price": 134.02,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-05T16:13:45.186Z",
+    "pnl_pct": -0.10115112514785807,
+    "pnl_usd": -0.13569999999998572,
+    "qty": 1.0,
+    "stop_order_id": "6a7209eb-ceae-48be-946b-94700eb00355",
+    "stop_price": 128.71,
+    "symbol": "PCAR"
+  },
+  {
+    "closed_at": "2026-08-05T16:14:11.343106+00:00",
+    "entry_order_id": "6a6ceea9-dbcb-4741-921a-5fa67e348542",
+    "entry_price": 144.6211,
+    "entry_time": "2026-07-31T18:51:21.97Z",
+    "exit_order_id": "6a73613a-8b80-49fa-bf59-7dab52bfcb43",
+    "exit_price": 147.6401,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-05T16:13:46.176Z",
+    "pnl_pct": 2.0875238813699903,
+    "pnl_usd": 3.018999999999977,
+    "qty": 1,
+    "stop_order_id": "6a70cf51-999e-4ede-b96c-40c7ba59b6e9",
+    "stop_price": 138.37,
+    "symbol": "TGT"
+  },
+  {
+    "closed_at": "2026-08-05T16:14:11.378856+00:00",
+    "entry_order_id": "6a72171d-611e-45d1-b26b-9b73b430573a",
+    "entry_price": 84.8574,
+    "entry_time": "2026-08-04T16:45:18.151Z",
+    "exit_order_id": "6a73613a-3df3-4170-9259-92f2ccb9c431",
+    "exit_price": 85.315,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-05T16:13:46.98Z",
+    "pnl_pct": 0.5392576251452397,
+    "pnl_usd": 0.45759999999999934,
+    "qty": 1,
+    "stop_order_id": "6a721747-1d51-431b-bd48-1d4757b63a6a",
+    "stop_price": 82.52,
+    "symbol": "XLP"
   }
 ]
