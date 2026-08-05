@@ -8,15 +8,6 @@
     "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
     "stop_price": 68.4
   },
-  "CDP": {
-    "entry_order_id": "6a72260f-99fa-4e59-9994-d21837f48a26",
-    "entry_price": 37.8199,
-    "entry_time": "2026-08-04T17:49:03.668Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a72261a-6780-485e-907b-1aa446d711a5",
-    "stop_price": 36.71
-  },
   "CLBK": {
     "entry_order_id": "6a722624-4fd2-4ab0-83c3-0f35d96aba9a",
     "entry_price": 10.7,
@@ -25,15 +16,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
     "stop_price": 10.3
-  },
-  "CNQ": {
-    "entry_order_id": "6a7241f4-56a0-4296-92c5-5802953a620e",
-    "entry_price": 46.1399,
-    "entry_time": "2026-08-04T19:48:04.608Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a72420a-de43-4e63-a00f-062e218561fa",
-    "stop_price": 44.29
   },
   "CUZ": {
     "entry_order_id": "6a72421b-3840-4d4c-8300-42b653e3b7e9",
@@ -44,15 +26,6 @@
     "stop_order_id": "6a72422a-0107-42bc-ae6d-246688c86e0f",
     "stop_price": 29.8
   },
-  "DINO": {
-    "entry_order_id": "6a724239-929f-4c65-8e0c-453450fc60e2",
-    "entry_price": 88.3299,
-    "entry_time": "2026-08-04T19:49:13.334Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a724247-8787-4130-b093-73c05efac4bd",
-    "stop_price": 83.3
-  },
   "DNTH": {
     "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
     "entry_price": 110.46,
@@ -61,15 +34,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
     "stop_price": 101.49
-  },
-  "EWH": {
-    "entry_order_id": "6a724253-7df1-46a1-a5f7-ea2d0b879eaa",
-    "entry_price": 22.94,
-    "entry_time": "2026-08-04T19:49:39.888Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a724262-cc74-4377-8ece-15f4444be645",
-    "stop_price": 22.52
   },
   "EWW": {
     "entry_order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46",
