@@ -40,6 +40,25 @@
 # The retry loop exists for the (rarer) case where yet another push lands in
 # the gap between our merge and our own push attempt.
 #
+# pending_entries.json exemption (2026-08-05): confirmed live -- the daily
+# universe screen resets this file to `{}` every morning (see
+# check_universe_screen.py) while an hourly cycle can independently be
+# mid-write with its own real pending-setup dict, and if both land close
+# together a genuine same-file conflict on THIS file alone was blocking the
+# entire push, including real trade data (positions.json/trade_history.json)
+# in the same commit. Investigated and ruled out an alternate "merge-base
+# needs a commit not a tree" theory -- tested directly, git accepts a tree
+# object for --merge-base identically to a commit here. The actual fix:
+# pending_entries.json is intraday-only, low-stakes scratch state (worst
+# case on a bad merge: a mid-confirmation candidate restarts its %K/%D cross
+# next cycle -- never a safety issue), so it's excluded from the strict
+# conflict check entirely -- strip_data_path() removes it from all three
+# trees before merge-tree runs, then graft_data_blob() re-adds THIS run's
+# own version afterward (local always wins for this one file, since it's
+# the most-recently-computed value). A genuine conflict in any other file
+# still fails loudly exactly as before -- this narrows what gets
+# auto-resolved, it doesn't loosen the conflict check in general.
+#
 # Usage:
 #   scripts/sync_state.sh pull   # refresh local data/ from origin/bot-state
 #   scripts/sync_state.sh push   # commit current data/ to origin/bot-state
@@ -48,6 +67,51 @@ set -euo pipefail
 cmd="${1:-}"
 cd "$(git rev-parse --show-toplevel)"
 BASE_MARKER=".bot_state_base"
+
+# PENDING_EXEMPT_PATH: the one file excluded from strict conflict detection
+# (see header comment). Path is relative to data/, matching how it appears
+# in `git ls-tree <tree> data`'s output.
+PENDING_EXEMPT_PATH="pending_entries.json"
+
+# strip_data_path <tree> <path-under-data> -- returns a new tree identical
+# to <tree> but with data/<path> removed entirely (a no-op, returning <tree>
+# unchanged, if that path wasn't present). Used to make a 3-way merge blind
+# to a specific low-stakes file so a conflict there can never block it.
+strip_data_path() {
+    local tree="$1" path="$2" dt new_dt
+    dt=$(git ls-tree "$tree" data | awk '{print $3}')
+    if [ -z "$dt" ]; then
+        echo "$tree"
+        return 0
+    fi
+    new_dt=$(git ls-tree "$dt" | grep -v "	${path}\$" || true)
+    if [ -z "$new_dt" ]; then
+        # data/ would become empty (this exempted path was its only entry)
+        # -- point "data" at an actual empty tree object rather than an
+        # empty-list `git mktree`, which would produce a root tree with no
+        # "data" entry at all and break the "root tree = exactly one data
+        # entry" invariant the rest of this script relies on. Vanishingly
+        # unlikely in practice (data/ always has candidates.json etc.
+        # alongside pending_entries.json), but correct is cheap here.
+        local empty_tree
+        empty_tree=$(printf "" | git mktree)
+        printf "040000 tree %s\tdata\n" "$empty_tree" | git mktree
+        return 0
+    fi
+    new_dt=$(echo "$new_dt" | git mktree)
+    printf "040000 tree %s\tdata\n" "$new_dt" | git mktree
+}
+
+# graft_data_blob <tree> <path-under-data> <blob-sha> -- returns a new tree
+# identical to <tree> but with data/<path> set to <blob-sha> (added or
+# replaced). Used to re-insert the exempted file after a merge that never
+# saw it.
+graft_data_blob() {
+    local tree="$1" path="$2" blob="$3" dt new_dt
+    dt=$(git ls-tree "$tree" data | awk '{print $3}')
+    new_dt=$( { [ -n "$dt" ] && git ls-tree "$dt" | grep -v "	${path}\$"; printf "100644 blob %s\t%s\n" "$blob" "$path"; } | git mktree )
+    printf "040000 tree %s\tdata\n" "$new_dt" | git mktree
+}
 
 pull() {
     if ! git fetch origin bot-state 2>/dev/null; then
@@ -124,10 +188,19 @@ push() {
         if [ -n "$remote_head" ] && [ "$remote_head" != "$cur_parent" ]; then
             echo "sync_state push: bot-state moved since our pull (attempt $attempt/$max_attempts) -- merging before pushing" >&2
             local remote_tree merge_out merge_status merge_err merged_tree
+            local our_pending_blob stripped_base stripped_remote stripped_cur
             remote_tree=$(git rev-parse "${remote_head}^{tree}")
+
+            # Our own pending_entries.json (may be absent) -- carried through
+            # the merge separately, see header comment and strip/graft above.
+            our_pending_blob=$(git rev-parse -q --verify "${cur_tree}:data/${PENDING_EXEMPT_PATH}" 2>/dev/null || echo "")
+            stripped_base=$(strip_data_path "$base_tree" "$PENDING_EXEMPT_PATH")
+            stripped_remote=$(strip_data_path "$remote_tree" "$PENDING_EXEMPT_PATH")
+            stripped_cur=$(strip_data_path "$cur_tree" "$PENDING_EXEMPT_PATH")
+
             merge_err=$(mktemp)
             set +e
-            merge_out=$(git merge-tree --write-tree --merge-base="$base_tree" "$remote_tree" "$cur_tree" 2>"$merge_err")
+            merge_out=$(git merge-tree --write-tree --merge-base="$stripped_base" "$stripped_remote" "$stripped_cur" 2>"$merge_err")
             merge_status=$?
             set -e
 
@@ -140,6 +213,9 @@ push() {
             rm -f "$merge_err"
 
             merged_tree=$(echo "$merge_out" | head -1)
+            if [ -n "$our_pending_blob" ]; then
+                merged_tree=$(graft_data_blob "$merged_tree" "$PENDING_EXEMPT_PATH" "$our_pending_blob")
+            fi
             cur_parent="$remote_head"
             cur_tree="$merged_tree"
             base_tree="$remote_tree"
