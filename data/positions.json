@@ -35,15 +35,6 @@
     "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
     "stop_price": 101.49
   },
-  "FHN": {
-    "entry_order_id": "6a6cd017-68ff-45e0-94a6-a795a7586d6d",
-    "entry_price": 25.6899,
-    "entry_time": "2026-07-31T16:40:56.074Z",
-    "qty": 4,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a70cf00-b5bb-4132-ae1d-1f0f6be15ca9",
-    "stop_price": 24.91
-  },
   "GBTG": {
     "entry_order_id": "6a736ed6-e3db-45ab-b003-582afe42fb32",
     "entry_price": 9.4362,
@@ -61,5 +52,14 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a",
     "stop_price": 34.47
+  },
+  "MAC": {
+    "entry_order_id": "6a737e39-37d9-4386-8abb-1aaf732eb875",
+    "entry_price": 25.6099,
+    "entry_time": "2026-08-05T18:17:30.095Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a737e4a-5865-4a86-a855-2c4e236445b5",
+    "stop_price": 24.68
   }
 }
