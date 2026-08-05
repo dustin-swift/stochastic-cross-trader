@@ -44,15 +44,6 @@
     "stop_order_id": "6a736ef2-bfca-4e6b-9d9a-5a1433260a17",
     "stop_price": 9.39
   },
-  "ILF": {
-    "entry_order_id": "6a7209c6-bb20-496e-a321-3aaa0a541a35",
-    "entry_price": 35.308,
-    "entry_time": "2026-08-04T15:48:22.455Z",
-    "qty": 3.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a",
-    "stop_price": 34.47
-  },
   "MAC": {
     "entry_order_id": "6a737e39-37d9-4386-8abb-1aaf732eb875",
     "entry_price": 25.6099,

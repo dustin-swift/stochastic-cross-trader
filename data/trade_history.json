@@ -334,5 +334,21 @@
     "stop_order_id": "6a70cf00-b5bb-4132-ae1d-1f0f6be15ca9",
     "stop_price": 24.91,
     "symbol": "FHN"
+  },
+  {
+    "closed_at": "2026-08-05T21:58:21.837697+00:00",
+    "entry_order_id": "6a7209c6-bb20-496e-a321-3aaa0a541a35",
+    "entry_price": 35.308,
+    "entry_time": "2026-08-04T15:48:22.455Z",
+    "exit_order_id": "6a738a96-a694-4233-bc38-a86cfc65d094",
+    "exit_price": 35.1801,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-05T19:10:14.224Z",
+    "pnl_pct": -0.3622408519315612,
+    "pnl_usd": -0.3836999999999904,
+    "qty": 3.0,
+    "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a",
+    "stop_price": 34.47,
+    "symbol": "ILF"
   }
 ]
