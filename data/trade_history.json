@@ -286,5 +286,37 @@
     "stop_order_id": "6a721747-1d51-431b-bd48-1d4757b63a6a",
     "stop_price": 82.52,
     "symbol": "XLP"
+  },
+  {
+    "closed_at": "2026-08-05T17:07:37.193502+00:00",
+    "entry_order_id": "6a72171c-78d5-4d39-9339-1ed8e9118a46",
+    "entry_price": 77.01,
+    "entry_time": "2026-08-04T16:45:17.097Z",
+    "exit_order_id": "6a736dc8-cb5e-4fd5-9f44-7735f8bf4713",
+    "exit_price": 77.2101,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-05T17:07:20.854Z",
+    "pnl_pct": 0.25983638488507044,
+    "pnl_usd": 0.20009999999999195,
+    "qty": 1,
+    "stop_order_id": "6a721745-2914-40c9-8cac-a75dce267d7c",
+    "stop_price": 74.86,
+    "symbol": "EWW"
+  },
+  {
+    "closed_at": "2026-08-05T17:07:37.257725+00:00",
+    "entry_order_id": "6a6b8c8a-a429-4622-9602-01cefe6a90cd",
+    "entry_price": 56.86,
+    "entry_time": "2026-07-30T17:40:33Z",
+    "exit_order_id": "6a736dc9-287d-4e6b-8470-f3e8e5a6707c",
+    "exit_price": 57.9901,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-05T17:07:22.073Z",
+    "pnl_pct": 1.987513190291934,
+    "pnl_usd": 0.3975025040999996,
+    "qty": 0.351741,
+    "stop_order_id": null,
+    "stop_price": null,
+    "symbol": "XLF"
   }
 ]
