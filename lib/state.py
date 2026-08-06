@@ -135,6 +135,10 @@ def close_trade_record(
     exit_order_id: str | None,
     exit_reason: str,
     closed_at: str,
+    exit_k: float | None = None,
+    exit_d: float | None = None,
+    exit_prev_k: float | None = None,
+    exit_prev_d: float | None = None,
 ) -> dict:
     """Build a closed-trade record from an open position dict + exit info.
 
@@ -142,6 +146,20 @@ def close_trade_record(
     before this cycle had to move on) -- pnl fields are then also None rather
     than a fabricated number. Pure function so the pnl math is unit-testable
     without touching the filesystem or a broker.
+
+    Stochastic detail (2026-08-05, at the user's request for post-trade
+    review -- "I need to look at each trade to determine what's working and
+    what's not working"): `entry_k`/`entry_d`/`entry_prev_k`/`entry_prev_d`
+    are read straight off `position` -- the hourly-signal-check skill writes
+    those onto positions.json at entry time from check_hourly_signals.py's
+    `entries[]` output (see that script's module docstring), so a position
+    written before this feature existed just carries them through as None,
+    no migration needed. `exit_k`/`exit_d`/`exit_prev_k`/`exit_prev_d` are
+    the exit-side equivalents, passed in directly by the caller (from that
+    same cycle's `exits[]` entry) since there's no other place to source
+    them from -- a stop-out found in reconciliation has no fresh oscillator
+    reading at all (the resting stop fired on its own between cycles), so
+    these stay None for that exit_reason, same as an earnings-forced exit.
     """
     qty = position["qty"]
     entry_price = position["entry_price"]
@@ -156,12 +174,20 @@ def close_trade_record(
         "entry_price": entry_price,
         "entry_time": position.get("entry_time"),
         "entry_order_id": position.get("entry_order_id"),
+        "entry_k": position.get("entry_k"),
+        "entry_d": position.get("entry_d"),
+        "entry_prev_k": position.get("entry_prev_k"),
+        "entry_prev_d": position.get("entry_prev_d"),
         "stop_price": position.get("stop_price"),
         "stop_order_id": position.get("stop_order_id"),
         "exit_price": exit_price,
         "exit_time": exit_time,
         "exit_order_id": exit_order_id,
         "exit_reason": exit_reason,
+        "exit_k": exit_k,
+        "exit_d": exit_d,
+        "exit_prev_k": exit_prev_k,
+        "exit_prev_d": exit_prev_d,
         "pnl_usd": pnl_usd,
         "pnl_pct": pnl_pct,
         "closed_at": closed_at,

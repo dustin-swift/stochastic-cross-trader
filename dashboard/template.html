@@ -533,6 +533,11 @@
     return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
   };
   const pnlClass = (n) => (n === null || n === undefined) ? '' : (n > 0 ? 'pos-text' : n < 0 ? 'neg-text' : '');
+  const fmtStoch = (prev, cur) => {
+    const p = (prev === null || prev === undefined) ? '—' : prev.toFixed(1);
+    const c = (cur === null || cur === undefined) ? '—' : cur.toFixed(1);
+    return p + ' &rarr; ' + c;
+  };
   const esc = (s) => String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   // ---- topbar ----
@@ -690,6 +695,10 @@
               <div><div class="kv-label">Quantity</div><div class="kv-value">${t.qty}</div></div>
               <div><div class="kv-label">Entry Time</div><div class="kv-value">${fmtDate(t.entry_time)}</div></div>
               <div><div class="kv-label">Stop Price</div><div class="kv-value">${fmtUsd(t.stop_price)}</div></div>
+              <div><div class="kv-label">Entry %K</div><div class="kv-value tab">${fmtStoch(t.entry_prev_k, t.entry_k)}</div></div>
+              <div><div class="kv-label">Entry %D</div><div class="kv-value tab">${fmtStoch(t.entry_prev_d, t.entry_d)}</div></div>
+              <div><div class="kv-label">Exit %K</div><div class="kv-value tab">${fmtStoch(t.exit_prev_k, t.exit_k)}</div></div>
+              <div><div class="kv-label">Exit %D</div><div class="kv-value tab">${fmtStoch(t.exit_prev_d, t.exit_d)}</div></div>
               <div><div class="kv-label">Entry Order</div><div class="kv-value">${esc(t.entry_order_id)}</div></div>
               <div><div class="kv-label">Exit Order</div><div class="kv-value">${esc(t.exit_order_id)}</div></div>
               <div><div class="kv-label">Closed At</div><div class="kv-value">${fmtDate(t.closed_at)}</div></div>

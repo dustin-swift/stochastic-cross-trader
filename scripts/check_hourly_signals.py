@@ -34,13 +34,24 @@ Input (JSON, via --input file or stdin):
 
 Output (JSON, to stdout):
   {
-    "entries": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "atr14": 3.2,
-                 "estimated_stop_price": 202.1, "qty": 1}],
-    "exits": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
+    "entries": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "prev_k": 18.6, "prev_d": 15.2,
+                 "atr14": 3.2, "estimated_stop_price": 202.1, "qty": 1}],
+    "exits": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "prev_k": 48.3, "prev_d": 44.7,
+               "stochastic_state": "NORMAL"}],
     "position_states": [{"symbol": "MSFT", "k": 41.0, "d": 45.2, "stochastic_state": "NORMAL"}],
     "candidate_states": [{"symbol": "AAPL", "k": 24.1, "d": 19.8, "pending": null}],
     "stale_cycle": false, "cycle_gap_minutes": 62.3
   }
+
+`prev_k`/`prev_d` on both `entries[]` and `exits[]` (2026-08-05, at the user's
+request for post-trade review data) are the PRIOR bar's %K/%D -- i.e. the
+reading one hour before the bar that actually confirmed the entry/exit. This
+is purely for later human review (trade_history.json persists both the
+trigger-bar and prior-bar readings for every closed trade -- see
+lib.state.close_trade_record) and doesn't feed into any decision here; `None`
+whenever there weren't at least 2 valid bars to look back across, or for a
+forced `earnings_exit` (which bypasses the oscillator check entirely, so
+there's no k/d/prev_k/prev_d to report either).
 
 `position_states` reports the (possibly just-updated) `stochastic_state` for
 every open position checked this cycle, whether or not it exited — the skill
@@ -293,6 +304,9 @@ def run(
 
         sdf = _stoch(bars, stoch_cfg)
         k, d = sdf["k"].iloc[-1], sdf["d"].iloc[-1]
+        prev_k, prev_d = sdf["k"].iloc[-2], sdf["d"].iloc[-2]
+        prev_k = None if pd.isna(prev_k) else float(prev_k)
+        prev_d = None if pd.isna(prev_d) else float(prev_d)
         advance = advance_pending_entry(
             prior_pending,
             sdf,
@@ -303,7 +317,17 @@ def run(
         signal = advance["signal"]
         new_pending = advance["pending"]
 
-        logger.log("signal_check", symbol=symbol, kind="entry", signal=signal, k=k, d=d, pending=new_pending)
+        logger.log(
+            "signal_check",
+            symbol=symbol,
+            kind="entry",
+            signal=signal,
+            k=k,
+            d=d,
+            prev_k=prev_k,
+            prev_d=prev_d,
+            pending=new_pending,
+        )
         candidate_states.append({"symbol": symbol, "k": k, "d": d, "pending": new_pending})
 
         if signal and stale_cycle:
@@ -344,6 +368,8 @@ def run(
                     "sector": c.get("sector"),
                     "k": k,
                     "d": d,
+                    "prev_k": prev_k,
+                    "prev_d": prev_d,
                     "atr14": atr14,
                     "last_close": last_close,
                     "estimated_stop_price": estimated_stop,
@@ -369,7 +395,15 @@ def run(
                 stochastic_state=prior_state,
             )
             position_states.append({"symbol": symbol, "k": None, "d": None, "stochastic_state": prior_state})
-            exits.append({"symbol": symbol, "k": None, "d": None, "stochastic_state": prior_state, "exit_reason": "earnings_exit"})
+            exits.append({
+                "symbol": symbol,
+                "k": None,
+                "d": None,
+                "prev_k": None,
+                "prev_d": None,
+                "stochastic_state": prior_state,
+                "exit_reason": "earnings_exit",
+            })
             continue  # forced exit overrides the normal oscillator check entirely for this cycle
 
         if len(bars) < 2:
@@ -387,6 +421,9 @@ def run(
 
         sdf = _stoch(bars, stoch_cfg)
         k, d = sdf["k"].iloc[-1], sdf["d"].iloc[-1]
+        prev_k, prev_d = sdf["k"].iloc[-2], sdf["d"].iloc[-2]
+        prev_k = None if pd.isna(prev_k) else float(prev_k)
+        prev_d = None if pd.isna(prev_d) else float(prev_d)
 
         # State update happens BEFORE the exit check — a bar that newly spikes
         # both lines above the overbought threshold must already suppress a
@@ -408,6 +445,8 @@ def run(
             signal=signal,
             k=k,
             d=d,
+            prev_k=prev_k,
+            prev_d=prev_d,
             stochastic_state=new_state,
             state_transitioned=new_state != prior_state,
             trend_intact=trend_intact,
@@ -416,7 +455,15 @@ def run(
         position_states.append({"symbol": symbol, "k": k, "d": d, "stochastic_state": new_state})
         if signal:
             reason = "overbought_hold_exit" if new_state == STATE_OVERBOUGHT_HOLD else "signal_exit"
-            exits.append({"symbol": symbol, "k": k, "d": d, "stochastic_state": new_state, "exit_reason": reason})
+            exits.append({
+                "symbol": symbol,
+                "k": k,
+                "d": d,
+                "prev_k": prev_k,
+                "prev_d": prev_d,
+                "stochastic_state": new_state,
+                "exit_reason": reason,
+            })
 
     return {
         "entries": entries,

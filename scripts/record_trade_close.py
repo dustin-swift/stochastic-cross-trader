@@ -13,11 +13,17 @@ Input (JSON, via --input file or stdin):
   {
     "symbol": "AAPL",
     "position": {"entry_price": 200.0, "qty": 0.5, "entry_time": "...",
-                 "entry_order_id": "...", "stop_price": 195.0, "stop_order_id": "..."},
+                 "entry_order_id": "...", "stop_price": 195.0, "stop_order_id": "...",
+                 "entry_k": 24.1, "entry_d": 19.8, "entry_prev_k": 18.6, "entry_prev_d": 15.2},
     "exit_price": 205.0,          # null if the fill price couldn't be confirmed
     "exit_time": "2026-07-30T15:00:00Z",
     "exit_order_id": "order-3",   # the stop order id for a stop_out, the new sell order id otherwise
-    "exit_reason": "stop_out" | "signal_exit" | "earnings_exit"
+    "exit_reason": "stop_out" | "signal_exit" | "overbought_hold_exit" | "earnings_exit",
+    "exit_k": 41.0, "exit_d": 45.2, "exit_prev_k": 48.3, "exit_prev_d": 44.7
+    # exit_k/exit_d/exit_prev_k/exit_prev_d (2026-08-05, post-trade review data)
+    # come straight from that cycle's check_hourly_signals.py exits[] entry --
+    # omit them (or pass null) for a stop_out, which has no fresh oscillator
+    # reading since the resting stop fired on its own between cycles.
   }
 
 Output (JSON, to stdout): the full trade-history record as written.
@@ -62,6 +68,10 @@ def main() -> None:
         exit_order_id=payload.get("exit_order_id"),
         exit_reason=payload["exit_reason"],
         closed_at=closed_at,
+        exit_k=payload.get("exit_k"),
+        exit_d=payload.get("exit_d"),
+        exit_prev_k=payload.get("exit_prev_k"),
+        exit_prev_d=payload.get("exit_prev_d"),
     )
 
     store.append_trade_history(record)

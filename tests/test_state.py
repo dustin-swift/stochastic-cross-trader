@@ -81,6 +81,10 @@ def test_close_trade_record_computes_pnl():
         "entry_order_id": "entry-1",
         "stop_price": 95.0,
         "stop_order_id": "stop-1",
+        "entry_k": 24.1,
+        "entry_d": 19.8,
+        "entry_prev_k": 18.6,
+        "entry_prev_d": 15.2,
     }
     record = close_trade_record(
         symbol="AAPL",
@@ -90,6 +94,10 @@ def test_close_trade_record_computes_pnl():
         exit_order_id="exit-1",
         exit_reason="signal_exit",
         closed_at="2026-07-30T15:00:05Z",
+        exit_k=41.0,
+        exit_d=45.2,
+        exit_prev_k=48.3,
+        exit_prev_d=44.7,
     )
     assert record["pnl_usd"] == 20.0
     assert round(record["pnl_pct"], 4) == 10.0
@@ -97,6 +105,17 @@ def test_close_trade_record_computes_pnl():
     assert record["entry_order_id"] == "entry-1"
     assert record["exit_order_id"] == "exit-1"
     assert record["exit_reason"] == "signal_exit"
+    # Stochastic detail (2026-08-05, post-trade review data): entry-side
+    # comes from `position` (written by the skill at entry time), exit-side
+    # is passed in directly by the caller.
+    assert record["entry_k"] == 24.1
+    assert record["entry_d"] == 19.8
+    assert record["entry_prev_k"] == 18.6
+    assert record["entry_prev_d"] == 15.2
+    assert record["exit_k"] == 41.0
+    assert record["exit_d"] == 45.2
+    assert record["exit_prev_k"] == 48.3
+    assert record["exit_prev_d"] == 44.7
 
 
 def test_close_trade_record_handles_unknown_exit_price():
@@ -113,6 +132,30 @@ def test_close_trade_record_handles_unknown_exit_price():
     assert record["exit_price"] is None
     assert record["pnl_usd"] is None
     assert record["pnl_pct"] is None
+
+
+def test_close_trade_record_stochastic_fields_default_to_none():
+    # A position/stop_out written before this feature existed (or one with
+    # no fresh oscillator reading, e.g. a stop-out) must not error -- every
+    # stochastic field simply comes back None, no migration needed.
+    position = {"entry_price": 100.0, "qty": 1.0}
+    record = close_trade_record(
+        symbol="AAPL",
+        position=position,
+        exit_price=105.0,
+        exit_time="2026-07-30T15:00:00Z",
+        exit_order_id="exit-1",
+        exit_reason="stop_out",
+        closed_at="2026-07-30T15:00:05Z",
+    )
+    assert record["entry_k"] is None
+    assert record["entry_d"] is None
+    assert record["entry_prev_k"] is None
+    assert record["entry_prev_d"] is None
+    assert record["exit_k"] is None
+    assert record["exit_d"] is None
+    assert record["exit_prev_k"] is None
+    assert record["exit_prev_d"] is None
 
 
 def test_has_open_slot():

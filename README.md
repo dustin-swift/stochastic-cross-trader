@@ -55,8 +55,10 @@ pip install -r requirements.txt
   `positions.json` (open positions only — see `trade_history.json` below for closed trades),
   `trade_history.json` (every closed trade — stop-out, signal exit,
   overbought-hold exit, or earnings-forced exit — with entry/exit price, P&L,
-  and exit reason; this is what the dashboard reads for closed-trade
-  drill-down, since `positions.json` drops a trade the moment it closes),
+  exit reason, and the %K/%D readings on both the trigger bar and the prior
+  bar for entry and exit alike — see Trade-detail fields below; this is what
+  the dashboard reads for closed-trade drill-down, since `positions.json`
+  drops a trade the moment it closes),
   `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check, decision,
   order event, and alert). Not committed to `main` — see Cloud routines &
   state persistence below for where this data actually lives when running on
@@ -182,6 +184,32 @@ state still advances normally either way — only the entry itself is held
 back for that cycle. Exits are never affected by this guard: missing a
 chance to close risk is worse than a late one, unlike opening new risk on a
 possibly-stale read.
+
+## Trade-detail fields (2026-08-05)
+
+Every entry/exit decision carries the confirming bar's %K/%D *and* the prior
+bar's %K/%D — added at the user's request, specifically to support reviewing
+each closed trade after the fact and figuring out what's working versus
+what isn't, rather than just seeing an aggregate win rate.
+
+- `check_hourly_signals.py`'s `entries[]`/`exits[]` output includes `k`/`d`
+  (the trigger bar) and `prev_k`/`prev_d` (one hour earlier) for every
+  decision — `None` on either pair when there wasn't enough bar history to
+  look back, or for a forced `earnings_exit` (which bypasses the oscillator
+  check entirely, so there's nothing to report).
+- The hourly-signal-check skill writes `entry_k`/`entry_d`/`entry_prev_k`/
+  `entry_prev_d` onto the position in `positions.json` the moment it opens,
+  and passes `exit_k`/`exit_d`/`exit_prev_k`/`exit_prev_d` into
+  `record_trade_close.py` the moment it closes (see that script's docstring
+  for the input shape) — a `stop_out` exit has no exit-side reading, since
+  the resting stop fired on its own between cycles, not off a fresh check.
+- `trade_history.json` ends up with all eight fields per closed trade
+  (`entry_k`, `entry_d`, `entry_prev_k`, `entry_prev_d`, `exit_k`, `exit_d`,
+  `exit_prev_k`, `exit_prev_d`), alongside the price/P&L fields that were
+  already there — see `lib.state.close_trade_record`. The dashboard's closed-
+  trade detail drill-down (see Dashboard below) surfaces all eight per row.
+- Positions/trades written before this feature existed simply carry these
+  fields through as `None` — no backfill, no migration.
 
 ## Exit logic: overbought-hold refinement (spec §4)
 

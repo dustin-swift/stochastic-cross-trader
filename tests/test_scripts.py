@@ -313,12 +313,19 @@ def test_check_hourly_signals_end_to_end(tmp_path):
     entry = output["entries"][0]
     assert entry["k"] == 30
     assert entry["d"] == 22
+    assert entry["prev_k"] == 14  # post-trade review data (2026-08-05): the bar before the trigger
+    assert entry["prev_d"] == 15
     assert entry["last_close"] == 15
     assert entry["estimated_stop_price"] == 12.0  # 15 - 1.5*2.0
     assert entry["qty"] == 7  # round(100 / 15)
 
     assert [e["symbol"] for e in output["exits"]] == ["MSFT"]
-    assert output["exits"][0]["stochastic_state"] == "NORMAL"
+    exit_ = output["exits"][0]
+    assert exit_["stochastic_state"] == "NORMAL"
+    assert exit_["k"] == 16
+    assert exit_["d"] == 22
+    assert exit_["prev_k"] == 28
+    assert exit_["prev_d"] == 26
 
     assert [s["symbol"] for s in output["position_states"]] == ["MSFT"]
     assert output["position_states"][0]["stochastic_state"] == "NORMAL"
@@ -1076,6 +1083,44 @@ def test_record_trade_close_writes_history_and_logs(tmp_path):
 
     events = [e["event"] for e in _events(tmp_path)]
     assert events == ["trade_closed"]
+
+
+def test_record_trade_close_carries_stochastic_detail(tmp_path):
+    payload = {
+        "symbol": "AAPL",
+        "position": {
+            "entry_price": 200.0,
+            "qty": 1.0,
+            "entry_time": "2026-07-29T14:30:00Z",
+            "entry_order_id": "entry-1",
+            "stop_price": 195.0,
+            "stop_order_id": "stop-1",
+            "entry_k": 24.1,
+            "entry_d": 19.8,
+            "entry_prev_k": 18.6,
+            "entry_prev_d": 15.2,
+        },
+        "exit_price": 205.0,
+        "exit_time": "2026-07-30T15:00:00Z",
+        "exit_order_id": "exit-1",
+        "exit_reason": "signal_exit",
+        "exit_k": 41.0,
+        "exit_d": 45.2,
+        "exit_prev_k": 48.3,
+        "exit_prev_d": 44.7,
+    }
+
+    result = _run("record_trade_close.py", payload, ["--data-dir", str(tmp_path / "data")])
+    output = json.loads(result.stdout)
+
+    assert output["entry_k"] == 24.1
+    assert output["entry_d"] == 19.8
+    assert output["entry_prev_k"] == 18.6
+    assert output["entry_prev_d"] == 15.2
+    assert output["exit_k"] == 41.0
+    assert output["exit_d"] == 45.2
+    assert output["exit_prev_k"] == 48.3
+    assert output["exit_prev_d"] == 44.7
 
 
 def test_build_dashboard_renders_html_from_repo_state(tmp_path):
