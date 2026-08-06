@@ -8,15 +8,6 @@
     "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
     "stop_price": 10.3
   },
-  "GBTG": {
-    "entry_order_id": "6a736ed6-e3db-45ab-b003-582afe42fb32",
-    "entry_price": 9.4362,
-    "entry_time": "2026-08-05T17:11:50.292Z",
-    "qty": 11,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a736ef2-bfca-4e6b-9d9a-5a1433260a17",
-    "stop_price": 9.39
-  },
   "OII": {
     "entry_order_id": "6a74b334-a38f-4404-81ca-291d549d549c",
     "entry_price": 49.6496,
@@ -25,6 +16,24 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a74b345-cc0d-4e43-828b-4202ade92416",
     "stop_price": 46.18
+  },
+  "PVH": {
+    "entry_order_id": "6a74c223-9622-4125-9202-62e6e8d9a3b7",
+    "entry_price": 88.0099,
+    "entry_time": "2026-08-06T17:19:31.425Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a74c231-4dce-4870-a652-f6dff0efe644",
+    "stop_price": 83.1
+  },
+  "SBH": {
+    "entry_order_id": "6a74c240-08ff-42e7-a6ba-e58105ae72ae",
+    "entry_price": 16.1699,
+    "entry_time": "2026-08-06T17:20:01.18Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a74c24e-5b2c-45dd-978a-6762636f2485",
+    "stop_price": 15.13
   },
   "SBLK": {
     "entry_order_id": "6a74b352-3f94-41c4-b7a1-13a33c44beaf",
@@ -61,41 +70,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a74b3ae-5b6d-4814-971c-7d30d8f36e8e",
     "stop_price": 23.75
-  },
-  "GSAT": {
-    "entry_order_id": "6a74c1de-eb74-499e-bedb-44e696e8031d",
-    "entry_price": 83.3599,
-    "entry_time": "2026-08-06T17:18:22.252Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a74c1f4-082d-470f-9686-d56b06f4b7b7",
-    "stop_price": 81.63
-  },
-  "OZK": {
-    "entry_order_id": "6a74c207-6288-4f00-ba7c-880a40cdfd17",
-    "entry_price": 51.7499,
-    "entry_time": "2026-08-06T17:19:03.347Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a74c216-6441-4af2-a08d-03803425251e",
-    "stop_price": 50.16
-  },
-  "PVH": {
-    "entry_order_id": "6a74c223-9622-4125-9202-62e6e8d9a3b7",
-    "entry_price": 88.0099,
-    "entry_time": "2026-08-06T17:19:31.425Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a74c231-4dce-4870-a652-f6dff0efe644",
-    "stop_price": 83.1
-  },
-  "SBH": {
-    "entry_order_id": "6a74c240-08ff-42e7-a6ba-e58105ae72ae",
-    "entry_price": 16.1699,
-    "entry_time": "2026-08-06T17:20:01.18Z",
-    "qty": 6,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a74c24e-5b2c-45dd-978a-6762636f2485",
-    "stop_price": 15.13
   }
 }
