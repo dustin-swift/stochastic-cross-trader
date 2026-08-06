@@ -13,7 +13,7 @@
     "entry_price": 10.7,
     "entry_time": "2026-08-04T17:49:25.196Z",
     "qty": 9,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a722631-ba6f-458e-adbe-c02826814911",
     "stop_price": 10.3
   },
@@ -43,14 +43,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a736ef2-bfca-4e6b-9d9a-5a1433260a17",
     "stop_price": 9.39
-  },
-  "MAC": {
-    "entry_order_id": "6a737e39-37d9-4386-8abb-1aaf732eb875",
-    "entry_price": 25.6099,
-    "entry_time": "2026-08-05T18:17:30.095Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a737e4a-5865-4a86-a855-2c4e236445b5",
-    "stop_price": 24.68
   }
 }

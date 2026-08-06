@@ -350,5 +350,21 @@
     "stop_order_id": "6a7209d2-a332-4db4-a570-f8b894815d3a",
     "stop_price": 34.47,
     "symbol": "ILF"
+  },
+  {
+    "closed_at": "2026-08-06T13:32:22.407142+00:00",
+    "entry_order_id": "6a737e39-37d9-4386-8abb-1aaf732eb875",
+    "entry_price": 25.6099,
+    "entry_time": "2026-08-05T18:17:30.095Z",
+    "exit_order_id": "6a737e4a-5865-4a86-a855-2c4e236445b5",
+    "exit_price": 24.6,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-08-06T13:31:13.786Z",
+    "pnl_pct": -3.943396889484141,
+    "pnl_usd": -4.039599999999993,
+    "qty": 4,
+    "stop_order_id": "6a737e4a-5865-4a86-a855-2c4e236445b5",
+    "stop_price": 24.68,
+    "symbol": "MAC"
   }
 ]
