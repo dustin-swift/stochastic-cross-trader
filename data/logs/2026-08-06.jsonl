@@ -2003,3 +2003,4 @@
 {"event": "stop_placed", "qty": 1, "stop_order_id": "6a74d07a-6f9b-49dc-ab8d-d6727c4705c3", "stop_price": 77.76, "symbol": "ETSY", "timestamp": "2026-08-06T18:20:46.947310+00:00"}
 {"event": "entry_executed", "order_id": "6a74d085-6ac9-40ef-b11f-ef30c83d56d0", "qty": 6, "symbol": "REF", "timestamp": "2026-08-06T18:21:10.469302+00:00"}
 {"event": "stop_placed", "qty": 6, "stop_order_id": "6a74d092-6ed9-43c9-9df3-563df5976430", "stop_price": 14.33, "symbol": "REF", "timestamp": "2026-08-06T18:21:10.469439+00:00"}
+{"candidates_checked": 317, "candidates_unresolved": ["EA", "TMHC"], "circuit_breaker_tripped": false, "cycle_gap_minutes": 62.70363631666667, "entries_proposed": 2, "entries_taken": 2, "event": "cycle_summary", "exits_taken": 3, "slots_remaining": 5, "stale_cycle": false, "stop_outs_reconciled": 0, "timestamp": "2026-08-06T18:21:36.437609+00:00"}
