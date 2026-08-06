@@ -2,13 +2,24 @@
 already-computed stochastic DataFrame (see lib.indicators.stochastic) — no
 network calls. The "signal bar" is always the last row of the DataFrame.
 
-Note on spec section 3's condition 1 ("%K was below 20 on a prior bar"): a
-literal "%K crosses above 20" already implies the immediately-preceding bar
-was below 20, which would make that condition redundant. We keep it as an
-explicit, separately-checked condition (`lookback_bars`, default 1 = just the
-immediately-preceding bar) so it's harmless when redundant, but can be widened
-to look further back (a genuine oversold dip a few bars ago, not just brushing
-the line) via config without a code change if that's the intended reading.
+Basing-pattern requirement (`lookback_bars`, 2026-08-06 revision, at the
+user's direction): a literal "%K crosses above 20" already implies the
+immediately-preceding bar was below 20, so a `lookback_bars=1` check is
+mostly redundant with the crossing condition itself -- one bar dipping under
+20 and immediately bouncing can be ordinary noise in a downtrend, not a real
+reversal. `lookback_bars` now requires ALL of the N bars immediately before
+the crossing bar (not just one, and not just "any of them") to have been
+below `oversold_threshold` -- a genuine multi-bar basing/consolidation under
+the line, not a brush past it. This was widened from a v1 that checked "was
+it oversold *anywhere* in the lookback window" (`.any()`), which the
+2026-08-04 backtest notes correctly flagged as a no-op for lookback_bars > 1
+once the crossing condition already guarantees the immediately-preceding bar
+qualifies -- `.all()` is what actually makes a wider window stricter.
+Confirmed live as a real problem: CUZ/CNQ/DNTH/DINO all confirmed with %D
+barely above 20 (21-26 range) off a single-bar dip, several reversing for a
+loss within a day. Default is 2 (see config/strategy.yaml) -- one bar of
+confirmed basing below the immediately-crossing bar, not just the crossing
+bar's own predecessor.
 
 Entry logic (2026-08-04 dual-cross revision, see `advance_pending_entry`):
 the original rule fired the instant %K crossed above 20 and above %D in the
@@ -103,11 +114,12 @@ def advance_pending_entry(
     `oversold_threshold`, with %K at or below `k_invalidate_max` — fire the
     entry. Transitions:
 
-    - Not pending, %K crosses above threshold (prior-bar-oversold confirmed
-      per `lookback_bars`, spec §3 condition 1) -> becomes pending. If %D
-      has *also* already crossed on this same bar, falls through to the
-      pending-evaluation logic below immediately rather than forcing an
-      extra bar of waiting.
+    - Not pending, %K crosses above threshold, AND each of the
+      `lookback_bars` bars immediately before the crossing bar was also
+      below threshold (basing-pattern requirement, 2026-08-06 -- see module
+      docstring) -> becomes pending. If %D has *also* already crossed on
+      this same bar, falls through to the pending-evaluation logic below
+      immediately rather than forcing an extra bar of waiting.
     - Pending, current %K < threshold -> invalidated (reverts to not
       pending) — the reversal attempt failed, %K never got %D's
       confirmation before losing the level itself. No expiry timer; this is
@@ -130,8 +142,12 @@ def advance_pending_entry(
     if pending is None:
         prev_k = k.iloc[-2]
         crossed_above_threshold = prev_k < oversold_threshold <= cur_k
+        # Basing-pattern requirement (2026-08-06): ALL of the lookback_bars
+        # bars immediately before the crossing bar must have been oversold,
+        # not just one of them -- see module docstring for why .all() (not
+        # .any()) is what makes lookback_bars > 1 an actual stricter check.
         lookback_window = k.iloc[-(lookback_bars + 1) : -1]
-        was_oversold_prior = bool((lookback_window < oversold_threshold).any())
+        was_oversold_prior = bool((lookback_window < oversold_threshold).all())
         if not (crossed_above_threshold and was_oversold_prior):
             return {"pending": None, "signal": False}
         pending = {"k_at_cross": float(cur_k)}

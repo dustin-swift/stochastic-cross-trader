@@ -165,6 +165,23 @@ Pending state is intraday-only: `scripts/check_universe_screen.py` resets
 `data/pending_entries.json` to `{}` on every successful run, so a setup mid-
 confirmation never silently carries into the next trading day.
 
+**Basing-pattern requirement (`stochastic.entry_lookback_bars`, 2026-08-06,
+at the user's direction):** a literal "%K crosses above 20" already implies
+the immediately-preceding bar was below 20, so requiring just that one bar
+adds almost nothing — a single bar dipping under 20 and immediately
+bouncing can be ordinary noise in a downtrend, not a real reversal. Live
+review found several losing entries (CUZ, CNQ, DNTH, DINO) all confirmed
+with %D barely above 20 (21-26 range) off exactly that kind of single-bar
+dip. `entry_lookback_bars` (default 2) now requires **all** of the N bars
+immediately before the crossing bar to have been oversold, not just the
+crossing bar's own predecessor — a genuine short basing/consolidation run,
+not a brush past the line. Raised conservatively from 1 to 2 as a first
+step; consider 3 if `signal_exit` frequency is still high after review (see
+Trade-detail fields above for the data to make that call from). This
+supersedes an earlier version of this feature that used `.any()` instead of
+`.all()` across the lookback window, which made widening it a no-op above 1
+— see `lib/signals.py`'s module docstring for the full history.
+
 **Missed-cycle guard (2026-08-04, confirmed live on DNTH/ILF/PCAR):** the
 crossing check above only ever compares the two most recent bars it was
 handed — it has no way to know how much real time actually separates them.
@@ -184,6 +201,43 @@ state still advances normally either way — only the entry itself is held
 back for that cycle. Exits are never affected by this guard: missing a
 chance to close risk is worse than a late one, unlike opening new risk on a
 possibly-stale read.
+
+## Market-regime filter (config["market_filter"], 2026-08-06)
+
+Only opens NEW positions while the broad market itself is trending — gates
+section 5 (entries) of the hourly-signal-check skill, exactly like the
+circuit breaker; exits and existing positions are never affected. Built
+after a live review found two positions (CNQ, DINO) enter within a minute
+of each other and reverse for a loss within seconds of each other the next
+day — correlated, not independent, failures. A choppy or declining broad
+market is exactly the condition where that kind of simultaneous reversal
+happens; this is also expected to bias new entries toward conditions more
+likely to reach `OVERBOUGHT_HOLD` (a real winner worth riding) instead of
+an immediate `signal_exit` reversal.
+
+`lib.market_filter.market_trend_intact` (fed SPY hourly bars by
+`scripts/check_market_trend.py`) requires the fast SMA to be **above** the
+slow SMA **and genuinely rising** (higher than it was `rising_lookback_bars`
+bars ago, default 5) — "above but flat" doesn't count, since a fast SMA
+that's above the slow SMA but no longer climbing isn't the trending
+condition this filter exists to require. Defaults: `fast_sma_period: 20`,
+`slow_sma_period: 200`, both computed on **hourly** bars, not daily — this
+system trades on hourly signals, so the regime read updates on the same
+cadence rather than lagging a full day behind. On hourly bars those period
+counts span roughly 3-4 trading days and ~5-7 weeks respectively (~6.5
+hourly bars per regular session) — deliberately different indicators from a
+same-numbered daily filter, not a relabeling of one.
+
+**SPY over QQQ**: the two aren't always correlated (QQQ skews tech/growth),
+so picking one is a real trade-off either way — SPY was chosen as the more
+standard broad-market proxy (`config["market_filter"]["symbol"]`). Revisit
+(or require both to agree) if this turns out to miss regime shifts QQQ
+would have caught, or vice versa.
+
+Missing/insufficient bar history reads as `null`, treated the same as
+`true` (don't block entries on missing data — the same convention as the
+exit-side `trend_intact` filter). `market_filter.enabled: false` disables
+the feature entirely without needing a live fetch.
 
 ## Trade-detail fields (2026-08-05)
 
@@ -298,17 +352,26 @@ Both sides of the check read off the same exit_date:
   forfeited most of that day's run-up, exactly what holding through
   exit_date is meant to capture). A day already past exit_date (a missed
   close-of-day check) still force-exits immediately regardless of time.
-  Re-checked fresh every cycle, not just at entry, since a position can be
-  held for days after the daily screen last looked at it and drift into an
-  earnings date that was safely far away at entry time.
-- **Daily screen + hourly-check defense-in-depth (candidates)**: blocked
-  only on the exit_date itself — a **single-day buffer**, not a multi-day
-  window. Entering on the exit_date would get force-exited again almost
-  immediately (near-zero-value trade), but entering any day before that is
-  intentionally allowed, so entries still capture the run-up into the
-  report. (Prior to 2026-07-30 this was a flat 5-day exclusion window,
-  which was excessive and cost real run-up — changed at the user's
-  direction after noticing it.)
+  **Re-fetched only on the last scheduled cycle of the day, not every cycle**
+  (2026-08-06, at the user's direction — `get_earnings_results` has no batch
+  mode, so re-checking all open positions every hour was pure overhead: the
+  force-exit itself was already gated to that same near-close cycle, so an
+  earlier fetch could never be acted on any sooner anyway). Known trade-off:
+  an already-overdue position (a whole day's cycles missed) is now only
+  caught at the *next* last-cycle check instead of immediately — acceptable
+  since healthy operation never reaches that branch in the first place.
+- **Candidates**: blocked only on the exit_date itself — a **single-day
+  buffer**, not a multi-day window. Entering on the exit_date would get
+  force-exited again almost immediately (near-zero-value trade), but
+  entering any day before that is intentionally allowed, so entries still
+  capture the run-up into the report. (Prior to 2026-07-30 this was a flat
+  5-day exclusion window, which was excessive and cost real run-up —
+  changed at the user's direction after noticing it.) **Checked only for
+  the tiny shortlist that already confirmed a stochastic signal, right
+  before buying** (2026-08-06 — see `scripts/filter_entry_earnings.py`),
+  not for the full ~300+ candidate list every cycle; that upfront fetch had
+  been the dominant cost in a whole cycle's latency for almost no payoff,
+  since only a handful of candidates ever actually signal.
 
 `config["catalysts"]["enabled"]` (default `true`) is a single on/off switch
 for the whole feature, both sides.

@@ -36,19 +36,20 @@ stochastic:
   # between the two lines while a stock is running hot don't shake you out of
   # a move that's still working. The resting ATR stop is unaffected either way.
   overbought_threshold: 80
-  # How many bars back (strictly before the signal bar) %K must have dipped
-  # below oversold_threshold to count as "was below 20 on a prior bar" (spec
-  # §3 condition 1). 1 = only the immediately-preceding bar.
-  # NOTE: raising this above 1 does NOT make entries stricter/deeper-dip —
-  # traced and confirmed (tests/test_backtest.py) that the crossing condition
-  # itself already requires the immediately-preceding bar to be oversold, and
-  # that bar is always inside the lookback window regardless of its width, so
-  # widening this is a no-op once there's enough clean history to evaluate.
-  # It's kept here (rather than removed) because it's real, tested, load-
-  # bearing behavior for short-history edge cases (see lib/backtest.py) — not
-  # because it's a useful noise-reduction knob, which an earlier version of
-  # this comment incorrectly claimed.
-  entry_lookback_bars: 1
+  # Basing-pattern requirement (2026-08-06, at the user's direction): how
+  # many bars immediately before the crossing bar must ALL have been below
+  # oversold_threshold, not just the crossing bar's own predecessor. A
+  # single bar dipping under 20 and immediately bouncing can be ordinary
+  # noise in a downtrend, not a real reversal -- requiring a short run of
+  # consecutive oversold bars is meant to filter that out. Raised from 1 to
+  # 2 as a first step (start conservative, watch signal_exit frequency drop
+  # before going further to 3) after live review found several losing
+  # entries (CUZ, CNQ, DNTH, DINO) all confirmed with %D barely above 20
+  # off a single-bar dip. Superseded an earlier version of this comment
+  # (and the underlying code, which used `.any()` instead of `.all()`) that
+  # made this knob a no-op above 1 -- see lib.signals module docstring for
+  # the full history.
+  entry_lookback_bars: 2
   # Dual-cross entry confirmation (spec §3, 2026-08-04 revision, at the
   # user's direction): entries used to fire the instant %K crossed above
   # oversold_threshold and above %D in the same bar, with no requirement on
@@ -98,6 +99,40 @@ stochastic:
 trend_filter:
   enabled: true
   sma_period: 50
+
+# Market-regime filter (2026-08-06, at the user's direction): only open NEW
+# positions while the broad market itself is trending -- fast SMA above slow
+# SMA, and the fast SMA genuinely rising, not just sitting above. Gates
+# section 5 (entries) of the hourly-signal-check skill only, the same way
+# the circuit breaker does -- exits and existing positions are never
+# affected. Built after a live review found two positions (CNQ, DINO) enter
+# within a minute of each other and reverse for a loss within seconds of
+# each other the next day -- correlated, not independent, failures; a choppy
+# or declining broad market is exactly when that kind of simultaneous
+# reversal happens. Also expected to bias new entries toward conditions more
+# likely to reach OVERBOUGHT_HOLD (a real winner worth riding) instead of an
+# immediate signal_exit reversal.
+#
+# HOURLY bars, not daily: this system trades on hourly signals, so the
+# market-regime read updates on the same cadence rather than lagging a full
+# day behind. 20/200-period SMAs on hourly bars span roughly 3-4 trading
+# days and ~5-7 weeks respectively (accounting for ~6.5 hourly bars per
+# regular session) -- deliberately different indicators from a "20-day/
+# 200-day" filter, not a relabeling of one. See lib/market_filter.py.
+#
+# SPY over QQQ: SPY and QQQ aren't always correlated (QQQ skews tech/growth),
+# so picking one is a real trade-off either way -- SPY was chosen as the more
+# standard broad-market proxy. Revisit (or require both to agree) if this
+# turns out to miss regime shifts QQQ would have caught, or vice versa.
+market_filter:
+  enabled: true
+  symbol: SPY
+  fast_sma_period: 20
+  slow_sma_period: 200
+  # How many bars back the fast SMA must have risen from to count as
+  # "rising," not just "currently above the slow SMA." 5 = a modest slope
+  # check, not full bar-over-bar noise sensitivity.
+  rising_lookback_bars: 5
 
 # --- Step 4: ATR-based stop-loss ---
 # `period` counts DAILY bars (the standard ATR convention, matching what

@@ -135,9 +135,20 @@ purpose:
   get force-exited again almost immediately, a near-zero-value trade. This is
   deliberately a single-day buffer, not a multi-day window: entries on
   earlier days are allowed through so they still capture the run-up into the
-  report. Absent field -> not re-checked here (candidates.json is already
-  earnings-filtered by the daily screen when that ran with --earnings-input;
-  this is a defense-in-depth re-check, not the primary gate).
+  report. Absent field -> not re-checked here.
+  **2026-08-06 architecture change**: the live hourly-signal-check skill no
+  longer fetches earnings for every candidate up front (get_earnings_results
+  has no batch mode, and only a handful of ~300+ candidates ever actually
+  signal in a given cycle -- that per-candidate fetch was the dominant cost
+  in the whole cycle's latency). Live cycles now pass candidates through
+  this script with `earnings_report_dates` omitted entirely, then run
+  `scripts/filter_entry_earnings.py` on the resulting `entries[]` shortlist
+  -- fetching earnings only for symbols that already confirmed a signal,
+  right before buying. This per-candidate field still works exactly as
+  before for callers that already have the data cheaply in memory (chiefly
+  `lib.backtest.py`, which fetches a symbol's full earnings history once for
+  an entire backtest run, not per-cycle-per-symbol against a live API) --
+  nothing here changed, only which callers still populate the field.
 - Open positions: if present and today is on-or-after the nearest upcoming
   report's exit_date, the position is force-exited (reason "earnings_exit")
   regardless of stochastic state — including while OVERBOUGHT_HOLD, since a

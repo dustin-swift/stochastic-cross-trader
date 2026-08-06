@@ -111,9 +111,34 @@ def test_advance_pending_entry_false_with_nan_outside_lookback_window():
     assert result["pending"] == {"k_at_cross": 22.0}
 
 
-def test_advance_pending_entry_wider_lookback_still_starts_pending():
-    df = _stoch_df([30, 25, 18, 22], [35, 22, 19, 15])
-    result = advance_pending_entry(None, df, lookback_bars=3)
+def test_advance_pending_entry_lookback_2_blocks_single_bar_dip():
+    # Basing-pattern requirement (2026-08-06): with lookback_bars=2, BOTH bars
+    # immediately before the crossing bar must be oversold, not just one.
+    # Here only the immediately-preceding bar (18) is <20 -- the bar before
+    # that (25) isn't, so this is a single-bar dip/bounce, not a real basing
+    # pattern, and must NOT start pending even though the crossing condition
+    # itself is satisfied.
+    df = _stoch_df([25, 18, 22], [22, 19, 15])
+    result = advance_pending_entry(None, df, lookback_bars=2)
+    assert result["signal"] is False
+    assert result["pending"] is None
+
+
+def test_advance_pending_entry_lookback_2_starts_pending_with_full_basing():
+    # Same shape, but both prior bars (15, 18) are genuinely oversold --
+    # a real 2-bar basing pattern -- so this one does start pending.
+    df = _stoch_df([15, 18, 22], [14, 19, 15])
+    result = advance_pending_entry(None, df, lookback_bars=2)
+    assert result["signal"] is False
+    assert result["pending"] == {"k_at_cross": 22.0}
+
+
+def test_advance_pending_entry_lookback_1_unaffected_by_basing_requirement():
+    # lookback_bars=1 (the pre-2026-08-06 default) only ever looks at the
+    # immediately-preceding bar -- .any() vs .all() are identical for a
+    # single-bar window, so this behavior is deliberately unchanged.
+    df = _stoch_df([30, 18, 22], [35, 19, 15])
+    result = advance_pending_entry(None, df, lookback_bars=1)
     assert result["pending"] == {"k_at_cross": 22.0}
 
 

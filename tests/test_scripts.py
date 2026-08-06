@@ -1233,3 +1233,125 @@ def test_run_backtest_end_to_end(tmp_path):
 
     events = [e["event"] for e in _events(tmp_path)]
     assert events == ["backtest_run"]
+
+
+def test_filter_entry_earnings_keeps_entries_with_no_report(tmp_path):
+    payload = {
+        "entries": [{"symbol": "AAPL", "k": 24.1}, {"symbol": "MSFT", "k": 30.0}],
+        "earnings_by_symbol": {"AAPL": [], "MSFT": []},
+    }
+    result = _run("filter_entry_earnings.py", payload, ["--data-dir", str(tmp_path / "data"), "--today", "2026-08-06"])
+    kept = json.loads(result.stdout)
+    assert [e["symbol"] for e in kept] == ["AAPL", "MSFT"]
+
+    log_files = list((tmp_path / "data" / "logs").glob("*.jsonl"))
+    assert log_files == []  # nothing excluded -> no log event at all
+
+
+def test_filter_entry_earnings_excludes_too_close(tmp_path):
+    payload = {
+        "entries": [{"symbol": "AAPL", "k": 24.1}, {"symbol": "MSFT", "k": 30.0}],
+        # AAPL reports tomorrow BMO -> exit_date is today -> too_close.
+        "earnings_by_symbol": {"AAPL": [{"date": "2026-08-07", "timing": "am"}], "MSFT": []},
+    }
+    result = _run("filter_entry_earnings.py", payload, ["--data-dir", str(tmp_path / "data"), "--today", "2026-08-06"])
+    kept = json.loads(result.stdout)
+    assert [e["symbol"] for e in kept] == ["MSFT"]
+
+    events = _events(tmp_path)
+    excl = next(e for e in events if e["event"] == "entries_earnings_excluded")
+    assert excl["symbols"] == ["AAPL"]
+    assert excl["reasons"] == {"AAPL": "too_close"}
+
+
+def test_filter_entry_earnings_excludes_unchecked_symbol_conservatively(tmp_path):
+    # AAPL's earnings fetch failed/never happened -- missing from
+    # earnings_by_symbol entirely -> excluded as "unknown", not passed
+    # through. This is the primary gate now, so failing closed is correct.
+    payload = {
+        "entries": [{"symbol": "AAPL", "k": 24.1}],
+        "earnings_by_symbol": {},
+    }
+    result = _run("filter_entry_earnings.py", payload, ["--data-dir", str(tmp_path / "data"), "--today", "2026-08-06"])
+    kept = json.loads(result.stdout)
+    assert kept == []
+
+    events = _events(tmp_path)
+    excl = next(e for e in events if e["event"] == "entries_earnings_excluded")
+    assert excl["reasons"] == {"AAPL": "unknown"}
+
+
+def test_filter_entry_earnings_empty_entries_no_op(tmp_path):
+    payload = {"entries": [], "earnings_by_symbol": {}}
+    result = _run("filter_entry_earnings.py", payload, ["--data-dir", str(tmp_path / "data"), "--today", "2026-08-06"])
+    assert json.loads(result.stdout) == []
+    assert not (tmp_path / "data" / "logs").exists() or list((tmp_path / "data" / "logs").glob("*.jsonl")) == []
+
+
+def test_filter_entry_earnings_defaults_today_when_omitted(tmp_path):
+    # No --today override and no "today" in payload -- must use the real
+    # current date without erroring, and still apply the filter correctly.
+    payload = {"entries": [{"symbol": "AAPL"}], "earnings_by_symbol": {"AAPL": []}}
+    result = _run("filter_entry_earnings.py", payload, ["--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == [{"symbol": "AAPL"}]
+
+
+def test_check_market_trend_true_when_trending(tmp_path):
+    config_path = _write_cfg(tmp_path, {"market_filter": {"enabled": True, "symbol": "SPY", "fast_sma_period": 5, "slow_sma_period": 20, "rising_lookback_bars": 3}})
+    closes = [100.0 + i * 0.5 for i in range(30)]
+    payload = {"bars": [{"high": c, "low": c, "close": c} for c in closes]}
+
+    result = _run("check_market_trend.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"trend_intact": True}
+
+    events = _events(tmp_path)
+    assert events[0]["event"] == "market_trend_check"
+    assert events[0]["symbol"] == "SPY"
+    assert events[0]["trend_intact"] is True
+
+
+def test_check_market_trend_false_when_declining(tmp_path):
+    config_path = _write_cfg(tmp_path, {"market_filter": {"enabled": True, "symbol": "SPY", "fast_sma_period": 5, "slow_sma_period": 20, "rising_lookback_bars": 3}})
+    closes = list(reversed([100.0 + i * 0.5 for i in range(30)]))
+    payload = {"bars": [{"high": c, "low": c, "close": c} for c in closes]}
+
+    result = _run("check_market_trend.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"trend_intact": False}
+
+
+def test_check_market_trend_null_with_insufficient_history(tmp_path):
+    config_path = _write_cfg(tmp_path, {"market_filter": {"enabled": True, "fast_sma_period": 5, "slow_sma_period": 20, "rising_lookback_bars": 3}})
+    payload = {"bars": [{"high": 100, "low": 100, "close": 100}] * 5}
+
+    result = _run("check_market_trend.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"trend_intact": None}
+
+
+def test_check_market_trend_disabled_returns_true_without_evaluating(tmp_path):
+    config_path = _write_cfg(tmp_path, {"market_filter": {"enabled": False}})
+    # Deliberately a declining series -- if the disabled check evaluated it
+    # anyway this would come back False, so this proves the toggle short-circuits.
+    closes = list(reversed([100.0 + i * 0.5 for i in range(30)]))
+    payload = {"bars": [{"high": c, "low": c, "close": c} for c in closes]}
+
+    result = _run("check_market_trend.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"trend_intact": True}
+
+    events = _events(tmp_path)
+    assert events[0]["enabled"] is False
+
+
+def test_check_market_trend_defaults_when_section_omitted(tmp_path):
+    # No "market_filter" key in config at all -- must default to enabled
+    # with SPY/20/200/5, not error.
+    config_path = _write_cfg(tmp_path)
+    closes = [100.0 + i * 0.1 for i in range(210)]
+    payload = {"bars": [{"high": c, "low": c, "close": c} for c in closes]}
+
+    result = _run("check_market_trend.py", payload, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"trend_intact": True}
+
+    events = _events(tmp_path)
+    assert events[0]["symbol"] == "SPY"
+    assert events[0]["fast_sma_period"] == 20
+    assert events[0]["slow_sma_period"] == 200

@@ -270,24 +270,17 @@ def test_summarize_stats():
     assert summary["by_exit_reason"] == {"signal_exit": 1, "stop_loss": 2}
 
 
-def test_entry_lookback_bars_has_no_effect_on_signal_quality_given_enough_history():
-    # entry_lookback_bars is read from config and passed through to
-    # entry_signal, but as of lib.signals' current implementation, widening
-    # it can't make the entry signal *stricter*: the crossing condition
-    # itself already requires the immediately-preceding bar to be oversold,
-    # and that bar is always inside the lookback window regardless of its
-    # width -- so "was oversold somewhere in the lookback window" is
-    # trivially satisfied whenever the crossing condition is, for any
-    # lookback_bars >= 1. (See lib/signals.py's module docstring.)
-    #
-    # There IS a real but different effect at short history: a wider window
-    # requires more non-NaN bars to even evaluate (see
-    # test_entry_lookback_bars_can_suppress_entry_when_history_is_short
-    # below), which can suppress an entry near the start of a data window.
-    # That's a data-availability side effect, not the "requires a deeper/
-    # more sustained dip" noise filter it might sound like -- this test
-    # isolates the signal-quality claim specifically, with enough padding
-    # that the NaN-window effect doesn't confound it.
+def test_entry_lookback_bars_agrees_when_basing_run_is_uniformly_oversold():
+    # Basing-pattern requirement (2026-08-06): entry_lookback_bars now
+    # requires ALL bars in the window to be oversold (.all(), not .any()),
+    # not just "the crossing bar's own predecessor" -- see lib/signals.py's
+    # module docstring for the full history of this change. When the entire
+    # pre-crossing run genuinely is flat-and-oversold, widening the window
+    # doesn't change the outcome, since every bar in it already qualifies --
+    # this isolates that agreement case specifically, with enough padding
+    # that the NaN-window effect (see the short-history test below) doesn't
+    # confound it. See test_entry_lookback_bars_requires_full_basing_run
+    # below for the case where widening DOES change the outcome.
     padded_closes = [150, 150, 150, 150, 150, 244, 226, 370]  # 3 extra flat warmup bars
     padded_times = _T[:8]
     bars = [_bar(t, c) for t, c in zip(padded_times, padded_closes)]
@@ -298,6 +291,24 @@ def test_entry_lookback_bars_has_no_effect_on_signal_quality_given_enough_histor
 
     assert len(result_default["open_positions"]) == len(result_wide["open_positions"]) == 1
     assert result_default["open_positions"][0]["entry_price"] == result_wide["open_positions"][0]["entry_price"]
+
+
+def test_entry_lookback_bars_requires_full_basing_run():
+    # k sequence [.., 25, 14, 30]: the bar two back from the crossing bar
+    # (k=25) is NOT oversold, only the immediately-preceding one (k=14) is --
+    # a single-bar dip, not a real 2-bar basing pattern. lookback_bars=1
+    # (only checks the immediate predecessor) still fires; lookback_bars=2
+    # (requires both prior bars oversold) correctly blocks it.
+    closes = [150, 150, 325, 226, 370]
+    bars = [_bar(t, c) for t, c in zip(_T[:5], closes)]
+    data = {"XXX": {"bars": bars, "atr_series": [{"begins_at": _T[4], "value": 150.0}]}}
+
+    result_default = run_backtest(data, CFG)  # entry_lookback_bars=1 (implicit)
+    result_2bar = run_backtest(data, {**CFG, "stochastic": {**CFG["stochastic"], "entry_lookback_bars": 2}})
+
+    assert len(result_default["open_positions"]) == 1
+    assert result_2bar["open_positions"] == []
+    assert result_2bar["trades"] == []
 
 
 def test_entry_lookback_bars_can_suppress_entry_when_history_is_short():
