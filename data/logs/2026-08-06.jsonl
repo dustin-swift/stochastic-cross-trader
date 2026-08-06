@@ -1326,3 +1326,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 4.0, "needs_cancel": false, "order_id": "6a74b3a2-4daf-4af3-9f49-628f725850e5", "order_state": "filled", "symbol": "WRBY", "timestamp": "2026-08-06T16:17:46.355649+00:00"}
 {"event": "entry_executed", "fill_price": 26.0599, "order_id": "6a74b3a2-4daf-4af3-9f49-628f725850e5", "qty": 4.0, "symbol": "WRBY", "timestamp": "2026-08-06T16:17:56.209515+00:00"}
 {"event": "stop_placed", "order_id": "6a74b3ae-5b6d-4814-971c-7d30d8f36e8e", "stop_price": 23.75, "symbol": "WRBY", "timestamp": "2026-08-06T16:17:56.209623+00:00"}
+{"candidates_checked": 320, "circuit_breaker_tripped": false, "entries_proposed": 6, "entries_rejected_by_broker": ["TTE"], "entries_taken": 5, "event": "cycle_summary", "exits_symbols": ["CUZ", "DNTH"], "exits_taken": 2, "max_positions": 15, "slots_remaining": 7, "stop_outs_reconciled": 0, "timestamp": "2026-08-06T16:18:09.664503+00:00"}
