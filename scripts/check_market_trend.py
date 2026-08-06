@@ -7,7 +7,19 @@ skips new entries entirely for the cycle, the same way a tripped circuit
 breaker does. Exits and existing positions are never affected.
 
 Input (JSON, via --input file or stdin):
-  {"bars": [{"high": .., "low": .., "close": ..}, ...]}   # hourly bars, oldest-first, for config["market_filter"]["symbol"]
+  {"bars": [{"high": .., "low": .., "close": ..}, ...]}   # bars, oldest-first, for config["market_filter"]["symbol"]
+
+Granularity-agnostic -- this script just runs whatever bars it's handed
+through lib.market_filter.market_trend_intact with config["market_filter"]'s
+fast/slow SMA periods. The deployed config uses MINUTE bars (2026-08-06
+revision, at the user's direction -- see lib/market_filter.py's module
+docstring for why: an hourly 20/200 filter can't actually catch a steep
+single-day decline inside an otherwise-intact longer uptrend, since a 3-day
+average rarely dips below a 6-week one; minute bars turn this into a
+same-day momentum read instead of a multi-week regime read), with
+`require_rising: false` (a plain fast-above-slow comparison, no slope check
+— minute-level averages are noisy enough that a separate rising requirement
+adds little).
 
 Output (JSON, to stdout): {"trend_intact": bool | null}
 `null` means there wasn't enough bar history to evaluate -- treat this the
@@ -50,6 +62,7 @@ def main() -> None:
     fast_period = mf_cfg.get("fast_sma_period", 20)
     slow_period = mf_cfg.get("slow_sma_period", 200)
     rising_lookback_bars = mf_cfg.get("rising_lookback_bars", 5)
+    require_rising = mf_cfg.get("require_rising", True)
     symbol = mf_cfg.get("symbol", "SPY")
 
     if not mf_cfg.get("enabled", True):
@@ -66,6 +79,7 @@ def main() -> None:
         fast_period=fast_period,
         slow_period=slow_period,
         rising_lookback_bars=rising_lookback_bars,
+        require_rising=require_rising,
     )
 
     logger.log(
@@ -75,6 +89,7 @@ def main() -> None:
         fast_sma_period=fast_period,
         slow_sma_period=slow_period,
         rising_lookback_bars=rising_lookback_bars,
+        require_rising=require_rising,
     )
 
     json.dump({"trend_intact": trend_intact}, sys.stdout)

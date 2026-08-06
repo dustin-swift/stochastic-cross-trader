@@ -204,29 +204,37 @@ possibly-stale read.
 
 ## Market-regime filter (config["market_filter"], 2026-08-06)
 
-Only opens NEW positions while the broad market itself is trending — gates
-section 5 (entries) of the hourly-signal-check skill, exactly like the
-circuit breaker; exits and existing positions are never affected. Built
-after a live review found two positions (CNQ, DINO) enter within a minute
-of each other and reverse for a loss within seconds of each other the next
-day — correlated, not independent, failures. A choppy or declining broad
-market is exactly the condition where that kind of simultaneous reversal
-happens; this is also expected to bias new entries toward conditions more
-likely to reach `OVERBOUGHT_HOLD` (a real winner worth riding) instead of
-an immediate `signal_exit` reversal.
+Only opens NEW positions while the broad market isn't in a short-term
+decline — gates section 5 (entries) of the hourly-signal-check skill,
+exactly like the circuit breaker; exits and existing positions are never
+affected, and a failing check skips the entire candidate fetch for the
+cycle too (computed early, section 2, before section 5's expensive fetch —
+no reason to spend the latency on a fetch we won't act on). Built after a
+live review found two positions (CNQ, DINO) enter within a minute of each
+other and reverse for a loss within seconds of each other the next day —
+correlated, not independent, failures.
 
-`lib.market_filter.market_trend_intact` (fed SPY hourly bars by
-`scripts/check_market_trend.py`) requires the fast SMA to be **above** the
-slow SMA **and genuinely rising** (higher than it was `rising_lookback_bars`
-bars ago, default 5) — "above but flat" doesn't count, since a fast SMA
-that's above the slow SMA but no longer climbing isn't the trending
-condition this filter exists to require. Defaults: `fast_sma_period: 20`,
-`slow_sma_period: 200`, both computed on **hourly** bars, not daily — this
-system trades on hourly signals, so the regime read updates on the same
-cadence rather than lagging a full day behind. On hourly bars those period
-counts span roughly 3-4 trading days and ~5-7 weeks respectively (~6.5
-hourly bars per regular session) — deliberately different indicators from a
-same-numbered daily filter, not a relabeling of one.
+**Revised twice the same day.** v1 used HOURLY bars (20/200-period SMAs, a
+multi-week regime read) requiring the fast SMA above the slow SMA *and*
+genuinely rising. On reflection this couldn't actually catch what it was
+built for: a single steep down day, even a real one, usually isn't enough
+to pull a 3-day average below a 6-week one inside an otherwise-intact
+longer uptrend — a slow filter answers "is the market in an uptrend," not
+"is there a selloff happening right now," and those are different
+questions with different lookback horizons.
+
+v2 (current) switches `lib.market_filter.market_trend_intact` to **MINUTE**
+bars, same `fast_sma_period: 20` / `slow_sma_period: 200`, now spanning
+roughly 20 minutes and ~3.3 hours — a same-day momentum read instead of a
+multi-week one — and drops the rising requirement (`require_rising: false`,
+a plain fast-above-slow comparison; minute-level averages are noisy enough
+that a separate slope check adds little). **Known trade-off, not assumed
+away**: at this timeframe the filter can also trip during an ordinary
+intraday pullback-and-bounce, not just a genuine steep selloff — exactly
+the kind of dip this strategy exists to buy into. Worth watching after some
+live cycles whether it's blocking good entries too often, not just bad
+ones; `require_rising` and the periods are one-line config edits if it
+needs retuning.
 
 **SPY over QQQ**: the two aren't always correlated (QQQ skews tech/growth),
 so picking one is a real trade-off either way — SPY was chosen as the more

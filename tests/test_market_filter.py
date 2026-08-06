@@ -53,3 +53,44 @@ def test_market_trend_intact_custom_periods():
     closes = _uptrend_closes(30)
     result = market_trend_intact(_bars(closes), fast_period=5, slow_period=20, rising_lookback_bars=3)
     assert result is True
+
+
+# -- require_rising=False (2026-08-06 minute-bar revision) ------------------
+
+
+def test_market_trend_intact_no_rising_check_true_when_above_and_flat():
+    # The "above but flat" case that returns False when require_rising=True
+    # (see test above) must return True with require_rising=False -- a plain
+    # fast-above-slow comparison, no slope requirement at all.
+    closes = _uptrend_closes(200) + [_uptrend_closes(200)[-1]] * 25
+    result = market_trend_intact(
+        _bars(closes), fast_period=20, slow_period=200, require_rising=False
+    )
+    assert result is True
+
+
+def test_market_trend_intact_no_rising_check_false_when_below():
+    closes = list(reversed(_uptrend_closes(210)))
+    result = market_trend_intact(
+        _bars(closes), fast_period=20, slow_period=200, require_rising=False
+    )
+    assert result is False
+
+
+def test_market_trend_intact_no_rising_check_needs_only_slow_period_bars():
+    # With require_rising=False, rising_lookback_bars is irrelevant to the
+    # data-availability check -- exactly slow_period bars is enough, unlike
+    # the require_rising=True case which needs slow_period + lookback.
+    closes = _uptrend_closes(200)
+    result = market_trend_intact(
+        _bars(closes), fast_period=20, slow_period=200, rising_lookback_bars=5, require_rising=False
+    )
+    assert result is True
+
+
+def test_market_trend_intact_no_rising_check_none_when_insufficient():
+    closes = _uptrend_closes(150)
+    result = market_trend_intact(
+        _bars(closes), fast_period=20, slow_period=200, require_rising=False
+    )
+    assert result is None
