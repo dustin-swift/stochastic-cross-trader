@@ -2349,3 +2349,4 @@
 {"event": "stop_placed", "order_id": "6a74debd-a442-48ab-a7d1-cf662e21953d", "stop_price": 70.77, "symbol": "QSR", "timestamp": "2026-08-06T19:21:38.763828+00:00"}
 {"event": "entry_executed", "order_id": "6a74dec9-9eb3-483a-b9d0-8599cdcc4648", "qty": 7, "symbol": "UTZ", "timestamp": "2026-08-06T19:22:04.169398+00:00"}
 {"event": "stop_placed", "order_id": "6a74ded6-32a1-46e0-870f-ca495baa530c", "stop_price": 13.55, "symbol": "UTZ", "timestamp": "2026-08-06T19:22:04.169532+00:00"}
+{"candidates_checked": 319, "candidates_skipped_no_data": ["EA", "TMHC"], "circuit_breaker_tripped": false, "cycle_gap_minutes": 59.19278618333333, "entries_proposed": 6, "entries_suppressed_by_stale_guard": 0, "entries_taken": 6, "event": "cycle_summary", "exits_taken": 2, "new_pending_setups": ["EW", "LEVI", "LTH", "RPRX"], "open_positions": 14, "slots_remaining": 1, "stale_cycle": false, "stop_outs_reconciled": [], "timestamp": "2026-08-06T19:22:18.375643+00:00"}
