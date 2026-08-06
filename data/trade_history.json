@@ -366,5 +366,37 @@
     "stop_order_id": "6a737e4a-5865-4a86-a855-2c4e236445b5",
     "stop_price": 24.68,
     "symbol": "MAC"
+  },
+  {
+    "closed_at": "2026-08-06T16:08:11.133387+00:00",
+    "entry_order_id": "6a72421b-3840-4d4c-8300-42b653e3b7e9",
+    "entry_price": 30.9599,
+    "entry_time": "2026-08-04T19:48:43.244Z",
+    "exit_order_id": "6a74b15d-62c0-4830-a9ca-aef8ed40c34f",
+    "exit_price": 30.3101,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-06T16:07:58.066Z",
+    "pnl_pct": -2.0988439885141874,
+    "pnl_usd": -1.9494000000000078,
+    "qty": 3,
+    "stop_order_id": "6a72422a-0107-42bc-ae6d-246688c86e0f",
+    "stop_price": 29.8,
+    "symbol": "CUZ"
+  },
+  {
+    "closed_at": "2026-08-06T16:08:11.175403+00:00",
+    "entry_order_id": "6a72099f-02d3-4aee-bb0e-534f47989c2e",
+    "entry_price": 110.46,
+    "entry_time": "2026-08-04T15:47:43.584Z",
+    "exit_order_id": "6a74b15e-f3ba-458a-a972-e5bf4a5b2ce5",
+    "exit_price": 108.0501,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-06T16:07:58.836Z",
+    "pnl_pct": -2.181694731124384,
+    "pnl_usd": -2.4098999999999933,
+    "qty": 1.0,
+    "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
+    "stop_price": 101.49,
+    "symbol": "DNTH"
   }
 ]
