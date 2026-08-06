@@ -398,5 +398,21 @@
     "stop_order_id": "6a7209b3-5421-4a77-bfd3-05b3c9c97a5f",
     "stop_price": 101.49,
     "symbol": "DNTH"
+  },
+  {
+    "closed_at": "2026-08-06T17:09:31.743027+00:00",
+    "entry_order_id": "6a72171a-bd5e-4ea2-8e5a-f2525ba7b607",
+    "entry_price": 72.1999,
+    "entry_time": "2026-08-04T16:45:14.535Z",
+    "exit_order_id": "6a74bfbb-a130-469e-b9b6-ebfe84b107ad",
+    "exit_price": 71.667,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-06T17:09:15.39Z",
+    "pnl_pct": -0.7380896649441304,
+    "pnl_usd": -0.5328999999999979,
+    "qty": 1,
+    "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
+    "stop_price": 68.4,
+    "symbol": "ASH"
   }
 ]

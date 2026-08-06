@@ -1,13 +1,4 @@
 {
-  "ASH": {
-    "entry_order_id": "6a72171a-bd5e-4ea2-8e5a-f2525ba7b607",
-    "entry_price": 72.1999,
-    "entry_time": "2026-08-04T16:45:14.535Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a721742-3ba6-407a-8591-e21731ee5d79",
-    "stop_price": 68.4
-  },
   "CLBK": {
     "entry_order_id": "6a722624-4fd2-4ab0-83c3-0f35d96aba9a",
     "entry_price": 10.7,
