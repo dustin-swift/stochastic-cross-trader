@@ -1355,3 +1355,139 @@ def test_check_market_trend_defaults_when_section_omitted(tmp_path):
     assert events[0]["symbol"] == "SPY"
     assert events[0]["fast_sma_period"] == 20
     assert events[0]["slow_sma_period"] == 200
+
+
+def _write_state(tmp_path, candidates=None, pending=None, positions=None):
+    data_dir = tmp_path / "data"
+    data_dir.mkdir(exist_ok=True)
+    (data_dir / "candidates.json").write_text(json.dumps(candidates or []))
+    (data_dir / "pending_entries.json").write_text(json.dumps(pending or {}))
+    (data_dir / "positions.json").write_text(json.dumps(positions or {}))
+    return data_dir
+
+
+def _historicals_batch(symbols_and_bars):
+    return {
+        "data": {
+            "results": [{"symbol": symbol, "bars": bars} for symbol, bars in symbols_and_bars.items()]
+        }
+    }
+
+
+def test_build_entries_payload_append_then_finalize(tmp_path):
+    data_dir = _write_state(
+        tmp_path,
+        candidates=[{"symbol": "AAA", "sector": "Tech", "atr14": 1.5}, {"symbol": "BBB", "sector": "Health", "atr14": 2.0}],
+        pending={"AAA": {"k_at_cross": 22.5}},
+    )
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+
+    batch = _historicals_batch(
+        {
+            "AAA": [{"begins_at": "t1", "high_price": "10", "low_price": "9", "close_price": "9.5"}],
+            "BBB": [{"begins_at": "t1", "high_price": "20", "low_price": "19", "close_price": "19.5"}],
+        }
+    )
+    _run(
+        "build_entries_payload.py",
+        batch,
+        ["--append", "--data-dir", str(data_dir), "--build-file", str(build_file)],
+    )
+    assert build_file.exists()
+
+    result = _run(
+        "build_entries_payload.py",
+        None,
+        ["--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)],
+    )
+    payload = json.loads(result.stdout)
+    by_symbol = {c["symbol"]: c for c in payload["candidates"]}
+    assert set(by_symbol) == {"AAA", "BBB"}
+    assert by_symbol["AAA"]["sector"] == "Tech"
+    assert by_symbol["AAA"]["atr14"] == 1.5
+    assert by_symbol["AAA"]["pending"] == {"k_at_cross": 22.5}
+    assert "pending" not in by_symbol["BBB"]
+    assert by_symbol["BBB"]["bars"][0]["close"] == 19.5
+    assert payload["open_positions"] == []
+    assert not build_file.exists()  # finalize cleans up the scratch file
+
+
+def test_build_entries_payload_appends_multiple_batches(tmp_path):
+    data_dir = _write_state(tmp_path, candidates=[{"symbol": "AAA", "atr14": 1.0}, {"symbol": "CCC", "atr14": 3.0}])
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+
+    for symbol in ("AAA", "CCC"):
+        batch = _historicals_batch({symbol: [{"begins_at": "t1", "high_price": "1", "low_price": "1", "close_price": "1"}]})
+        _run("build_entries_payload.py", batch, ["--append", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+
+    result = _run("build_entries_payload.py", None, ["--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+    payload = json.loads(result.stdout)
+    assert {c["symbol"] for c in payload["candidates"]} == {"AAA", "CCC"}
+
+
+def test_build_entries_payload_skips_interpolated_bars(tmp_path):
+    data_dir = _write_state(tmp_path, candidates=[{"symbol": "AAA", "atr14": 1.0}])
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+
+    batch = _historicals_batch(
+        {"AAA": [{"begins_at": "t1", "high_price": "1", "low_price": "1", "close_price": "1", "interpolated": True}]}
+    )
+    result = _run("build_entries_payload.py", batch, ["--append", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+    assert "AAA" in result.stderr
+
+    events = _events(tmp_path)
+    skip_event = next(e for e in events if e["event"] == "candidate_bars_interpolated")
+    assert skip_event["symbols"] == ["AAA"]
+
+    finalize_result = _run("build_entries_payload.py", None, ["--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+    assert json.loads(finalize_result.stdout) == {"candidates": [], "open_positions": []}
+
+
+def test_build_entries_payload_drops_symbols_already_open(tmp_path):
+    data_dir = _write_state(
+        tmp_path,
+        candidates=[{"symbol": "AAA", "atr14": 1.0}],
+        positions={"AAA": {"entry_price": 10.0, "qty": 1, "stochastic_state": "NORMAL"}},
+    )
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+    batch = _historicals_batch({"AAA": [{"begins_at": "t1", "high_price": "1", "low_price": "1", "close_price": "1"}]})
+    _run("build_entries_payload.py", batch, ["--append", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+
+    result = _run("build_entries_payload.py", None, ["--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+    payload = json.loads(result.stdout)
+    assert payload["candidates"] == []
+
+    events = _events(tmp_path)
+    dropped = next(e for e in events if e["event"] == "candidate_payload_dropped_open_position")
+    assert dropped["symbols"] == ["AAA"]
+
+
+def test_build_entries_payload_finalize_with_no_build_file_is_empty(tmp_path):
+    data_dir = _write_state(tmp_path)
+    result = _run(
+        "build_entries_payload.py",
+        None,
+        ["--finalize", "--data-dir", str(data_dir), "--build-file", str(data_dir / ".missing.jsonl")],
+    )
+    assert json.loads(result.stdout) == {"candidates": [], "open_positions": []}
+
+
+def test_build_entries_payload_finalize_rejects_stale_build_file(tmp_path):
+    import os
+    import time
+
+    data_dir = _write_state(tmp_path, candidates=[{"symbol": "AAA", "atr14": 1.0}])
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+    build_file.write_text(json.dumps({"symbol": "AAA", "bars": []}) + "\n")
+    old_time = time.time() - 3 * 3600  # 3 hours old, past the default 120-minute limit
+    os.utime(build_file, (old_time, old_time))
+
+    result = subprocess.run(
+        [sys.executable, str(REPO_ROOT / "scripts" / "build_entries_payload.py"), "--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)],
+        capture_output=True,
+        text=True,
+        cwd=REPO_ROOT,
+    )
+    assert result.returncode != 0
+    assert "stale" in result.stderr.lower() or "minutes old" in result.stderr
+    assert not build_file.exists()  # deleted despite the error, so the next cycle starts clean
