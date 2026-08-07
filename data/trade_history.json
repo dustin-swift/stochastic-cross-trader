@@ -614,5 +614,29 @@
     "stop_order_id": "6a74debd-a442-48ab-a7d1-cf662e21953d",
     "stop_price": 70.77,
     "symbol": "QSR"
+  },
+  {
+    "closed_at": "2026-08-07T17:07:52.043485+00:00",
+    "entry_d": 20.528703760617,
+    "entry_k": 28.369905956112614,
+    "entry_order_id": "6a75eec3-d1ac-4f6b-b8ff-055725f1fffb",
+    "entry_prev_d": 21.056752303509985,
+    "entry_prev_k": 13.873863721733677,
+    "entry_price": 87.405,
+    "entry_time": "2026-08-07T14:42:12.068Z",
+    "exit_d": 29.92654998258426,
+    "exit_k": 17.052377220480512,
+    "exit_order_id": "6a7610db-b2fe-46d2-b72f-736ed71ca7e2",
+    "exit_prev_d": 33.69905956112829,
+    "exit_prev_k": 33.75130616509904,
+    "exit_price": 85.22,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-07T17:07:39.638Z",
+    "pnl_pct": -2.499856987586524,
+    "pnl_usd": -2.1850000000000023,
+    "qty": 1,
+    "stop_order_id": "6a75eed5-f447-47b2-a40b-5696de33bb89",
+    "stop_price": 82.56,
+    "symbol": "GPN"
   }
 ]
