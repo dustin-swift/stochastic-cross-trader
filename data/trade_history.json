@@ -590,5 +590,29 @@
     "stop_order_id": "6a74b395-a64a-4e3c-b793-593e0cbb7a3f",
     "stop_price": 86.51,
     "symbol": "UNM"
+  },
+  {
+    "closed_at": "2026-08-07T16:11:19.308457+00:00",
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a74deb1-e9f6-4894-8d9a-bf8b26b23187",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 73.2874,
+    "entry_time": "2026-08-06T19:21:21.234Z",
+    "exit_d": 35.11111111111103,
+    "exit_k": 32.74336283185831,
+    "exit_order_id": "6a76039a-9d0f-4ffa-8ba8-cbe60bf3a560",
+    "exit_prev_d": 34.97148475909534,
+    "exit_prev_k": 35.988200589970404,
+    "exit_price": 73.6,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-07T16:11:06.961Z",
+    "pnl_pct": 0.42653989635323963,
+    "pnl_usd": 0.3125999999999891,
+    "qty": 1,
+    "stop_order_id": "6a74debd-a442-48ab-a7d1-cf662e21953d",
+    "stop_price": 70.77,
+    "symbol": "QSR"
   }
 ]
