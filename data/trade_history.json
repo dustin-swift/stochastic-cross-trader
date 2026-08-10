@@ -782,5 +782,29 @@
     "stop_order_id": "6a74ded6-32a1-46e0-870f-ca495baa530c",
     "stop_price": 13.55,
     "symbol": "UTZ"
+  },
+  {
+    "closed_at": "2026-08-10T17:09:58.040593+00:00",
+    "entry_d": 20.402157448241493,
+    "entry_k": 36.33008262224025,
+    "entry_order_id": "6a79e505-715e-4aa3-8205-488f37fc15e0",
+    "entry_prev_d": 11.665571084245514,
+    "entry_prev_k": 16.51090342679131,
+    "entry_price": 18.1943,
+    "entry_time": "2026-08-10T14:49:42.156Z",
+    "exit_d": 35.68878603936139,
+    "exit_k": 25.097646212354846,
+    "exit_order_id": "6a7a05d7-7b41-4800-a63d-196d7bfc46e2",
+    "exit_prev_d": 39.43293150932319,
+    "exit_prev_k": 39.855072463768096,
+    "exit_price": 17.9901,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-10T17:09:43.264Z",
+    "pnl_pct": -1.12232952078396,
+    "pnl_usd": -1.020999999999983,
+    "qty": 5,
+    "stop_order_id": "6a79e52b-0fb8-4163-b5b6-b7c096c6ea35",
+    "stop_price": 16.65,
+    "symbol": "TRVI"
   }
 ]

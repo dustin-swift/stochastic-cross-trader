@@ -25,18 +25,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a74de90-e90f-4aae-8486-af96f02243a3",
     "stop_price": 91.05
-  },
-  "TRVI": {
-    "entry_d": 20.402157448241493,
-    "entry_k": 36.33008262224025,
-    "entry_order_id": "6a79e505-715e-4aa3-8205-488f37fc15e0",
-    "entry_prev_d": 11.665571084245514,
-    "entry_prev_k": 16.51090342679131,
-    "entry_price": 18.1943,
-    "entry_time": "2026-08-10T14:49:42.156Z",
-    "qty": 5,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a79e52b-0fb8-4163-b5b6-b7c096c6ea35",
-    "stop_price": 16.65
   }
 }
