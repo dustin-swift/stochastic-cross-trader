@@ -1,4 +1,30 @@
 {
+  "BN": {
+    "entry_d": 42.875977450445525,
+    "entry_k": 51.025641025641,
+    "entry_order_id": "6a7a2370-c289-4fa9-9c5b-486b3bfe0de6",
+    "entry_prev_d": 34.53306195532054,
+    "entry_prev_k": 43.439716312056795,
+    "entry_price": 44.3299,
+    "entry_time": "2026-08-10T19:16:01.018Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7a237f-e011-4761-bbab-ac36d2cd3680",
+    "stop_price": 42.87
+  },
+  "CFG": {
+    "entry_d": 20.0589993803371,
+    "entry_k": 23.64072958500607,
+    "entry_order_id": "6a7a238e-5261-4b9b-922d-5bddb2fe6813",
+    "entry_prev_d": 20.52497423057611,
+    "entry_prev_k": 17.880847953216165,
+    "entry_price": 72.52,
+    "entry_time": "2026-08-10T19:16:30.745Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7a2398-a48b-4a43-95f4-e3d77c587e42",
+    "stop_price": 70.1
+  },
   "CGNX": {
     "entry_order_id": "6a74de55-41ac-46fc-a35f-cc1dd6cea9a1",
     "entry_price": 68.2292,
@@ -7,6 +33,32 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a74de66-1965-4a2f-b330-2b3ae37c0043",
     "stop_price": 63.34
+  },
+  "FITB": {
+    "entry_d": 20.971789389331587,
+    "entry_k": 26.971568451311597,
+    "entry_order_id": "6a7a23a6-0445-475d-aa88-8935937126ba",
+    "entry_prev_d": 19.72684579807013,
+    "entry_prev_k": 19.16237604881773,
+    "entry_price": 56.9687,
+    "entry_time": "2026-08-10T19:16:55.055Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7a23b0-01b1-4974-ab24-8bb95437246e",
+    "stop_price": 55.11
+  },
+  "HOPE": {
+    "entry_d": 20.18619296431692,
+    "entry_k": 32.10295040803514,
+    "entry_order_id": "6a7a23bd-7b1f-4fe2-a0d1-e6e9320af8aa",
+    "entry_prev_d": 13.490519952488228,
+    "entry_prev_k": 19.151561519146203,
+    "entry_price": 13.9287,
+    "entry_time": "2026-08-10T19:17:17.423Z",
+    "qty": 7,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7a23c8-2e46-438d-89ce-52044c7e3ec5",
+    "stop_price": 13.49
   },
   "INVH": {
     "entry_order_id": "6a74de73-a247-48e3-8af2-e1ae03c5301d",
@@ -25,5 +77,18 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a74de90-e90f-4aae-8486-af96f02243a3",
     "stop_price": 91.05
+  },
+  "WSBC": {
+    "entry_d": 20.9427617662913,
+    "entry_k": 27.024635495223993,
+    "entry_order_id": "6a7a23d4-ff1b-4420-aa1d-e074685c1322",
+    "entry_prev_d": 19.59220759220744,
+    "entry_prev_k": 19.155001155001333,
+    "entry_price": 41.5973,
+    "entry_time": "2026-08-10T19:17:40.837Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7a23e0-ae8b-46e3-b694-5225e3308c53",
+    "stop_price": 40.29
   }
 }
