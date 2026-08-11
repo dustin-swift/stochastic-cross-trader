@@ -69,15 +69,6 @@
     "stop_order_id": "6a74de7d-fd2c-4795-bd00-c9090caaec46",
     "stop_price": 29.48
   },
-  "NDAQ": {
-    "entry_order_id": "6a74de87-9437-4c48-aec2-5149c38b99a8",
-    "entry_price": 94.6999,
-    "entry_time": "2026-08-06T19:20:39.474Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a74de90-e90f-4aae-8486-af96f02243a3",
-    "stop_price": 91.05
-  },
   "WSBC": {
     "entry_d": 20.9427617662913,
     "entry_k": 27.024635495223993,
