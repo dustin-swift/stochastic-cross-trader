@@ -115,5 +115,83 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7b3567-1213-4f6c-b27b-050a4f0fd1bf",
     "stop_price": 68.2
+  },
+  "CDP": {
+    "entry_price": 37.0599,
+    "qty": 3,
+    "entry_time": "2026-08-12T16:15:45.569Z",
+    "entry_order_id": "6a7c9c31-04d8-453a-bb8d-4e1ffcf576c4",
+    "stop_order_id": "6a7c9c41-fc5c-45f5-82fb-911e4809ae76",
+    "stop_price": 35.9,
+    "stochastic_state": "NORMAL",
+    "entry_k": 51.54093401399158,
+    "entry_d": 29.58848267129638,
+    "entry_prev_k": 22.45002492308251,
+    "entry_prev_d": 18.370797595925577
+  },
+  "DLO": {
+    "entry_price": 14.1399,
+    "qty": 7,
+    "entry_time": "2026-08-12T16:16:22.989Z",
+    "entry_order_id": "6a7c9c56-cd9d-462a-bd06-525003d74e19",
+    "stop_order_id": "6a7c9c62-02e5-481f-88e7-890da53c018c",
+    "stop_price": 13.34,
+    "stochastic_state": "NORMAL",
+    "entry_k": 36.818801353685004,
+    "entry_d": 27.885798022200017,
+    "entry_prev_k": 25.48830577840812,
+    "entry_prev_d": 19.552618372132486
+  },
+  "FCX": {
+    "entry_price": 69.1799,
+    "qty": 1,
+    "entry_time": "2026-08-12T16:16:46.388Z",
+    "entry_order_id": "6a7c9c6e-895b-4afa-8aee-d314de14fe42",
+    "stop_order_id": "6a7c9c78-98bd-4bf2-9f8f-d8f449ade118",
+    "stop_price": 64.72,
+    "stochastic_state": "NORMAL",
+    "entry_k": 28.073465398297305,
+    "entry_d": 21.673492279646194,
+    "entry_prev_k": 23.298896427881328,
+    "entry_prev_d": 15.020700681827188
+  },
+  "PAYO": {
+    "entry_price": 7.0499,
+    "qty": 14,
+    "entry_time": "2026-08-12T16:17:07.42Z",
+    "entry_order_id": "6a7c9c83-86c8-4506-b7ab-3e44e1aaa4b0",
+    "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
+    "stop_price": 6.96,
+    "stochastic_state": "NORMAL",
+    "entry_k": 23.333333333333087,
+    "entry_d": 20.277777777777377,
+    "entry_prev_k": 22.22222222222169,
+    "entry_prev_d": 18.055555555555074
+  },
+  "SBLK": {
+    "entry_price": 27.8399,
+    "qty": 4,
+    "entry_time": "2026-08-12T16:17:29.476Z",
+    "entry_order_id": "6a7c9c99-b3dd-4320-977f-fabab921968b",
+    "stop_order_id": "6a7c9ca4-8f3f-4470-b1d3-bd83e52d9560",
+    "stop_price": 26.46,
+    "stochastic_state": "NORMAL",
+    "entry_k": 28.13849974863868,
+    "entry_d": 21.042512613755626,
+    "entry_prev_k": 19.25870101397646,
+    "entry_prev_d": 15.189854145732502
+  },
+  "SFL": {
+    "entry_price": 11.6999,
+    "qty": 9,
+    "entry_time": "2026-08-12T16:17:52.401Z",
+    "entry_order_id": "6a7c9cb0-e132-415e-9e99-11655384f7f5",
+    "stop_order_id": "6a7c9cb9-679e-4de5-a52a-92203344059f",
+    "stop_price": 11.23,
+    "stochastic_state": "NORMAL",
+    "entry_k": 27.33333333333326,
+    "entry_d": 22.962962962962923,
+    "entry_prev_k": 22.88888888888884,
+    "entry_prev_d": 19.3185185185185
   }
 }
