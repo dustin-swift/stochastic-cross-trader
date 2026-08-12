@@ -878,5 +878,29 @@
     "stop_order_id": "6a74de7d-fd2c-4795-bd00-c9090caaec46",
     "stop_price": 29.48,
     "symbol": "INVH"
+  },
+  {
+    "closed_at": "2026-08-12T13:17:54.552844+00:00",
+    "entry_d": 42.875977450445525,
+    "entry_k": 51.025641025641,
+    "entry_order_id": "6a7a2370-c289-4fa9-9c5b-486b3bfe0de6",
+    "entry_prev_d": 34.53306195532054,
+    "entry_prev_k": 43.439716312056795,
+    "entry_price": 44.3299,
+    "entry_time": "2026-08-10T19:16:01.018Z",
+    "exit_d": 75.34743866274165,
+    "exit_k": 65.18880678556218,
+    "exit_order_id": "6a7c724e-ee68-4f7a-9a47-e0ebc3ec4da4",
+    "exit_prev_d": null,
+    "exit_prev_k": 76.85612163638713,
+    "exit_price": null,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-12T13:17:46.004693+00:00",
+    "pnl_pct": null,
+    "pnl_usd": null,
+    "qty": 2,
+    "stop_order_id": "6a7a237f-e011-4761-bbab-ac36d2cd3680",
+    "stop_price": 42.87,
+    "symbol": "BN"
   }
 ]

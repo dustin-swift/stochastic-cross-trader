@@ -1,17 +1,4 @@
 {
-  "BN": {
-    "entry_d": 42.875977450445525,
-    "entry_k": 51.025641025641,
-    "entry_order_id": "6a7a2370-c289-4fa9-9c5b-486b3bfe0de6",
-    "entry_prev_d": 34.53306195532054,
-    "entry_prev_k": 43.439716312056795,
-    "entry_price": 44.3299,
-    "entry_time": "2026-08-10T19:16:01.018Z",
-    "qty": 2,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7a237f-e011-4761-bbab-ac36d2cd3680",
-    "stop_price": 42.87
-  },
   "CFG": {
     "entry_d": 20.0589993803371,
     "entry_k": 23.64072958500607,
