@@ -998,5 +998,29 @@
     "stop_order_id": "6a7c9c78-98bd-4bf2-9f8f-d8f449ade118",
     "stop_price": 64.72,
     "symbol": "FCX"
+  },
+  {
+    "closed_at": "2026-08-12T19:10:19.357715+00:00",
+    "entry_d": 29.58848267129638,
+    "entry_k": 51.54093401399158,
+    "entry_order_id": "6a7c9c31-04d8-453a-bb8d-4e1ffcf576c4",
+    "entry_prev_d": 18.370797595925577,
+    "entry_prev_k": 22.45002492308251,
+    "entry_price": 37.0599,
+    "entry_time": "2026-08-12T16:15:45.569Z",
+    "exit_d": 76.35083772221407,
+    "exit_k": 74.42348008385781,
+    "exit_order_id": "6a7cc511-f215-4214-bfba-4538a5bdfcf1",
+    "exit_prev_d": 68.72332236559198,
+    "exit_prev_k": 83.22851153039872,
+    "exit_price": 36.89,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-12T19:10:09.353Z",
+    "pnl_pct": -0.45844700066648425,
+    "pnl_usd": -0.5096999999999952,
+    "qty": 3,
+    "stop_order_id": "6a7c9c41-fc5c-45f5-82fb-911e4809ae76",
+    "stop_price": 35.9,
+    "symbol": "CDP"
   }
 ]

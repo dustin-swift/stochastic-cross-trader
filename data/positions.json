@@ -1,17 +1,4 @@
 {
-  "CDP": {
-    "entry_d": 29.58848267129638,
-    "entry_k": 51.54093401399158,
-    "entry_order_id": "6a7c9c31-04d8-453a-bb8d-4e1ffcf576c4",
-    "entry_prev_d": 18.370797595925577,
-    "entry_prev_k": 22.45002492308251,
-    "entry_price": 37.0599,
-    "entry_time": "2026-08-12T16:15:45.569Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7c9c41-fc5c-45f5-82fb-911e4809ae76",
-    "stop_price": 35.9
-  },
   "CFG": {
     "entry_d": 20.0589993803371,
     "entry_k": 23.64072958500607,
