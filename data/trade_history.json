@@ -902,5 +902,29 @@
     "stop_order_id": "6a7a237f-e011-4761-bbab-ac36d2cd3680",
     "stop_price": 42.87,
     "symbol": "BN"
+  },
+  {
+    "closed_at": "2026-08-12T14:17:54.243944+00:00",
+    "entry_d": 21.915979207243478,
+    "entry_k": 27.7456445231383,
+    "entry_order_id": "6a7b3516-32ff-4751-a9e5-a65c7e112f2d",
+    "entry_prev_d": 20.713643077625505,
+    "entry_prev_k": 19.370702471353354,
+    "entry_price": 22.6487,
+    "entry_time": "2026-08-11T14:43:34.911Z",
+    "exit_d": 57.879629629629456,
+    "exit_k": 54.16666666666679,
+    "exit_order_id": "6a7c8084-757c-4d0f-9fe6-9ddcf69132ad",
+    "exit_prev_d": 55.5160256410254,
+    "exit_prev_k": 62.51388888888874,
+    "exit_price": 22.7913,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-12T14:17:41.036Z",
+    "pnl_pct": 0.6296167108928996,
+    "pnl_usd": 0.5703999999999922,
+    "qty": 4,
+    "stop_order_id": "6a7b3528-82b6-4089-8fc5-f552d52e9f8b",
+    "stop_price": 21.99,
+    "symbol": "KEY"
   }
 ]

@@ -51,19 +51,6 @@
     "stop_order_id": "6a7a23c8-2e46-438d-89ce-52044c7e3ec5",
     "stop_price": 13.49
   },
-  "KEY": {
-    "entry_d": 21.915979207243478,
-    "entry_k": 27.7456445231383,
-    "entry_order_id": "6a7b3516-32ff-4751-a9e5-a65c7e112f2d",
-    "entry_prev_d": 20.713643077625505,
-    "entry_prev_k": 19.370702471353354,
-    "entry_price": 22.6487,
-    "entry_time": "2026-08-11T14:43:34.911Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7b3528-82b6-4089-8fc5-f552d52e9f8b",
-    "stop_price": 21.99
-  },
   "RF": {
     "entry_d": 23.24923755059504,
     "entry_k": 36.81513116024779,
