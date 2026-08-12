@@ -974,5 +974,29 @@
     "stop_order_id": "6a7b3547-4416-4958-af20-cbef39d4f6db",
     "stop_price": 30.48,
     "symbol": "RF"
+  },
+  {
+    "closed_at": "2026-08-12T18:13:54.984363+00:00",
+    "entry_d": 21.673492279646194,
+    "entry_k": 28.073465398297305,
+    "entry_order_id": "6a7c9c6e-895b-4afa-8aee-d314de14fe42",
+    "entry_prev_d": 15.020700681827188,
+    "entry_prev_k": 23.298896427881328,
+    "entry_price": 69.1799,
+    "entry_time": "2026-08-12T16:16:46.388Z",
+    "exit_d": 26.17924617651833,
+    "exit_k": 22.390807732960383,
+    "exit_order_id": "6a7cb7d8-0094-4b23-8294-340e0bc22a26",
+    "exit_prev_d": 26.481942408158645,
+    "exit_prev_k": 28.0734653982973,
+    "exit_price": 68.9142,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-12T18:13:44.201Z",
+    "pnl_pct": -0.38407109579517984,
+    "pnl_usd": -0.2657000000000096,
+    "qty": 1,
+    "stop_order_id": "6a7c9c78-98bd-4bf2-9f8f-d8f449ade118",
+    "stop_price": 64.72,
+    "symbol": "FCX"
   }
 ]
