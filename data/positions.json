@@ -1,17 +1,4 @@
 {
-  "BEN": {
-    "entry_d": 35.283910455673414,
-    "entry_k": 39.763608761656464,
-    "entry_order_id": "6a7cc617-cac9-4793-835e-02110af5467c",
-    "entry_prev_d": 30.5708812260536,
-    "entry_prev_k": 33.90804597701139,
-    "entry_price": 33.6687,
-    "entry_time": "2026-08-12T19:14:31.713Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7cc625-0de0-4201-93d4-e00f14490be1",
-    "stop_price": 32.23
-  },
   "CFG": {
     "entry_d": 20.0589993803371,
     "entry_k": 23.64072958500607,
@@ -112,7 +99,7 @@
     "entry_price": 7.0499,
     "entry_time": "2026-08-12T16:17:07.42Z",
     "qty": 14,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
     "stop_price": 6.96
   },
@@ -138,7 +125,7 @@
     "entry_price": 11.6999,
     "entry_time": "2026-08-12T16:17:52.401Z",
     "qty": 9,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7c9cb9-679e-4de5-a52a-92203344059f",
     "stop_price": 11.23
   },
@@ -154,18 +141,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a7c8da6-009f-4863-b44b-dc05eb35eae4",
     "stop_price": 6.25
-  },
-  "ZION": {
-    "entry_d": 22.542957720675307,
-    "entry_k": 35.02505755321376,
-    "entry_order_id": "6a7b3552-6b8d-4600-a06c-742ac6674513",
-    "entry_prev_d": 16.19173706915505,
-    "entry_prev_k": 16.28596392685485,
-    "entry_price": 70.4699,
-    "entry_time": "2026-08-11T14:44:34.983Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7b3567-1213-4f6c-b27b-050a4f0fd1bf",
-    "stop_price": 68.2
   }
 }
