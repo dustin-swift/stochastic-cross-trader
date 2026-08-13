@@ -64,6 +64,19 @@
     "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
     "stop_price": 6.96
   },
+  "SBH": {
+    "entry_d": 37.55820608085114,
+    "entry_k": 38.14580833409871,
+    "entry_order_id": "6a7e096e-7095-4b5d-802a-c3b130e55dbb",
+    "entry_prev_d": 35.11039310716219,
+    "entry_prev_k": 36.322024771136356,
+    "entry_price": 16.5587,
+    "entry_time": "2026-08-13T18:14:06.706Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a7e0988-1c62-4219-93e3-cac7cbc37696",
+    "stop_price": 15.52
+  },
   "SBLK": {
     "entry_d": 21.042512613755626,
     "entry_k": 28.13849974863868,
