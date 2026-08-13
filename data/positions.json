@@ -116,19 +116,6 @@
     "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
     "stop_price": 6.96
   },
-  "PRM": {
-    "entry_d": 21.330785168295623,
-    "entry_k": 39.85046339550391,
-    "entry_order_id": "6a7c8d89-1ec4-4e2c-8a0d-e68b34ffcb5a",
-    "entry_prev_d": 11.058538536807143,
-    "entry_prev_k": 15.061207022921437,
-    "entry_price": 35.3586,
-    "entry_time": "2026-08-12T15:13:14.084Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7c8d93-34df-49eb-b6ac-c35fbf533f24",
-    "stop_price": 32.04
-  },
   "SBLK": {
     "entry_d": 21.042512613755626,
     "entry_k": 28.13849974863868,
@@ -167,19 +154,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a7c8da6-009f-4863-b44b-dc05eb35eae4",
     "stop_price": 6.25
-  },
-  "WSBC": {
-    "entry_d": 20.9427617662913,
-    "entry_k": 27.024635495223993,
-    "entry_order_id": "6a7a23d4-ff1b-4420-aa1d-e074685c1322",
-    "entry_prev_d": 19.59220759220744,
-    "entry_prev_k": 19.155001155001333,
-    "entry_price": 41.5973,
-    "entry_time": "2026-08-10T19:17:40.837Z",
-    "qty": 2,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7a23e0-ae8b-46e3-b694-5225e3308c53",
-    "stop_price": 40.29
   },
   "ZION": {
     "entry_d": 22.542957720675307,
