@@ -1186,6 +1186,81 @@ def test_build_dashboard_renders_html_from_repo_state(tmp_path):
     assert embedded["circuit_breaker"]["tripped"] is False
     assert embedded["activity_today"]["signal_check"] == 1
     assert any(r["name"] == "dashboard-refresh" for r in embedded["routines"])
+    assert "daily" in embedded  # daily-stochastic-check comparison tab data, even if empty
+
+
+def test_build_dashboard_daily_section_absent_when_no_daily_track_yet(tmp_path):
+    # No config/strategy_daily.yaml, no data/daily/ -- must degrade to an
+    # empty daily section, not crash the whole dashboard build.
+    import yaml as _yaml
+
+    data_dir = tmp_path / "data"
+    (data_dir / "logs").mkdir(parents=True)
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        _yaml.safe_dump(BASE_CFG, f)
+
+    output_path = tmp_path / "dist.html"
+    _run("build_dashboard.py", {"account": {}, "position_prices": {}}, [
+        "--config", str(config_path),
+        "--data-dir", str(data_dir),
+        "--dashboard-dir", str(REPO_ROOT / "dashboard"),
+        "--output", str(output_path),
+        "--daily-config", str(tmp_path / "nonexistent_strategy_daily.yaml"),
+        "--daily-data-dir", str(tmp_path / "nonexistent_daily_data"),
+    ])
+    html = output_path.read_text()
+    data_marker = 'type="application/json">'
+    start = html.index(data_marker) + len(data_marker)
+    end = html.index("</script>", start)
+    embedded = json.loads(html[start:end])
+    assert embedded["daily"] == {"positions": [], "trade_history": [], "config": {"max_positions": 0}, "available": False}
+
+
+def test_build_dashboard_daily_section_populated(tmp_path):
+    import yaml as _yaml
+
+    data_dir = tmp_path / "data"
+    (data_dir / "logs").mkdir(parents=True)
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        _yaml.safe_dump(BASE_CFG, f)
+
+    daily_config_path = tmp_path / "strategy_daily.yaml"
+    with daily_config_path.open("w") as f:
+        _yaml.safe_dump({**BASE_CFG, "sizing": {**BASE_CFG["sizing"], "max_positions": 7}}, f)
+
+    daily_data_dir = tmp_path / "daily_data"
+    daily_data_dir.mkdir()
+    (daily_data_dir / "positions.json").write_text(json.dumps({
+        "AAPL": {"entry_price": 200.0, "qty": 1, "entry_time": "2026-08-13T00:00:00Z",
+                  "entry_order_id": "paper", "stop_order_id": None, "stop_price": 195.0, "stochastic_state": "NORMAL"},
+    }))
+    (daily_data_dir / "trade_history.json").write_text(json.dumps([
+        {"symbol": "MSFT", "qty": 1, "entry_price": 400.0, "exit_price": 410.0,
+         "pnl_usd": 10.0, "pnl_pct": 2.5, "exit_reason": "signal_exit",
+         "entry_time": "2026-08-11T00:00:00Z", "exit_time": "2026-08-12T00:00:00Z",
+         "entry_order_id": "paper", "exit_order_id": "paper", "stop_price": 390.0, "closed_at": "2026-08-12T00:00:05Z"},
+    ]))
+
+    output_path = tmp_path / "dist.html"
+    _run("build_dashboard.py", {"account": {}, "position_prices": {}}, [
+        "--config", str(config_path),
+        "--data-dir", str(data_dir),
+        "--dashboard-dir", str(REPO_ROOT / "dashboard"),
+        "--output", str(output_path),
+        "--daily-config", str(daily_config_path),
+        "--daily-data-dir", str(daily_data_dir),
+    ])
+    html = output_path.read_text()
+    data_marker = 'type="application/json">'
+    start = html.index(data_marker) + len(data_marker)
+    end = html.index("</script>", start)
+    embedded = json.loads(html[start:end])
+    assert embedded["daily"]["available"] is True
+    assert embedded["daily"]["config"]["max_positions"] == 7
+    assert embedded["daily"]["positions"][0]["symbol"] == "AAPL"
+    assert embedded["daily"]["trade_history"][0]["symbol"] == "MSFT"
 
 
 def test_run_backtest_end_to_end(tmp_path):
@@ -1491,3 +1566,124 @@ def test_build_entries_payload_finalize_rejects_stale_build_file(tmp_path):
     assert result.returncode != 0
     assert "stale" in result.stderr.lower() or "minutes old" in result.stderr
     assert not build_file.exists()  # deleted despite the error, so the next cycle starts clean
+
+
+def test_build_entries_payload_candidates_data_dir_reads_shared_candidates(tmp_path):
+    # daily-stochastic-check usage: candidates.json lives in a shared dir,
+    # but pending_entries.json/positions.json live in the track's own dir.
+    shared_dir = tmp_path / "data"
+    shared_dir.mkdir()
+    (shared_dir / "candidates.json").write_text(json.dumps([{"symbol": "AAA", "sector": "Tech", "atr14": 1.5}]))
+
+    daily_dir = tmp_path / "data" / "daily"
+    daily_dir.mkdir()
+    (daily_dir / "pending_entries.json").write_text(json.dumps({"AAA": {"k_at_cross": 22.5}}))
+    (daily_dir / "positions.json").write_text(json.dumps({}))
+
+    build_file = daily_dir / ".entries_candidates_build.jsonl"
+    batch = _historicals_batch({"AAA": [{"begins_at": "t1", "high_price": "10", "low_price": "9", "close_price": "9.5"}]})
+    _run("build_entries_payload.py", batch, ["--append", "--data-dir", str(daily_dir), "--build-file", str(build_file)])
+
+    result = _run(
+        "build_entries_payload.py",
+        None,
+        [
+            "--finalize",
+            "--data-dir", str(daily_dir),
+            "--candidates-data-dir", str(shared_dir),
+            "--build-file", str(build_file),
+        ],
+    )
+    payload = json.loads(result.stdout)
+    assert len(payload["candidates"]) == 1
+    c = payload["candidates"][0]
+    assert c["symbol"] == "AAA"
+    assert c["sector"] == "Tech"
+    assert c["atr14"] == 1.5
+    assert c["pending"] == {"k_at_cross": 22.5}  # pending still comes from --data-dir, not --candidates-data-dir
+
+
+def test_check_paper_stops_detects_low_breach(tmp_path):
+    payload = {
+        "positions": [
+            {"symbol": "AAA", "stop_price": 95.0, "bars": [{"begins_at": "2026-08-13T00:00:00Z", "high": 101.0, "low": 94.0, "close": 96.0}]},
+            {"symbol": "BBB", "stop_price": 50.0, "bars": [{"begins_at": "2026-08-13T00:00:00Z", "high": 60.0, "low": 55.0, "close": 58.0}]},
+        ]
+    }
+    result = _run("check_paper_stops.py", payload, ["--data-dir", str(tmp_path / "data")])
+    out = json.loads(result.stdout)
+    assert out == {"stop_outs": [{"symbol": "AAA", "exit_price": 95.0, "exit_time": "2026-08-13T00:00:00Z"}]}
+
+    events = _events(tmp_path)
+    assert events[0]["event"] == "paper_stop_out"
+    assert events[0]["symbol"] == "AAA"
+
+
+def test_check_paper_stops_no_breach_no_events(tmp_path):
+    payload = {
+        "positions": [
+            {"symbol": "AAA", "stop_price": 90.0, "bars": [{"begins_at": "2026-08-13T00:00:00Z", "high": 101.0, "low": 94.0, "close": 96.0}]},
+        ]
+    }
+    result = _run("check_paper_stops.py", payload, ["--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"stop_outs": []}
+    assert not (tmp_path / "data" / "logs").exists() or list((tmp_path / "data" / "logs").glob("*.jsonl")) == []
+
+
+def test_check_paper_stops_skips_symbol_with_no_bars(tmp_path):
+    payload = {"positions": [{"symbol": "AAA", "stop_price": 90.0, "bars": []}]}
+    result = _run("check_paper_stops.py", payload, ["--data-dir", str(tmp_path / "data")])
+    assert json.loads(result.stdout) == {"stop_outs": []}
+
+
+def test_record_paper_entry_writes_position(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    payload = {
+        "symbol": "AAA",
+        "entry_price": 100.0,
+        "qty": 2,
+        "entry_time": "2026-08-13T00:00:00Z",
+        "stop_price": 95.0,
+        "entry_k": 24.1,
+        "entry_d": 19.8,
+        "entry_prev_k": 18.6,
+        "entry_prev_d": 15.2,
+    }
+    result = _run("record_paper_entry.py", payload, ["--data-dir", str(data_dir)])
+    out = json.loads(result.stdout)
+    assert out["symbol"] == "AAA"
+    assert out["entry_order_id"] == "paper"
+    assert out["stop_order_id"] is None
+    assert out["stochastic_state"] == "NORMAL"
+    assert out["stop_price"] == 95.0
+    assert out["entry_k"] == 24.1
+
+    positions = json.loads((data_dir / "positions.json").read_text())
+    assert "AAA" in positions
+    assert positions["AAA"]["qty"] == 2
+    assert positions["AAA"]["entry_order_id"] == "paper"
+
+    log_files = list((data_dir / "logs").glob("*.jsonl"))
+    assert len(log_files) == 1
+    events = [json.loads(line) for line in log_files[0].read_text().splitlines()]
+    assert events[0]["event"] == "paper_entry_recorded"
+    assert events[0]["symbol"] == "AAA"
+
+
+def test_record_paper_entry_overwrites_existing_symbol(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    data_dir.mkdir(parents=True)
+    (data_dir / "positions.json").write_text(json.dumps({"BBB": {"entry_price": 1.0, "qty": 1}}))
+
+    payload = {
+        "symbol": "AAA",
+        "entry_price": 50.0,
+        "qty": 1,
+        "entry_time": "2026-08-13T00:00:00Z",
+        "stop_price": 48.0,
+    }
+    _run("record_paper_entry.py", payload, ["--data-dir", str(data_dir)])
+    positions = json.loads((data_dir / "positions.json").read_text())
+    assert set(positions.keys()) == {"AAA", "BBB"}
+    assert positions["AAA"]["entry_k"] is None  # omitted fields default to null, not a KeyError
+

@@ -45,6 +45,18 @@ def test_load_valid_config_roundtrip(tmp_path):
     assert cfg == VALID_CFG
 
 
+def test_loads_the_real_daily_config():
+    # config/strategy_daily.yaml (the daily-stochastic-check paper track,
+    # 2026-08-13) must always load cleanly and must always be a permanent
+    # dry-run track -- unlike config/strategy.yaml, `live: True` here would
+    # be a real bug, not just an unflipped default.
+    cfg = load_config("config/strategy_daily.yaml")
+    assert cfg["live"] is False
+    assert cfg["stochastic"]["k_period"] == 14
+    assert cfg["market_filter"]["fast_sma_period"] == 20
+    assert cfg["market_filter"]["slow_sma_period"] == 200
+
+
 def test_missing_file_raises():
     with pytest.raises(FileNotFoundError):
         load_config("does/not/exist.yaml")

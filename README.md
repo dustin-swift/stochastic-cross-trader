@@ -572,6 +572,8 @@ Robinhood MCP connector (see prerequisite #3 above):
   the-line confirmation reverse before the trade landed; see
   `scripts/check_hourly_signals.py`'s "Execution-lag cron fix" docstring
   note for the full writeup).
+- **daily-stochastic-check** — once per day, after market close. The daily
+  paper-comparison track — see "Daily comparison track" below.
 - **dashboard-refresh** — hourly during market hours, a few minutes after
   `hourly-signal-check` — see Dashboard below.
 
@@ -579,12 +581,61 @@ Minimum cron interval for a routine is 1 hour. All three routines are safe
 to also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
 agent to follow the skill directly) any time, in addition to their schedule.
 
+## Daily comparison track (config/strategy_daily.yaml, 2026-08-13)
+
+A second, parallel strategy track built to directly answer "would this do
+better on daily bars instead of hourly?" — same stochastic entry/exit rules,
+same $100/15-slot sizing, and (at the user's explicit choice) the same
+daily-screened candidate list as the hourly track above, but every
+oscillator/ATR/trend/market-regime reading is computed on DAILY bars
+instead of hourly ones. See `.claude/skills/daily-stochastic-check.md` for
+the full runbook and `config/strategy_daily.yaml` for the rationale behind
+every value that differs from the hourly config (mainly: SMA periods that
+made sense at hourly granularity don't automatically make sense at daily
+granularity, so several were re-derived rather than copied as-is).
+
+**Permanent paper/dry-run — never trades real money.** This was an explicit
+choice (asked directly, 2026-08-13: dry-run-only vs. live-with-split-capital
+— dry-run won, to keep the comparison clean and avoid the two tracks
+competing for capital/slots in the same account). `config/strategy_daily.yaml`
+has `live: false`, but that's not the only safeguard — the
+`daily-stochastic-check` skill is written to never call an order-placing
+tool under any circumstance, full stop. Every entry/exit on this track is a
+**simulated fill** recorded straight into `data/daily/positions.json` /
+`data/daily/trade_history.json` — no broker order, no broker fill, nothing
+to reconcile. The stop-loss itself is simulated too (`scripts/
+check_paper_stops.py`, run each cycle before the ordinary signal-exit check):
+since there's no real resting stop order to check for a fill, this instead
+applies the same fill convention `lib/backtest.py` uses for historical
+research — a stop "fills" at the exact stop price on the first bar whose low
+touches or breaches it.
+
+**Separate state, shared candidates.** This track's positions, pending
+dual-cross setups, trade history, and last-cycle timestamp all live under
+`data/daily/` — completely separate from the hourly (live) track's
+`data/*.json`, so the two can never collide, double-count, or accidentally
+compete for the same simulated/real slot. The one deliberate exception:
+`data/candidates.json` (the daily-universe-screen's output) is read
+directly by both tracks, not duplicated — `scripts/build_entries_payload.py`'s
+`--candidates-data-dir` flag is what makes that split possible (positions/
+pending come from `--data-dir data/daily`, candidates come from
+`--candidates-data-dir data`).
+
+**Comparing results**: the dashboard's "Daily · Paper" tab (see Dashboard
+below) shows this track's open positions and closed-trade performance
+side by side with the hourly track's real results — same layout, same
+metrics, so a win-rate/P&L comparison is a glance, not a spreadsheet
+exercise.
+
 ## Dashboard
 
 A published Claude Artifact — positions, closed-trade history with
 drill-down, today's watchlist, and portfolio/system stats — kept fresh by
 the **dashboard-refresh** cloud routine on the same hourly cadence as
-trading itself, with no manual "refresh" step required:
+trading itself, with no manual "refresh" step required. It has two tabs:
+**Hourly · Live** (the real-money track described above) and
+**Daily · Paper** (the comparison track described in "Daily comparison
+track" above, clearly banner-labeled as paper/dry-run).
 
 - `dashboard/template.html` — the page itself (self-contained: fonts
   embedded as base64 `@font-face` data URIs, since a published Artifact's
@@ -593,10 +644,14 @@ trading itself, with no manual "refresh" step required:
   variable-font files, base64-encoded.
 - `scripts/build_dashboard.py` — renders `template.html` into
   `dashboard/dist.html`, pulling positions/trade history/candidates/logs/
-  config straight from `data/` and `config/strategy.yaml`. The only inputs
-  it can't derive itself — live account totals and current prices for open
-  positions — come in via a small JSON payload on stdin (see the script's
-  own docstring for the exact shape).
+  config straight from `data/` and `config/strategy.yaml` for the Hourly
+  tab, and from `data/daily/` and `config/strategy_daily.yaml` (via
+  `--daily-data-dir`/`--daily-config`, defaulted to those paths) for the
+  Daily tab — degrades to an empty Daily tab rather than failing if that
+  track hasn't run yet. The only inputs it can't derive itself — live
+  account totals and current prices for open positions, hourly track only,
+  since the daily track never touches the real broker — come in via a small
+  JSON payload on stdin (see the script's own docstring for the exact shape).
 - The **dashboard-refresh** routine's job each run: `sync_state.sh pull`,
   fetch that live snapshot via the Robinhood MCP connector, run
   `build_dashboard.py`, then publish `dashboard/dist.html` with the

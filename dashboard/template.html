@@ -181,6 +181,40 @@
     color: var(--ink-muted);
   }
 
+  /* ---- track tabs (hourly live vs. daily paper comparison) ---- */
+  .tabbar {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 4px;
+    cursor: pointer;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--accent); }
+  .tab-panel[hidden] { display: none; }
+  .paper-banner {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--accent-2);
+    background: var(--warn-bg);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    letter-spacing: 0.02em;
+  }
+
   /* ---- section shell ---- */
   section { display: flex; flex-direction: column; gap: 12px; }
   .section-head {
@@ -452,6 +486,13 @@
     </div>
   </div>
 
+  <div class="tabbar" id="tabbar">
+    <button class="tab-btn active" data-tab="hourly" type="button">Hourly &middot; Live</button>
+    <button class="tab-btn" data-tab="daily" type="button">Daily &middot; Paper</button>
+  </div>
+
+  <div class="tab-panel" id="tab-panel-hourly">
+
   <section id="snapshot">
     <div class="section-head">
       <span class="section-title">Account Snapshot</span>
@@ -497,6 +538,38 @@
     </div>
     <div class="system-grid" id="system-grid"></div>
   </section>
+
+  </div>
+
+  <div class="tab-panel" id="tab-panel-daily" hidden>
+
+  <div class="paper-banner" id="daily-banner">Paper / dry-run comparison track — same stochastic rules and candidate list as the hourly track, evaluated on daily bars. No real orders are ever placed here.</div>
+
+  <section id="daily-stats">
+    <div class="section-head">
+      <span class="section-title">Paper Performance</span>
+      <span class="section-note">All closed paper trades, all-time</span>
+    </div>
+    <div id="daily-performance-body"></div>
+  </section>
+
+  <section id="daily-positions">
+    <div class="section-head">
+      <span class="section-title">Open Paper Positions</span>
+      <span class="section-note" id="daily-positions-note"></span>
+    </div>
+    <div class="panel table-scroll" id="daily-positions-table-wrap"></div>
+  </section>
+
+  <section id="daily-history">
+    <div class="section-head">
+      <span class="section-title">Closed Paper Trade History</span>
+      <span class="section-note">Click a row to drill in</span>
+    </div>
+    <div class="panel table-scroll" id="daily-history-table-wrap"></div>
+  </section>
+
+  </div>
 
   <footer>
     <span>dustin-swift/stochastic-cross-trader — <code>bot-state</code> branch</span>
@@ -581,17 +654,17 @@
     </div>
   `).join('');
 
-  // ---- open positions ----
-  const posNote = document.getElementById('positions-note');
-  posNote.textContent = slotsUsed + ' open, ' + (slotsMax - slotsUsed) + ' slots free';
-  const posWrap = document.getElementById('positions-table-wrap');
-  if (DATA.positions.length === 0) {
-    posWrap.innerHTML = `<div class="empty-state">
-      <strong>No open positions</strong>
-      <span>The strategy hasn't taken an entry yet. New positions will appear here the moment an hourly cycle fills one.</span>
-    </div>`;
-  } else {
-    const rows = DATA.positions.map(p => {
+  // ---- open positions (generic -- called once for hourly, once for daily) ----
+  function renderPositions(positions, slotsMax, noteElId, wrapElId, emptyCopy) {
+    const used = positions.length;
+    const noteEl = document.getElementById(noteElId);
+    if (noteEl) noteEl.textContent = used + ' open, ' + Math.max(0, slotsMax - used) + ' slots free';
+    const wrap = document.getElementById(wrapElId);
+    if (positions.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><strong>No open positions</strong><span>${esc(emptyCopy)}</span></div>`;
+      return;
+    }
+    const rows = positions.map(p => {
       const stateClass = p.stochastic_state === 'OVERBOUGHT_HOLD' ? 'badge-hold' : 'badge-normal';
       return `<tr>
         <td class="sym">${esc(p.symbol)}</td>
@@ -602,23 +675,25 @@
         <td><span class="badge ${stateClass}">${esc(p.stochastic_state || 'NORMAL')}</span></td>
       </tr>`;
     }).join('');
-    posWrap.innerHTML = `<table>
+    wrap.innerHTML = `<table>
       <thead><tr>
         <th>Symbol</th><th class="num">Qty</th><th class="num">Entry</th><th class="num">Stop</th><th>Entered</th><th>Stoch. State</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
   }
+  renderPositions(DATA.positions, slotsMax, 'positions-note', 'positions-table-wrap',
+    "The strategy hasn't taken an entry yet. New positions will appear here the moment an hourly cycle fills one.");
+  renderPositions(DATA.daily.positions, DATA.daily.config.max_positions, 'daily-positions-note', 'daily-positions-table-wrap',
+    "No paper entry yet. New paper positions will appear here the moment a daily cycle confirms one.");
 
-  // ---- performance summary ----
-  const closed = DATA.trade_history;
-  const perfBody = document.getElementById('performance-body');
-  if (closed.length === 0) {
-    perfBody.innerHTML = `<div class="panel empty-state">
-      <strong>No closed trades yet</strong>
-      <span>Win rate, P&amp;L, and exit-reason breakdown will populate here once the first position closes.</span>
-    </div>`;
-  } else {
+  // ---- performance summary (generic) ----
+  function renderPerformance(closed, bodyElId, emptyCopy) {
+    const body = document.getElementById(bodyElId);
+    if (closed.length === 0) {
+      body.innerHTML = `<div class="panel empty-state"><strong>No closed trades yet</strong><span>${esc(emptyCopy)}</span></div>`;
+      return;
+    }
     const withPnl = closed.filter(t => t.pnl_usd !== null && t.pnl_usd !== undefined);
     const wins = withPnl.filter(t => t.pnl_usd > 0);
     const losses = withPnl.filter(t => t.pnl_usd < 0);
@@ -649,7 +724,7 @@
       </div>
     `).join('');
 
-    perfBody.innerHTML = `<div class="perf-grid">
+    body.innerHTML = `<div class="perf-grid">
       <div class="perf-cell">
         <div class="tiles" style="border:none;">${statTiles.map(t => `
           <div class="tile" style="padding:8px 14px;">
@@ -663,22 +738,26 @@
       </div>
     </div>`;
   }
+  const closed = DATA.trade_history;
+  renderPerformance(closed, 'performance-body',
+    'Win rate, P&L, and exit-reason breakdown will populate here once the first position closes.');
+  renderPerformance(DATA.daily.trade_history, 'daily-performance-body',
+    'Win rate, P&L, and exit-reason breakdown will populate here once the first paper trade closes.');
 
-  // ---- closed trade history ----
-  const histWrap = document.getElementById('history-table-wrap');
-  if (closed.length === 0) {
-    histWrap.innerHTML = `<div class="empty-state">
-      <strong>Nothing to show yet</strong>
-      <span>Every closed trade — stop-out, signal exit, overbought-hold exit, or earnings-forced exit — will land here with full entry/exit detail.</span>
-    </div>`;
-  } else {
+  // ---- closed trade history (generic) ----
+  function renderHistory(closed, wrapElId, idPrefix, emptyCopy) {
+    const wrap = document.getElementById(wrapElId);
+    if (closed.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><strong>Nothing to show yet</strong><span>${esc(emptyCopy)}</span></div>`;
+      return;
+    }
     const sorted = closed.slice().sort((a, b) => new Date(b.exit_time) - new Date(a.exit_time));
     const rows = sorted.map((t, i) => {
       const reasonClass = t.exit_reason === 'stop_out' ? 'badge-stop'
         : t.exit_reason === 'earnings_exit' ? 'badge-earnings'
         : t.exit_reason === 'overbought_hold_exit' ? 'badge-hold'
         : 'badge-signal';
-      const detailId = 'detail-' + i;
+      const detailId = idPrefix + '-' + i;
       return `<tr class="exp-row" data-target="${detailId}">
           <td><span class="caret" data-caret="${detailId}">&#9656;</span></td>
           <td class="sym">${esc(t.symbol)}</td>
@@ -706,22 +785,36 @@
           </td>
         </tr>`;
     }).join('');
-    histWrap.innerHTML = `<table>
+    wrap.innerHTML = `<table>
       <thead><tr>
         <th></th><th>Symbol</th><th class="num">Entry</th><th class="num">Exit</th><th class="num">P&amp;L</th><th class="num">P&amp;L %</th><th>Reason</th><th>Closed</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
-    histWrap.querySelectorAll('.exp-row').forEach(row => {
+    wrap.querySelectorAll('.exp-row').forEach(row => {
       row.addEventListener('click', () => {
         const id = row.getAttribute('data-target');
         const detail = document.getElementById(id);
-        const caret = histWrap.querySelector(`[data-caret="${id}"]`);
+        const caret = wrap.querySelector(`[data-caret="${id}"]`);
         detail.classList.toggle('open');
         caret.classList.toggle('open');
       });
     });
   }
+  renderHistory(closed, 'history-table-wrap', 'detail',
+    'Every closed trade — stop-out, signal exit, overbought-hold exit, or earnings-forced exit — will land here with full entry/exit detail.');
+  renderHistory(DATA.daily.trade_history, 'daily-history-table-wrap', 'detail-d',
+    'Every closed paper trade — simulated stop-out, signal exit, overbought-hold exit, or earnings-forced exit — will land here with full entry/exit detail.');
+
+  // ---- tab switching ----
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-panel-hourly').hidden = btn.dataset.tab !== 'hourly';
+      document.getElementById('tab-panel-daily').hidden = btn.dataset.tab !== 'daily';
+    });
+  });
 
   // ---- watchlist ----
   const wl = DATA.candidates;

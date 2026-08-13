@@ -1,0 +1,119 @@
+# Daily Stochastic Pullback Strategy — the same rules as config/strategy.yaml
+# (spec-wise), but every bar-based reading uses DAILY bars instead of hourly.
+# Built 2026-08-13, at the user's direction: the hourly track's results
+# haven't been satisfying, and the user wants a true side-by-side comparison
+# of timeframe rather than another tweak to the hourly config. This is a
+# SEPARATE, PARALLEL track — its own state under data/daily/, its own skill
+# (.claude/skills/daily-stochastic-check.md), its own scheduled routine
+# (once/day, after close) — sharing only the daily-universe-screen's
+# candidate list (data/candidates.json), at the user's explicit choice, so
+# the comparison isolates timeframe and nothing else.
+#
+# PERMANENT DRY-RUN — not a temporary flag. `live` is hardcoded false here
+# and the daily-stochastic-check skill must NEVER call place_equity_order or
+# cancel_equity_order under any circumstance, regardless of what this file
+# says — this is a paper/comparison track by explicit user choice (asked,
+# and answered "dry-run only" over "live with split capital" 2026-08-13),
+# not a dry-run-until-promoted track like the hourly system started as. If
+# the comparison later favors daily and the user wants it to go live, that
+# needs an explicit new decision and a real capital-split design, not a
+# one-line flip of this value.
+live: false
+
+account_number: "849995824"  # unused (no orders ever placed) — kept for lib.config's schema
+
+# Screening: NOT used by the daily track. It deliberately reuses the SAME
+# data/candidates.json the hourly track's daily-universe-screen already
+# produces (2026-08-13 user choice: same universe, so only timeframe
+# differs). This section exists only because lib.config requires it.
+screening:
+  finviz_csv_path: data/finviz_export.csv
+  max_candidates_per_sector: 999
+
+# Same stochastic settings as the hourly config, computed on DAILY bars
+# instead of hourly ones -- the entire point of this comparison is isolating
+# the timeframe variable, so nothing else about the oscillator rules changes.
+stochastic:
+  k_period: 14
+  k_smooth: 3
+  d_period: 3
+  oversold_threshold: 20
+  overbought_threshold: 80
+  entry_lookback_bars: 2
+  k_invalidate_max: 55
+  # Missed-cycle guard, daily cadence: this track runs once per day, and a
+  # normal Friday-to-Monday gap is ~3 trading days (~4320 real minutes) with
+  # no missed cycle at all -- the hourly config's 90-minute threshold would
+  # misfire on every single weekend. Set high enough to comfortably span a
+  # long weekend (accounting for a slightly late run) while still catching a
+  # genuinely stuck/skipped routine (e.g. silently broken for the better
+  # part of a week).
+  max_cycle_gap_minutes: 6000  # ~4.2 days
+
+# Trend-intact exit filter, on DAILY bars: a 50-period SMA here is a ~10-week
+# structural trend read (vs. ~1.5 weeks on the hourly track's 50 HOURLY
+# bars) -- appropriately longer-horizon for a daily-cadence system.
+trend_filter:
+  enabled: true
+  sma_period: 50
+
+# Market-regime filter, on DAILY bars: this restores the ORIGINAL 20/200
+# daily-SMA design the user first proposed for the hourly track and later
+# revised away from (see lib/market_filter.py's docstring) -- that revision
+# happened specifically because a 20/200 read is too slow to catch a single
+# steep INTRADAY decline for an HOURLY-cadence system. That objection doesn't
+# apply here: at once-a-day cadence, a 20/200-day SMA read (fast ~1 trading
+# month, slow ~10 months) is exactly the natural regime-filter granularity,
+# not a mismatch. require_rising stays false for the same reason as the
+# hourly config: a healthy pullback to the averages during an uptrend
+# shouldn't be treated the same as the averages actually rolling over.
+market_filter:
+  enabled: true
+  symbol: SPY
+  fast_sma_period: 20   # trading days
+  slow_sma_period: 200  # trading days
+  require_rising: false
+  rising_lookback_bars: 5
+
+# Same ATR stop convention as the hourly track -- already daily-bar ATR(14)
+# there too, so no change needed here; period counts daily bars either way.
+atr:
+  period: 14
+  stop_multiplier: 1.5
+
+trailing_stop:
+  enabled: false
+  activation_pct: 3.0
+  atr_multiplier: 2.0
+
+# Unused (no real orders ever placed by this track) -- kept for lib.config's
+# schema only.
+order_lifecycle:
+  poll_timeout_seconds: 30
+  poll_interval_seconds: 5
+
+alerts:
+  provider: slack
+
+# Same $100/trade, same 15-slot cap as the hourly track, for a like-for-like
+# comparison -- these are PAPER slots/dollars (see the `live: false` note
+# above), not a claim on real account capital.
+sizing:
+  per_trade_usd: 100
+  max_price_per_share: 150
+  max_positions: 15
+
+# Unused in practice (no real capital at risk on this track), kept only
+# because lib.config requires the section. A paper circuit breaker isn't
+# meaningful without a paper equity curve, which this track doesn't build.
+risk:
+  max_daily_loss_pct: 3
+
+# Same earnings/catalyst avoidance rule as the hourly track. `near_close`
+# gating (hourly config's forced_exit_utc_hour) doesn't apply here -- this
+# track only ever runs once per day, so every run IS the "last check of the
+# day"; the daily-stochastic-check skill always fetches earnings for open
+# positions rather than gating on an hour threshold.
+catalysts:
+  enabled: true
+  forced_exit_utc_hour: 19  # unused (see note above), kept for schema parity
