@@ -439,3 +439,4 @@
 {"d": 40.105650887371816, "event": "signal_check", "k": 27.012731410295842, "kind": "entry", "pending": null, "prev_d": 52.595548416960895, "prev_k": 41.92139737991269, "signal": false, "symbol": "ZGN", "timestamp": "2026-08-13T18:33:02.970156+00:00"}
 {"d": 40.5255818634005, "event": "signal_check", "k": 25.833441152369904, "kind": "entry", "pending": null, "prev_d": 54.470177254496065, "prev_k": 39.893043515763175, "signal": false, "symbol": "ZIM", "timestamp": "2026-08-13T18:33:02.973586+00:00"}
 {"d": 58.11463631019031, "event": "signal_check", "k": 65.1427115188584, "kind": "entry", "pending": null, "prev_d": 56.62725774539859, "prev_k": 55.259977223644775, "signal": false, "symbol": "ZION", "timestamp": "2026-08-13T18:33:02.976900+00:00"}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-13T20:29:59.606948+00:00", "trend_intact": true}
