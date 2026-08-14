@@ -25,19 +25,6 @@
     "stop_order_id": "6a7cc63d-614f-4954-a046-6a294674b165",
     "stop_price": 28.91
   },
-  "PAYO": {
-    "entry_d": 20.277777777777377,
-    "entry_k": 23.333333333333087,
-    "entry_order_id": "6a7c9c83-86c8-4506-b7ab-3e44e1aaa4b0",
-    "entry_prev_d": 18.055555555555074,
-    "entry_prev_k": 22.22222222222169,
-    "entry_price": 7.0499,
-    "entry_time": "2026-08-12T16:17:07.42Z",
-    "qty": 14,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
-    "stop_price": 6.96
-  },
   "SBH": {
     "entry_d": 37.55820608085114,
     "entry_k": 38.14580833409871,

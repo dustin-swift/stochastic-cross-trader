@@ -1238,5 +1238,29 @@
     "stop_order_id": "6a7a23c8-2e46-438d-89ce-52044c7e3ec5",
     "stop_price": 13.49,
     "symbol": "HOPE"
+  },
+  {
+    "closed_at": "2026-08-14T19:11:04.034888+00:00",
+    "entry_d": 20.277777777777377,
+    "entry_k": 23.333333333333087,
+    "entry_order_id": "6a7c9c83-86c8-4506-b7ab-3e44e1aaa4b0",
+    "entry_prev_d": 18.055555555555074,
+    "entry_prev_k": 22.22222222222169,
+    "entry_price": 7.0499,
+    "entry_time": "2026-08-12T16:17:07.42Z",
+    "exit_d": 79.2857142857141,
+    "exit_k": 74.99999999999973,
+    "exit_order_id": "6a7f6835-661f-4b0a-9858-b8875ac44b3d",
+    "exit_prev_d": 82.42063492063478,
+    "exit_prev_k": 79.64285714285704,
+    "exit_price": 7.1201,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-14T19:10:45.976Z",
+    "pnl_pct": 0.9957588050894417,
+    "pnl_usd": 0.9827999999999975,
+    "qty": 14,
+    "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
+    "stop_price": 6.96,
+    "symbol": "PAYO"
   }
 ]
