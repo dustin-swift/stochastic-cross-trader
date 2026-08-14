@@ -64,6 +64,43 @@
 #   scripts/sync_state.sh push   # commit current data/ to origin/bot-state
 set -euo pipefail
 
+# Hang-proofing (2026-08-14, at the user's direction, after a live hourly-
+# signal-check cycle froze mid-run -- reconciliation completed, then nothing
+# for 14+ minutes with no error, right around where this script's push()
+# runs). git fetch/push are network calls with no built-in timeout; in a
+# non-interactive cloud session, a stalled connection or a credential helper
+# waiting on a prompt that will never come blocks forever instead of
+# erroring -- unlike almost every other failure mode in this script, which
+# already fails fast and loud. GIT_TERMINAL_PROMPT=0 makes git refuse to
+# prompt at all (fails immediately instead of blocking on stdin); every
+# network git call below is also wrapped in `timeout` so a stalled TCP
+# connection can't hang past GIT_NET_TIMEOUT_SECONDS either. This doesn't
+# explain every stalled cycle seen so far (some never got far enough to
+# reach this script at all -- see the checkout-freshness guard added
+# 2026-08-07 for a different, earlier-stage class of staleness), but it
+# closes a real gap: an unattended script should never be able to hang
+# silently and indefinitely on a single git command.
+export GIT_TERMINAL_PROMPT=0
+GIT_NET_TIMEOUT_SECONDS="${GIT_NET_TIMEOUT_SECONDS:-30}"
+
+# git_net <git-args...> -- run a network-touching git command (fetch/push)
+# under a hard timeout, when `timeout` is available. Exit code 124
+# specifically means "timed out" (see `timeout`'s own man page) -- callers
+# that branch on the exit code use that to give an accurate message rather
+# than conflating a timeout with an ordinary git failure (e.g. "no branch
+# yet"). Degrades to plain `git` (no timeout) if `timeout` isn't on PATH --
+# confirmed absent on a bare macOS dev machine (BSD userland, no GNU
+# coreutils) -- so this can't turn into a hard dependency that breaks a
+# working environment that happens to lack it; GIT_TERMINAL_PROMPT=0 above
+# still applies either way and is the more load-bearing half of this fix.
+git_net() {
+    if command -v timeout >/dev/null 2>&1; then
+        timeout "$GIT_NET_TIMEOUT_SECONDS" git "$@"
+    else
+        git "$@"
+    fi
+}
+
 cmd="${1:-}"
 cd "$(git rev-parse --show-toplevel)"
 BASE_MARKER=".bot_state_base"
@@ -114,7 +151,13 @@ graft_data_blob() {
 }
 
 pull() {
-    if ! git fetch origin bot-state 2>/dev/null; then
+    local fetch_status=0
+    git_net fetch origin bot-state 2>/dev/null || fetch_status=$?
+    if [ "$fetch_status" -ne 0 ]; then
+        if [ "$fetch_status" -eq 124 ]; then
+            echo "sync_state pull: git fetch timed out after ${GIT_NET_TIMEOUT_SECONDS}s -- treating as a real failure, not a missing branch. Not proceeding with a possibly-stale local data/." >&2
+            exit 1
+        fi
         echo "sync_state pull: no bot-state branch on origin yet -- nothing to pull, starting fresh" >&2
         rm -f "$BASE_MARKER"
         exit 0
@@ -156,7 +199,7 @@ push() {
     if [ -f "$BASE_MARKER" ]; then
         base_commit=$(cat "$BASE_MARKER")
     else
-        git fetch origin bot-state 2>/dev/null || true
+        git_net fetch origin bot-state 2>/dev/null || true
         base_commit=$(git rev-parse --verify -q origin/bot-state 2>/dev/null || echo "")
         echo "sync_state push: no $BASE_MARKER from a prior pull() -- falling back to the current remote tip as merge base (degraded safety, run pull() first when possible)" >&2
     fi
@@ -181,7 +224,7 @@ push() {
         # this is the check that has to happen on every attempt, not just
         # after a rejection, since a stale-but-fast-forwardable push is the
         # actual failure mode here (see header).
-        git fetch origin bot-state 2>/dev/null || true
+        git_net fetch origin bot-state 2>/dev/null || true
         local remote_head
         remote_head=$(git rev-parse --verify -q origin/bot-state 2>/dev/null || echo "")
 
@@ -228,7 +271,7 @@ push() {
         fi
 
         push_err=$(mktemp)
-        if git push origin "${new_commit}:refs/heads/bot-state" 2>"$push_err"; then
+        if git_net push origin "${new_commit}:refs/heads/bot-state" 2>"$push_err"; then
             rm -f "$push_err"
             # Re-materialize data/ from what's now actually on bot-state --
             # a merged push can include changes from the other run that
