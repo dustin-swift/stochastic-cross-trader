@@ -1197,6 +1197,47 @@ def test_build_dashboard_renders_html_from_repo_state(tmp_path):
     assert "daily" in embedded  # daily-stochastic-check comparison tab data, even if empty
 
 
+def test_build_dashboard_tolerates_malformed_nested_event_field(tmp_path):
+    # Confirmed live 2026-08-14: an ad-hoc cycle_summary log call nested the
+    # whole summary dict under its own "event" key (e.g. logger.log(summary_dict)
+    # instead of logger.log("cycle_summary", **summary_dict)), producing
+    # {"event": {"event": "cycle_summary", ...}, "timestamp": ...} -- crashed
+    # _todays_event_counts with "unhashable type: dict" since it tried to use
+    # the whole nested dict as a Counter/dict key. build_dashboard.py must
+    # unwrap it (event["event"]) rather than crash the whole dashboard build.
+    import yaml as _yaml
+    from datetime import datetime, timezone
+
+    data_dir = tmp_path / "data"
+    (data_dir / "logs").mkdir(parents=True)
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        _yaml.safe_dump(BASE_CFG, f)
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    log_path = data_dir / "logs" / f"{today}.jsonl"
+    log_path.write_text(
+        json.dumps({"timestamp": f"{today}T14:00:00+00:00", "event": "signal_check"}) + "\n"
+        + json.dumps({"timestamp": f"{today}T15:02:07+00:00", "event": {"event": "cycle_summary", "entries_taken": 0, "exits_taken": 0}}) + "\n"
+    )
+
+    output_path = tmp_path / "dist.html"
+    _run("build_dashboard.py", {"account": {}, "position_prices": {}}, [
+        "--config", str(config_path),
+        "--data-dir", str(data_dir),
+        "--dashboard-dir", str(REPO_ROOT / "dashboard"),
+        "--output", str(output_path),
+    ])
+
+    html = output_path.read_text()
+    data_marker = 'type="application/json">'
+    start = html.index(data_marker) + len(data_marker)
+    end = html.index("</script>", start)
+    embedded = json.loads(html[start:end])
+    assert embedded["activity_today"]["signal_check"] == 1
+    assert embedded["activity_today"]["cycle_summary"] == 1
+
+
 def test_build_dashboard_daily_section_absent_when_no_daily_track_yet(tmp_path):
     # No config/strategy_daily.yaml, no data/daily/ -- must degrade to an
     # empty daily section, not crash the whole dashboard build.
