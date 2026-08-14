@@ -1190,5 +1190,29 @@
     "stop_order_id": "6a7a23b0-01b1-4974-ab24-8bb95437246e",
     "stop_price": 55.11,
     "symbol": "FITB"
+  },
+  {
+    "closed_at": "2026-08-14T16:32:57.149399+00:00",
+    "entry_d": 21.625451916123897,
+    "entry_k": 33.7845263919012,
+    "entry_order_id": "6a7c8d76-6d5d-4dd4-b04d-196f102e1c01",
+    "entry_prev_d": 17.835623041696216,
+    "entry_prev_k": 12.292118582790684,
+    "entry_price": 19.2099,
+    "entry_time": "2026-08-12T15:12:54.929Z",
+    "exit_d": 65.19454658752329,
+    "exit_k": 40.202092815860816,
+    "exit_order_id": "6a7f4324-8c88-4587-8b38-6958b6445755",
+    "exit_prev_d": 83.30457499047436,
+    "exit_prev_k": 65.1769087523279,
+    "exit_price": 19.0701,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-14T16:32:36.5Z",
+    "pnl_pct": -0.7277497540330802,
+    "pnl_usd": -0.6990000000000052,
+    "qty": 5,
+    "stop_order_id": "6a7c8d80-3126-40d3-913c-cf8c9f3c8c87",
+    "stop_price": 18.52,
+    "symbol": "NWG"
   }
 ]
