@@ -428,3 +428,4 @@
 {"event": "stop_placed", "stop_order_id": "6a7f6986-4315-4265-abfc-9a38f21446ce", "stop_price": 13.98, "symbol": "REF", "timestamp": "2026-08-14T19:16:28.483916+00:00"}
 {"entry_price": 72.3399, "event": "entry_executed", "order_id": "6a7f6992-3da1-49ca-8015-b4266e04624b", "qty": 1, "symbol": "TECH", "timestamp": "2026-08-14T19:16:57.851002+00:00"}
 {"event": "stop_placed", "stop_order_id": "6a7f69a2-7cbe-454d-bb43-fa181ca827c0", "stop_price": 71.32, "symbol": "TECH", "timestamp": "2026-08-14T19:16:57.851265+00:00"}
+{"candidates_checked": 341, "candidates_missing_data": 3, "candidates_total": 350, "circuit_breaker_tripped": false, "cycle_gap_minutes": 65.6930301, "entries_proposed": 3, "entries_taken": 3, "event": "cycle_summary", "exits_taken": 1, "market_trend_intact": true, "max_positions": 15, "open_positions": 9, "slots_remaining": 6, "stale_cycle": false, "stop_outs_found": 0, "timestamp": "2026-08-14T19:17:12.191341+00:00"}
