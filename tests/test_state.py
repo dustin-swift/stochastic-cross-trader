@@ -10,6 +10,7 @@ def test_load_defaults_when_no_files(tmp_path):
     assert store.load_daily_pnl() == {}
     assert store.load_trade_history() == []
     assert store.load_pending_entries() == {}
+    assert store.load_pending_fills() == {}
     assert store.load_last_cycle_at() is None
 
 
@@ -25,6 +26,13 @@ def test_save_and_load_pending_entries_roundtrip(tmp_path):
     pending = {"AAPL": {"k_at_cross": 22.5}, "MSFT": {"k_at_cross": 20.1}}
     store.save_pending_entries(pending)
     assert store.load_pending_entries() == pending
+
+
+def test_save_and_load_pending_fills_roundtrip(tmp_path):
+    store = StateStore(tmp_path)
+    pending = {"AAPL": {"atr14": 3.2, "signal_date": "2026-08-14"}}
+    store.save_pending_fills(pending)
+    assert store.load_pending_fills() == pending
 
 
 def test_save_and_load_last_cycle_at_roundtrip(tmp_path):

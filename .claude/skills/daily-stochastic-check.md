@@ -27,14 +27,31 @@ declined 2026-08-13) -- never treat a stray `live: true` edit to this
 specific config file as authorization to place real orders here.
 
 **Separate state, shared candidates.** This track's own state --
-`positions.json`, `pending_entries.json`, `trade_history.json`,
-`last_cycle_at.json`, `logs/` -- lives under `data/daily/`, completely
-separate from the hourly (live) track's `data/*.json`, so the two can never
-collide or double-count. The one exception, at the user's explicit choice:
-`data/candidates.json` (the shared daily-universe-screen output) is read
-directly, NOT duplicated under `data/daily/` -- both tracks evaluate the
-exact same daily candidate list, so any difference in results traces back to
-timeframe alone, not universe.
+`positions.json`, `pending_entries.json`, `pending_fills.json`,
+`trade_history.json`, `last_cycle_at.json`, `logs/` -- lives under
+`data/daily/`, completely separate from the hourly (live) track's
+`data/*.json`, so the two can never collide or double-count. The one
+exception, at the user's explicit choice: `data/candidates.json` (the
+shared daily-universe-screen output) is read directly, NOT duplicated under
+`data/daily/` -- both tracks evaluate the exact same daily candidate list,
+so any difference in results traces back to timeframe alone, not universe.
+
+**Fills happen at the NEXT trading day's open, not the signal day's close**
+(2026-08-14, at the user's direction -- the original same-day-close design
+was a fill no real order could ever actually achieve, since this routine
+only runs once per day, AFTER close: by the time a signal confirms, today's
+regular session is already over). So there are two distinct pending states,
+not one:
+
+- `pending_entries.json` -- the %K/%D dual-cross confirmation state, same
+  meaning as on the hourly track (has %K crossed oversold but %D hasn't
+  confirmed yet). Unrelated to fills; a symbol here hasn't signaled at all yet.
+- `pending_fills.json` (new) -- a signal has ALREADY confirmed but hasn't
+  been "bought" yet. Queued at signal confirmation (`scripts/
+  queue_paper_fill.py`, section 4 below), settled into a real
+  `positions.json` entry on the NEXT cycle once that day's open price is
+  known (`scripts/settle_paper_fills.py`, section 0a below). A symbol sits
+  here for exactly one cycle.
 
 ## 0. Setup
 
@@ -48,6 +65,19 @@ included, since `sync_state.sh` captures the entire `data/` tree).
 - Load `data/daily/positions.json` and `data/daily/pending_entries.json` (via `StateStore("data/daily")`, or read the files directly). Load the shared `data/candidates.json` (via `StateStore("data")`).
 - **Capture the missed-cycle guard's prior timestamp now**, before section 3 runs and overwrites it: `python3 -c "from lib.state import StateStore; print(StateStore('data/daily').load_last_cycle_at() or '')"`. Call this `prior_cycle_at`.
 
+## 0a. Settle pending fills (do this before anything else that reads positions.json)
+
+A symbol confirmed a signal LAST cycle and is sitting in `data/daily/pending_fills.json`, waiting on today's now-known open price. Settle these first so they immediately count against slot availability and are eligible for exit evaluation this same cycle -- exactly like a live position that filled mid-cycle would be.
+
+- Read `data/daily/pending_fills.json`. If empty, skip this section entirely -- nothing to settle.
+- Otherwise, `get_equity_historicals(symbols=[...], interval="day", start_time=<~5 days back>)` for just those symbols (this list is small -- at most `sizing.max_positions`, 15 -- so a single hand-built call/payload is fine here, unlike section 4's full candidate sweep). **This fetch needs the `open` field**, unlike every other bars fetch in this skill (which only ever need high/low/close) -- don't drop it when building the payload below.
+- Build `{"bars_by_symbol": {"AAPL": [{"begins_at": "...", "open": ..., "high": ..., "low": ..., "close": ...}, ...]}}` (oldest-first; only the last bar's `open` actually gets used, but pass whatever the fetch returned) and run:
+  ```bash
+  echo '<payload>' | python3 scripts/settle_paper_fills.py --config config/strategy_daily.yaml --data-dir data/daily
+  ```
+  → `{"filled": [{"symbol", "entry_price", "qty", "stop_price"}, ...], "still_pending": [symbols...]}`. This script reads `data/daily/pending_fills.json` itself (not from the payload), sizes qty and the ATR stop off the REAL open price (not the signal-day estimate -- same "size at actual fill price, not signal price" principle the live hourly track uses), writes each filled symbol straight into `data/daily/positions.json`, and updates `pending_fills.json` to drop filled/price-capped symbols while leaving genuinely-still-pending ones (a fetch that came back empty for a symbol) for next cycle.
+- Nothing further needed here -- `settle_paper_fills.py` already wrote `positions.json` and `pending_fills.json`. Note `filled` for this cycle's summary (section 6).
+
 ## 1. Market regime check (daily SPY 20/200 SMA)
 
 `get_equity_historicals(symbols=["SPY"], interval="day", start_time=<~400 days back>)` -- 200 daily bars needs roughly that much calendar-day lookback once weekends/holidays are accounted for; err generous rather than risk a spurious `null`. Then:
@@ -60,7 +90,7 @@ There is no circuit-breaker check on this track (spec-equivalent to the hourly t
 
 ## 2. Determine slot availability
 
-`lib.state.has_open_slot(positions, config["sizing"]["max_positions"])` off `data/daily/positions.json` **as it stands right now** -- after section 3's exits, not before them (evaluate this after section 3, same ordering fix the hourly track already made and for the same reason: a same-cycle exit should free a slot a same-cycle entry can use). If `market_trend_intact` came back `false`, treat slots as unavailable regardless of the actual count. If there's no open slot, skip section 4 entirely.
+`lib.state.has_open_slot(positions, config["sizing"]["max_positions"])` off `data/daily/positions.json` **as it stands right now** -- after section 0a's settlements AND section 3's exits, not before them (evaluate this after section 3, same ordering fix the hourly track already made and for the same reason: a same-cycle exit should free a slot a same-cycle entry can use; section 0a's settlements matter here too, since a symbol that just filled this cycle occupies a slot immediately). If `market_trend_intact` came back `false`, treat slots as unavailable regardless of the actual count. If there's no open slot, skip section 4 entirely.
 
 ## 3. Exits -- simulated stop-loss, then signal/overbought-hold, then earnings-forced
 
@@ -111,13 +141,13 @@ Only reached if section 1 didn't come back `trend_intact: false` and section 2 f
 
 Take the filtered `entries`, in order, up to however many open slots section 2 found:
 
-- For each: **simulate the fill and record the paper position directly** -- no order placement, no polling, no real stop:
+- For each: **queue it for a next-open fill -- do NOT record a position yet** (2026-08-14; see the skill header's "Fills happen at the NEXT trading day's open" note for why). This cycle's daily bar has already closed by the time this routine runs, so there is no real fill this signal could achieve today:
   ```bash
-  echo '{"symbol": "...", "entry_price": <entries[].last_close>, "qty": <entries[].qty>, "entry_time": "<this cycle'"'"'s daily bar'"'"'s begins_at>", "stop_price": <entries[].estimated_stop_price>, "entry_k": ..., "entry_d": ..., "entry_prev_k": ..., "entry_prev_d": ...}' | python3 scripts/record_paper_entry.py --data-dir data/daily
+  echo '{"symbol": "...", "atr14": <entries[].atr14>, "entry_k": ..., "entry_d": ..., "entry_prev_k": ..., "entry_prev_d": ..., "signal_date": "<today'"'"'s UTC date, e.g. via date -u +%Y-%m-%d -- informational only, not used for any decision>"}' | python3 scripts/queue_paper_fill.py --data-dir data/daily
   ```
-  `entries[].estimated_stop_price` and `entries[].qty` are already computed by `check_hourly_signals.py` regardless of live/dry-run status (see its docstring) -- this track just writes them straight into the position record instead of using them to size a real order.
-- Log a `paper_entry_recorded` event per entry (already done by the script itself -- nothing further needed here).
-- **If `entries[].atr14` was `null`** for a symbol that otherwise confirmed: same handling as the hourly track -- `estimated_stop_price` will be `null` too; skip recording that one as a paper position rather than guessing a stop distance (log why), consistent with the hourly track's `stop_skipped_no_atr` handling even though there's no real order at stake here -- the point of this track is a faithful comparison, not a looser one.
+  This writes into `data/daily/pending_fills.json` and logs `paper_fill_queued`. The position itself gets written NEXT cycle, by section 0a, once tomorrow's open is actually known -- don't try to guess or pre-compute an entry price here.
+- **`entries[].atr14` being `null`** for a symbol that otherwise confirmed is still worth queuing (unlike the hourly track, which skips a real order without a real ATR) -- `atr14` is only needed at settlement time to compute the stop, and `settle_paper_fills.py` already handles a `null` atr14 there (no stop computed, matching the hourly track's `stop_skipped_no_atr` handling) -- so there's no reason to drop the signal here just because the stop can't be computed yet.
+- A slot "reserved" by a queued pending fill is accounted for by section 2 on the NEXT cycle too (`build_entries_payload.py --finalize` already excludes any symbol in `pending_fills.json` from being re-evaluated as a fresh candidate, same as an already-open position) -- so a queued symbol can't get double-queued while it's waiting to settle.
 
 ## 5. Sync state out -- entries
 
@@ -125,4 +155,4 @@ Take the filtered `entries`, in order, up to however many open slots section 2 f
 
 ## 6. Cycle summary
 
-Report: candidates checked, entries taken vs. proposed, exits taken (broken out by reason -- especially `stop_out`, since that's simulated here, not broker-confirmed), open paper positions vs. slots, `market_trend_intact`, and whether the candidate sweep was truncated. This is the number a human skims to compare against the same cycle's hourly-track summary.
+Report: **fills settled this cycle** (section 0a's `filled`, at what open price, and any still-pending symbols carried to next cycle), candidates checked, new signals queued this cycle (section 4, awaiting tomorrow's open -- distinct from "entries taken," since nothing is actually a position yet), exits taken (broken out by reason -- especially `stop_out`, since that's simulated here, not broker-confirmed), open paper positions vs. slots, `market_trend_intact`, and whether the candidate sweep was truncated. This is the number a human skims to compare against the same cycle's hourly-track summary.

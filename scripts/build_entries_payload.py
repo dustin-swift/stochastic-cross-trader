@@ -139,7 +139,12 @@ def finalize(
     candidates_store = candidates_store or store
     candidates_by_symbol = {c["symbol"]: c for c in candidates_store.load_candidates()}
     pending_by_symbol = store.load_pending_entries()
-    open_symbols = set(store.load_positions().keys())
+    # A symbol already open OR already queued for a next-open fill (2026-08-14,
+    # daily-stochastic-check's pending_fills.json -- see scripts/
+    # queue_paper_fill.py) must not be re-evaluated as a fresh candidate;
+    # load_pending_fills() is a no-op read (empty dict) for the hourly track,
+    # which never writes that file, so this is safe to always include.
+    open_symbols = set(store.load_positions().keys()) | set(store.load_pending_fills().keys())
 
     seen: dict[str, dict] = {}
     with build_file.open() as f:

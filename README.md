@@ -621,6 +621,23 @@ directly by both tracks, not duplicated — `scripts/build_entries_payload.py`'s
 pending come from `--data-dir data/daily`, candidates come from
 `--candidates-data-dir data`).
 
+**Fills happen at the next trading day's open, not the signal day's close
+(2026-08-14).** The original design recorded a confirmed signal's fill at
+that day's own closing price — but since this routine only runs once per
+day, *after* close, that fill was never actually achievable by any real
+order: by the time the signal is even computed, the session it's priced off
+of is already over. So a confirmed entry is now **queued**
+(`scripts/queue_paper_fill.py`, into `data/daily/pending_fills.json`) rather
+than bought immediately, and **settled** into a real `positions.json` entry
+on the *next* cycle (`scripts/settle_paper_fills.py`), once that next day's
+open price is actually known — sizing the share count and the ATR stop off
+that real open, not the signal-day estimate, the same "size at the real
+fill price, not the signal price" principle the hourly track already
+follows. `pending_fills.json` is distinct from `pending_entries.json`: the
+latter is the %K/%D dual-cross confirmation state (*before* a signal
+fires), the former is a signal that's *already* confirmed and is just
+waiting one cycle to be realistically fillable.
+
 **Comparing results**: the dashboard's "Daily · Paper" tab (see Dashboard
 below) shows this track's open positions and closed-trade performance
 side by side with the hourly track's real results — same layout, same

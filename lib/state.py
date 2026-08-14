@@ -79,6 +79,27 @@ class StateStore:
     def save_pending_entries(self, pending_by_symbol: dict[str, dict]) -> None:
         _atomic_write_json(self.pending_entries_path, pending_by_symbol)
 
+    # -- paper next-open pending fills (daily-stochastic-check track,
+    # 2026-08-14) -- distinct from pending_entries above (which tracks the
+    # %K/%D dual-cross confirmation state, BEFORE a signal fires). This
+    # tracks a signal that has ALREADY confirmed but hasn't been "bought"
+    # yet: the daily track only runs once per day, after close, so the
+    # earliest realistic fill for a signal confirmed off today's close is
+    # tomorrow's open -- not today's close, which no real order could ever
+    # actually achieve (see scripts/settle_paper_fills.py). A symbol sits
+    # here for exactly one cycle between being queued (scripts/
+    # queue_paper_fill.py, at signal confirmation) and being settled into a
+    # real positions.json entry at the next cycle's now-known open price.
+    @property
+    def pending_fills_path(self) -> Path:
+        return self.data_dir / "pending_fills.json"
+
+    def load_pending_fills(self) -> dict[str, dict]:
+        return _read_json(self.pending_fills_path, default={})
+
+    def save_pending_fills(self, pending_by_symbol: dict[str, dict]) -> None:
+        _atomic_write_json(self.pending_fills_path, pending_by_symbol)
+
     # -- last successful hourly-signal-check cycle (2026-08-04, missed-cycle
     # guard) -- a plain ISO8601 UTC timestamp written by check_hourly_signals.py
     # itself at the end of every invocation, live or dry-run. Used only to

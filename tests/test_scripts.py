@@ -954,6 +954,14 @@ def _events(tmp_path):
     return [json.loads(line) for line in log_files[0].read_text().splitlines()]
 
 
+def _events_in(data_dir):
+    """Like _events, but for a data-dir that isn't tmp_path/data (e.g. the
+    daily-stochastic-check track's tmp_path/data/daily)."""
+    log_files = list((data_dir / "logs").glob("*.jsonl"))
+    assert len(log_files) == 1
+    return [json.loads(line) for line in log_files[0].read_text().splitlines()]
+
+
 def test_check_circuit_breaker_not_tripped(tmp_path):
     config_path = _write_cfg(tmp_path)
     payload = {"account_value": 1500, "realized_pnl_today": 5, "unrealized_pnl_today": 2}
@@ -1686,4 +1694,134 @@ def test_record_paper_entry_overwrites_existing_symbol(tmp_path):
     positions = json.loads((data_dir / "positions.json").read_text())
     assert set(positions.keys()) == {"AAA", "BBB"}
     assert positions["AAA"]["entry_k"] is None  # omitted fields default to null, not a KeyError
+
+
+def test_queue_paper_fill_writes_pending_fills(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    payload = {
+        "symbol": "AAA",
+        "atr14": 2.0,
+        "entry_k": 24.1,
+        "entry_d": 19.8,
+        "entry_prev_k": 18.6,
+        "entry_prev_d": 15.2,
+        "signal_date": "2026-08-14",
+    }
+    result = _run("queue_paper_fill.py", payload, ["--data-dir", str(data_dir)])
+    out = json.loads(result.stdout)
+    assert out["symbol"] == "AAA"
+    assert out["atr14"] == 2.0
+
+    pending = json.loads((data_dir / "pending_fills.json").read_text())
+    assert pending["AAA"]["entry_k"] == 24.1
+    assert pending["AAA"]["signal_date"] == "2026-08-14"
+
+    events = _events_in(data_dir)
+    assert events[0]["event"] == "paper_fill_queued"
+
+
+def test_queue_paper_fill_overwrites_existing_pending_symbol(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    data_dir.mkdir(parents=True)
+    (data_dir / "pending_fills.json").write_text(json.dumps({"AAA": {"atr14": 1.0}, "BBB": {"atr14": 3.0}}))
+
+    payload = {"symbol": "AAA", "atr14": 5.0}
+    _run("queue_paper_fill.py", payload, ["--data-dir", str(data_dir)])
+    pending = json.loads((data_dir / "pending_fills.json").read_text())
+    assert pending["AAA"]["atr14"] == 5.0
+    assert pending["BBB"]["atr14"] == 3.0
+
+
+def _write_daily_cfg(tmp_path):
+    return _write_cfg(tmp_path, {"atr": {"period": 14, "stop_multiplier": 1.5}})
+
+
+def test_settle_paper_fills_fills_at_next_open(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    data_dir.mkdir(parents=True)
+    (data_dir / "pending_fills.json").write_text(json.dumps({
+        "AAA": {"atr14": 2.0, "entry_k": 24.1, "entry_d": 19.8, "entry_prev_k": 18.6, "entry_prev_d": 15.2, "signal_date": "2026-08-13"},
+    }))
+    config_path = _write_daily_cfg(tmp_path)
+
+    payload = {"bars_by_symbol": {"AAA": [{"begins_at": "2026-08-14T00:00:00Z", "open": 100.0, "high": 102.0, "low": 99.0, "close": 101.0}]}}
+    result = _run("settle_paper_fills.py", payload, ["--config", str(config_path), "--data-dir", str(data_dir)])
+    out = json.loads(result.stdout)
+    assert out["still_pending"] == []
+    assert len(out["filled"]) == 1
+    assert out["filled"][0]["symbol"] == "AAA"
+    assert out["filled"][0]["entry_price"] == 100.0
+    assert out["filled"][0]["stop_price"] == 100.0 - 1.5 * 2.0
+
+    positions = json.loads((data_dir / "positions.json").read_text())
+    assert positions["AAA"]["entry_price"] == 100.0
+    assert positions["AAA"]["entry_order_id"] == "paper"
+    assert positions["AAA"]["stop_order_id"] is None
+    assert positions["AAA"]["stochastic_state"] == "NORMAL"
+    assert positions["AAA"]["entry_k"] == 24.1
+
+    pending_after = json.loads((data_dir / "pending_fills.json").read_text())
+    assert pending_after == {}
+
+    events = _events_in(data_dir)
+    filled_event = next(e for e in events if e["event"] == "paper_entry_filled_next_open")
+    assert filled_event["symbol"] == "AAA"
+    assert filled_event["signal_date"] == "2026-08-13"
+
+
+def test_settle_paper_fills_leaves_symbol_pending_when_no_fresh_bar(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    data_dir.mkdir(parents=True)
+    (data_dir / "pending_fills.json").write_text(json.dumps({
+        "AAA": {"atr14": 2.0},
+        "BBB": {"atr14": 1.0},
+    }))
+    config_path = _write_daily_cfg(tmp_path)
+
+    payload = {"bars_by_symbol": {"AAA": [{"begins_at": "2026-08-14T00:00:00Z", "open": 100.0, "high": 102.0, "low": 99.0, "close": 101.0}]}}
+    result = _run("settle_paper_fills.py", payload, ["--config", str(config_path), "--data-dir", str(data_dir)])
+    out = json.loads(result.stdout)
+    assert out["still_pending"] == ["BBB"]
+    assert [f["symbol"] for f in out["filled"]] == ["AAA"]
+
+    pending_after = json.loads((data_dir / "pending_fills.json").read_text())
+    assert set(pending_after.keys()) == {"BBB"}
+
+    positions = json.loads((data_dir / "positions.json").read_text())
+    assert set(positions.keys()) == {"AAA"}
+
+
+def test_settle_paper_fills_drops_symbol_over_price_cap(tmp_path):
+    data_dir = tmp_path / "data" / "daily"
+    data_dir.mkdir(parents=True)
+    (data_dir / "pending_fills.json").write_text(json.dumps({"AAA": {"atr14": 2.0}}))
+    config_path = _write_daily_cfg(tmp_path)  # BASE_CFG's max_price_per_share is 150
+
+    payload = {"bars_by_symbol": {"AAA": [{"begins_at": "2026-08-14T00:00:00Z", "open": 500.0, "high": 505.0, "low": 495.0, "close": 500.0}]}}
+    result = _run("settle_paper_fills.py", payload, ["--config", str(config_path), "--data-dir", str(data_dir)])
+    out = json.loads(result.stdout)
+    assert out["filled"] == []
+    assert out["still_pending"] == []  # dropped, not retried
+
+    pending_after = json.loads((data_dir / "pending_fills.json").read_text())
+    assert pending_after == {}
+    positions = json.loads((data_dir / "positions.json").read_text())
+    assert positions == {}
+
+    events = _events_in(data_dir)
+    assert events[0]["event"] == "paper_fill_skipped_price_cap"
+
+
+def test_build_entries_payload_excludes_pending_fill_symbols(tmp_path):
+    data_dir = _write_state(tmp_path, candidates=[{"symbol": "AAA", "atr14": 1.0}, {"symbol": "BBB", "atr14": 2.0}])
+    (data_dir / "pending_fills.json").write_text(json.dumps({"AAA": {"atr14": 1.0}}))
+    build_file = data_dir / ".entries_candidates_build.jsonl"
+
+    for symbol in ("AAA", "BBB"):
+        batch = _historicals_batch({symbol: [{"begins_at": "t1", "high_price": "1", "low_price": "1", "close_price": "1"}]})
+        _run("build_entries_payload.py", batch, ["--append", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+
+    result = _run("build_entries_payload.py", None, ["--finalize", "--data-dir", str(data_dir), "--build-file", str(build_file)])
+    payload = json.loads(result.stdout)
+    assert {c["symbol"] for c in payload["candidates"]} == {"BBB"}  # AAA excluded, already pending a fill
 

@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Writes a new paper (dry-run, no real order) position for the
-daily-stochastic-check track (2026-08-13). The hourly (live) track's entry
-lifecycle involves an actual order fill; this track's `entries[]` output
-from check_hourly_signals.py already carries everything a position record
-needs (last_close as the simulated entry price, qty, estimated_stop_price)
-since that script computes those regardless of whether the caller ever
-places a real order -- this script's only job is writing that straight into
-data/daily/positions.json with the real-order fields (entry_order_id,
-stop_order_id) replaced by an explicit "paper" marker instead of a broker id.
+"""Writes a new paper (dry-run, no real order) position directly, given an
+already-known entry price.
+
+Superseded as of 2026-08-14 for the daily-stochastic-check skill's normal
+flow: a confirmed signal is now queued (scripts/queue_paper_fill.py) and
+settled at the next trading day's open (scripts/settle_paper_fills.py)
+instead of being written immediately at the signal day's close, since that
+close-price fill was never actually achievable (this track's routine only
+runs once per day, after close). Kept as a standalone, tested utility for
+direct/manual position writes (e.g. manual reconciliation) where the entry
+price is already known and doesn't need next-open settlement logic.
 
 Input (JSON, via --input file or stdin):
   {
