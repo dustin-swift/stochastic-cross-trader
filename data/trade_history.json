@@ -1214,5 +1214,29 @@
     "stop_order_id": "6a7c8d80-3126-40d3-913c-cf8c9f3c8c87",
     "stop_price": 18.52,
     "symbol": "NWG"
+  },
+  {
+    "closed_at": "2026-08-14T18:10:18.487025+00:00",
+    "entry_d": 20.18619296431692,
+    "entry_k": 32.10295040803514,
+    "entry_order_id": "6a7a23bd-7b1f-4fe2-a0d1-e6e9320af8aa",
+    "entry_prev_d": 13.490519952488228,
+    "entry_prev_k": 19.151561519146203,
+    "entry_price": 13.9287,
+    "entry_time": "2026-08-10T19:17:17.423Z",
+    "exit_d": 74.49743996250918,
+    "exit_k": 58.66708544592495,
+    "exit_order_id": "6a7f59f7-5705-4618-87c3-3bf009642b20",
+    "exit_prev_d": 84.83644753465718,
+    "exit_prev_k": 75.54987212276204,
+    "exit_price": 14.3613,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-14T18:09:59.89Z",
+    "pnl_pct": 3.105817484761686,
+    "pnl_usd": 3.0282000000000053,
+    "qty": 7,
+    "stop_order_id": "6a7a23c8-2e46-438d-89ce-52044c7e3ec5",
+    "stop_price": 13.49,
+    "symbol": "HOPE"
   }
 ]

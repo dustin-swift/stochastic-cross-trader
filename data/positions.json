@@ -12,19 +12,6 @@
     "stop_order_id": "6a7c8d6a-c13f-4984-8b86-e6db61c83b83",
     "stop_price": 31.91
   },
-  "HOPE": {
-    "entry_d": 20.18619296431692,
-    "entry_k": 32.10295040803514,
-    "entry_order_id": "6a7a23bd-7b1f-4fe2-a0d1-e6e9320af8aa",
-    "entry_prev_d": 13.490519952488228,
-    "entry_prev_k": 19.151561519146203,
-    "entry_price": 13.9287,
-    "entry_time": "2026-08-10T19:17:17.423Z",
-    "qty": 7,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7a23c8-2e46-438d-89ce-52044c7e3ec5",
-    "stop_price": 13.49
-  },
   "INVH": {
     "entry_d": 41.02127038350891,
     "entry_k": 43.111111111110745,
@@ -99,7 +86,7 @@
     "entry_price": 6.7599,
     "entry_time": "2026-08-12T15:13:33.673Z",
     "qty": 15,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a7c8da6-009f-4863-b44b-dc05eb35eae4",
     "stop_price": 6.25
   }
