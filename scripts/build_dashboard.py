@@ -60,6 +60,8 @@ def _todays_event_counts(data_dir: Path, today: str) -> dict[str, int]:
             if not line:
                 continue
             event = json.loads(line).get("event", "unknown")
+            if isinstance(event, dict):
+                event = event.get("event", "unknown")
             counts[event] = counts.get(event, 0) + 1
     return counts
 
