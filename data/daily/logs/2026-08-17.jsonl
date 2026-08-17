@@ -1,0 +1,1 @@
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-17T20:20:07.033773+00:00", "trend_intact": true}
