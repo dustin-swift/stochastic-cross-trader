@@ -10,7 +10,13 @@ import os
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-REQUIRED_COLUMNS = ("Ticker", "Sector")
+REQUIRED_COLUMNS = ("Ticker",)
+# Sector was required through 2026-08-14; dropped at the user's direction
+# once the per-sector candidate cap was set to 999 (effectively unlimited,
+# see config/strategy.yaml) -- sector stopped being load-bearing for
+# filtering, so a leaner export without it is fully supported now. Rows
+# missing the column just carry sector: "UNKNOWN" downstream (see
+# scripts/check_universe_screen.py's _normalize).
 
 
 def load_universe(csv_path: str) -> list[dict]:

@@ -17,6 +17,16 @@ have to immediately sell it because it turns out to report tomorrow. Open
 positions' earnings are handled separately and much less frequently (see
 the hourly-signal-check skill's exit section) — this script is entries-only.
 
+(2026-08-14: briefly tried sourcing earnings dates straight from the Finviz
+export's own "Earnings Date" column instead of a live fetch, reverted the
+same day — that column doesn't reliably mean "next upcoming report": a
+past-looking date just means the last report already happened and the next
+one isn't scheduled yet, which is genuinely ambiguous to screen on, not a
+data-quality bug to work around. Back to a live per-symbol fetch on the tiny
+confirmed shortlist, exactly as this script originally worked -- the call
+volume was never the problem at this stage, only at the old whole-candidate-
+list stage this design already replaced.)
+
 Input (JSON, via --input file or stdin):
   {
     "entries": [{"symbol": "AAPL", ...}, ...],  # check_hourly_signals.py's entries[] output, verbatim

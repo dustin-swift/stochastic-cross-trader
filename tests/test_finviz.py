@@ -37,9 +37,20 @@ def test_load_universe_missing_file(tmp_path):
 
 
 def test_load_universe_missing_columns(tmp_path):
-    path = _write(tmp_path, "Ticker,Price\nAAPL,210.5\n")
-    with pytest.raises(ValueError, match="Sector"):
+    # Sector was dropped as a required column 2026-08-14 -- Ticker is the
+    # only one left. Use a header lacking Ticker to still exercise the error
+    # path.
+    path = _write(tmp_path, "Symbol,Price\nAAPL,210.5\n")
+    with pytest.raises(ValueError, match="Ticker"):
         load_universe(str(path))
+
+
+def test_load_universe_without_sector_column_is_valid(tmp_path):
+    # 2026-08-14, at the user's direction: Sector is no longer required --
+    # a leaner export (Ticker, Earnings Date, ATR only) must load cleanly.
+    path = _write(tmp_path, "Ticker,Earnings Date,ATR\nAAPL,Aug 26/a,3.35\n")
+    rows = load_universe(str(path))
+    assert rows == [{"Ticker": "AAPL", "Earnings Date": "Aug 26/a", "ATR": "3.35"}]
 
 
 def test_load_universe_empty_file_missing_columns(tmp_path):

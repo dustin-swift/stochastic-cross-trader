@@ -134,9 +134,9 @@ Only reached if section 1 didn't come back `trend_intact: false` and section 2 f
   ```
   → `{"entries": [...], "candidate_states": [...], "stale_cycle": ..., ...}`.
 - **Persist `candidate_states`** back into `data/daily/pending_entries.json` (same rule as the hourly track: every cycle, drop a symbol entirely once `pending` is `null`).
-- **Earnings check on the confirmed shortlist only** (same as the hourly track's section 5): `get_earnings_results(symbol=...)` for just the symbols in `entries`, then:
+- **Earnings check on the confirmed shortlist only** (same as the hourly track's section 5): if `entries` is non-empty, `get_earnings_results(symbol=...)` for each one, build `earnings_by_symbol` the same way (`{"date": report.date, "timing": report.timing}` objects, include `timing`), then:
   ```bash
-  echo '{"entries": <entries>, "earnings_by_symbol": <fetched>}' | python3 scripts/filter_entry_earnings.py --data-dir data/daily
+  echo '{"entries": <entries>, "earnings_by_symbol": {...}}' | python3 scripts/filter_entry_earnings.py --data-dir data/daily
   ```
 
 Take the filtered `entries`, in order, up to however many open slots section 2 found:

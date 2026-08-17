@@ -140,6 +140,57 @@ def test_check_universe_screen_atr14_none_when_column_absent(tmp_path):
     assert output[0]["atr14"] is None
 
 
+def test_check_universe_screen_parses_atr_from_leaner_atr_column(tmp_path):
+    # 2026-08-14: a leaner export uses "ATR" instead of "Average True Range".
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text(
+        "Ticker,ATR\n"
+        "A,1.39\n"
+        "B,\n"  # blank cell -> None, not a crash
+    )
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run("check_universe_screen.py", None, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    output = {c["symbol"]: c for c in json.loads(result.stdout)}
+    assert output["A"]["atr14"] == 1.39
+    assert output["B"]["atr14"] is None
+
+
+def test_check_universe_screen_prefers_average_true_range_over_atr_when_both_present(tmp_path):
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text("Ticker,Average True Range,ATR\nA,1.39,9.99\n")
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run("check_universe_screen.py", None, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    output = json.loads(result.stdout)
+    assert output[0]["atr14"] == 1.39
+
+
+def test_check_universe_screen_no_sector_column_defaults_unknown(tmp_path):
+    # 2026-08-14: Sector is no longer required -- a leaner export must still
+    # screen cleanly, with sector defaulting to "UNKNOWN".
+    csv_path = tmp_path / "finviz_export.csv"
+    csv_path.write_text("Ticker,Earnings Date,ATR\nA,-,1.39\nB,-,2.0\n")
+
+    cfg = {**BASE_CFG, "screening": {"finviz_csv_path": str(csv_path), "max_candidates_per_sector": 5}}
+    config_path = tmp_path / "strategy.yaml"
+    with config_path.open("w") as f:
+        yaml.safe_dump(cfg, f)
+
+    result = _run("check_universe_screen.py", None, ["--config", str(config_path), "--data-dir", str(tmp_path / "data")])
+    output = json.loads(result.stdout)
+    assert {c["sector"] for c in output} == {"UNKNOWN"}
+    assert {c["symbol"] for c in output} == {"A", "B"}
+
+
 def test_check_universe_screen_excludes_earnings_too_close(tmp_path):
     from datetime import date, timedelta
 

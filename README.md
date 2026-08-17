@@ -39,8 +39,10 @@ pip install -r requirements.txt
   (mocked in every test).
 - `scripts/` — thin CLIs around `lib/`/`providers/` that the agent skills
   shell out to: `check_universe_screen.py` (Finviz CSV → candidates.json,
-  optionally earnings-filtered), `check_hourly_signals.py` (bars → entry/exit
-  signals, earnings-aware), `run_backtest.py` (historical replay — see
+  no earnings filtering), `filter_entry_earnings.py` (earnings check on the
+  confirmed-entry shortlist, live-fetched), `check_hourly_signals.py` (bars
+  → entry/exit signals, earnings-aware for open positions), `run_backtest.py`
+  (historical replay — see
   Backtesting below), `check_circuit_breaker.py`, `evaluate_order_fill.py`,
   `record_stop_failure.py` (the three alert-wired order-lifecycle helpers —
   see Alerting below).
@@ -78,15 +80,28 @@ SMA50) is **not automated** — you build and export it yourself:
    - Average Volume: over 750K
    - 50-Day Simple Moving Average: price above SMA50
    - 52-Week High/Low: within 15% of the 52-week high
-2. Export the results to CSV (Elite plans include CSV export). Include the
-   **Average True Range** column — `scripts/check_universe_screen.py` parses
-   it straight into each candidate's `atr14` (daily ATR(14), the standard
-   convention), which the live entry lifecycle then uses directly for the
-   resting stop-loss calculation with no live indicator fetch needed. A
-   symbol without that column (or a blank cell) just carries `atr14: null`
-   through — its estimated stop won't show in dry-run output, and a live
-   entry signal on it gets logged and skipped rather than guessing a stop
-   distance (see `.claude/skills/hourly-signal-check.md`).
+2. Export the results to CSV (Elite plans include CSV export). Only
+   **Ticker** is strictly required — everything below is optional but
+   recommended, since the screen and the live entry lifecycle both use it
+   when present:
+   - **Average True Range** (or the shorter **ATR** column name, whichever
+     your export uses — either is accepted) — parsed straight into each
+     candidate's `atr14` (daily ATR(14), the standard convention), which the
+     live entry lifecycle then uses directly for the resting stop-loss
+     calculation with no live indicator fetch needed. A symbol without
+     either column (or a blank cell) just carries `atr14: null` through —
+     its estimated stop won't show in dry-run output, and a live entry
+     signal on it gets logged and skipped rather than guessing a stop
+     distance (see `.claude/skills/hourly-signal-check.md`).
+   - **Earnings Date** is not used by this pipeline at all (2026-08-14, at
+     the user's direction) — feel free to include or omit it, it's ignored
+     either way. Earnings avoidance happens only on the tiny confirmed-entry
+     shortlist, via a live `get_earnings_results` fetch right before buying
+     — see Catalyst avoidance below.
+   - **Sector** — no longer required (2026-08-14; the per-sector cap
+     defaults to effectively unlimited, see `max_candidates_per_sector`
+     below) — include it only if you want the dashboard's watchlist grouped
+     by sector rather than lumped into one "UNKNOWN" bucket.
 3. Publish it: `bash scripts/publish_finviz_export.sh /path/to/your/export.csv`. This is the step that actually matters when the daily screen runs as a scheduled cloud routine (see Cloud routines & state persistence below) — the routine runs in a fresh clone with no access to your Mac, so simply saving the file locally to `data/finviz_export.csv` isn't enough on its own; the script pulls the latest `bot-state`, copies your export into `data/`, and pushes it back so the next cloud run can see it. (If you're only ever running the skills manually, by hand, from this machine, saving the file to `data/finviz_export.csv` directly also works — `screening.finviz_csv_path` is configurable in `config/strategy.yaml` — but the script is the supported path once anything is scheduled.)
 4. Re-publish whenever you want to refine the filters, or when the daily screen reports the file is stale.
 
@@ -334,9 +349,9 @@ known earnings dates around the exact moment the gap risk exists.
 
 **The rule is BMO/AMC-aware (2026-07-30), not a fixed day-count window** —
 see `lib/catalysts.py` for the implementation. Each report carries a
-`timing` — `"am"` (before market open) or `"pm"` (after market close), from
-`get_earnings_results`' `report.timing` — and the *exit_date* (the last
-trading day it's safe to hold through the close of) is computed from it:
+`timing` — `"am"` (before market open) or `"pm"` (after market close) — and
+the *exit_date* (the last trading day it's safe to hold through the close
+of) is computed from it:
 
 - **BMO** report on date D: the regular session on D already opens knowing
   the news, so exit_date = D - 1.
@@ -374,24 +389,43 @@ Both sides of the check read off the same exit_date:
   entering any day before that is intentionally allowed, so entries still
   capture the run-up into the report. (Prior to 2026-07-30 this was a flat
   5-day exclusion window, which was excessive and cost real run-up —
-  changed at the user's direction after noticing it.) **Checked only for
-  the tiny shortlist that already confirmed a stochastic signal, right
-  before buying** (2026-08-06 — see `scripts/filter_entry_earnings.py`),
-  not for the full ~300+ candidate list every cycle; that upfront fetch had
-  been the dominant cost in a whole cycle's latency for almost no payoff,
-  since only a handful of candidates ever actually signal.
+  changed at the user's direction after noticing it.)
+
+**No earnings filtering happens in the daily screen at all** (2026-08-14, at
+the user's direction — briefly tried sourcing earnings dates from the
+Finviz export's own "Earnings Date" column instead, reverted the same day:
+that column doesn't reliably mean "next upcoming report," a past-looking
+date just means the last report already happened and the next one isn't
+scheduled yet, which is genuinely ambiguous to screen the whole candidate
+list on). `scripts/check_universe_screen.py` does pure market-data
+screening plus the sector cap now, nothing earnings-related.
+
+Earnings avoidance instead happens on two separate, both live-fetched,
+paths:
+
+1. **The confirmed-entry shortlist** (2026-08-06, at the user's direction):
+   `get_earnings_results` — one call per symbol, that endpoint has no batch
+   mode — for the tiny handful of candidates (typically 0-5) that actually
+   confirm a stochastic entry signal in a given hourly cycle, right before
+   buying. See `scripts/filter_entry_earnings.py`.
+2. **Open positions**, on the last scheduled cycle of the day: a position
+   can persist for days or weeks past the daily screen that originally
+   surfaced it, so there's no way to know its earnings date without asking
+   fresh — see the hourly check's last-cycle-of-day step above.
 
 `config["catalysts"]["enabled"]` (default `true`) is a single on/off switch
 for the whole feature, both sides.
 
 Both checks are **optional per call** — a symbol missing `earnings_report_dates`
-entirely is handled differently depending on context (see `lib/catalysts.py`
-and `scripts/check_hourly_signals.py` docstrings): the daily screen treats
-"not checked" conservatively as excluded, but an open position with no
-earnings data falls through to normal signal logic rather than being force-
-sold — a data-fetch hiccup shouldn't liquidate a live position. If Robinhood
-MCP is unavailable, both scripts still work fine with no earnings data at
-all, exactly as before this feature existed — it's additive, not required.
+entirely is handled differently depending on context (see `lib/catalysts.py`,
+`scripts/filter_entry_earnings.py`, and `scripts/check_hourly_signals.py`
+docstrings): the entries shortlist check treats "not checked" conservatively
+as excluded (it's the primary earnings gate for entries now), but an open
+position with no earnings data falls through to normal signal logic rather
+than being force-sold — a data-fetch hiccup shouldn't liquidate a live
+position. If Robinhood MCP is unavailable, either check simply can't run
+that cycle — entries fail closed (excluded), open positions fail open
+(normal signal logic).
 
 ## Whole-share sizing (config["sizing"])
 

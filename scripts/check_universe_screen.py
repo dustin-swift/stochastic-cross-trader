@@ -5,25 +5,23 @@ Screening (market cap, price, avg volume, % off 52wk high, price vs SMA50)
 happens entirely outside this repo: the user builds the screen visually in
 the Finviz Elite web UI and exports it to CSV by hand (see README). This
 script's job is: check that export isn't stale or missing, load it, cap
-candidates per sector, optionally exclude candidates with earnings too close
-(catalyst avoidance), and write data/candidates.json.
+candidates per sector, and write data/candidates.json.
 
-Earnings data (--earnings-input) is optional and fetched by the caller via
-Robinhood MCP (get_earnings_results, one call per symbol) — this script does
-no network calls. It's applied AFTER the sector cap, not before: checking
-earnings for the full raw Finviz universe (which can be 50-100+ rows) would
-reintroduce the same per-symbol-call scaling problem that Finviz replaced
-create_scan for in the first place. The tradeoff is that an excluded slot
-isn't backfilled from the same sector — acceptable for now, revisit if this
-meaningfully shrinks the daily list in practice.
-
-Earnings entries carry timing ("am"=BMO, "pm"=AMC, from get_earnings_results'
-report.timing) so lib.catalysts can compute the correct trigger date — see
-lib/catalysts.py's module docstring for the BMO/AMC-aware rule. A candidate
-is excluded only on the exact day that would otherwise force-exit it almost
-immediately (a single-day buffer, not a multi-day window) — entries on
-earlier days are intentionally allowed through so they still capture the
-run-up into the report.
+No earnings/catalyst filtering happens here (2026-08-14, at the user's
+direction — briefly tried sourcing it from the export's own "Earnings Date"
+column, reverted the same day): that column turned out not to reliably mean
+"next upcoming report" — a past-looking date just means the last report
+already happened and the next one isn't scheduled yet, which is genuinely
+ambiguous to screen on at the full-candidate-list level (346 of 544 rows in
+a real export were past-dated this way). The safer, simpler design: don't
+try to filter earnings for the whole daily list at all, live or CSV-sourced.
+Earnings avoidance instead happens ONLY on the tiny handful of candidates
+that actually confirm a stochastic entry signal in a given hourly cycle —
+see `scripts/filter_entry_earnings.py` and the hourly-signal-check /
+daily-stochastic-check skills, which do a real-time `get_earnings_results`
+check right before buying. `--earnings-input` still exists below as a raw
+capability (some caller could still pass earnings data to filter on), but
+neither scheduled skill calls it anymore.
 
 Also resets data/pending_entries.json to empty on every successful run (spec
 §3, 2026-08-04 dual-cross entry revision, see lib.signals.advance_pending_entry)
@@ -33,7 +31,6 @@ state and shouldn't carry into today's candidate list.
 Usage:
   python3 scripts/check_universe_screen.py
   python3 scripts/check_universe_screen.py --config config/strategy.yaml --data-dir data
-  echo '{"AAPL": [{"date": "2026-08-15", "timing": "am"}], "MSFT": []}' | python3 scripts/check_universe_screen.py --earnings-input -
 """
 from __future__ import annotations
 
@@ -54,7 +51,17 @@ from lib.universe import cap_per_sector
 from providers.finviz import check_freshness, load_universe
 
 
-def _parse_atr(raw: str | None) -> float | None:
+def _parse_atr(row: dict) -> float | None:
+    """Prefers "Average True Range" (the original Finviz Elite column name);
+    falls back to "ATR" (seen in a leaner export, 2026-08-14) when the former
+    is absent or blank. Either way, a missing/unparseable value leaves
+    "atr14" as None rather than crashing -- the live entry lifecycle already
+    treats a None atr14 as "can't size a stop, skip this entry" (see
+    check_hourly_signals.py), not a hard error.
+    """
+    raw = row.get("Average True Range")
+    if raw is None or raw.strip() == "":
+        raw = row.get("ATR")
     if raw is None or raw.strip() == "":
         return None
     try:
@@ -68,14 +75,12 @@ def _normalize(rows: list[dict]) -> list[dict]:
     export includes) — add lowercase "symbol"/"sector" keys for cap_per_sector
     and downstream consumers, keeping the original columns alongside.
 
-    Also parses "Average True Range" (when the export includes it — the
-    user's Finviz Elite screener column, daily ATR(14)) into a clean float
-    "atr14" field. This is the same ATR(14)-on-daily-bars a live fetch would
-    return during market hours anyway (today's daily bar isn't complete yet,
-    so both sources reflect the same last-completed session) — using the
-    already-exported value means the live entry lifecycle never needs to
-    call get_equity_technical_indicators for this at all. Exports without
-    that column (or a blank cell) leave "atr14" as None, same as before.
+    "sector" defaults to "UNKNOWN" when the column is absent (2026-08-14:
+    Sector is no longer a required column at all -- see providers/finviz.py).
+
+    Also parses ATR (see `_parse_atr`) into a clean float "atr14" field --
+    None when the source column/cell can't supply a value, which downstream
+    code already treats as "not known," not a crash.
     """
     normalized = []
     for row in rows:
@@ -83,7 +88,7 @@ def _normalize(rows: list[dict]) -> list[dict]:
             **row,
             "symbol": row["Ticker"],
             "sector": row.get("Sector", "UNKNOWN"),
-            "atr14": _parse_atr(row.get("Average True Range")),
+            "atr14": _parse_atr(row),
         })
     return normalized
 
@@ -147,7 +152,9 @@ def main() -> None:
         "--earnings-input",
         default=None,
         help="JSON file (or '-' for stdin) mapping symbol -> list of {\"date\", \"timing\"} report objects "
-        "(or bare date strings for backward compat). Omit to skip earnings filtering entirely.",
+        "(or bare date strings for backward compat). Omit to skip earnings filtering entirely -- not used "
+        "by either scheduled skill (2026-08-14): earnings avoidance happens only on the tiny confirmed-"
+        "signal shortlist, live, right before buying (see scripts/filter_entry_earnings.py).",
     )
     args = parser.parse_args()
 
