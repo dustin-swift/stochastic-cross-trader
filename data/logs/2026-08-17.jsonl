@@ -52,3 +52,4 @@
 {"event": "exit_executed", "order_id": "6a833ffb-4693-4d3f-8139-6b6eab2cf1e8", "qty": 3, "symbol": "CRBG", "timestamp": "2026-08-17T17:09:20.941687+00:00"}
 {"event": "exit_executed", "order_id": "6a833ffc-00b5-4ac8-a4f9-4e3110173857", "qty": 15, "symbol": "TDAY", "timestamp": "2026-08-17T17:09:20.941812+00:00"}
 {"event": "exit_executed", "order_id": "6a833ffe-7e4e-4642-880c-12efd93fc8e2", "qty": 1, "symbol": "TECH", "timestamp": "2026-08-17T17:09:20.941860+00:00"}
+{"candidates_checked": 0, "candidates_total": 350, "circuit_breaker_tripped": false, "cycle_gap_minutes": 119.29936436666667, "entries_proposed": 0, "entries_skipped_reason": "market_regime_filter_trend_not_intact", "entries_taken": 0, "event": "cycle_summary", "exits": ["CRBG", "TDAY", "TECH"], "exits_taken": 3, "market_trend_intact": false, "max_positions": 15, "open_positions": 5, "slots_remaining": 10, "stale_cycle": true, "stop_outs_found": 0, "timestamp": "2026-08-17T17:09:55.258183+00:00"}
