@@ -25,19 +25,6 @@
     "stop_order_id": "6a7f6969-f8f3-4be4-832a-82957acc593c",
     "stop_price": 44.97
   },
-  "INVH": {
-    "entry_d": 41.02127038350891,
-    "entry_k": 43.111111111110745,
-    "entry_order_id": "6a7cc634-4de0-418e-ad83-fc489f363d30",
-    "entry_prev_d": 34.38878329728502,
-    "entry_prev_k": 47.16279069767403,
-    "entry_price": 29.7687,
-    "entry_time": "2026-08-12T19:15:00.277Z",
-    "qty": 3,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7cc63d-614f-4954-a046-6a294674b165",
-    "stop_price": 28.91
-  },
   "REF": {
     "entry_d": 21.7732884399551,
     "entry_k": 30.555555555555575,

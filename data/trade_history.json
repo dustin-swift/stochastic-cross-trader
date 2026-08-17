@@ -1262,5 +1262,29 @@
     "stop_order_id": "6a7c9c8e-9d2f-40bd-ab55-70c157ac2ee2",
     "stop_price": 6.96,
     "symbol": "PAYO"
+  },
+  {
+    "closed_at": "2026-08-17T15:08:42.285389+00:00",
+    "entry_d": 41.02127038350891,
+    "entry_k": 43.111111111110745,
+    "entry_order_id": "6a7cc634-4de0-418e-ad83-fc489f363d30",
+    "entry_prev_d": 34.38878329728502,
+    "entry_prev_k": 47.16279069767403,
+    "entry_price": 29.7687,
+    "entry_time": "2026-08-12T19:15:00.277Z",
+    "exit_d": 73.2925949576654,
+    "exit_k": 60.18518518518531,
+    "exit_order_id": "6a8323f1-01bd-464b-811f-94e832c2ef04",
+    "exit_prev_d": 83.03717956378124,
+    "exit_prev_k": 77.36430395913173,
+    "exit_price": 29.8901,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-17T15:08:33.425Z",
+    "pnl_pct": 0.40781088861792103,
+    "pnl_usd": 0.36420000000000385,
+    "qty": 3,
+    "stop_order_id": "6a7cc63d-614f-4954-a046-6a294674b165",
+    "stop_price": 28.91,
+    "symbol": "INVH"
   }
 ]
