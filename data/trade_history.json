@@ -1382,5 +1382,29 @@
     "stop_order_id": "6a7e0988-1c62-4219-93e3-cac7cbc37696",
     "stop_price": 15.52,
     "symbol": "SBH"
+  },
+  {
+    "closed_at": "2026-08-17T19:08:48.764292+00:00",
+    "entry_d": 22.962962962962923,
+    "entry_k": 27.33333333333326,
+    "entry_order_id": "6a7c9cb0-e132-415e-9e99-11655384f7f5",
+    "entry_prev_d": 19.3185185185185,
+    "entry_prev_k": 22.88888888888884,
+    "entry_price": 11.6999,
+    "entry_time": "2026-08-12T16:17:52.401Z",
+    "exit_d": 79.9068697036178,
+    "exit_k": 78.57142857142874,
+    "exit_order_id": "6a835c2f-3369-436e-873a-35fa731a899e",
+    "exit_prev_d": 82.92220501570104,
+    "exit_prev_k": 78.2275132275134,
+    "exit_price": 12.4301,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-17T19:08:31.865Z",
+    "pnl_pct": 6.241078983581061,
+    "pnl_usd": 6.5718,
+    "qty": 9,
+    "stop_order_id": "6a7c9cb9-679e-4de5-a52a-92203344059f",
+    "stop_price": 11.23,
+    "symbol": "SFL"
   }
 ]
