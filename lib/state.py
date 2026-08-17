@@ -118,6 +118,28 @@ class StateStore:
     def save_last_cycle_at(self, timestamp: str) -> None:
         _atomic_write_json(self.last_cycle_at_path, {"timestamp": timestamp})
 
+    # -- MA pullback / breakout-retest watchlist (see lib.ma_breakout) ------
+    # Long-lived, per-symbol breakout/retest tracking state that persists
+    # across many days -- {symbol: {"breakout_date", "breakout_level",
+    # "retest_seen", "retest_low", "failed", "max_close_since_breakout",
+    # "extension_confirmed", "eligible_for_entry", ...}}. Distinct from
+    # candidates.json above: candidates.json is today's fresh screen output,
+    # fully replaced every morning, whereas a watchlist entry can track a
+    # symbol for weeks (through a breakout, a pullback, and a retest) even as
+    # it drops in and out of the daily Finviz scan -- overloading
+    # candidates.json's meaning would lose that continuity. Mirrors the
+    # candidates_path/load_candidates/save_candidates trio above exactly,
+    # just a distinct filename and used by a different agent/data-dir.
+    @property
+    def watchlist_path(self) -> Path:
+        return self.data_dir / "watchlist.json"
+
+    def load_watchlist(self) -> dict[str, dict]:
+        return _read_json(self.watchlist_path, default={})
+
+    def save_watchlist(self, watchlist_by_symbol: dict[str, dict]) -> None:
+        _atomic_write_json(self.watchlist_path, watchlist_by_symbol)
+
     # -- daily P&L ----------------------------------------------------------
     @property
     def daily_pnl_path(self) -> Path:

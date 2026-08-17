@@ -12,6 +12,7 @@ def test_load_defaults_when_no_files(tmp_path):
     assert store.load_pending_entries() == {}
     assert store.load_pending_fills() == {}
     assert store.load_last_cycle_at() is None
+    assert store.load_watchlist() == {}
 
 
 def test_save_and_load_candidates_roundtrip(tmp_path):
@@ -39,6 +40,31 @@ def test_save_and_load_last_cycle_at_roundtrip(tmp_path):
     store = StateStore(tmp_path)
     store.save_last_cycle_at("2026-08-04T15:47:00+00:00")
     assert store.load_last_cycle_at() == "2026-08-04T15:47:00+00:00"
+
+
+def test_save_and_load_watchlist_roundtrip(tmp_path):
+    store = StateStore(tmp_path)
+    watchlist = {
+        "AAPL": {
+            "breakout_date": "2026-01-05",
+            "breakout_level": 97.32,
+            "retest_seen": True,
+            "retest_low": 94.1,
+            "failed": False,
+            "eligible_for_entry": True,
+        }
+    }
+    store.save_watchlist(watchlist)
+    assert store.load_watchlist() == watchlist
+
+
+def test_watchlist_is_a_distinct_file_from_candidates(tmp_path):
+    store = StateStore(tmp_path)
+    store.save_watchlist({"AAPL": {"breakout_level": 100.0}})
+    store.save_candidates([{"symbol": "AAPL"}])
+    assert store.watchlist_path != store.candidates_path
+    assert store.load_watchlist() == {"AAPL": {"breakout_level": 100.0}}
+    assert store.load_candidates() == [{"symbol": "AAPL"}]
 
 
 def test_save_and_load_positions_roundtrip(tmp_path):

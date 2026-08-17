@@ -26,15 +26,27 @@ pip install -r requirements.txt
 - `config/strategy.yaml` — every tunable (screening path, stochastic
   settings, ATR stop multiplier, position sizing, daily-loss circuit breaker,
   order-fill polling timeout, alert provider, and the `live` dry-run/live
-  switch). Edit this, not code, to retune.
+  switch). Edit this, not code, to retune. `config/ma_pullback_strategy.yaml`
+  is the equivalent file for the independent MA Pullback / Breakout-Retest
+  agent — see that section below.
 - `providers/finviz.py` — reads the manually-exported Finviz Elite CSV from
-  disk and checks it isn't stale. No network calls, no auth key.
-- `lib/` — pure, unit-tested computation: indicators, signal logic, sector
+  disk and checks it isn't stale. No network calls, no auth key. Reused as-is
+  by the MA Pullback agent against its own, separate CSV path.
+- `lib/` — pure, unit-tested computation: indicators (`lib/indicators.py` —
+  `sma`/`stochastic` for the hourly track, plus `atr`/`rolling_high` added
+  for the MA Pullback agent's breakout-level math), signal logic, sector
   cap, whole-share entry sizing (`lib/sizing.py` — see Whole-share sizing
-  below), entry-order fill/reject/timeout decisions, state (JSON-backed
-  candidates/positions/daily P&L), risk circuit breaker, config loading,
-  JSONL event logging, earnings/catalyst avoidance (`lib/catalysts.py`), and
-  the historical backtest engine (`lib/backtest.py` — see Backtesting below).
+  below; the MA Pullback agent reuses `entry_share_quantity` directly, same
+  sizing logic, see the MA Pullback section's Sizing subsection), entry-order
+  fill/reject/timeout decisions,
+  state (JSON-backed candidates/positions/daily P&L/watchlist — see
+  `lib/state.py`), risk circuit breaker, config loading (`lib/config.py` —
+  `load_config` for the stochastic system, `load_ma_config` for the MA
+  Pullback agent, sharing a common schema-validation helper), JSONL event
+  logging, earnings/catalyst avoidance (`lib/catalysts.py`), the historical
+  backtest engine (`lib/backtest.py` — see Backtesting below), and the MA
+  Pullback agent's own breakout/retest state machine and entry/exit signal
+  logic (`lib/ma_breakout.py`, `lib/ma_signals.py` — see that section below).
   No network calls anywhere in `lib/` except `lib/alerts.py`'s webhook POST
   (mocked in every test).
 - `scripts/` — thin CLIs around `lib/`/`providers/` that the agent skills
@@ -45,11 +57,17 @@ pip install -r requirements.txt
   (historical replay — see
   Backtesting below), `check_circuit_breaker.py`, `evaluate_order_fill.py`,
   `record_stop_failure.py` (the three alert-wired order-lifecycle helpers —
-  see Alerting below).
+  see Alerting below), `record_trade_close.py` (closed-trade history, reused
+  verbatim by the MA Pullback agent too). The MA Pullback agent adds three
+  of its own: `check_ma_universe_screen.py`, `check_ma_daily_scan.py`,
+  `check_ma_hourly_signals.py`, plus `publish_ma_finviz_export.sh` — see
+  that section below.
 - `.claude/skills/daily-universe-screen.md`, `.claude/skills/hourly-signal-check.md`
   — step-by-step runbooks for an agent invocation (Robinhood MCP calls +
   the scripts above). These are what actually run each cycle, whether
-  triggered manually or by a scheduled cloud agent.
+  triggered manually or by a scheduled cloud agent. `.claude/skills/
+  daily-ma-scan.md` and `.claude/skills/hourly-ma-signal-check.md` are the
+  MA Pullback agent's own equivalents.
 - `data/` — gitignored on `main`. `finviz_export.csv` (your manual export —
   see below), `candidates.json` (today's list), `pending_entries.json`
   (intraday dual-cross entry state — see Entry logic below),
@@ -64,10 +82,15 @@ pip install -r requirements.txt
   `daily_pnl.json`, `logs/YYYY-MM-DD.jsonl` (every signal check, decision,
   order event, and alert). Not committed to `main` — see Cloud routines &
   state persistence below for where this data actually lives when running on
-  a schedule.
+  a schedule. `data/ma_pullback/` is the MA Pullback agent's entirely
+  separate state directory (own `finviz_export.csv`, `watchlist.json`,
+  `positions.json`, `trade_history.json`, `last_cycle_at.json`, `logs/`) —
+  see that section below.
 - `scripts/sync_state.sh`, `scripts/publish_finviz_export.sh` — the
   state-persistence and Finviz-publish mechanics for cloud routines (see
-  below).
+  below). `scripts/publish_ma_finviz_export.sh` is the MA Pullback agent's
+  equivalent publish script; `sync_state.sh` needs no changes for either
+  agent since it already syncs the whole `data/` tree generically.
 
 ## Finviz Elite manual screen
 
@@ -608,10 +631,21 @@ Robinhood MCP connector (see prerequisite #3 above):
   note for the full writeup).
 - **daily-stochastic-check** — once per day, after market close. The daily
   paper-comparison track — see "Daily comparison track" below.
+- **daily-ma-scan** — once per day, before market open, staggered a few
+  minutes from `daily-universe-screen` so the two routines don't collide on
+  the shared cloud sandbox. The MA Pullback / Breakout-Retest agent's daily
+  watchlist scan — see that section below. Requires a freshly published MA
+  agent Finviz export (`scripts/publish_ma_finviz_export.sh`) beforehand.
+- **hourly-ma-signal-check** — hourly during market hours, staggered a few
+  minutes from `hourly-signal-check` for the same reason. The MA Pullback
+  agent's entry/exit cycle — see that section below.
 - **dashboard-refresh** — hourly during market hours, a few minutes after
-  `hourly-signal-check` — see Dashboard below.
+  `hourly-signal-check` — see Dashboard below. Also passes `--ma-config
+  config/ma_pullback_strategy.yaml --ma-data-dir data/ma_pullback` (in
+  addition to the existing `--daily-config`/`--daily-data-dir` flags) so the
+  dashboard's third tab stays current too.
 
-Minimum cron interval for a routine is 1 hour. All three routines are safe
+Minimum cron interval for a routine is 1 hour. All routines are safe
 to also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
 agent to follow the skill directly) any time, in addition to their schedule.
 
@@ -678,15 +712,214 @@ side by side with the hourly track's real results — same layout, same
 metrics, so a win-rate/P&L comparison is a glance, not a spreadsheet
 exercise.
 
+## MA Pullback / Breakout-Retest Agent (config/ma_pullback_strategy.yaml, 2026-08-17)
+
+A **second, entirely independent trading system** in this same repo,
+trading a different mechanism from the hourly stochastic pullback trader
+above: trend-continuation via a 52-week-high breakout, then a validated
+retest of the broken level, then a reclaim — rather than mean-reversion off
+an oversold oscillator. Built from a user-supplied spec and reference
+implementation (list-based scaffolding meant to show *where the logic
+goes*, not production code), ported onto this repo's actual conventions:
+pandas-based indicators, YAML config validated in `lib/config.py`, atomic
+JSON state via `lib.state.StateStore`, JSONL event logging, a dry-run/live
+switch, `bot-state`-branch persistence, and a published dashboard tab — all
+of it reusing every existing module that's already generic (order-fill
+lifecycle, circuit breaker, market-regime filter, earnings avoidance, state
+persistence, Finviz CSV loading, alerting) rather than re-inventing them.
+See "What gets reused as-is" in the design plan
+(`/Users/dustinrowley/.claude/plans/tidy-knitting-castle.md`) for the full
+list of shared modules and exactly how each is invoked for this agent.
+
+**Own capital sleeve within the SAME account, own everything else.**
+Confirmed with the user (2026-08-17): this agent trades the **same
+Robinhood account** as the stochastic system (`config/ma_pullback_strategy.yaml`'s
+`account_number` is the same value as `config/strategy.yaml`'s), not a
+separate sub-account — the user is adding **$1,500** to that account
+specifically to cover this agent's own capacity. Separation between the two
+systems is enforced by config, not account isolation: `config/
+ma_pullback_strategy.yaml` (own tunables, `live: false` by default — same
+dry-run-first convention as every strategy in this repo), `data/ma_pullback/`
+(own `watchlist.json`, `positions.json`, `trade_history.json`,
+`finviz_export.csv`, `last_cycle_at.json`, `logs/` — completely separate
+from the hourly/daily tracks' state, so the three can never collide or
+double-count), its own two scheduled routines (`daily-ma-scan`,
+`hourly-ma-signal-check` — see Scheduling above), its own
+`sizing.max_positions` slot cap (**10**, to start — "while we work out the
+bugs," per the user, 2026-08-17; revisit once this agent has a live track
+record), and its own `risk.max_daily_loss_pct` circuit breaker, so a bad day
+on one system can't drain the other's sleeve of the shared buying power.
+The one deliberately *shared* piece of state is the market-regime signal
+(see "Shared market-regime check" below).
+
+### Breakout / retest tracking (`lib/ma_breakout.py`, spec §2-3)
+
+The daily scan (`scripts/check_ma_daily_scan.py`, driven by the
+`daily-ma-scan` skill) maintains a per-symbol watchlist
+(`data/ma_pullback/watchlist.json`) via `lib.ma_breakout.update_watchlist_entry`,
+tracking each symbol through: a fresh breakout, an extension/separation
+confirmation, a genuine retest, and either eligibility for entry or a
+failed/aged-out drop. **This scan never places trades** — it only decides
+which symbols the hourly cycle should evaluate for entry the next time it
+runs.
+
+Four corrections from the reference spec, each a real bug caught during the
+spec's own development and validated as the single biggest driver of edge
+in its backtest:
+
+- **`breakout_level` is the PRIOR `breakout.lookback_days`-bar high, never
+  the breakout bar's own (possibly higher) high.** `lib.indicators.rolling_high(...,
+  include_today=False)` is what encodes this — the level being broken is
+  always excluded from including today's own bar.
+- **Entries are hard-blocked below `breakout_level`, even though the
+  reclaim trigger already implies it.** `lib.ma_signals.evaluate_entry`
+  checks this a second time, explicitly, as its own never-relaxed
+  condition — see the corresponding hard-rule callout in
+  `.claude/skills/hourly-ma-signal-check.md`.
+- **A retest requires separation + extension before it counts**: at least
+  `breakout.min_separation_days` trading days must pass, AND price must
+  have closed at least `breakout.min_extension_pct` above `breakout_level`,
+  before a subsequent pullback through the level is recorded as a genuine
+  retest — a same-day (or next-day) whipsaw straight back through the level
+  is explicitly NOT a retest, no matter how far it dips.
+- **A failed breakout (`close < breakout_level * (1 - breakout.failed_breakout_depth)`)
+  is sticky** — it stays `failed` on every subsequent daily scan until a
+  fresh breakout overwrites the entry entirely; it does not un-fail on its
+  own if price later recovers.
+
+### Entry / exit signal logic (`lib/ma_signals.py`, spec §4-6)
+
+The hourly cycle (`scripts/check_ma_hourly_signals.py`, driven by the
+`hourly-ma-signal-check` skill) evaluates exits for open positions first
+(daily-bar-driven), then the reclaim-entry trigger for eligible watchlist
+symbols (hourly-bar-driven) — same "exits before entries, re-check slots in
+between" ordering the hourly stochastic skill uses, for the same reason (a
+freed slot should be usable the same cycle it frees up).
+
+**Entry** (`evaluate_entry`): reclaim trigger (`close >= breakout_level AND
+(prev_close < breakout_level OR low <= breakout_level)`), then a stack of
+vetoes — late-entry extension cap (`entry.late_entry_extension_cap`), trend
+qualification (`close > sma_fast > sma_slow` with `sma_slow` confirmed
+rising over `trend.slope_lookback_bars`), volume confirmation on the
+reclaim bar, an ATR-regime check (today's ATR vs. its own recent average,
+`entry.atr_regime_multiple`), and a gap cap
+(`entry.gap_cap_atr_multiple`) — before computing `entry_price`/`stop_price`
+(`max(retest_low - stop_target.stop_retest_buffer_atr*ATR, entry_price -
+stop_target.stop_atr_multiple*ATR)`, i.e. anchored to the actual retest low,
+with an ATR-based sanity floor rather than pure ATR alone)/`target_1`/`shares`
+(via `lib.sizing.entry_share_quantity` — see Sizing below). Market-regime
+and earnings vetoes are deliberately **not** inside this function — see
+"Shared vetoes" below.
+
+**Exit** (`evaluate_exit`): partial profit at `stop_target.partial_profit_r_multiple`
+(default 1.5R, selling `stop_target.partial_profit_pct` of the position and
+moving the stop to breakeven), a post-partial trailing (chandelier) stop
+(`highest_close - stop_target.chandelier_atr_multiple*ATR`) that **only
+ratchets up, never loosens** (a `max()` against the existing stop price
+enforces this — a computed chandelier level below the current stop can
+never lower it), trend invalidation (`close < sma_fast`) gated by a
+**`exit_timing.trend_invalidation_grace_days`-bar grace period** (a real,
+spec-documented correction: without it, ordinary noise right after a fresh
+reclaim could exit a position that would otherwise have kept working), a
+time stop (`exit_timing.time_stop_days`, only if no partial has been taken
+yet), and a hard stop (`close < stop_price`).
+
+### Sizing (`lib.sizing.entry_share_quantity`, confirmed with the user, 2026-08-17)
+
+**Same sizing logic as the hourly stochastic track** — not the ATR-risk-based
+sizing the original spec draft used. The user's direction was explicit:
+"position sizing will follow same logic as stochastic trader" — so
+`lib.ma_signals.evaluate_entry` calls the exact same
+`lib.sizing.entry_share_quantity(price, per_trade_usd, max_price_per_share)`
+the hourly stochastic skill already uses (see Whole-share sizing above),
+just reading this agent's own `config/ma_pullback_strategy.yaml` `sizing`
+section: **~$100/trade** (`sizing.per_trade_usd`, whole shares, rounded to
+whichever side lands closest), **capped at $150/share**
+(`sizing.max_price_per_share` — a candidate priced above this is excluded
+from entries entirely, not bought at 1 share regardless of cost), and
+**10 concurrent slots** (`sizing.max_positions` — see "Own capital sleeve"
+above). Sizing is fully decoupled from `risk_per_share`/stop distance here;
+the ATR-anchored stop math above still drives `stop_price`/`target_1`, it
+just doesn't drive share count. $100 × 10 slots = **$1,000 typical, up to
+$1,500 max theoretical exposure** (10 slots at the $150/share cap) — the
+exact amount the user is adding to the account to cover this sleeve.
+
+### Shared vetoes, not duplicated ones
+
+Two cross-cutting checks are evaluated at the skill/script level, not
+inside `lib.ma_signals`, deliberately reusing the exact same modules the
+hourly stochastic system already has — same separation-of-concerns between
+pure signal logic and shared gates that system already uses:
+
+- **Market regime**: `scripts/check_market_trend.py`, called with `--config
+  config/strategy.yaml` — the STOCHASTIC system's own config, not this
+  agent's. This is the spec's "shared market-regime check module ... so
+  both agents read the same risk-off signal": one SPY-based signal, one
+  place it's defined, no duplicated `market_filter` section in this agent's
+  own config.
+- **Earnings avoidance**: `lib/catalysts.py` + `scripts/filter_entry_earnings.py`,
+  reused verbatim for the confirmed-entry shortlist, same BMO/AMC-aware
+  exit-date logic as the hourly stochastic system — no MA-specific earnings
+  code needed. Unlike the stochastic system, open positions are not
+  earnings-force-exited on this agent (its exit logic is entirely
+  daily-bar-driven already, so there's no "first check of the day vs. last
+  check of the day" distinction to gate a forced exit behind).
+
+### What's reused verbatim (no MA-specific code needed)
+
+`lib.sizing.entry_share_quantity` (same whole-share sizing as the hourly
+track, see Sizing above), `lib/orders.py` (order-fill polling), `lib/risk.py`
++ `scripts/check_circuit_breaker.py` (this agent's own `max_daily_loss_pct`),
+`scripts/evaluate_order_fill.py`, `scripts/record_stop_failure.py`,
+`scripts/record_trade_close.py` + `lib.state.close_trade_record` (its
+`entry_k`/`entry_d`/`exit_k`/`exit_d` fields simply stay `null` for MA
+trades, same "carries through as `None`, no migration" convention already
+used elsewhere in this repo), `providers/finviz.py`, `lib/alerts.py`,
+`lib/logging_utils.py`, and `lib.state.has_open_slot`/`open_slot_count` —
+all pointed at `config/ma_pullback_strategy.yaml`/`data/ma_pullback` instead
+of the stochastic system's own config/data-dir (the one exception is
+`account_number`, which is the SAME value as `config/strategy.yaml`'s — see
+"Own capital sleeve" above).
+
+### Skills
+
+`.claude/skills/daily-ma-scan.md` (fresh-checkout guard, state sync,
+Finviz freshness check, daily-bar fetch for the union of today's Finviz
+candidates and everything already tracked, `check_ma_daily_scan.py`,
+persist, sync out — **never calls an order-placing tool, full stop**) and
+`.claude/skills/hourly-ma-signal-check.md` (reconciliation, circuit
+breaker + shared market-regime check, exits first via
+`check_ma_hourly_signals.py` + `record_trade_close.py` + a sync-out
+immediately after exits (same stranded-exit-protection pattern as the
+hourly stochastic skill), re-check slots, entries via
+`check_ma_hourly_signals.py` + `filter_entry_earnings.py` + whole-share buy
++ **an immediate resting broker-side `stop_market` order — not deferred to
+the next daily-bar check**, `record_stop_failure.py` on failure, sync out
+again). Both explicitly call out the never-enter-below-breakout-level rule
+and the mandatory broker-side stop as hard rules, not suggestions — same
+documentation convention the existing skills use for the `live` flag.
+
+### Testing
+
+`tests/test_ma_breakout.py` and `tests/test_ma_signals.py` cover every
+corrected-logic branch above (breakout_level = prior high, hard
+no-entry-below-breakout_level, retest separation/extension, failed-breakout
+stickiness, the trend-invalidation grace period, chandelier ratchet-only
+behavior, and entries excluded above `max_price_per_share`);
+`tests/test_ma_scripts.py` covers the three new CLI scripts end-to-end
+(subprocess-driven, same convention as `tests/test_scripts.py`).
+
 ## Dashboard
 
 A published Claude Artifact — positions, closed-trade history with
 drill-down, today's watchlist, and portfolio/system stats — kept fresh by
 the **dashboard-refresh** cloud routine on the same hourly cadence as
-trading itself, with no manual "refresh" step required. It has two tabs:
-**Hourly · Live** (the real-money track described above) and
-**Daily · Paper** (the comparison track described in "Daily comparison
-track" above, clearly banner-labeled as paper/dry-run).
+trading itself, with no manual "refresh" step required. It has three tabs:
+**Hourly · Live** (the real-money track described above), **Daily · Paper**
+(the comparison track described in "Daily comparison track" above, clearly
+banner-labeled as paper/dry-run), and **MA Pullback · Live** (the
+independent breakout-retest agent described below, clearly labeled with its
+own live/dry-run status).
 
 - `dashboard/template.html` — the page itself (self-contained: fonts
   embedded as base64 `@font-face` data URIs, since a published Artifact's
@@ -696,18 +929,25 @@ track" above, clearly banner-labeled as paper/dry-run).
 - `scripts/build_dashboard.py` — renders `template.html` into
   `dashboard/dist.html`, pulling positions/trade history/candidates/logs/
   config straight from `data/` and `config/strategy.yaml` for the Hourly
-  tab, and from `data/daily/` and `config/strategy_daily.yaml` (via
+  tab, from `data/daily/` and `config/strategy_daily.yaml` (via
   `--daily-data-dir`/`--daily-config`, defaulted to those paths) for the
-  Daily tab — degrades to an empty Daily tab rather than failing if that
-  track hasn't run yet. The only inputs it can't derive itself — live
-  account totals and current prices for open positions, hourly track only,
-  since the daily track never touches the real broker — come in via a small
-  JSON payload on stdin (see the script's own docstring for the exact shape).
+  Daily tab, and from `data/ma_pullback/` and
+  `config/ma_pullback_strategy.yaml` (via `--ma-data-dir`/`--ma-config`,
+  same defaulted-path convention) for the MA Pullback tab — each of the
+  latter two degrades to an empty tab rather than failing the whole build if
+  that track hasn't run yet or its config/state isn't present on this
+  checkout. The only inputs it can't derive itself — live account totals and
+  current prices for open positions, hourly track only, since neither the
+  daily nor the MA Pullback track's dashboard section needs a live broker
+  call — come in via a small JSON payload on stdin (see the script's own
+  docstring for the exact shape).
 - The **dashboard-refresh** routine's job each run: `sync_state.sh pull`,
   fetch that live snapshot via the Robinhood MCP connector, run
-  `build_dashboard.py`, then publish `dashboard/dist.html` with the
-  Artifact tool using the dashboard's existing URL (so it updates in place
-  rather than minting a new one each time).
+  `build_dashboard.py` (with `--ma-config`/`--ma-data-dir` alongside the
+  existing `--daily-config`/`--daily-data-dir` flags), then publish
+  `dashboard/dist.html` with the Artifact tool using the dashboard's
+  existing URL (so it updates in place rather than minting a new one each
+  time).
 
 Since a published Artifact page runs in a locked-down sandbox with no
 general network access, this "rebuild and republish" pattern — rather than

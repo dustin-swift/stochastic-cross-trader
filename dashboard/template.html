@@ -489,6 +489,7 @@
   <div class="tabbar" id="tabbar">
     <button class="tab-btn active" data-tab="hourly" type="button">Hourly &middot; Live</button>
     <button class="tab-btn" data-tab="daily" type="button">Daily &middot; Paper</button>
+    <button class="tab-btn" data-tab="ma" type="button">MA Pullback &middot; Live</button>
   </div>
 
   <div class="tab-panel" id="tab-panel-hourly">
@@ -567,6 +568,51 @@
       <span class="section-note">Click a row to drill in</span>
     </div>
     <div class="panel table-scroll" id="daily-history-table-wrap"></div>
+  </section>
+
+  </div>
+
+  <div class="tab-panel" id="tab-panel-ma" hidden>
+
+  <div class="paper-banner" id="ma-banner">MA Pullback / Breakout-Retest agent — a separate, independent trend-continuation system (52-week-high breakout, then a validated retest, then a reclaim) with its own capital sleeve, config, and state. See README's "MA Pullback / Breakout-Retest Agent" section.</div>
+
+  <section id="ma-stats">
+    <div class="section-head">
+      <span class="section-title">Performance</span>
+      <span class="section-note">All closed trades, all-time</span>
+    </div>
+    <div id="ma-performance-body"></div>
+  </section>
+
+  <section id="ma-positions">
+    <div class="section-head">
+      <span class="section-title">Open Positions</span>
+      <span class="section-note" id="ma-positions-note"></span>
+    </div>
+    <div class="panel table-scroll" id="ma-positions-table-wrap"></div>
+  </section>
+
+  <section id="ma-watchlist">
+    <div class="section-head">
+      <span class="section-title">Watchlist &mdash; Breakout / Retest Tracking</span>
+      <span class="section-note" id="ma-watchlist-note"></span>
+    </div>
+    <div class="panel table-scroll" id="ma-watchlist-table-wrap"></div>
+  </section>
+
+  <section id="ma-history">
+    <div class="section-head">
+      <span class="section-title">Closed Trade History</span>
+      <span class="section-note">Click a row to drill in</span>
+    </div>
+    <div class="panel table-scroll" id="ma-history-table-wrap"></div>
+  </section>
+
+  <section id="ma-system">
+    <div class="section-head">
+      <span class="section-title">System</span>
+    </div>
+    <div class="system-grid" id="ma-system-grid"></div>
   </section>
 
   </div>
@@ -813,8 +859,165 @@
       btn.classList.add('active');
       document.getElementById('tab-panel-hourly').hidden = btn.dataset.tab !== 'hourly';
       document.getElementById('tab-panel-daily').hidden = btn.dataset.tab !== 'daily';
+      document.getElementById('tab-panel-ma').hidden = btn.dataset.tab !== 'ma';
     });
   });
+
+  // ---- MA Pullback / Breakout-Retest tab ----
+  const ma = DATA.ma || { positions: [], watchlist: [], trade_history: [], config: {}, activity_today: {}, available: false };
+
+  document.getElementById('ma-banner').textContent = ma.available
+    ? 'MA Pullback / Breakout-Retest agent — a separate, independent trend-continuation system (52-week-high breakout, then a validated retest, then a reclaim) with its own capital sleeve, config, and state. ' + (ma.config.live ? 'LIVE.' : 'Dry-run — no real orders placed.')
+    : 'MA Pullback / Breakout-Retest agent has not run yet (no config/state found on this checkout).';
+
+  renderPerformance(ma.trade_history, 'ma-performance-body',
+    'Win rate, P&L, and exit-reason breakdown will populate here once the first position closes.');
+
+  // ---- MA open positions ----
+  (function renderMaPositions() {
+    const positions = ma.positions;
+    const note = document.getElementById('ma-positions-note');
+    if (note) note.textContent = positions.length + ' / ' + ma.config.max_positions + ' slots used';
+    const wrap = document.getElementById('ma-positions-table-wrap');
+    if (positions.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><strong>No open positions</strong><span>A new position appears here the moment an hourly cycle fills a reclaim entry.</span></div>`;
+      return;
+    }
+    const rows = positions.map(p => `<tr>
+        <td class="sym">${esc(p.symbol)}</td>
+        <td class="num">${p.shares}</td>
+        <td class="num">${fmtUsd(p.entry_price)}</td>
+        <td class="num">${fmtUsd(p.stop_price)}</td>
+        <td class="num">${fmtUsd(p.target_1)}</td>
+        <td class="num">${p.bars_held}</td>
+        <td>${p.partial_taken ? '<span class="badge badge-hold">Yes</span>' : '<span class="badge badge-normal">No</span>'}</td>
+        <td>${fmtDate(p.entry_time)}</td>
+      </tr>`).join('');
+    wrap.innerHTML = `<table>
+      <thead><tr>
+        <th>Symbol</th><th class="num">Shares</th><th class="num">Entry</th><th class="num">Stop</th><th class="num">Target 1</th><th class="num">Bars Held</th><th>Partial Taken</th><th>Entered</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  })();
+
+  // ---- MA watchlist (breakout/retest tracking) ----
+  (function renderMaWatchlist() {
+    const watchlist = ma.watchlist;
+    const note = document.getElementById('ma-watchlist-note');
+    if (note) note.textContent = watchlist.length + ' tracked, ' + watchlist.filter(w => w.eligible_for_entry).length + ' eligible for entry';
+    const wrap = document.getElementById('ma-watchlist-table-wrap');
+    if (watchlist.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><strong>Nothing tracked yet</strong><span>A symbol appears here the moment the daily scan finds a fresh 52-week-high breakout.</span></div>`;
+      return;
+    }
+    const sorted = watchlist.slice().sort((a, b) => a.symbol.localeCompare(b.symbol));
+    const rows = sorted.map(w => {
+      const statusClass = w.failed ? 'badge-stop' : w.eligible_for_entry ? 'badge-hold' : w.retest_seen ? 'badge-signal' : 'badge-normal';
+      const status = w.failed ? 'Failed' : w.eligible_for_entry ? 'Eligible' : w.retest_seen ? 'Retest seen' : 'Tracking';
+      return `<tr>
+        <td class="sym">${esc(w.symbol)}</td>
+        <td class="num">${fmtUsd(w.breakout_level)}</td>
+        <td class="num">${w.retest_low === null || w.retest_low === undefined ? '—' : fmtUsd(w.retest_low)}</td>
+        <td>${w.breakout_date ? esc(w.breakout_date) : '—'}</td>
+        <td><span class="badge ${statusClass}">${status}</span></td>
+      </tr>`;
+    }).join('');
+    wrap.innerHTML = `<table>
+      <thead><tr>
+        <th>Symbol</th><th class="num">Breakout Level</th><th class="num">Retest Low</th><th>Breakout Date</th><th>Status</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  })();
+
+  // ---- MA closed trade history ----
+  (function renderMaHistory() {
+    const closed = ma.trade_history;
+    const wrap = document.getElementById('ma-history-table-wrap');
+    if (closed.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><strong>Nothing to show yet</strong><span>Every closed trade — trend-invalidation exit, time stop, or hard stop — will land here with full entry/exit detail.</span></div>`;
+      return;
+    }
+    const sorted = closed.slice().sort((a, b) => new Date(b.exit_time) - new Date(a.exit_time));
+    const rows = sorted.map((t, i) => {
+      const reasonClass = t.exit_reason === 'stop_out' || t.exit_reason === 'stop_hit' ? 'badge-stop'
+        : t.exit_reason === 'trend_invalidated' ? 'badge-hold'
+        : 'badge-signal';
+      const detailId = 'ma-detail-' + i;
+      return `<tr class="exp-row" data-target="${detailId}">
+          <td><span class="caret" data-caret="${detailId}">&#9656;</span></td>
+          <td class="sym">${esc(t.symbol)}</td>
+          <td class="num">${fmtUsd(t.entry_price)}</td>
+          <td class="num">${fmtUsd(t.exit_price)}</td>
+          <td class="num ${pnlClass(t.pnl_usd)}">${fmtSignedUsd(t.pnl_usd)}</td>
+          <td class="num ${pnlClass(t.pnl_pct)}">${fmtPct(t.pnl_pct)}</td>
+          <td><span class="badge ${reasonClass}">${esc(t.exit_reason)}</span></td>
+          <td>${fmtDate(t.exit_time)}</td>
+        </tr>
+        <tr class="exp-detail">
+          <td colspan="8">
+            <div class="exp-detail-inner" id="${detailId}">
+              <div><div class="kv-label">Quantity</div><div class="kv-value">${t.qty}</div></div>
+              <div><div class="kv-label">Entry Time</div><div class="kv-value">${fmtDate(t.entry_time)}</div></div>
+              <div><div class="kv-label">Stop Price</div><div class="kv-value">${fmtUsd(t.stop_price)}</div></div>
+              <div><div class="kv-label">Entry Order</div><div class="kv-value">${esc(t.entry_order_id)}</div></div>
+              <div><div class="kv-label">Exit Order</div><div class="kv-value">${esc(t.exit_order_id)}</div></div>
+              <div><div class="kv-label">Closed At</div><div class="kv-value">${fmtDate(t.closed_at)}</div></div>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+    wrap.innerHTML = `<table>
+      <thead><tr>
+        <th></th><th>Symbol</th><th class="num">Entry</th><th class="num">Exit</th><th class="num">P&amp;L</th><th class="num">P&amp;L %</th><th>Reason</th><th>Closed</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+    wrap.querySelectorAll('.exp-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const id = row.getAttribute('data-target');
+        const detail = document.getElementById(id);
+        const caret = wrap.querySelector(`[data-caret="${id}"]`);
+        detail.classList.toggle('open');
+        caret.classList.toggle('open');
+      });
+    });
+  })();
+
+  // ---- MA system panel ----
+  (function renderMaSystem() {
+    const maRoutines = DATA.routines.filter(r => r.name === 'daily-ma-scan' || r.name === 'hourly-ma-signal-check' || r.name === 'dashboard-refresh');
+    const routineRows = maRoutines.map(r => `
+      <div class="row"><span class="k">${esc(r.name)}</span><span class="v">${esc(r.schedule)}</span></div>
+    `).join('');
+    const activityEntries = Object.entries(ma.activity_today || {}).sort((a, b) => b[1] - a[1]);
+    const activityRows = activityEntries.length
+      ? activityEntries.map(([event, count]) => `
+          <div class="row"><span class="k">${esc(event)}</span><span class="v">${count}</span></div>
+        `).join('')
+      : `<div class="row"><span class="k">No activity logged today</span><span class="v"></span></div>`;
+    document.getElementById('ma-system-grid').innerHTML = `
+      <div class="system-cell">
+        <h3>Scheduled Routines</h3>
+        <div class="kv-list">${routineRows}</div>
+      </div>
+      <div class="system-cell">
+        <h3>Strategy Config</h3>
+        <div class="kv-list">
+          <div class="row"><span class="k">Mode</span><span class="v">${ma.config.live ? 'LIVE' : 'Dry Run'}</span></div>
+          <div class="row"><span class="k">Position size</span><span class="v">${fmtUsd(ma.config.per_trade_usd, {minimumFractionDigits:0,maximumFractionDigits:0})} / trade</span></div>
+          <div class="row"><span class="k">Max price / share</span><span class="v">${fmtUsd(ma.config.max_price_per_share, {minimumFractionDigits:0,maximumFractionDigits:0})}</span></div>
+          <div class="row"><span class="k">Max positions</span><span class="v">${ma.config.max_positions}</span></div>
+          <div class="row"><span class="k">Daily loss breaker</span><span class="v">${ma.config.max_daily_loss_pct}%</span></div>
+        </div>
+      </div>
+      <div class="system-cell">
+        <h3>Today's Activity</h3>
+        <div class="kv-list">${activityRows}</div>
+      </div>
+    `;
+  })();
 
   // ---- watchlist ----
   const wl = DATA.candidates;

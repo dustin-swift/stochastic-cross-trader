@@ -1,0 +1,182 @@
+# MA Pullback / Breakout-Retest Agent -- tunable config.
+# Companion system to the hourly stochastic pullback trader (config/strategy.yaml),
+# trading a different mechanism: 52-week-high breakout, then a validated retest
+# of the broken level, then a reclaim. Every value below is sourced directly
+# from the user-supplied spec / reference `config.py`, with the comment on
+# each noting which spec section/rule it implements. Edit values here to
+# retune -- no code changes needed, same convention as config/strategy.yaml.
+
+# Live/dry-run switch. Ships dry-run (false) like every strategy in this repo
+# -- flip deliberately only after reviewing real dry-run cycles.
+live: false
+
+# Same Robinhood account as the stochastic system (config/strategy.yaml) --
+# at the user's direction, this agent trades a separate capital sleeve
+# within the SAME account, not a distinct sub-account. Separation is
+# enforced by the 10-slot / $100-per-trade cap below (sizing.max_positions)
+# and this agent's own circuit breaker (risk.max_daily_loss_pct), not by
+# account isolation.
+account_number: "849995824"
+
+# --- Universe (Finviz Elite manual screen, built and exported by hand to its
+# OWN file below -- a genuinely different scanner list from the stochastic
+# system's, not a shared export). At the user's direction (2026-08-17): the
+# filter is a CLOSING-price new-52-week-high scan -- price closed at or
+# above its 52-week high that day -- plus the base liquidity filters (avg
+# volume > 500k, price > $5). This is deliberately narrower than the
+# original spec draft's "new 52-week high" (which Finviz's stock
+# ta_highlow52w:nh filter can register off an intraday high, not the close)
+# -- build the Finviz Elite screen to key off the CLOSE, not just the day's
+# high, so today's fresh watchlist entries already reflect a genuine closing
+# breakout. No max_candidates_per_sector cap here (unlike the stochastic
+# system's screening section) -- the spec doesn't call for one, and the
+# daily scan (scripts/check_ma_daily_scan.py) never places trades, so
+# there's no risk-sizing reason to cap the watchlist itself.
+screening:
+  finviz_csv_path: data/ma_pullback/finviz_export.csv
+
+# --- Breakout / retest tracking (spec §2-3, lib/ma_breakout.py) ---
+breakout:
+  # 52-week high window, trading days. breakout_level is the PRIOR
+  # lookback_days high -- never the breakout bar's own high (the single
+  # biggest correction in the spec; see lib/ma_breakout.py's module docstring).
+  lookback_days: 252
+  # A breakout more than this many trading days old is dropped from the
+  # watchlist entirely -- a stale setup shouldn't keep occupying state.
+  max_breakout_age_days: 35
+  # close < breakout_level * (1 - this) marks the breakout FAILED -- sticky
+  # until a fresh breakout overwrites it (does not un-fail on its own).
+  failed_breakout_depth: 0.10
+  # Minimum trading days between the breakout bar and the first bar that can
+  # count toward a genuine retest -- a same-candle whipsaw back through
+  # breakout_level is not a retest.
+  min_separation_days: 1
+  # Price must close at least this far above breakout_level (extension
+  # confirmed via max_close_since_breakout) before a subsequent pullback
+  # counts as a real retest, not noise right at the level.
+  min_extension_pct: 0.01
+
+# --- Entry vetoes (spec §4, lib/ma_signals.py's evaluate_entry) ---
+entry:
+  # Don't chase a reclaim more than this far above breakout_level -- an
+  # extended reclaim isn't the low-risk entry this strategy is built around.
+  late_entry_extension_cap: 0.05
+  # Skip the entry if today's open gaps beyond this many ATRs past the
+  # breakout_level trigger -- protects fill quality on a large gap-through.
+  gap_cap_atr_multiple: 1.75
+  # Bars (hourly) used for the reclaim-bar volume-confirmation average.
+  volume_confirm_lookback: 20
+  # Bars (daily) used for the ATR-of-ATR regime comparison below.
+  atr_regime_lookback: 20
+  # Skip the entry if today's daily ATR has spiked more than this multiple
+  # above its own atr_regime_lookback-bar average -- an ATR regime shift
+  # (e.g. a gap/news event) isn't the calm-trend continuation this strategy
+  # is meant to catch.
+  atr_regime_multiple: 1.5
+
+# --- Trend qualification, Stage-2-style (spec §4, daily bars) ---
+trend:
+  sma_fast: 50
+  sma_slow: 200
+  # Trading days back to confirm sma_slow is still genuinely rising (not
+  # just currently above sma_fast) -- part of the entry's trend_ok check:
+  # close > sma_fast > sma_slow AND sma_slow rising over this window.
+  slope_lookback_bars: 5
+
+# --- ATR (spec §4-6, daily bars -- standard ATR(14) convention, same
+# meaning as config/strategy.yaml's atr.period) ---
+atr:
+  period: 14
+
+# --- Stop / target (spec §5-6) ---
+stop_target:
+  # ATR-based sanity floor on stop distance -- the stop is
+  # max(retest_low - stop_retest_buffer_atr*ATR, entry_price - stop_atr_multiple*ATR),
+  # so a retest_low sitting unusually close to entry can't produce a stop
+  # tighter than this many ATRs.
+  stop_atr_multiple: 2.5
+  # Buffer below retest_low, in ATR units, so the stop sits just past the
+  # actual structural low rather than exactly on it (normal noise/wick room).
+  stop_retest_buffer_atr: 0.25
+  # Take a partial profit once unrealized gain reaches this multiple of the
+  # initial per-share risk (R). Stop moves to breakeven the same bar.
+  partial_profit_r_multiple: 1.5
+  # Fraction of the position sold at the partial-profit target.
+  partial_profit_pct: 0.45
+  # Post-partial trailing (chandelier) stop distance, in ATRs off the
+  # highest close since entry -- ratchets UP only, never loosens (spec-
+  # corrected: max() against the existing stop_price enforces this in
+  # lib.ma_signals.evaluate_exit).
+  chandelier_atr_multiple: 2.5
+
+# --- Exit timing (spec §6) ---
+exit_timing:
+  # Minimum bars held before a close < sma_fast trend-invalidation exit can
+  # fire -- the grace period exists specifically to avoid whipsaw on noise
+  # right after a fresh reclaim (a real, spec-documented correction: without
+  # this, an early pullback right after entry could exit a position that
+  # would otherwise have kept working).
+  trend_invalidation_grace_days: 3
+  # Exit if no partial has been taken within this many trading days --
+  # doesn't apply once a partial has already been taken (the chandelier
+  # trail is doing the work by then).
+  time_stop_days: 10
+
+# --- Position sizing (at the user's direction, 2026-08-17: same logic as
+# the stochastic system's config/strategy.yaml sizing section, NOT the
+# ATR-risk-based sizing the original spec draft used -- see
+# lib.sizing.entry_share_quantity, reused verbatim by
+# lib.ma_signals.evaluate_entry). Sizing is fully decoupled from
+# risk_per_share/stop distance here; risk_per_share still drives
+# stop_price/target_1 above, just not share count. ---
+sizing:
+  # Target dollar amount per trade -- round(per_trade_usd / price) whole
+  # shares, whichever side of the target that lands on.
+  per_trade_usd: 100
+  # Hard price cap: a candidate priced above this is excluded from entries
+  # entirely (not bought at 1 share regardless of cost).
+  max_price_per_share: 150
+  # Slot cap while this agent is new and still being shaken out -- 10 slots
+  # x ~$150/slot max = $1,500 max theoretical exposure, matching the $1,500
+  # the user is adding to the account to cover this sleeve. Revisit once a
+  # live track record justifies scaling further, same convention as the
+  # stochastic system's own sizing.max_positions history.
+  max_positions: 10
+
+# --- Portfolio-level daily-loss circuit breaker (reused verbatim via
+# lib.risk.circuit_breaker_tripped / scripts/check_circuit_breaker.py, run
+# with --config config/ma_pullback_strategy.yaml --data-dir data/ma_pullback)
+# -- this agent's OWN max_daily_loss_pct, so a bad day on one system can't
+# drain the other's capital sleeve. Same default as the stochastic system's
+# risk.max_daily_loss_pct; revisit once real ATR-implied stop distances for
+# this agent's own candidate list are observed. ---
+risk:
+  max_daily_loss_pct: 3
+
+# --- Entry-order fill polling (reused verbatim via
+# scripts/evaluate_order_fill.py --config config/ma_pullback_strategy.yaml)
+# -- same defaults as config/strategy.yaml's order_lifecycle. ---
+order_lifecycle:
+  poll_timeout_seconds: 30
+  poll_interval_seconds: 5
+
+# --- Alerts (reused verbatim via lib.alerts.send_alert, config passed
+# explicitly so it never falls back to loading config/strategy.yaml) --
+# same webhook env var (ALERT_WEBHOOK_URL) as the stochastic system. ---
+alerts:
+  provider: slack
+
+# --- Catalyst avoidance / earnings (spec §7) -- reused verbatim via
+# lib.catalysts + scripts/filter_entry_earnings.py, no MA-specific earnings
+# code needed. No forced_exit_utc_hour here (unlike config/strategy.yaml):
+# that setting exists there to gate the stochastic system's near-close forced
+# exit on the SPECIFIC exit_date, because its checks run hourly throughout
+# the day and must pick the LAST regular-session check of that day. This
+# agent's exit checks (lib.ma_signals.evaluate_exit) are all daily-bar-driven
+# already -- the hourly-ma-signal-check skill's earnings force-exit for a
+# held position naturally only has one evaluation opportunity per trading
+# day's worth of daily-bar state, so there's no first-check-vs-last-check
+# distinction to gate here the way there is on the stochastic system's
+# multiple-checks-per-day hourly oscillator. ---
+catalysts:
+  enabled: true
