@@ -1358,5 +1358,29 @@
     "stop_order_id": "6a7f69a2-7cbe-454d-bb43-fa181ca827c0",
     "stop_price": 71.32,
     "symbol": "TECH"
+  },
+  {
+    "closed_at": "2026-08-17T18:09:59.964573+00:00",
+    "entry_d": 37.55820608085114,
+    "entry_k": 38.14580833409871,
+    "entry_order_id": "6a7e096e-7095-4b5d-802a-c3b130e55dbb",
+    "entry_prev_d": 35.11039310716219,
+    "entry_prev_k": 36.322024771136356,
+    "entry_price": 16.5587,
+    "entry_time": "2026-08-13T18:14:06.706Z",
+    "exit_d": 48.985507246376805,
+    "exit_k": 39.13043478260878,
+    "exit_order_id": "6a834e65-e711-419d-8c31-c2a929b58a39",
+    "exit_prev_d": 51.40096618357487,
+    "exit_prev_k": 53.33333333333329,
+    "exit_price": 16.2701,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-17T18:09:41.791Z",
+    "pnl_pct": -1.742890444298173,
+    "pnl_usd": -1.7316000000000145,
+    "qty": 6,
+    "stop_order_id": "6a7e0988-1c62-4219-93e3-cac7cbc37696",
+    "stop_price": 15.52,
+    "symbol": "SBH"
   }
 ]
