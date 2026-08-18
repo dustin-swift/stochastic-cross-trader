@@ -448,3 +448,65 @@ def test_check_ma_hourly_signals_large_gap_suppresses_entry(tmp_path):
 
     events = [e["event"] for e in _events(data_dir)]
     assert "ma_entry_suppressed_stale_cycle" in events
+
+
+# --- generic reused scripts against the REAL MA config shape (regression
+# for the 2026-08-18 bug: both scripts used to call lib.config.load_config
+# unconditionally, which validates against the stochastic schema regardless
+# of which --config path was actually passed, so a perfectly valid
+# config/ma_pullback_strategy.yaml crashed every cycle) ---
+
+def test_check_circuit_breaker_accepts_ma_config_shape(tmp_path):
+    cfg = _write_ma_cfg(tmp_path)
+    data_dir = tmp_path / "data"
+    payload = {"account_value": 1500, "realized_pnl_today": 5, "unrealized_pnl_today": 2}
+
+    result = _run(
+        "check_circuit_breaker.py", payload, ["--config", str(cfg), "--data-dir", str(data_dir)]
+    )
+
+    assert json.loads(result.stdout) == {"tripped": False}
+
+
+def test_check_circuit_breaker_tripped_against_ma_config_shape(tmp_path):
+    cfg = _write_ma_cfg(tmp_path)
+    data_dir = tmp_path / "data"
+    payload = {"account_value": 1500, "realized_pnl_today": -60, "unrealized_pnl_today": 0}
+
+    result = _run(
+        "check_circuit_breaker.py", payload, ["--config", str(cfg), "--data-dir", str(data_dir)]
+    )
+
+    assert json.loads(result.stdout) == {"tripped": True}
+
+
+def test_evaluate_order_fill_accepts_ma_config_shape(tmp_path):
+    cfg = _write_ma_cfg(tmp_path)
+    data_dir = tmp_path / "data"
+    payload = {
+        "symbol": "AAPL", "order_id": "o-1", "order_state": "filled",
+        "filled_qty": 10, "requested_qty": 10, "elapsed_seconds": 5,
+    }
+
+    result = _run(
+        "evaluate_order_fill.py", payload, ["--config", str(cfg), "--data-dir", str(data_dir)]
+    )
+
+    assert json.loads(result.stdout)["decision"] == "proceed"
+
+
+def test_evaluate_order_fill_timeout_uses_ma_config_default(tmp_path):
+    cfg = _write_ma_cfg(tmp_path)
+    data_dir = tmp_path / "data"
+    payload = {
+        "symbol": "AAPL", "order_id": "o-1", "order_state": "new",
+        "filled_qty": 0, "requested_qty": 10, "elapsed_seconds": 999,
+    }
+
+    result = _run(
+        "evaluate_order_fill.py", payload, ["--config", str(cfg), "--data-dir", str(data_dir)]
+    )
+
+    # poll_timeout_seconds: 30 in BASE_MA_CFG's order_lifecycle section -- 999
+    # elapsed seconds is well past it with nothing filled.
+    assert json.loads(result.stdout)["decision"] == "timeout"

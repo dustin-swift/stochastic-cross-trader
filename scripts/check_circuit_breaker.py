@@ -2,7 +2,9 @@
 """Portfolio-level daily-loss circuit breaker check (spec §5, §6b). Thin CLI
 wrapping lib.risk.circuit_breaker_tripped — alerts and logs if tripped. The
 hourly-signal-check skill calls this each cycle before evaluating any new
-entries.
+entries. Strategy-agnostic (see lib.config.load_raw_config's docstring): the
+MA Pullback / Breakout-Retest agent's hourly skill calls this exact same
+script too, just pointed at its own --config/--data-dir.
 
 Input (JSON, via --input file or stdin):
   {"account_value": 1500.0, "realized_pnl_today": -10.0, "unrealized_pnl_today": -20.0}
@@ -19,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lib.alerts import send_alert
-from lib.config import load_config
+from lib.config import load_raw_config
 from lib.logging_utils import EventLogger
 from lib.risk import circuit_breaker_tripped
 
@@ -38,7 +40,7 @@ def main() -> None:
     parser.add_argument("--data-dir", default="data")
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    config = load_raw_config(args.config)
     payload = _load_input(args.input)
     logger = EventLogger(args.data_dir)
 

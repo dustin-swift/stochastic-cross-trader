@@ -10,6 +10,41 @@ from typing import Any
 
 import yaml
 
+
+def load_raw_config(path: str | Path) -> dict[str, Any]:
+    """Load a strategy YAML file with NO schema validation -- for the small
+    set of scripts (`check_circuit_breaker.py`, `evaluate_order_fill.py`)
+    that are deliberately strategy-agnostic: they're reused verbatim across
+    every strategy in this repo (see each strategy's README section) and
+    only ever read a couple of leaf values (`risk.max_daily_loss_pct`,
+    `order_lifecycle.poll_timeout_seconds`) that happen to share the same
+    key names across every strategy's config, not the strategy-specific
+    sections (`stochastic`, `breakout`, etc.) that make `load_config` and
+    `load_ma_config` reject each other's files.
+
+    Bug fixed 2026-08-18, caught live on the MA Pullback agent's first
+    scheduled hourly cycle: both scripts used to call `load_config`
+    unconditionally, which validates against the STOCHASTIC schema
+    (requires a top-level `stochastic` key) regardless of which config path
+    was actually passed in -- so `--config config/ma_pullback_strategy.yaml`
+    crashed every single cycle, dry-run or live, on a config that's
+    perfectly valid for its own strategy. The full-schema validators
+    (`load_config`/`load_ma_config`) already ran once earlier in the same
+    skill invocation, when the calling script loaded its OWN strategy's
+    config the strict way -- these two scripts don't need to re-validate an
+    entire schema they don't own, just read the couple of keys they
+    actually use. Slipped past tests because `tests/test_scripts.py` only
+    ever exercised these two scripts against a stochastic-shaped config
+    fixture, never an MA one -- `tests/test_ma_scripts.py` now covers both
+    against the real MA config shape too.
+    """
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"strategy config not found: {path}")
+    with path.open() as f:
+        return yaml.safe_load(f)
+
+
 _REQUIRED_TOP_LEVEL = {
     "live": bool,
     "account_number": str,

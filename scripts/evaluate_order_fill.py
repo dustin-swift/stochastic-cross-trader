@@ -2,7 +2,9 @@
 """Entry-order fill polling decision (spec §6b amendment). Thin CLI wrapping
 lib.orders.evaluate_fill_status — the hourly-signal-check skill calls this
 after each get_equity_orders poll during the entry lifecycle, and acts on
-the returned decision.
+the returned decision. Strategy-agnostic (see lib.config.load_raw_config's
+docstring): the MA Pullback / Breakout-Retest agent's hourly skill calls
+this exact same script too, just pointed at its own --config/--data-dir.
 
 Input (JSON, via --input file or stdin):
   {"symbol": "AAPL", "order_id": "...", "order_state": "partially_filled",
@@ -24,7 +26,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lib.alerts import send_alert
-from lib.config import load_config
+from lib.config import load_raw_config
 from lib.logging_utils import EventLogger
 from lib.orders import evaluate_fill_status
 
@@ -43,7 +45,7 @@ def main() -> None:
     parser.add_argument("--data-dir", default="data")
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    config = load_raw_config(args.config)
     payload = _load_input(args.input)
     logger = EventLogger(args.data_dir)
 
