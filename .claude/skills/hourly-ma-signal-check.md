@@ -44,6 +44,11 @@ incidents that established this pattern; it applies identically here.
   origin main && git rev-parse HEAD` vs `git rev-parse origin/main`; if they
   differ, `git reset --hard origin/main && git clean -fd`. Log
   `stale_checkout_detected` if corrected.
+- **Install dependencies (mandatory, unconditional)**: `pip install -q -r
+  requirements.txt` — see `hourly-signal-check.md`'s section 0 for why this
+  is now a required step (2026-08-18 fix: Python packages aren't reliably
+  surviving between routine runs in this sandbox, confirmed live; cheap
+  no-op via pip when already satisfied).
 - **Sync state in (mandatory, first)**: `bash scripts/sync_state.sh pull` —
   populates `data/`, including `data/ma_pullback/{watchlist,positions,
   trade_history,last_cycle_at}.json`. A missing `bot-state` branch or a

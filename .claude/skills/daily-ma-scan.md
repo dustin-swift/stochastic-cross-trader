@@ -44,13 +44,18 @@ along on the same push/pull.
    `daily-universe-screen.md`/`hourly-signal-check.md` — it applies equally
    here since this routine shares the same cloud environment. Log a
    `stale_checkout_detected` event if a mismatch was found and corrected.
-2. **Sync state in (mandatory, do this first)**: `bash scripts/
+2. **Install dependencies (mandatory, unconditional)**: `pip install -q -r
+   requirements.txt` — see `hourly-signal-check.md`'s section 0 for why this
+   is now a required step (2026-08-18 fix: Python packages aren't reliably
+   surviving between routine runs in this sandbox, confirmed live; cheap
+   no-op via pip when already satisfied).
+3. **Sync state in (mandatory, do this first)**: `bash scripts/
    sync_state.sh pull` — populates `data/` (including `data/ma_pullback/*`)
    from `bot-state`. A genuinely fresh setup with no `bot-state` branch yet
    (or no `data/ma_pullback/` on it) is fine — the freshness check in the
    next step correctly blocks on a missing/stale export rather than silently
    proceeding with an empty watchlist.
-3. Load `data/ma_pullback/watchlist.json` directly (or via `python3 -c "from
+4. Load `data/ma_pullback/watchlist.json` directly (or via `python3 -c "from
    lib.state import StateStore; import json;
    print(json.dumps(StateStore('data/ma_pullback').load_watchlist()))"`) —
    this is the `"watchlist"` field of the payload built in step 5 below.
