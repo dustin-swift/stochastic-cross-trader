@@ -489,3 +489,6 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 1, "needs_cancel": false, "order_id": "6a849255-d680-48f1-9fe2-cb64f415ebe5", "order_state": "filled", "symbol": "STRC", "timestamp": "2026-08-18T17:12:03.143313+00:00"}
 {"entry_price": 94.65, "event": "entry_executed", "order_id": "6a849255-d680-48f1-9fe2-cb64f415ebe5", "qty": 1, "symbol": "STRC", "timestamp": "2026-08-18T17:12:19.626708+00:00"}
 {"event": "stop_placed", "order_id": "6a849269-0143-4e8b-b8f4-3dc63d6abab1", "qty": 1, "stop_price": 90.95, "symbol": "STRC", "timestamp": "2026-08-18T17:12:19.626842+00:00"}
+{"account_value": 2259.9359, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 2.49, "timestamp": "2026-08-18T18:05:04.319565+00:00", "tripped": false, "unrealized_pnl_today": 0.0659}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-18T18:06:33.773952+00:00", "trend_intact": false}
+{"d": 31.6478440688672, "event": "signal_check", "k": 44.27583266516464, "kind": "exit", "prev_d": null, "prev_k": 31.121194023833382, "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "STRC", "timestamp": "2026-08-18T18:06:56.824138+00:00", "trend_intact": null}
