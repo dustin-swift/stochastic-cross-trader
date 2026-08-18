@@ -1,1 +1,15 @@
-{}
+{
+  "STRC": {
+    "entry_price": 94.65,
+    "qty": 1,
+    "entry_time": "2026-08-18T17:11:49.966Z",
+    "entry_order_id": "6a849255-d680-48f1-9fe2-cb64f415ebe5",
+    "stop_order_id": "6a849269-0143-4e8b-b8f4-3dc63d6abab1",
+    "stop_price": 90.95,
+    "stochastic_state": "NORMAL",
+    "entry_k": 31.121194023833382,
+    "entry_d": 23.309231699877795,
+    "entry_prev_k": 19.54650551760358,
+    "entry_prev_d": 21.745469205951952
+  }
+}
