@@ -46,18 +46,34 @@
 # mid-write with its own real pending-setup dict, and if both land close
 # together a genuine same-file conflict on THIS file alone was blocking the
 # entire push, including real trade data (positions.json/trade_history.json)
-# in the same commit. Investigated and ruled out an alternate "merge-base
-# needs a commit not a tree" theory -- tested directly, git accepts a tree
-# object for --merge-base identically to a commit here. The actual fix:
-# pending_entries.json is intraday-only, low-stakes scratch state (worst
-# case on a bad merge: a mid-confirmation candidate restarts its %K/%D cross
-# next cycle -- never a safety issue), so it's excluded from the strict
-# conflict check entirely -- strip_data_path() removes it from all three
-# trees before merge-tree runs, then graft_data_blob() re-adds THIS run's
-# own version afterward (local always wins for this one file, since it's
-# the most-recently-computed value). A genuine conflict in any other file
-# still fails loudly exactly as before -- this narrows what gets
-# auto-resolved, it doesn't loosen the conflict check in general.
+# in the same commit. The actual fix: pending_entries.json is intraday-only,
+# low-stakes scratch state (worst case on a bad merge: a mid-confirmation
+# candidate restarts its %K/%D cross next cycle -- never a safety issue), so
+# it's excluded from the strict conflict check entirely -- strip_data_path()
+# removes it from all three trees before merge-tree runs, then
+# graft_data_blob() re-adds THIS run's own version afterward (local always
+# wins for this one file, since it's the most-recently-computed value). A
+# genuine conflict in any other file still fails loudly exactly as before --
+# this narrows what gets auto-resolved, it doesn't loosen the conflict check
+# in general.
+#
+# --merge-base must be a real commit, not a bare tree (2026-08-18 fix,
+# confirmed live on the MA Pullback agent's second scheduled hourly cycle):
+# this 2026-08-05 comment used to claim the opposite ("investigated and
+# ruled out an alternate 'merge-base needs a commit not a tree' theory --
+# tested directly, git accepts a tree object for --merge-base identically to
+# a commit here") based on local testing at the time. That was wrong, or at
+# least not portable -- the actual cloud sandbox's git build rejected every
+# single concurrent-push merge with "expected commit type, but the object
+# dereferences to tree type" regardless of whether the two runs' changes
+# genuinely overlapped, misreporting every ordinary concurrent push as an
+# unresolvable conflict. `git merge-tree`'s own docs describe --merge-base
+# as taking "that commit," not a tree, so the earlier tolerance was
+# undocumented git-version-specific leniency, not a supported behavior to
+# rely on. Fixed by wrapping the stripped base tree in a throwaway,
+# unreferenced commit object (git commit-tree, never pushed anywhere -- see
+# stripped_base_commit below) before passing it to --merge-base, so this no
+# longer depends on which git build happens to be running it.
 #
 # Usage:
 #   scripts/sync_state.sh pull   # refresh local data/ from origin/bot-state
@@ -241,9 +257,16 @@ push() {
             stripped_remote=$(strip_data_path "$remote_tree" "$PENDING_EXEMPT_PATH")
             stripped_cur=$(strip_data_path "$cur_tree" "$PENDING_EXEMPT_PATH")
 
+            # --merge-base wants a commit, not a bare tree (see header
+            # comment, 2026-08-18 fix) -- wrap it in a throwaway commit
+            # object. Never referenced by any branch/tag, so it's just an
+            # unreachable object git will eventually gc; nothing to clean up.
+            local stripped_base_commit
+            stripped_base_commit=$(git commit-tree "$stripped_base" -m "sync_state.sh synthetic merge-base")
+
             merge_err=$(mktemp)
             set +e
-            merge_out=$(git merge-tree --write-tree --merge-base="$stripped_base" "$stripped_remote" "$stripped_cur" 2>"$merge_err")
+            merge_out=$(git merge-tree --write-tree --merge-base="$stripped_base_commit" "$stripped_remote" "$stripped_cur" 2>"$merge_err")
             merge_status=$?
             set -e
 
