@@ -1,30 +1,4 @@
 {
-  "DPC": {
-    "entry_d": 20.099509550140304,
-    "entry_k": 30.321485136157833,
-    "entry_order_id": "6a7f6957-2393-4c46-ba1e-5d5f2de0f13f",
-    "entry_prev_d": 13.021648553933188,
-    "entry_prev_k": 18.703878990795424,
-    "entry_price": 50.5799,
-    "entry_time": "2026-08-14T19:15:35.805Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a7f6969-f8f3-4be4-832a-82957acc593c",
-    "stop_price": 44.97
-  },
-  "REF": {
-    "entry_d": 21.7732884399551,
-    "entry_k": 30.555555555555575,
-    "entry_order_id": "6a7f6976-5c73-4b81-bb13-30807a8ef1d7",
-    "entry_prev_d": 14.927048260381577,
-    "entry_prev_k": 19.27609427609427,
-    "entry_price": 15.5899,
-    "entry_time": "2026-08-14T19:16:06.378Z",
-    "qty": 6,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a7f6986-4315-4265-abfc-9a38f21446ce",
-    "stop_price": 13.98
-  },
   "SBLK": {
     "entry_d": 21.042512613755626,
     "entry_k": 28.13849974863868,
