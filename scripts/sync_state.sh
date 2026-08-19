@@ -257,16 +257,26 @@ push() {
             stripped_remote=$(strip_data_path "$remote_tree" "$PENDING_EXEMPT_PATH")
             stripped_cur=$(strip_data_path "$cur_tree" "$PENDING_EXEMPT_PATH")
 
-            # --merge-base wants a commit, not a bare tree (see header
-            # comment, 2026-08-18 fix) -- wrap it in a throwaway commit
-            # object. Never referenced by any branch/tag, so it's just an
-            # unreachable object git will eventually gc; nothing to clean up.
-            local stripped_base_commit
+            # git merge-tree wants commits for ALL THREE operands, not bare
+            # trees -- not just --merge-base (2026-08-18 fix wrapped only
+            # that one). Confirmed live 2026-08-19: a cycle with a genuinely
+            # clean, non-conflicting concurrent update still failed with
+            # "expected commit type, but the object dereferences to tree
+            # type" because stripped_remote/stripped_cur (both bare trees
+            # from strip_data_path, which returns mktree output) were passed
+            # straight through -- same class of error the 2026-08-18 fix
+            # addressed for --merge-base, just left on the other two
+            # arguments. Wrap all three the same way. None of these commits
+            # are ever referenced by any branch/tag -- just unreachable
+            # objects git will eventually gc, nothing to clean up.
+            local stripped_base_commit stripped_remote_commit stripped_cur_commit
             stripped_base_commit=$(git commit-tree "$stripped_base" -m "sync_state.sh synthetic merge-base")
+            stripped_remote_commit=$(git commit-tree "$stripped_remote" -m "sync_state.sh synthetic remote")
+            stripped_cur_commit=$(git commit-tree "$stripped_cur" -m "sync_state.sh synthetic local")
 
             merge_err=$(mktemp)
             set +e
-            merge_out=$(git merge-tree --write-tree --merge-base="$stripped_base_commit" "$stripped_remote" "$stripped_cur" 2>"$merge_err")
+            merge_out=$(git merge-tree --write-tree --merge-base="$stripped_base_commit" "$stripped_remote_commit" "$stripped_cur_commit" 2>"$merge_err")
             merge_status=$?
             set -e
 
