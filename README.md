@@ -801,9 +801,15 @@ in its backtest:
   retest — a same-day (or next-day) whipsaw straight back through the level
   is explicitly NOT a retest, no matter how far it dips.
 - **A failed breakout (`close < breakout_level * (1 - breakout.failed_breakout_depth)`)
-  is sticky** — it stays `failed` on every subsequent daily scan until a
-  fresh breakout overwrites the entry entirely; it does not un-fail on its
-  own if price later recovers.
+  is dropped from the watchlist outright** (revised 2026-08-19, at the
+  user's direction — supersedes the original "kept marked `failed`, sticky"
+  reading) — `lib.ma_breakout.update_watchlist_entry` returns `None` the
+  moment this fires, same as an aged-out entry, rather than persisting a
+  `failed: True` entry. It does not un-fail and resume tracking just because
+  price recovers; the symbol is only re-tracked by a genuine fresh breakout
+  (a new close at/above the prior lookback-window high), which happens
+  automatically the next time it clears its 52-week high and reappears on a
+  Finviz export.
 
 ### Entry / exit signal logic (`lib/ma_signals.py`, spec §4-6)
 

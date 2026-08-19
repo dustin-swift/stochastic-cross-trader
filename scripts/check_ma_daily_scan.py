@@ -25,10 +25,16 @@ data/ma_pullback/watchlist.json) -- the caller persists it via
 `StateStore.save_watchlist`.
 
 Logs one `ma_breakout_tracked` (fresh breakout, including an overwrite of a
-prior failed/aged-out entry), `ma_retest_seen` (retest_seen just flipped
-True), or `ma_breakout_failed` (failed just flipped True) event per
-meaningful state transition, plus `ma_watchlist_dropped` for a symbol aged
-out or otherwise dropped, and one summary `ma_daily_scan` event per run.
+prior failed/aged-out entry) or `ma_retest_seen` (retest_seen just flipped
+True) event per meaningful state transition, plus `ma_breakout_failed` or
+`ma_watchlist_dropped` when a symbol leaves the watchlist entirely (2026-08-
+19, at the user's direction: a failed breakout is now dropped outright, same
+as an aged-out one, rather than kept marked `failed` -- see
+`lib.ma_breakout`'s module docstring. The two drop reasons are distinguished
+here by recomputing `is_failed_breakout` against the symbol's last tracked
+`breakout_level`, purely for logging -- `update_watchlist_entry` itself
+already made the actual drop decision), and one summary `ma_daily_scan`
+event per run.
 """
 from __future__ import annotations
 
@@ -43,7 +49,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lib.config import load_ma_config
 from lib.logging_utils import EventLogger
-from lib.ma_breakout import update_watchlist_entry
+from lib.ma_breakout import is_failed_breakout, update_watchlist_entry
 from lib.state import StateStore
 
 
@@ -92,7 +98,19 @@ def run(payload: dict, config: dict, logger: EventLogger) -> dict:
 
         if new_entry is None:
             if prior_entry is not None:
-                logger.log("ma_watchlist_dropped", symbol=symbol)
+                # Distinguish a failed-breakout drop from an aged-out (or
+                # otherwise stale) one purely for logging -- the drop
+                # decision itself was already made above by
+                # update_watchlist_entry; this just recomputes *why*, the
+                # same convention hourly-signal-check.md uses for its own
+                # near_close recompute (see is_failed_breakout's docstring).
+                breakout_level = prior_entry.get("breakout_level")
+                today_close = float(bars["close"].iloc[-1])
+                failed_depth = config["breakout"]["failed_breakout_depth"]
+                if breakout_level is not None and is_failed_breakout(today_close, breakout_level, failed_depth):
+                    logger.log("ma_breakout_failed", symbol=symbol, breakout_level=breakout_level)
+                else:
+                    logger.log("ma_watchlist_dropped", symbol=symbol)
             updated_watchlist.pop(symbol, None)
             continue
 
@@ -104,11 +122,8 @@ def run(payload: dict, config: dict, logger: EventLogger) -> dict:
                 breakout_date=new_entry.get("breakout_date"),
                 breakout_level=new_entry.get("breakout_level"),
             )
-        else:
-            if not (prior_entry or {}).get("retest_seen") and new_entry.get("retest_seen"):
-                logger.log("ma_retest_seen", symbol=symbol, retest_low=new_entry.get("retest_low"))
-            if not (prior_entry or {}).get("failed") and new_entry.get("failed"):
-                logger.log("ma_breakout_failed", symbol=symbol, breakout_level=new_entry.get("breakout_level"))
+        elif not (prior_entry or {}).get("retest_seen") and new_entry.get("retest_seen"):
+            logger.log("ma_retest_seen", symbol=symbol, retest_low=new_entry.get("retest_low"))
 
         updated_watchlist[symbol] = new_entry
 

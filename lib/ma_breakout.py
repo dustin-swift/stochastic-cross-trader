@@ -16,10 +16,15 @@ Pullback" section for the full writeup):
   `breakout_level` AND at least `min_separation_days` trading days have
   passed since the breakout — a same-candle whipsaw back through the level
   is not a retest.
-- **Failed breakout is sticky**: once `close < breakout_level * (1 -
-  failed_breakout_depth)`, the entry stays `failed` on every subsequent call
-  until a fresh breakout overwrites it entirely — it does not un-fail on its
-  own.
+- **Failed breakout is dropped, not kept sticky** (revised 2026-08-19, at the
+  user's direction — supersedes this module's original "sticky failed" spec
+  reading): once `close < breakout_level * (1 - failed_breakout_depth)`, the
+  entry is removed from the watchlist entirely (`update_watchlist_entry`
+  returns `None`, same as age-out below), not marked `failed` and kept
+  around. If the symbol later prints a fresh 52-week-high close, it
+  reappears on its own via the next Finviz export and gets tracked as a
+  brand-new breakout — there's no need to keep a dead entry occupying
+  watchlist state (or getting re-fetched/re-evaluated) in the meantime.
 - **Age-out**: a breakout more than `max_breakout_age_days` trading days old
   is dropped from the watchlist entirely (returns `None`), not just marked
   ineligible — a stale setup shouldn't keep occupying watchlist state.
@@ -65,6 +70,16 @@ def detect_breakout(bars: pd.DataFrame, lookback: int = 252) -> float | None:
     return None
 
 
+def is_failed_breakout(close: float, breakout_level: float, failed_depth: float) -> bool:
+    """True once `close` has fallen `failed_depth` fraction below
+    `breakout_level` -- the setup-invalidation check (spec §2). Exposed as
+    its own function so a caller can recompute *why* a symbol left the
+    watchlist (for event logging) without duplicating the threshold formula
+    -- see `scripts/check_ma_daily_scan.py`.
+    """
+    return close < breakout_level * (1 - failed_depth)
+
+
 def _bar_index_for_date(bars: pd.DataFrame, target_date: str) -> int | None:
     matches = bars.index[bars["date"].astype(str) == str(target_date)]
     if len(matches) == 0:
@@ -86,7 +101,8 @@ def update_watchlist_entry(entry: dict | None, bars: pd.DataFrame, config: dict)
 
     Returns `(entry_or_None, eligible_for_entry)`:
     - `entry_or_None`: the updated entry to persist (drop the symbol from the
-      watchlist entirely if this is `None` -- stale/aged-out).
+      watchlist entirely if this is `None` -- stale/aged-out, or a fresh
+      failed-breakout invalidation -- see `is_failed_breakout` above).
     - `eligible_for_entry`: whether `scripts/check_ma_hourly_signals.py`
       should evaluate this symbol for entry this cycle (`retest_seen`, not
       `failed`) -- also stored on the entry itself as
@@ -137,10 +153,13 @@ def update_watchlist_entry(entry: dict | None, bars: pd.DataFrame, config: dict)
         return None, False
 
     if new_entry.get("failed"):
-        # Sticky until a fresh breakout overwrites it (handled above, before
-        # this check) -- a failed breakout never un-fails on its own.
-        new_entry["eligible_for_entry"] = False
-        return new_entry, False
+        # Defensive only -- a fresh, non-`None` `entry` should never actually
+        # carry `failed: True` going forward (the check below drops the
+        # symbol outright the moment it fails, 2026-08-19). This just
+        # self-heals a `failed: True` entry a caller hands in anyway (e.g.
+        # watchlist state persisted before this change) by dropping it now
+        # rather than propagating a state this function no longer produces.
+        return None, False
 
     bi = _bar_index_for_date(bars, new_entry["breakout_date"])
     if bi is None:
@@ -178,11 +197,10 @@ def update_watchlist_entry(entry: dict | None, bars: pd.DataFrame, config: dict)
             today_low if new_entry["retest_low"] is None else min(new_entry["retest_low"], today_low)
         )
 
-    # --- failed breakout (sticky) ---
-    if today_close < breakout_level * (1 - failed_depth):
-        new_entry["failed"] = True
-        new_entry["eligible_for_entry"] = False
-        return new_entry, False
+    # --- failed breakout: dropped outright, not marked-and-kept (2026-08-19,
+    # at the user's direction) ---
+    if is_failed_breakout(today_close, breakout_level, failed_depth):
+        return None, False
 
     eligible = bool(new_entry["retest_seen"] and not new_entry["failed"])
     new_entry["eligible_for_entry"] = eligible

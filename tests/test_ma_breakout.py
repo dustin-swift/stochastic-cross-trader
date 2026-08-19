@@ -167,25 +167,48 @@ def test_v_shaped_no_separation_retest_is_rejected():
     assert eligible_day11 is False
 
 
-# --- failed breakout is sticky ---
+# --- failed breakout is dropped outright, not kept sticky (2026-08-19, at
+# the user's direction) ---
 
-def test_failed_breakout_is_sticky_until_fresh_breakout():
+def test_failed_breakout_is_dropped_not_kept_sticky():
     pre = [(100.0, 95.0, 98.0)] * 10
     day_specs = pre + [
         (101.0, 100.0, 100.5),  # day10: breakout, level=100
-        (91.0, 84.0, 85.0),     # day11: close 85 < 90 (100 * (1 - 0.10)) -> failed
-        (96.0, 94.0, 95.0),     # day12: "recovers" above 90, but must STAY failed
+        (91.0, 84.0, 85.0),     # day11: close 85 < 90 (100 * (1 - 0.10)) -> failed, dropped
+        (96.0, 94.0, 95.0),     # day12: "recovers" above 90, but not a fresh breakout
+                                 # (96 is still below the prior 5-day high) -> stays dropped
     ]
     results = _breakout_and_days(day_specs, lookback=5, failed_breakout_depth=0.10)
     entry_day11, eligible_day11 = results[-2]
     entry_day12, eligible_day12 = results[-1]
 
-    assert entry_day11["failed"] is True
+    # Dropped outright the moment it fails -- not marked `failed` and kept.
+    assert entry_day11 is None
     assert eligible_day11 is False
-    # Sticky: still failed on day12 despite the close recovering above the
-    # failed-breakout threshold -- does not un-fail on its own.
-    assert entry_day12["failed"] is True
+    # Stays dropped: day12's close doesn't clear a fresh 52-week high, so
+    # there's nothing to re-track it against yet.
+    assert entry_day12 is None
     assert eligible_day12 is False
+
+
+def test_failed_breakout_reappears_on_a_later_fresh_breakout():
+    # Once dropped, the symbol is only re-tracked by an actual fresh
+    # breakout (a genuinely new high vs. the prior lookback window) -- not
+    # by merely recovering above the old failed-breakout threshold.
+    pre = [(100.0, 95.0, 98.0)] * 10
+    day_specs = pre + [
+        (101.0, 100.0, 100.5),  # day10: breakout, level=100 -> dropped next day
+        (91.0, 84.0, 85.0),     # day11: failed -> dropped
+        (85.0, 80.0, 82.0),     # day12: still down, no fresh high
+        (85.0, 80.0, 82.0),     # day13: still down, no fresh high
+        (102.0, 101.0, 101.5),  # day14: fresh breakout again (new prior-5-day high cleared)
+    ]
+    results = _breakout_and_days(day_specs, lookback=5, failed_breakout_depth=0.10)
+    entry_day14, eligible_day14 = results[-1]
+
+    assert entry_day14 is not None
+    assert entry_day14["failed"] is False
+    assert entry_day14["breakout_date"] is not None
 
 
 def test_fresh_breakout_overwrites_a_failed_entry():

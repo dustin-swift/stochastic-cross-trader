@@ -216,6 +216,51 @@ def test_check_ma_daily_scan_keeps_tracking_symbol_dropped_from_finviz(tmp_path)
     assert "AAPL" in watchlist  # still tracked despite being off today's Finviz list
 
 
+def test_check_ma_daily_scan_drops_failed_breakout_outright(tmp_path):
+    # 2026-08-19, at the user's direction: a failed breakout is dropped from
+    # the watchlist entirely (not kept marked `failed`) -- if the symbol
+    # later prints a fresh 52-week high, it's picked back up via Finviz on
+    # its own, same as any other new candidate.
+    cfg = _write_ma_cfg(tmp_path)
+    data_dir = tmp_path / "data"
+
+    existing_entry = {
+        "breakout_date": "2024-01-10",
+        "breakout_level": 100.0,
+        "breakout_volume": 1_000_000.0,
+        "retest_seen": False,
+        "retest_low": None,
+        "failed": False,
+        "max_close_since_breakout": 100.2,
+        "extension_confirmed": True,
+        "eligible_for_entry": False,
+    }
+    dates = [f"2024-01-{i+1:02d}" for i in range(11)]
+    price_history = {
+        "dates": dates,
+        "high": [100.0] * 9 + [101.0, 85.0],
+        "low": [95.0] * 9 + [100.0, 78.0],
+        # Final close (80.0) is well below breakout_level * (1 - 0.10) = 90.0.
+        "close": [98.0] * 9 + [100.2, 80.0],
+        "volume": [1_000_000.0] * 11,
+    }
+
+    payload = {
+        "finviz_candidates": [],
+        "price_history": {"AAPL": price_history},
+        "watchlist": {"AAPL": existing_entry},
+    }
+
+    result = _run("check_ma_daily_scan.py", payload, ["--config", str(cfg), "--data-dir", str(data_dir)])
+    watchlist = json.loads(result.stdout)
+
+    assert "AAPL" not in watchlist  # dropped, not kept around marked failed
+
+    events = [e["event"] for e in _events(data_dir)]
+    assert "ma_breakout_failed" in events
+    assert "ma_watchlist_dropped" not in events  # distinguishable from a plain age-out drop
+
+
 def test_check_ma_daily_scan_places_no_orders_and_writes_no_positions(tmp_path):
     # Sanity check on the "never places trades" rule -- this script has no
     # code path that touches positions.json at all.
