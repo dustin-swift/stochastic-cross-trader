@@ -1478,5 +1478,29 @@
     "stop_order_id": "6a7c9ca4-8f3f-4470-b1d3-bd83e52d9560",
     "stop_price": 26.46,
     "symbol": "SBLK"
+  },
+  {
+    "closed_at": "2026-08-19T13:32:46.821680+00:00",
+    "entry_d": 23.309231699877795,
+    "entry_k": 31.121194023833382,
+    "entry_order_id": "6a849255-d680-48f1-9fe2-cb64f415ebe5",
+    "entry_prev_d": 21.745469205951952,
+    "entry_prev_k": 19.54650551760358,
+    "entry_price": 94.65,
+    "entry_time": "2026-08-18T17:11:49.966Z",
+    "exit_d": 45.979663589564474,
+    "exit_k": 39.54285589418884,
+    "exit_order_id": "6a85b072-521f-4e62-8f0f-dd4b9831c907",
+    "exit_prev_d": 43.17244296611266,
+    "exit_prev_k": 54.470295209480135,
+    "exit_price": 94.1401,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-19T13:32:34.827Z",
+    "pnl_pct": -0.5387216059165367,
+    "pnl_usd": -0.5099000000000018,
+    "qty": 1,
+    "stop_order_id": "6a849269-0143-4e8b-b8f4-3dc63d6abab1",
+    "stop_price": 90.95,
+    "symbol": "STRC"
   }
 ]
