@@ -549,3 +549,4 @@
 {"event": "exit_executed", "fill_price": "29.6213", "order_id": "6a85f14c-c296-493f-a2f6-c67116aa69f4", "qty": 3.0, "symbol": "CZR", "timestamp": "2026-08-19T18:10:00.857383+00:00"}
 {"event": "exit_executed", "fill_price": "37.9713", "order_id": "6a85f14d-3195-4f7a-bd6b-ab8484e4058f", "qty": 3.0, "symbol": "DB", "timestamp": "2026-08-19T18:10:00.857419+00:00"}
 {"event": "exit_executed", "fill_price": "52.3601", "order_id": "6a85f14e-a210-4ee9-9119-d4a2cdf975fa", "qty": 2.0, "symbol": "XLB", "timestamp": "2026-08-19T18:10:00.857451+00:00"}
+{"candidates_checked": 0, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_taken": 0, "event": "cycle_summary", "exit_symbols": ["ASH", "BN", "CZR", "DB", "XLB"], "exits_taken": 5, "market_trend_intact": false, "open_positions": 10, "reconciliation_drift_symbols": ["BAC", "EBC", "NVST"], "slots_remaining": 5, "stop_outs_found": 0, "timestamp": "2026-08-19T18:10:30.573187+00:00"}
