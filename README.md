@@ -285,6 +285,24 @@ Missing/insufficient bar history reads as `null`, treated the same as
 exit-side `trend_intact` filter). `market_filter.enabled: false` disables
 the feature entirely without needing a live fetch.
 
+**Bars must include pre-market data (2026-08-19 fix)**: the hourly-signal-check
+skill fetches SPY with `bounds="extended"`, not the default `"regular"`
+(regular-session-only). Root cause of a confirmed live miss: a cycle's
+regime check landed 12 seconds after the 13:30 UTC open on a morning SPY
+had gapped up +0.38% overnight. With regular-hours-only bars, the 20/200
+minute SMA windows at that instant were built almost entirely from the
+*prior* session's closing bars — zero bars of the new session had closed
+yet — so the overnight gap wasn't reflected at all, and the check read
+`trend_intact: false`, objectively wrong (confirmed by recomputing with the
+same instant's real bars: RTH-only gave fast 767.67 vs. slow 768.09; adding
+pre-market bars gave fast 770.87 vs. slow 768.47 — correctly `true`).
+Pre-market SPY data is available and dense (confirmed live: ~330 one-minute
+bars between 4am ET and the open on a normal morning), so including it
+means the 200-period window is built from hours of *today's own* pre-market
+price action by the time the regular session opens — overnight/pre-market
+momentum is already priced into both SMAs at 9:30 instead of the fast SMA
+needing 20 minutes of fresh regular-session bars to catch up from scratch.
+
 ## Trade-detail fields (2026-08-05)
 
 Every entry/exit decision carries the confirming bar's %K/%D *and* the prior

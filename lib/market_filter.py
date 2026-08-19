@@ -39,6 +39,21 @@ Exits and existing positions are never affected by this filter -- like the
 circuit breaker, it only ever gates NEW entries (see the hourly-signal-check
 skill, which checks this before section 5, entries, early enough that a
 failing check skips the entire candidate fetch for the cycle too).
+
+**Caller must fetch bars with extended-hours bounds (2026-08-19 fix)**: this
+function is agnostic to session type, it just averages whatever closes it's
+given -- but a caller passing regular-hours-only bars will get a
+gap-blind read for any cycle whose fetch lands near the regular-session
+open. Confirmed live: a cycle running 12 seconds after the 13:30 UTC open,
+on a morning SPY gapped up +0.38% overnight, computed `trend_intact: false`
+because zero regular-session bars existed yet -- the 200-period window was
+almost entirely the prior session's closes. Feeding this function bars
+fetched with `bounds="extended"` instead fixes it: pre-market bars from the
+same morning are already available and dense, so the SMA windows reflect
+today's actual overnight/pre-market momentum by the time the regular
+session opens, rather than needing 20+ minutes of fresh regular-session
+bars to catch up from a standing start. See the hourly-signal-check skill's
+market-regime-check step and the README's market-regime-filter section.
 """
 from __future__ import annotations
 
