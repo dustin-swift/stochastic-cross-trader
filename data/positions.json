@@ -8,22 +8,9 @@
     "entry_price": 46.5783,
     "entry_time": "2026-08-19T15:16:12.254Z",
     "qty": 2.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a85c8d4-f972-42d9-ba52-d36fa6fb0a97",
     "stop_price": 44.25
-  },
-  "ASH": {
-    "entry_d": 20.337690631808332,
-    "entry_k": 35.32679738562092,
-    "entry_order_id": "6a85c8e7-4f81-451f-b8d2-a56a2a2bb392",
-    "entry_prev_d": 12.178649237472841,
-    "entry_prev_k": 19.64052287581704,
-    "entry_price": 74.2,
-    "entry_time": "2026-08-19T15:16:55.988Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85c90d-6f9b-4470-b1ec-86dd7de2d107",
-    "stop_price": 70.66
   },
   "AVLV": {
     "entry_d": null,
@@ -52,20 +39,6 @@
     "stop_order_id": "6a85c92c-8544-4682-9da3-6925f0f0ede4",
     "stop_price": 24.72
   },
-  "BN": {
-    "entry_d": null,
-    "entry_k": null,
-    "entry_order_id": "6a85d9ba-d9e5-44f1-a59a-5c6824c9239d",
-    "entry_prev_d": null,
-    "entry_prev_k": null,
-    "entry_price": 42.5899,
-    "entry_time": "2026-08-19T16:28:43.168Z",
-    "qty": 2.0,
-    "reconstructed_note": "Reconstructed 2026-08-19 from broker order records after sync_state.sh push failed on this cycle (merge-tree bare-tree bug); entry_k/d unrecoverable, stochastic_state defaults to NORMAL pending next signal_check.",
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85d9d4-a023-4ffd-9396-a310e4845052",
-    "stop_price": 41.13
-  },
   "CGGR": {
     "entry_d": null,
     "entry_k": null,
@@ -92,34 +65,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a85c94e-cd16-4191-8e91-259d971fcef3",
     "stop_price": 11.78
-  },
-  "CZR": {
-    "entry_d": null,
-    "entry_k": null,
-    "entry_order_id": "6a85da52-ca62-4fa5-91a3-32e0a0467ee4",
-    "entry_prev_d": null,
-    "entry_prev_k": null,
-    "entry_price": 29.6487,
-    "entry_time": "2026-08-19T16:31:14.270Z",
-    "qty": 3.0,
-    "reconstructed_note": "Reconstructed 2026-08-19 from broker order records after sync_state.sh push failed on this cycle (merge-tree bare-tree bug); entry_k/d unrecoverable, stochastic_state defaults to NORMAL pending next signal_check.",
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85da65-fb06-40d4-82a9-91f1dfc20867",
-    "stop_price": 29.18
-  },
-  "DB": {
-    "entry_d": null,
-    "entry_k": null,
-    "entry_order_id": "6a85da73-2b31-44af-a7ec-9760dd499303",
-    "entry_prev_d": null,
-    "entry_prev_k": null,
-    "entry_price": 38.0687,
-    "entry_time": "2026-08-19T16:31:47.775Z",
-    "qty": 3.0,
-    "reconstructed_note": "Reconstructed 2026-08-19 from broker order records after sync_state.sh push failed on this cycle (merge-tree bare-tree bug); entry_k/d unrecoverable, stochastic_state defaults to NORMAL pending next signal_check.",
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85daa0-acb3-4c4f-9720-82246a02ecaf",
-    "stop_price": 36.75
   },
   "DLO": {
     "entry_d": null,
@@ -187,18 +132,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a85c9ba-4533-4b3d-8310-c2a021cc3ba3",
     "stop_price": 53.8
-  },
-  "XLB": {
-    "entry_d": 22.70034308178282,
-    "entry_k": 37.9823140070753,
-    "entry_order_id": "6a85c9d1-f6c6-42dc-82c6-e70d1d9dbd97",
-    "entry_prev_d": 15.30782199908239,
-    "entry_prev_k": 12.5939588568473,
-    "entry_price": 52.8999,
-    "entry_time": "2026-08-19T15:20:49.968Z",
-    "qty": 2.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85c9ec-33fe-4892-837e-852f8a1df221",
-    "stop_price": 51.49
   }
 }
