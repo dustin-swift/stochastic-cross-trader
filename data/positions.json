@@ -62,7 +62,7 @@
     "entry_price": 31.7067,
     "entry_time": "2026-08-20T15:13:00Z",
     "qty": 3,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a87199f-b261-418e-a97d-28905d9ae138",
     "stop_price": 30.16
   },
@@ -91,19 +91,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a85c997-bda8-46de-86cc-38c89224de2e",
     "stop_price": 23.9
-  },
-  "MPLX": {
-    "entry_d": 20.25986755986735,
-    "entry_k": 24.215500115499847,
-    "entry_order_id": "6a87197f-34af-4403-845d-654722830198",
-    "entry_prev_d": 16.31416031416018,
-    "entry_prev_k": 17.278817278816994,
-    "entry_price": 59.1999,
-    "entry_time": "2026-08-20T15:13:00Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8719a2-e8e9-4eed-a799-3507e9bd6671",
-    "stop_price": 57.5
   },
   "PVAL": {
     "entry_d": 22.468522762640493,
