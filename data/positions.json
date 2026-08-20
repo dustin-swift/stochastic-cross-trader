@@ -63,7 +63,7 @@
     "entry_time": "2026-08-19T16:32:47.044Z",
     "qty": 7.0,
     "reconstructed_note": "Reconstructed 2026-08-19 from broker order records after sync_state.sh push failed on this cycle (merge-tree bare-tree bug); entry_k/d unrecoverable, stochastic_state defaults to NORMAL pending next signal_check.",
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a85dad3-8d6e-4731-972d-8cd3f9821c0e",
     "stop_price": 13.25
   },
