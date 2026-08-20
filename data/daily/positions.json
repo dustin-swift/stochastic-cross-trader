@@ -12,6 +12,32 @@
     "stop_order_id": null,
     "stop_price": 17.505
   },
+  "CSX": {
+    "entry_d": 22.053703826199484,
+    "entry_k": 31.782589415866024,
+    "entry_order_id": "paper",
+    "entry_prev_d": 16.456849193691212,
+    "entry_prev_k": 19.227006911217345,
+    "entry_price": 50.37,
+    "entry_time": "2026-08-19T00:00:00Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 48.644999999999996
+  },
+  "ELAN": {
+    "entry_d": 22.672672672672665,
+    "entry_k": 29.179179179179187,
+    "entry_order_id": "paper",
+    "entry_prev_d": 18.251584918251577,
+    "entry_prev_k": 21.77177177177178,
+    "entry_price": 24.08,
+    "entry_time": "2026-08-19T00:00:00Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 22.61
+  },
   "LAUR": {
     "entry_d": 20.01751032363632,
     "entry_k": 23.591923485653613,
@@ -24,5 +50,18 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": null,
     "stop_price": 35.82
+  },
+  "SHO": {
+    "entry_d": 22.847266933143302,
+    "entry_k": 32.00790401614423,
+    "entry_order_id": "paper",
+    "entry_prev_d": 14.169151944685161,
+    "entry_prev_k": 24.715611782434337,
+    "entry_price": 11.09,
+    "entry_time": "2026-08-19T00:00:00Z",
+    "qty": 9,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 10.745
   }
 }

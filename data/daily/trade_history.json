@@ -1,0 +1,26 @@
+[
+  {
+    "closed_at": "2026-08-20T20:21:32.922777+00:00",
+    "entry_d": 23.962516733601063,
+    "entry_k": 29.638554216867465,
+    "entry_order_id": "paper",
+    "entry_prev_d": 18.92904953145917,
+    "entry_prev_k": 24.738955823293168,
+    "entry_price": 36.96,
+    "entry_time": "2026-08-19T00:00:00Z",
+    "exit_d": 27.326709650844908,
+    "exit_k": 22.619709607661445,
+    "exit_order_id": "paper",
+    "exit_prev_d": 28.033125056055482,
+    "exit_prev_k": 29.721865128005845,
+    "exit_price": 36.36,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-19T00:00:00Z",
+    "pnl_pct": -1.6233766233766267,
+    "pnl_usd": -1.8000000000000043,
+    "qty": 3,
+    "stop_order_id": null,
+    "stop_price": 35.64,
+    "symbol": "RDN"
+  }
+]
