@@ -26,6 +26,20 @@
     "stop_order_id": "6a85da15-10ac-4bc9-80c9-41733065c7d6",
     "stop_price": 93.59
   },
+  "BAC": {
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a85bc3c-401a-410c-852a-3d78770ff048",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 63.9199,
+    "entry_time": "2026-08-19T14:22:52.342Z",
+    "qty": 2.0,
+    "reconstructed_note": "Reconstructed 2026-08-20 from broker order records -- orphaned bot entry from an earlier, previously-undiagnosed 2026-08-19 ~14:2x UTC sync failure (predates the 16:0x cycle fixed the same day). Misdiagnosed at the time as reconciliation_drift (looked like a manual position) until this cycle confirmed placed_agent=agentic on the entry order. entry_k/d unrecoverable.",
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a85bc58-ca7f-40e0-a004-bfa5036bdebc",
+    "stop_price": 62.27
+  },
   "BAX": {
     "entry_d": 21.14386344649497,
     "entry_k": 36.363636363636296,
@@ -52,6 +66,20 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a85dad3-8d6e-4731-972d-8cd3f9821c0e",
     "stop_price": 13.25
+  },
+  "EBC": {
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a85bc74-2f0b-4d56-afe8-0e9a5d1f31da",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 23.4787,
+    "entry_time": "2026-08-19T14:23:48.562Z",
+    "qty": 4.0,
+    "reconstructed_note": "Reconstructed 2026-08-20 from broker order records -- orphaned bot entry from an earlier, previously-undiagnosed 2026-08-19 ~14:2x UTC sync failure (predates the 16:0x cycle fixed the same day). Misdiagnosed at the time as reconciliation_drift (looked like a manual position) until this cycle confirmed placed_agent=agentic on the entry order. entry_k/d unrecoverable.",
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a85bc8a-61b1-4191-9fdc-62af42b3aa97",
+    "stop_price": 22.71
   },
   "FCX": {
     "entry_d": 21.797796968098208,
