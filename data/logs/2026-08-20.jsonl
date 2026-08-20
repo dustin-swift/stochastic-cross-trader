@@ -495,3 +495,4 @@
 {"event": "stop_placed", "order_id": "6a8719a1-6287-4285-a091-77221d5efe80", "qty": 3, "stop_price": 28.87, "symbol": "IBN", "timestamp": "2026-08-20T15:13:57.241520+00:00"}
 {"event": "entry_executed", "fill_price": 59.1999, "order_id": "6a87197f-34af-4403-845d-654722830198", "qty": 2, "symbol": "MPLX", "timestamp": "2026-08-20T15:13:57.241595+00:00"}
 {"event": "stop_placed", "order_id": "6a8719a2-e8e9-4eed-a799-3507e9bd6671", "qty": 2, "stop_price": 57.5, "symbol": "MPLX", "timestamp": "2026-08-20T15:13:57.241659+00:00"}
+{"candidates_checked": 443, "candidates_total": 456, "circuit_breaker": "ok", "entries": ["DB", "GEO", "IBN", "MPLX"], "entries_proposed": 4, "entries_taken": 4, "event": "cycle_summary", "exits_taken": 0, "market_regime": "intact", "open_positions": 14, "pending_setups": ["DE", "GRND", "HSBC", "JPM", "PCAR"], "slots_remaining": 1, "stop_outs_reconciled": 0, "timestamp": "2026-08-20T15:14:22.091093+00:00"}
