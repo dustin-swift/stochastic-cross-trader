@@ -26,33 +26,6 @@
     "stop_order_id": "6a85da15-10ac-4bc9-80c9-41733065c7d6",
     "stop_price": 93.59
   },
-  "BAC": {
-    "entry_d": null,
-    "entry_k": null,
-    "entry_order_id": "6a85bc3c-401a-410c-852a-3d78770ff048",
-    "entry_prev_d": null,
-    "entry_prev_k": null,
-    "entry_price": 63.9199,
-    "entry_time": "2026-08-19T14:22:52.342Z",
-    "qty": 2.0,
-    "reconstructed_note": "Reconstructed 2026-08-20 from broker order records -- orphaned bot entry from an earlier, previously-undiagnosed 2026-08-19 ~14:2x UTC sync failure (predates the 16:0x cycle fixed the same day). Misdiagnosed at the time as reconciliation_drift (looked like a manual position) until this cycle confirmed placed_agent=agentic on the entry order. entry_k/d unrecoverable.",
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85bc58-ca7f-40e0-a004-bfa5036bdebc",
-    "stop_price": 62.27
-  },
-  "DB": {
-    "entry_d": 20.866425817374118,
-    "entry_k": 26.61010642467056,
-    "entry_order_id": "6a87197b-5145-4f22-a63b-f68ce0d577e9",
-    "entry_prev_d": 20.02917295680678,
-    "entry_prev_k": 18.11668563582599,
-    "entry_price": 37.8487,
-    "entry_time": "2026-08-20T15:13:00Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a87199c-72e5-4247-be1f-597a92ad96fa",
-    "stop_price": 36.53
-  },
   "DLO": {
     "entry_d": null,
     "entry_k": null,
@@ -76,7 +49,7 @@
     "entry_price": 69.2275,
     "entry_time": "2026-08-19T15:19:03.69Z",
     "qty": 1.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
     "stop_price": 64.77
   },
