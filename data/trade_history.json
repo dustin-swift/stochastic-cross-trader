@@ -1838,5 +1838,29 @@
     "stop_order_id": "6a8719a2-e8e9-4eed-a799-3507e9bd6671",
     "stop_price": 57.5,
     "symbol": "MPLX"
+  },
+  {
+    "closed_at": "2026-08-21T15:23:23.184792+00:00",
+    "entry_d": 22.42492853820327,
+    "entry_k": 36.352890608209144,
+    "entry_order_id": "6a85c984-d0d8-44c9-823a-f3be386d20ba",
+    "entry_prev_d": 17.84475993883326,
+    "entry_prev_k": 13.636363636362788,
+    "entry_price": 24.8275,
+    "entry_time": "2026-08-19T15:19:32.825Z",
+    "exit_d": 34.57208445061715,
+    "exit_k": 33.73605533204991,
+    "exit_order_id": "6a886d59-6ebd-45e3-911d-4a65017f1eb6",
+    "exit_prev_d": 33.55775577557727,
+    "exit_prev_k": 40.27062706270606,
+    "exit_price": 24.4,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-21T15:23:05.797Z",
+    "pnl_pct": -1.7218809787534095,
+    "pnl_usd": -1.710000000000008,
+    "qty": 4.0,
+    "stop_order_id": "6a85c997-bda8-46de-86cc-38c89224de2e",
+    "stop_price": 23.9,
+    "symbol": "MAC"
   }
 ]

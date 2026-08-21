@@ -79,19 +79,6 @@
     "stop_order_id": "6a8719a1-6287-4285-a091-77221d5efe80",
     "stop_price": 28.87
   },
-  "MAC": {
-    "entry_d": 22.42492853820327,
-    "entry_k": 36.352890608209144,
-    "entry_order_id": "6a85c984-d0d8-44c9-823a-f3be386d20ba",
-    "entry_prev_d": 17.84475993883326,
-    "entry_prev_k": 13.636363636362788,
-    "entry_price": 24.8275,
-    "entry_time": "2026-08-19T15:19:32.825Z",
-    "qty": 4.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85c997-bda8-46de-86cc-38c89224de2e",
-    "stop_price": 23.9
-  },
   "PVAL": {
     "entry_d": 22.468522762640493,
     "entry_k": 38.0071725659961,
