@@ -1910,5 +1910,29 @@
     "stop_order_id": "6a886e9f-cd66-464a-96ad-60a0c11a3ede",
     "stop_price": 20.6,
     "symbol": "ET"
+  },
+  {
+    "closed_at": "2026-08-21T19:09:49.912855+00:00",
+    "entry_d": 22.4821822350076,
+    "entry_k": 38.07637983485511,
+    "entry_order_id": "6a886ed0-a9d1-471a-99e1-95dbe86b2baf",
+    "entry_prev_d": 18.749491249491694,
+    "entry_prev_k": 10.744301994302313,
+    "entry_price": 71.7276,
+    "entry_time": "2026-08-21T15:29:20.626Z",
+    "exit_d": 69.48106298388842,
+    "exit_k": 66.66666666666725,
+    "exit_order_id": "6a88a273-ce31-4d5e-9a90-b94264f23238",
+    "exit_prev_d": 66.6053674999067,
+    "exit_prev_k": 67.28395061728456,
+    "exit_price": 71.755,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-21T19:09:39.642Z",
+    "pnl_pct": 0.038200079188488445,
+    "pnl_usd": 0.02740000000000009,
+    "qty": 1,
+    "stop_order_id": "6a886edb-4384-4f0a-a584-45119ebf18c0",
+    "stop_price": 70.29,
+    "symbol": "FEZ"
   }
 ]

@@ -88,7 +88,7 @@
     "entry_price": 71.445,
     "entry_time": "2026-08-21T15:28:44.747Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a886ec0-59e8-4e0a-b179-ab9282528ca5",
     "stop_price": 70.03
   },
@@ -104,19 +104,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
     "stop_price": 64.77
-  },
-  "FEZ": {
-    "entry_d": 22.4821822350076,
-    "entry_k": 38.07637983485511,
-    "entry_order_id": "6a886ed0-a9d1-471a-99e1-95dbe86b2baf",
-    "entry_prev_d": 18.749491249491694,
-    "entry_prev_k": 10.744301994302313,
-    "entry_price": 71.7276,
-    "entry_time": "2026-08-21T15:29:20.626Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a886edb-4384-4f0a-a584-45119ebf18c0",
-    "stop_price": 70.29
   },
   "GEO": {
     "entry_d": 21.12656863716158,
