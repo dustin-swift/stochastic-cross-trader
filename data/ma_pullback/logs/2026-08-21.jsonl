@@ -41,3 +41,7 @@
 {"breakout_level": 43.89, "entry_price": 44.55, "event": "ma_entry_dry_run", "shares": 2, "stop_price": 43.07402414285715, "symbol": "FRO", "target_1": 46.76396378571427, "timestamp": "2026-08-21T15:14:24.939397+00:00"}
 {"account_value": 2260.69, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -2.55, "timestamp": "2026-08-21T16:11:56.807914+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-21T16:12:20.944771+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-21T16:14:25.100439+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-21T16:14:25.102957+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "NAT", "timestamp": "2026-08-21T16:14:25.105335+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-21T16:14:25.107782+00:00"}
