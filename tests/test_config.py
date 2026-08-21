@@ -137,11 +137,11 @@ VALID_MA_CFG = {
 
 def test_loads_the_real_ma_config():
     cfg = load_ma_config("config/ma_pullback_strategy.yaml")
-    assert cfg["live"] is False
+    assert cfg["live"] is True
     assert cfg["breakout"]["lookback_days"] == 252
     assert cfg["sizing"]["per_trade_usd"] == 100
     assert cfg["sizing"]["max_price_per_share"] == 150
-    assert cfg["sizing"]["max_positions"] == 10
+    assert cfg["sizing"]["max_positions"] == 5
 
 
 def test_load_valid_ma_config_roundtrip(tmp_path):

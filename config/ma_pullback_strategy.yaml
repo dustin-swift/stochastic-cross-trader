@@ -6,14 +6,18 @@
 # each noting which spec section/rule it implements. Edit values here to
 # retune -- no code changes needed, same convention as config/strategy.yaml.
 
-# Live/dry-run switch. Ships dry-run (false) like every strategy in this repo
-# -- flip deliberately only after reviewing real dry-run cycles.
-live: false
+# Live/dry-run switch. Flipped to true at the user's explicit direction,
+# 2026-08-19 -- "let's set this to live. max 5 positions to start." Every
+# order-placing branch in hourly-ma-signal-check.md is now live; the two
+# hard rules (never enter below breakout_level, always place the resting
+# broker-side stop immediately after a fill) apply for real starting the
+# next scheduled cycle.
+live: true
 
 # Same Robinhood account as the stochastic system (config/strategy.yaml) --
 # at the user's direction, this agent trades a separate capital sleeve
 # within the SAME account, not a distinct sub-account. Separation is
-# enforced by the 10-slot / $100-per-trade cap below (sizing.max_positions)
+# enforced by the 5-slot / $100-per-trade cap below (sizing.max_positions)
 # and this agent's own circuit breaker (risk.max_daily_loss_pct), not by
 # account isolation.
 account_number: "849995824"
@@ -136,12 +140,14 @@ sizing:
   # Hard price cap: a candidate priced above this is excluded from entries
   # entirely (not bought at 1 share regardless of cost).
   max_price_per_share: 150
-  # Slot cap while this agent is new and still being shaken out -- 10 slots
-  # x ~$150/slot max = $1,500 max theoretical exposure, matching the $1,500
-  # the user is adding to the account to cover this sleeve. Revisit once a
-  # live track record justifies scaling further, same convention as the
-  # stochastic system's own sizing.max_positions history.
-  max_positions: 10
+  # Slot cap while this agent is live and still being shaken out -- lowered
+  # from 10 to 5 at the user's explicit direction going live, 2026-08-19
+  # ("max 5 positions to start"). 5 slots x ~$150/slot max = $750 max
+  # theoretical exposure, comfortably inside the $1,500 already funded for
+  # this sleeve. Revisit once a live track record justifies scaling back up,
+  # same convention as the stochastic system's own sizing.max_positions
+  # history.
+  max_positions: 5
 
 # --- Portfolio-level daily-loss circuit breaker (reused verbatim via
 # lib.risk.circuit_breaker_tripped / scripts/check_circuit_breaker.py, run

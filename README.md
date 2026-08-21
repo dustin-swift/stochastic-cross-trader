@@ -753,20 +753,22 @@ list of shared modules and exactly how each is invoked for this agent.
 Confirmed with the user (2026-08-17): this agent trades the **same
 Robinhood account** as the stochastic system (`config/ma_pullback_strategy.yaml`'s
 `account_number` is the same value as `config/strategy.yaml`'s), not a
-separate sub-account — the user is adding **$1,500** to that account
+separate sub-account — the user added **$1,500** to that account
 specifically to cover this agent's own capacity. Separation between the two
 systems is enforced by config, not account isolation: `config/
-ma_pullback_strategy.yaml` (own tunables, `live: false` by default — same
-dry-run-first convention as every strategy in this repo), `data/ma_pullback/`
-(own `watchlist.json`, `positions.json`, `trade_history.json`,
-`finviz_export.csv`, `last_cycle_at.json`, `logs/` — completely separate
-from the hourly/daily tracks' state, so the three can never collide or
-double-count), its own two scheduled routines (`daily-ma-scan`,
-`hourly-ma-signal-check` — see Scheduling above), its own
-`sizing.max_positions` slot cap (**10**, to start — "while we work out the
-bugs," per the user, 2026-08-17; revisit once this agent has a live track
-record), and its own `risk.max_daily_loss_pct` circuit breaker, so a bad day
-on one system can't drain the other's sleeve of the shared buying power.
+ma_pullback_strategy.yaml` (own tunables — shipped dry-run-first like every
+strategy in this repo, then flipped to **`live: true`** at the user's
+explicit direction, 2026-08-19: "let's set this to live. max 5 positions to
+start"), `data/ma_pullback/` (own `watchlist.json`, `positions.json`,
+`trade_history.json`, `finviz_export.csv`, `last_cycle_at.json`, `logs/` —
+completely separate from the hourly/daily tracks' state, so the three can
+never collide or double-count), its own two scheduled routines
+(`daily-ma-scan`, `hourly-ma-signal-check` — see Scheduling above), its own
+`sizing.max_positions` slot cap (**5**, to start — lowered from an initial
+10 at the same 2026-08-19 go-live direction; revisit once this agent has a
+live track record), and its own `risk.max_daily_loss_pct` circuit breaker,
+so a bad day on one system can't drain the other's sleeve of the shared
+buying power.
 The one deliberately *shared* piece of state is the market-regime signal
 (see "Shared market-regime check" below).
 
@@ -861,12 +863,13 @@ section: **~$100/trade** (`sizing.per_trade_usd`, whole shares, rounded to
 whichever side lands closest), **capped at $150/share**
 (`sizing.max_price_per_share` — a candidate priced above this is excluded
 from entries entirely, not bought at 1 share regardless of cost), and
-**10 concurrent slots** (`sizing.max_positions` — see "Own capital sleeve"
+**5 concurrent slots** (`sizing.max_positions` — lowered from an initial 10
+at the user's direction going live, 2026-08-19; see "Own capital sleeve"
 above). Sizing is fully decoupled from `risk_per_share`/stop distance here;
 the ATR-anchored stop math above still drives `stop_price`/`target_1`, it
-just doesn't drive share count. $100 × 10 slots = **$1,000 typical, up to
-$1,500 max theoretical exposure** (10 slots at the $150/share cap) — the
-exact amount the user is adding to the account to cover this sleeve.
+just doesn't drive share count. $100 × 5 slots = **$500 typical, up to $750
+max theoretical exposure** (5 slots at the $150/share cap) — comfortably
+inside the $1,500 the user added to the account to cover this sleeve.
 
 ### Shared vetoes, not duplicated ones
 

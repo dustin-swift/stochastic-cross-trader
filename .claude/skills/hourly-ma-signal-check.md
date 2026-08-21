@@ -80,11 +80,12 @@ skill — log `reconciliation_drift` on a mismatch, don't guess a fix.
 field — the SAME account as the stochastic system (confirmed with the user,
 2026-08-17), not a separate sub-account. Separation between the two
 systems' capital is enforced by this agent's own `sizing.max_positions`
-(10 slots) and `risk.max_daily_loss_pct` circuit breaker, not by account
-isolation — a bad cycle on one system can't drain the other's sleeve, but
-both draw against the same buying power. The user is adding $1,500 to the
-account specifically to cover this agent's max theoretical exposure
-(10 slots × ~$150/slot).
+(**5 slots**, lowered from an initial 10 at the user's direction going
+live, 2026-08-19) and `risk.max_daily_loss_pct` circuit breaker, not by
+account isolation — a bad cycle on one system can't drain the other's
+sleeve, but both draw against the same buying power. The user added $1,500
+to the account to cover this sleeve, comfortably above this agent's max
+theoretical exposure (5 slots × ~$150/slot = $750).
 
 ## 2. Circuit breaker + market-regime check
 
@@ -224,8 +225,9 @@ live exit (or a `position_updates` state advance) impossible to strand off
 ## 4. Determine slot availability
 
 `lib.state.has_open_slot(positions, config["sizing"]["max_positions"])` —
-10 slots to start (2026-08-17, at the user's direction, "while we work out
-the bugs"; revisit once this agent has a live track record, same convention
+**5 slots** to start (lowered from an initial 10 at the user's direction
+going live, 2026-08-19: "let's set this to live. max 5 positions to
+start"; revisit once this agent has a live track record, same convention
 as the stochastic system's own `sizing.max_positions` history). If the
 breaker tripped or `trend_intact` came back `false` in step 2, treat slots
 as unavailable regardless of the actual count, same as the stochastic
