@@ -38,6 +38,19 @@
     "stop_order_id": null,
     "stop_price": 22.61
   },
+  "EXEL": {
+    "entry_d": 20.745879444311186,
+    "entry_k": 32.35178866683872,
+    "entry_order_id": "paper",
+    "entry_prev_d": 11.478811698170347,
+    "entry_prev_k": 20.357255497892627,
+    "entry_price": 53.76,
+    "entry_time": "2026-08-20T00:00:00Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 51.269999999999996
+  },
   "LAUR": {
     "entry_d": 20.01751032363632,
     "entry_k": 23.591923485653613,
