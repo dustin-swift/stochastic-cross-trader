@@ -948,3 +948,4 @@
 {"event": "stop_placed", "order_id": "6a886f13-ef35-43b1-a069-db0540d61bbf", "stop_price": 99.72, "symbol": "ORKA", "timestamp": "2026-08-21T15:30:34.696794+00:00"}
 {"event": "entry_executed", "fill_price": 46.5143, "order_id": "6a886f27-8685-4c23-832c-9d6a4e2b962e", "qty": 2, "symbol": "SHOO", "timestamp": "2026-08-21T15:31:06.857504+00:00"}
 {"event": "stop_placed", "order_id": "6a886f32-828f-4d7b-b1ea-d5e155959beb", "stop_price": 43.75, "symbol": "SHOO", "timestamp": "2026-08-21T15:31:06.857651+00:00"}
+{"candidates_checked": 449, "circuit_breaker_tripped": false, "cycle_gap_minutes": 59.69, "entries_proposed": 8, "entries_rejected_broker": {"BBVA": "sell-only instrument"}, "entries_taken": 7, "event": "cycle_summary", "exits_symbols": ["MAC"], "exits_taken": 1, "market_trend_intact": true, "slots_remaining": 1, "stop_outs_reconciled": 0, "timestamp": "2026-08-21T15:31:33.681994+00:00"}
