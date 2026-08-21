@@ -59,3 +59,4 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-21T19:12:08.486420+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "NAT", "timestamp": "2026-08-21T19:12:08.488717+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-21T19:12:08.490813+00:00"}
+{"circuit_breaker_tripped": false, "cycle_gap_minutes": 61.46, "eligible_for_entry": 4, "eligible_symbols": ["FRO", "IMVT", "NAT", "OKE"], "entries_proposed": 0, "entries_taken": 0, "event": "ma_cycle_summary", "exits_taken": 0, "live": true, "open_positions": 0, "partials_taken": 0, "position_updates": 0, "slots_free": 5, "stale_cycle": false, "stop_outs_found": 0, "timestamp": "2026-08-21T19:12:25.268981+00:00", "trend_intact": true, "watchlist_total": 54}
