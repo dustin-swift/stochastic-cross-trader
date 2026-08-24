@@ -12,20 +12,6 @@
     "stop_order_id": "6a8c6f85-d90c-4208-aa5f-931b82cf89f5",
     "stop_price": 40.05
   },
-  "AVLV": {
-    "entry_d": null,
-    "entry_k": null,
-    "entry_order_id": "6a85d9f4-e8ee-4f57-8275-0b51549b4691",
-    "entry_prev_d": null,
-    "entry_prev_k": null,
-    "entry_price": 94.9099,
-    "entry_time": "2026-08-19T16:29:40.729Z",
-    "qty": 1.0,
-    "reconstructed_note": "Reconstructed 2026-08-19 from broker order records after sync_state.sh push failed on this cycle (merge-tree bare-tree bug); entry_k/d unrecoverable, stochastic_state defaults to NORMAL pending next signal_check.",
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a85da15-10ac-4bc9-80c9-41733065c7d6",
-    "stop_price": 93.59
-  },
   "DLO": {
     "entry_d": null,
     "entry_k": null,
@@ -78,32 +64,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a87199f-b261-418e-a97d-28905d9ae138",
     "stop_price": 30.16
-  },
-  "HOMB": {
-    "entry_d": 30.094146155926826,
-    "entry_k": 36.507627393703714,
-    "entry_order_id": "6a8c6fa6-92b9-4afa-bb5c-2d8acb21031e",
-    "entry_prev_d": 22.15830771025719,
-    "entry_prev_k": 30.54356348624633,
-    "entry_price": 30.2399,
-    "entry_time": "2026-08-24T16:21:58.509Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8c6faf-aa06-4e70-bd8c-2287f745c7c5",
-    "stop_price": 29.47
-  },
-  "PGNY": {
-    "entry_d": 25.849403122130525,
-    "entry_k": 26.30853994490371,
-    "entry_order_id": "6a8c6fb9-d8a0-468d-94f0-fd1c8fbfdeb0",
-    "entry_prev_d": 20.9066663444655,
-    "entry_prev_k": 29.201101928374797,
-    "entry_price": 25.3899,
-    "entry_time": "2026-08-24T16:22:17.883Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8c6fc2-ec4e-4b03-b27f-9c2597f65499",
-    "stop_price": 23.99
   },
   "PVAL": {
     "entry_d": 22.468522762640493,
