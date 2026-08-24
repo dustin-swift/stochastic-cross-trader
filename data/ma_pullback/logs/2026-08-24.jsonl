@@ -28,3 +28,6 @@
 {"account_value": 2251.2928, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.37, "timestamp": "2026-08-24T14:12:41.211440+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"account_value": 2252.1573, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.37, "timestamp": "2026-08-24T15:10:57.064055+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-24T15:12:14.081423+00:00", "trend_intact": null}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-24T15:14:51.666543+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-24T15:14:51.668702+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-24T15:14:51.670621+00:00"}
