@@ -91,6 +91,19 @@
     "stop_order_id": "6a886f32-828f-4d7b-b1ea-d5e155959beb",
     "stop_price": 43.75
   },
+  "TAL": {
+    "entry_d": 28.988951427975746,
+    "entry_k": 41.951219512195024,
+    "entry_order_id": "6a8c7cf8-1b8f-4e9a-9acb-0411846e5b15",
+    "entry_prev_d": 19.88326037106519,
+    "entry_prev_k": 25.99124452782983,
+    "entry_price": 11.3987,
+    "entry_time": "2026-08-24T17:18:48.761Z",
+    "qty": 9,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a8c7d0e-f42c-4e37-ba6d-83e7ec3e42b7",
+    "stop_price": 10.74
+  },
   "USB": {
     "entry_d": 35.40147400563248,
     "entry_k": 42.816702052370886,
