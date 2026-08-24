@@ -1,30 +1,4 @@
 {
-  "AAL": {
-    "entry_d": 27.843439477047784,
-    "entry_k": 43.69219726069912,
-    "entry_order_id": "6a887aed-8011-484c-b4e8-4c82490ee859",
-    "entry_prev_d": 16.968450156343124,
-    "entry_prev_k": 28.08810438387903,
-    "entry_price": 13.7158,
-    "entry_time": "2026-08-21T16:21:02.144Z",
-    "qty": 7,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a887b0a-c2d5-475e-956c-93cc2616274a",
-    "stop_price": 12.65
-  },
-  "ARKG": {
-    "entry_d": 20.402858999350332,
-    "entry_k": 42.42550821498197,
-    "entry_order_id": "6a85c8bc-5dfd-4af3-a639-222cae4ed00c",
-    "entry_prev_d": 10.274250440917209,
-    "entry_prev_k": 10.846560846560962,
-    "entry_price": 46.5783,
-    "entry_time": "2026-08-19T15:16:12.254Z",
-    "qty": 2.0,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a85c8d4-f972-42d9-ba52-d36fa6fb0a97",
-    "stop_price": 44.25
-  },
   "AVLV": {
     "entry_d": null,
     "entry_k": null,
@@ -39,19 +13,6 @@
     "stop_order_id": "6a85da15-10ac-4bc9-80c9-41733065c7d6",
     "stop_price": 93.59
   },
-  "AXGN": {
-    "entry_d": 26.814361252407547,
-    "entry_k": 41.08803463654199,
-    "entry_order_id": "6a887aef-3087-4310-9cb8-5a896e3744e6",
-    "entry_prev_d": 15.682247050172904,
-    "entry_prev_k": 24.76740455566245,
-    "entry_price": 49.0199,
-    "entry_time": "2026-08-21T16:21:04.114Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a887b0d-78fb-4056-8285-557ee2320fe3",
-    "stop_price": 45.22
-  },
   "DLO": {
     "entry_d": null,
     "entry_k": null,
@@ -65,19 +26,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a85dad3-8d6e-4731-972d-8cd3f9821c0e",
     "stop_price": 13.25
-  },
-  "EZU": {
-    "entry_d": 23.31529464813138,
-    "entry_k": 38.751629339969284,
-    "entry_order_id": "6a886eac-45e3-42e9-856d-da5bc3e53e51",
-    "entry_prev_d": 18.13840946239908,
-    "entry_prev_k": 14.27468242017053,
-    "entry_price": 71.445,
-    "entry_time": "2026-08-21T15:28:44.747Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a886ec0-59e8-4e0a-b179-ab9282528ca5",
-    "stop_price": 70.03
   },
   "FCX": {
     "entry_d": 21.797796968098208,
