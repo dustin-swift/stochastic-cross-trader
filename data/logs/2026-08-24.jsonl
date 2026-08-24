@@ -504,3 +504,4 @@
 {"event": "exit_executed", "order_id": "6a8c62a4-ff5a-43a0-bdca-1ca4c6f3b4d5", "qty": 3, "symbol": "IBN", "timestamp": "2026-08-24T15:27:13.198524+00:00"}
 {"event": "exit_executed", "order_id": "6a8c62a6-e942-4f6a-aaa8-95e0bf7b66b7", "qty": 2, "symbol": "OII", "timestamp": "2026-08-24T15:27:13.198667+00:00"}
 {"event": "exit_executed", "order_id": "6a8c62a6-5fbe-4d0c-8e85-67e290af3bd3", "qty": 1, "symbol": "ORKA", "timestamp": "2026-08-24T15:27:13.198705+00:00"}
+{"candidates_checked": 0, "candidates_total": 466, "circuit_breaker_tripped": false, "event": "entries_skipped", "max_positions": 15, "open_positions": 10, "open_slots": 5, "reason": "market_trend_not_intact", "timestamp": "2026-08-24T15:27:34.417086+00:00"}
