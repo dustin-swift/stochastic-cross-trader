@@ -126,3 +126,4 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-25T19:12:57.841447+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-25T19:12:57.843735+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-25T19:12:57.846233+00:00"}
+{"corrected": true, "event": "stale_checkout_detected", "local_head": "201385eef978a31ff6db6184ca253bf6c6dfe0b5", "note": "Checkout was 1 commit behind origin/main (missed the live:true / max_positions:5 flip, commit ce6e690). Corrected via git reset --hard origin/main before entries evaluation. No exits/entries fired this cycle either way, so no order-placement impact.", "origin_head": "ce6e690d07f926e2cc5cbf2e9e412307c936166a", "timestamp": "2026-08-25T19:14:40.253348+00:00"}
