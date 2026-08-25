@@ -22,5 +22,29 @@
     "stop_order_id": null,
     "stop_price": 35.64,
     "symbol": "RDN"
+  },
+  {
+    "closed_at": "2026-08-25T20:22:23.487723+00:00",
+    "entry_d": 20.01751032363632,
+    "entry_k": 23.591923485653613,
+    "entry_order_id": "paper",
+    "entry_prev_d": 23.06678354726078,
+    "entry_prev_k": 16.93234148069436,
+    "entry_price": 37.83,
+    "entry_time": "2026-08-18T00:00:00Z",
+    "exit_d": 54.19626123756584,
+    "exit_k": 43.97306397306415,
+    "exit_order_id": "paper",
+    "exit_prev_d": 56.95516933696569,
+    "exit_prev_k": 60.02027210301668,
+    "exit_price": 37.31,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-24T00:00:00Z",
+    "pnl_pct": -1.3745704467353792,
+    "pnl_usd": -1.559999999999988,
+    "qty": 3,
+    "stop_order_id": null,
+    "stop_price": 35.82,
+    "symbol": "LAUR"
   }
 ]

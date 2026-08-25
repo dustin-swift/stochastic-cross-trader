@@ -77,19 +77,6 @@
     "stop_order_id": null,
     "stop_price": 16.43
   },
-  "LAUR": {
-    "entry_d": 20.01751032363632,
-    "entry_k": 23.591923485653613,
-    "entry_order_id": "paper",
-    "entry_prev_d": 23.06678354726078,
-    "entry_prev_k": 16.93234148069436,
-    "entry_price": 37.83,
-    "entry_time": "2026-08-18T00:00:00Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": null,
-    "stop_price": 35.82
-  },
   "SBRA": {
     "entry_d": 24.410363681769777,
     "entry_k": 31.347730952307355,
