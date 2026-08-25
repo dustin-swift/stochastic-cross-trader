@@ -114,3 +114,6 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-25T17:17:04.824674+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-25T17:17:04.827004+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-25T17:17:04.829070+00:00"}
+{"account_value": 2251.015, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 7.31, "timestamp": "2026-08-25T18:10:19.071030+00:00", "tripped": false, "unrealized_pnl_today": 1.2542}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-25T18:10:42.287682+00:00", "trend_intact": false}
+{"action": null, "bars_held": 4, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T18:12:35.013166+00:00"}
