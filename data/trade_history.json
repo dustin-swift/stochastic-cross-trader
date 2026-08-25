@@ -2270,5 +2270,29 @@
     "stop_order_id": "6a8c6f85-d90c-4208-aa5f-931b82cf89f5",
     "stop_price": 40.05,
     "symbol": "AAP"
+  },
+  {
+    "closed_at": "2026-08-25T13:41:56.664150+00:00",
+    "entry_d": 32.92202414562672,
+    "entry_k": 38.613526570048414,
+    "entry_order_id": "6a8c6fde-d3e8-456b-a945-d5c26784e6ba",
+    "entry_prev_d": 26.320523929482857,
+    "entry_prev_k": 34.46969696969705,
+    "entry_price": 14.1287,
+    "entry_time": "2026-08-24T16:22:54.514Z",
+    "exit_d": 41.82867242576116,
+    "exit_k": 41.68403501458968,
+    "exit_order_id": "6a8d9b98-9677-49f5-a289-7decd0d7ac88",
+    "exit_prev_d": 41.30400661216652,
+    "exit_prev_k": 42.99142132267062,
+    "exit_price": 13.9701,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-25T13:41:44.957Z",
+    "pnl_pct": -1.1225378131038188,
+    "pnl_usd": -1.110199999999999,
+    "qty": 7,
+    "stop_order_id": "6a8c6fe7-39c0-4abc-8bab-4ae0b038b0bb",
+    "stop_price": 13.68,
+    "symbol": "VLY"
   }
 ]

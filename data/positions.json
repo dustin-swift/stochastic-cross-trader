@@ -77,18 +77,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a8c6fd4-d4cb-4a45-870f-f036b82b77e4",
     "stop_price": 60.39
-  },
-  "VLY": {
-    "entry_d": 32.92202414562672,
-    "entry_k": 38.613526570048414,
-    "entry_order_id": "6a8c6fde-d3e8-456b-a945-d5c26784e6ba",
-    "entry_prev_d": 26.320523929482857,
-    "entry_prev_k": 34.46969696969705,
-    "entry_price": 14.1287,
-    "entry_time": "2026-08-24T16:22:54.514Z",
-    "qty": 7,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8c6fe7-39c0-4abc-8bab-4ae0b038b0bb",
-    "stop_price": 13.68
   }
 }
