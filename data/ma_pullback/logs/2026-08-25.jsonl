@@ -93,3 +93,6 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 2, "needs_cancel": false, "order_id": "6a8da354-3f67-4fe0-ae55-690096adb787", "order_state": "filled", "symbol": "FRO", "timestamp": "2026-08-25T14:14:53.641492+00:00"}
 {"breakout_level": 43.89, "entry_price": 42.9429, "event": "ma_entry_executed", "order_id": "6a8da354-3f67-4fe0-ae55-690096adb787", "shares": 2, "stop_price": 42.71, "symbol": "FRO", "target_1": 46.09631735714285, "timestamp": "2026-08-25T14:15:12.618865+00:00"}
 {"event": "ma_stop_placed", "order_id": "6a8da366-b2ee-48c0-b951-df3725add67c", "quantity": 2, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T14:15:12.618978+00:00"}
+{"account_value": 2246.865, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.11, "timestamp": "2026-08-25T15:13:44.515090+00:00", "tripped": false, "unrealized_pnl_today": 0.0342}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-25T15:14:05.167893+00:00", "trend_intact": false}
+{"action": null, "bars_held": 1, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T15:16:35.770948+00:00"}
