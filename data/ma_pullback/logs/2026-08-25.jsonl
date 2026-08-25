@@ -96,3 +96,6 @@
 {"account_value": 2246.865, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.11, "timestamp": "2026-08-25T15:13:44.515090+00:00", "tripped": false, "unrealized_pnl_today": 0.0342}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-25T15:14:05.167893+00:00", "trend_intact": false}
 {"action": null, "bars_held": 1, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T15:16:35.770948+00:00"}
+{"account_value": 2249.6494, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 6.39, "timestamp": "2026-08-25T16:14:58.002080+00:00", "tripped": false, "unrealized_pnl_today": 1.06}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-25T16:15:13.816942+00:00", "trend_intact": true}
+{"action": null, "bars_held": 2, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T16:16:48.387024+00:00"}
