@@ -2294,5 +2294,29 @@
     "stop_order_id": "6a8c6fe7-39c0-4abc-8bab-4ae0b038b0bb",
     "stop_price": 13.68,
     "symbol": "VLY"
+  },
+  {
+    "closed_at": "2026-08-25T16:11:01.814474+00:00",
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a85daae-663f-4ae2-8ec3-c0bf8715b4bf",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 14.0487,
+    "entry_time": "2026-08-19T16:32:47.044Z",
+    "exit_d": 77.99390669912576,
+    "exit_k": 74.65285322509423,
+    "exit_order_id": "6a8dbe8a-6117-477d-a3cf-d797b47a511f",
+    "exit_prev_d": null,
+    "exit_prev_k": 78.90217571831919,
+    "exit_price": 15.1201,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-25T16:10:51.136Z",
+    "pnl_pct": 7.626328414728767,
+    "pnl_usd": 7.499800000000004,
+    "qty": 7.0,
+    "stop_order_id": "6a85dad3-8d6e-4731-972d-8cd3f9821c0e",
+    "stop_price": 13.25,
+    "symbol": "DLO"
   }
 ]
