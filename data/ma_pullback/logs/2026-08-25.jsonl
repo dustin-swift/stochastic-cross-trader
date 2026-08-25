@@ -120,3 +120,9 @@
 {"account_value": 2252.949, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 7.61, "timestamp": "2026-08-25T19:10:54.136238+00:00", "tripped": false, "unrealized_pnl_today": 1.76}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-25T19:11:21.066755+00:00", "trend_intact": true}
 {"action": null, "bars_held": 5, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 42.71, "symbol": "FRO", "timestamp": "2026-08-25T19:11:55.059200+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "CMBT", "timestamp": "2026-08-25T19:12:57.833912+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-25T19:12:57.836536+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IOVA", "timestamp": "2026-08-25T19:12:57.838963+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-25T19:12:57.841447+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-25T19:12:57.843735+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-25T19:12:57.846233+00:00"}
