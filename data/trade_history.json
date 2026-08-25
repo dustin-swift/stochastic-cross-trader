@@ -2342,5 +2342,29 @@
     "stop_order_id": "6a8c6f9c-ae69-47dd-b763-8f60b8d3837b",
     "stop_price": 40.85,
     "symbol": "EWTX"
+  },
+  {
+    "closed_at": "2026-08-25T19:09:15.548208+00:00",
+    "entry_d": 35.40147400563248,
+    "entry_k": 42.816702052370886,
+    "entry_order_id": "6a8c6fcb-be62-46bc-991d-fbee23e1f881",
+    "entry_prev_d": 27.5384872682459,
+    "entry_prev_k": 36.3628995726217,
+    "entry_price": 62.1274,
+    "entry_time": "2026-08-24T16:22:35.945Z",
+    "exit_d": 63.733183856502365,
+    "exit_k": 63.01763272988992,
+    "exit_order_id": "6a8de84b-f728-4a2b-81bc-cc05a9a68cfa",
+    "exit_prev_d": 63.953016294820124,
+    "exit_prev_k": 66.59746443005055,
+    "exit_price": 62.2726,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-25T19:08:59.807Z",
+    "pnl_pct": 0.2337133052405127,
+    "pnl_usd": 0.2903999999999911,
+    "qty": 2,
+    "stop_order_id": "6a8c6fd4-d4cb-4a45-870f-f036b82b77e4",
+    "stop_price": 60.39,
+    "symbol": "USB"
   }
 ]

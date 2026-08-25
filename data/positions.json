@@ -63,18 +63,5 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8c7d0e-f42c-4e37-ba6d-83e7ec3e42b7",
     "stop_price": 10.74
-  },
-  "USB": {
-    "entry_d": 35.40147400563248,
-    "entry_k": 42.816702052370886,
-    "entry_order_id": "6a8c6fcb-be62-46bc-991d-fbee23e1f881",
-    "entry_prev_d": 27.5384872682459,
-    "entry_prev_k": 36.3628995726217,
-    "entry_price": 62.1274,
-    "entry_time": "2026-08-24T16:22:35.945Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8c6fd4-d4cb-4a45-870f-f036b82b77e4",
-    "stop_price": 60.39
   }
 }
