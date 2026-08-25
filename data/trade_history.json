@@ -2318,5 +2318,29 @@
     "stop_order_id": "6a85dad3-8d6e-4731-972d-8cd3f9821c0e",
     "stop_price": 13.25,
     "symbol": "DLO"
+  },
+  {
+    "closed_at": "2026-08-25T17:07:00.793786+00:00",
+    "entry_d": 31.679023738435365,
+    "entry_k": 45.51190502347322,
+    "entry_order_id": "6a8c6f93-2ab2-4c51-bd35-dd0139d3b187",
+    "entry_prev_d": 21.65242165242165,
+    "entry_prev_k": 25.735992402659107,
+    "entry_price": 44.8399,
+    "entry_time": "2026-08-24T16:21:39.577Z",
+    "exit_d": 76.76619420584687,
+    "exit_k": 77.39912445278308,
+    "exit_order_id": "6a8dcbaa-1229-4d12-9e7c-fc071bcc4977",
+    "exit_prev_d": 80.7248216500963,
+    "exit_prev_k": 71.42172332283957,
+    "exit_price": 45.3,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-25T17:06:50.974Z",
+    "pnl_pct": 1.0260950626562515,
+    "pnl_usd": 0.9201999999999941,
+    "qty": 2,
+    "stop_order_id": "6a8c6f9c-ae69-47dd-b763-8f60b8d3837b",
+    "stop_price": 40.85,
+    "symbol": "EWTX"
   }
 ]

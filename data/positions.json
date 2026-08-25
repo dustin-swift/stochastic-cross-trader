@@ -1,17 +1,4 @@
 {
-  "EWTX": {
-    "entry_d": 31.679023738435365,
-    "entry_k": 45.51190502347322,
-    "entry_order_id": "6a8c6f93-2ab2-4c51-bd35-dd0139d3b187",
-    "entry_prev_d": 21.65242165242165,
-    "entry_prev_k": 25.735992402659107,
-    "entry_price": 44.8399,
-    "entry_time": "2026-08-24T16:21:39.577Z",
-    "qty": 2,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a8c6f9c-ae69-47dd-b763-8f60b8d3837b",
-    "stop_price": 40.85
-  },
   "FCX": {
     "entry_d": 21.797796968098208,
     "entry_k": 42.81394616396674,
@@ -47,7 +34,7 @@
     "entry_price": 11.3987,
     "entry_time": "2026-08-24T17:18:48.761Z",
     "qty": 9,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8c7d0e-f42c-4e37-ba6d-83e7ec3e42b7",
     "stop_price": 10.74
   },
