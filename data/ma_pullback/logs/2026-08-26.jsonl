@@ -68,3 +68,12 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-26T18:10:18.879297+00:00"}
 {"account_value": 2256.325, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 7.09, "timestamp": "2026-08-26T19:11:03.002718+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-26T19:11:35.678235+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-26T19:12:28.308182+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "CMBT", "timestamp": "2026-08-26T19:12:28.310566+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-26T19:12:28.312623+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-26T19:12:28.314941+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IOVA", "timestamp": "2026-08-26T19:12:28.316993+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-26T19:12:28.319173+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-26T19:12:28.321234+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-26T19:12:28.323397+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-26T19:12:28.325192+00:00"}
