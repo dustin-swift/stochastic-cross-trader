@@ -203,8 +203,19 @@ def close_trade_record(
     them from -- a stop-out found in reconciliation has no fresh oscillator
     reading at all (the resting stop fired on its own between cycles), so
     these stay None for that exit_reason, same as an earnings-forced exit.
+
+    Quantity key fallback (bug fixed 2026-08-21, caught live on the MA
+    Pullback agent's first-ever stop-out): this function is shared verbatim
+    by both trading systems (see README's "What's reused verbatim" section),
+    but the stochastic system's positions.json uses "qty" while the MA
+    Pullback agent's uses "shares" (see lib.ma_signals.evaluate_entry) --
+    hardcoding "qty" raised a bare KeyError on every MA exit. Accepts either
+    key, preferring "qty" when both are somehow present, and still raises
+    (clearly, not silently) if neither is.
     """
-    qty = position["qty"]
+    qty = position.get("qty", position.get("shares"))
+    if qty is None:
+        raise KeyError(f"position for {symbol!r} has neither 'qty' nor 'shares': {position!r}")
     entry_price = position["entry_price"]
     pnl_usd = None
     pnl_pct = None

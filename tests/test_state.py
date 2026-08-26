@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from lib.state import StateStore, close_trade_record, has_open_slot, open_slot_count
 
 
@@ -190,6 +192,63 @@ def test_close_trade_record_stochastic_fields_default_to_none():
     assert record["exit_d"] is None
     assert record["exit_prev_k"] is None
     assert record["exit_prev_d"] is None
+
+
+def test_close_trade_record_accepts_shares_key_for_ma_pullback_positions():
+    # Bug fixed 2026-08-21, caught live on the MA Pullback agent's first
+    # stop-out: this function is shared verbatim by both trading systems,
+    # but the MA agent's positions.json uses "shares", not "qty" (see
+    # lib.ma_signals.evaluate_entry) -- hardcoding "qty" raised a bare
+    # KeyError. The output record still normalizes to "qty" either way,
+    # since that's the field name every downstream consumer (the dashboard,
+    # trade_history.json readers) expects.
+    position = {
+        "entry_price": 44.55,
+        "shares": 2,
+        "stop_price": 43.07,
+        "target_1": 46.76,
+        "breakout_level": 43.89,
+    }
+    record = close_trade_record(
+        symbol="FRO",
+        position=position,
+        exit_price=43.0,
+        exit_time="2026-08-21T20:00:00Z",
+        exit_order_id="exit-1",
+        exit_reason="stop_hit",
+        closed_at="2026-08-21T20:00:05Z",
+    )
+    assert record["qty"] == 2
+    assert round(record["pnl_usd"], 2) == -3.10
+    assert "shares" not in record
+
+
+def test_close_trade_record_prefers_qty_when_both_present():
+    position = {"entry_price": 100.0, "qty": 5, "shares": 999}
+    record = close_trade_record(
+        symbol="AAPL",
+        position=position,
+        exit_price=110.0,
+        exit_time="2026-07-30T15:00:00Z",
+        exit_order_id="exit-1",
+        exit_reason="signal_exit",
+        closed_at="2026-07-30T15:00:05Z",
+    )
+    assert record["qty"] == 5
+
+
+def test_close_trade_record_neither_qty_nor_shares_raises():
+    position = {"entry_price": 100.0}
+    with pytest.raises(KeyError):
+        close_trade_record(
+            symbol="AAPL",
+            position=position,
+            exit_price=110.0,
+            exit_time="2026-07-30T15:00:00Z",
+            exit_order_id="exit-1",
+            exit_reason="signal_exit",
+            closed_at="2026-07-30T15:00:05Z",
+        )
 
 
 def test_has_open_slot():
