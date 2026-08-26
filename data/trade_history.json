@@ -2366,5 +2366,29 @@
     "stop_order_id": "6a8c6fd4-d4cb-4a45-870f-f036b82b77e4",
     "stop_price": 60.39,
     "symbol": "USB"
+  },
+  {
+    "closed_at": "2026-08-26T16:10:56.911327+00:00",
+    "entry_d": 21.30745203034374,
+    "entry_k": 22.62382864792518,
+    "entry_order_id": "6a8f065e-6ec5-44b1-8423-0b7bef13f59c",
+    "entry_prev_d": 18.674698795180852,
+    "entry_prev_k": 23.69477911646599,
+    "entry_price": 44.2299,
+    "entry_time": "2026-08-26T15:29:34.303Z",
+    "exit_d": 21.151271753681517,
+    "exit_k": 17.135207496653383,
+    "exit_order_id": "6a8f1003-64e2-4737-82e5-75db827ea0b5",
+    "exit_prev_d": 21.30745203034374,
+    "exit_prev_k": 22.62382864792518,
+    "exit_price": 44.1071,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-26T16:10:43.415Z",
+    "pnl_pct": -0.27764023884294664,
+    "pnl_usd": -0.24559999999999604,
+    "qty": 2,
+    "stop_order_id": "6a8f066c-c514-456c-bc81-ea34f1c39455",
+    "stop_price": 40.82,
+    "symbol": "RHI"
   }
 ]

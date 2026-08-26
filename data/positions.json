@@ -155,19 +155,6 @@
     "stop_order_id": "6a8dccc8-a904-4217-9e5c-09df7baba07b",
     "stop_price": 17.76
   },
-  "RHI": {
-    "entry_d": 21.30745203034374,
-    "entry_k": 22.62382864792518,
-    "entry_order_id": "6a8f065e-6ec5-44b1-8423-0b7bef13f59c",
-    "entry_prev_d": 18.674698795180852,
-    "entry_prev_k": 23.69477911646599,
-    "entry_price": 44.2299,
-    "entry_time": "2026-08-26T15:29:34.303Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8f066c-c514-456c-bc81-ea34f1c39455",
-    "stop_price": 40.82
-  },
   "SXC": {
     "entry_d": 22.384114420166867,
     "entry_k": 37.788385043755035,
