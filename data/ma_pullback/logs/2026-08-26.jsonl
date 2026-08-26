@@ -31,3 +31,12 @@
 {"event": "bug_found", "note": "lib.state.close_trade_record expects position[\"qty\"] but ma_pullback positions.json schema uses \"shares\" per hourly-ma-signal-check.md section 5 step 6 -- KeyError on first-ever MA pullback stop-out reconciliation. Worked around this cycle by passing a translated qty field into record_trade_close.py; underlying script/schema mismatch needs a real fix.", "timestamp": "2026-08-26T14:11:29.198768+00:00"}
 {"account_value": 2252.5547, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -2.01, "timestamp": "2026-08-26T14:11:32.658592+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-26T14:11:49.146037+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-26T14:12:51.841427+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "CMBT", "timestamp": "2026-08-26T14:12:51.844641+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-26T14:12:51.847193+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-26T14:12:51.849961+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IOVA", "timestamp": "2026-08-26T14:12:51.859662+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-26T14:12:51.862504+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-26T14:12:51.864309+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-26T14:12:51.866111+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-26T14:12:51.867815+00:00"}
