@@ -2414,5 +2414,29 @@
     "stop_order_id": "6a85c9ba-4533-4b3d-8310-c2a021cc3ba3",
     "stop_price": 53.8,
     "symbol": "PVAL"
+  },
+  {
+    "closed_at": "2026-08-26T18:09:24.693584+00:00",
+    "entry_d": 21.797796968098208,
+    "entry_k": 42.81394616396674,
+    "entry_order_id": "6a85c967-112f-4dad-9a99-9d74683068b5",
+    "entry_prev_d": 8.320132373760032,
+    "entry_prev_k": 13.68518442650931,
+    "entry_price": 69.2275,
+    "entry_time": "2026-08-19T15:19:03.69Z",
+    "exit_d": 75.26978850042379,
+    "exit_k": 67.52215923495287,
+    "exit_order_id": "6a8f2bcb-b9e7-44ed-8e02-30703e229d7b",
+    "exit_prev_d": null,
+    "exit_prev_k": 73.43080939947775,
+    "exit_price": 78.7601,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-26T18:09:15.31Z",
+    "pnl_pct": 13.769961359286388,
+    "pnl_usd": 9.532599999999988,
+    "qty": 1.0,
+    "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
+    "stop_price": 64.77,
+    "symbol": "FCX"
   }
 ]

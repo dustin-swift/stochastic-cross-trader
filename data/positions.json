@@ -38,19 +38,6 @@
     "stop_order_id": "6a8f05f0-3d91-4fc7-9606-bfb0ce510d65",
     "stop_price": 130.58
   },
-  "FCX": {
-    "entry_d": 21.797796968098208,
-    "entry_k": 42.81394616396674,
-    "entry_order_id": "6a85c967-112f-4dad-9a99-9d74683068b5",
-    "entry_prev_d": 8.320132373760032,
-    "entry_prev_k": 13.68518442650931,
-    "entry_price": 69.2275,
-    "entry_time": "2026-08-19T15:19:03.69Z",
-    "qty": 1.0,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
-    "stop_price": 64.77
-  },
   "FNDA": {
     "entry_d": 28.600201409868607,
     "entry_k": 45.92145015105684,
@@ -86,7 +73,7 @@
     "entry_price": 22.125,
     "entry_time": "2026-08-26T14:31:41.733Z",
     "qty": 5.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8ef8e5-006f-4e26-9e6a-977876cf7a53",
     "stop_price": 21.47
   },
@@ -112,7 +99,7 @@
     "entry_price": 64.0043,
     "entry_time": "2026-08-26T15:28:43.547Z",
     "qty": 2,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8f063a-8241-4efd-a157-3526fb57ad37",
     "stop_price": 61.0
   },
