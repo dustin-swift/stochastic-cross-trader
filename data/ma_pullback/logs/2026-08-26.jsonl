@@ -55,3 +55,5 @@
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-26T16:17:10.388629+00:00", "trend_intact": false}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-26T17:09:05.233106+00:00", "trend_intact": false}
 {"account_value": 2251.76, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -2.44, "timestamp": "2026-08-26T17:09:05.874103+00:00", "tripped": false, "unrealized_pnl_today": 0}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-26T18:09:24.796775+00:00", "trend_intact": true}
+{"account_value": 2253.5047, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -2.44, "timestamp": "2026-08-26T18:09:25.037520+00:00", "tripped": false, "unrealized_pnl_today": 0}
