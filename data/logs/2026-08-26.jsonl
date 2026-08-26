@@ -993,3 +993,19 @@
 {"d": 18.878112959891887, "event": "signal_check", "k": 32.78428888184973, "kind": "entry", "pending": {"k_at_cross": 32.78428888184973}, "prev_d": 12.61218456340398, "prev_k": 13.377679231337629, "signal": false, "symbol": "ZGN", "timestamp": "2026-08-26T15:25:21.831063+00:00"}
 {"d": 18.416139850008282, "event": "signal_check", "k": 14.141995150284655, "kind": "entry", "pending": null, "prev_d": 21.52183526810384, "prev_k": 19.855072463768007, "signal": false, "symbol": "ZIM", "timestamp": "2026-08-26T15:25:21.833414+00:00"}
 {"d": 14.98082832408433, "event": "signal_check", "k": 28.323699421965504, "kind": "entry", "pending": {"k_at_cross": 28.323699421965504}, "prev_d": 8.61121179097979, "prev_k": 10.404624277457017, "signal": false, "symbol": "ZION", "timestamp": "2026-08-26T15:25:21.835768+00:00"}
+{"event": "entry_executed", "order_id": "6a8f05a7-cd25-461a-8213-163124fed1b5", "qty": 6, "symbol": "AMRX", "timestamp": "2026-08-26T15:30:18.072757+00:00"}
+{"event": "stop_placed", "order_id": "6a8f05bb-01b7-46da-bcfe-e28b545394bc", "symbol": "AMRX", "timestamp": "2026-08-26T15:30:18.072888+00:00"}
+{"event": "entry_executed", "order_id": "6a8f05c7-411d-4dc0-abc7-16ce6fd78315", "qty": 9, "symbol": "APPS", "timestamp": "2026-08-26T15:30:18.072927+00:00"}
+{"event": "stop_placed", "order_id": "6a8f05d6-f044-4def-8cad-afa3e54176fc", "symbol": "APPS", "timestamp": "2026-08-26T15:30:18.072953+00:00"}
+{"event": "entry_executed", "order_id": "6a8f05e0-a83e-4c70-97cd-93ec0d23b1b9", "qty": 1, "symbol": "DD", "timestamp": "2026-08-26T15:30:18.072975+00:00"}
+{"event": "stop_placed", "order_id": "6a8f05f0-3d91-4fc7-9606-bfb0ce510d65", "symbol": "DD", "timestamp": "2026-08-26T15:30:18.072995+00:00"}
+{"event": "entry_executed", "order_id": "6a8f05fa-d8b8-4a74-8221-11129269f43e", "qty": 3, "symbol": "FNDA", "timestamp": "2026-08-26T15:30:18.073015+00:00"}
+{"event": "stop_placed", "order_id": "6a8f0609-a292-493c-844c-1717ebfbef4d", "symbol": "FNDA", "timestamp": "2026-08-26T15:30:18.073040+00:00"}
+{"event": "entry_executed", "order_id": "6a8f0613-4f30-4b2c-8a5c-f47213379f64", "qty": 1, "symbol": "IJH", "timestamp": "2026-08-26T15:30:18.073066+00:00"}
+{"event": "stop_placed", "order_id": "6a8f0621-fe4b-4343-9bba-28a1333c4ba3", "symbol": "IJH", "timestamp": "2026-08-26T15:30:18.073085+00:00"}
+{"event": "entry_executed", "order_id": "6a8f062b-e5bc-41f3-a259-295c182d6e54", "qty": 2, "symbol": "MLI", "timestamp": "2026-08-26T15:30:18.073102+00:00"}
+{"event": "stop_placed", "order_id": "6a8f063a-8241-4efd-a157-3526fb57ad37", "symbol": "MLI", "timestamp": "2026-08-26T15:30:18.073118+00:00"}
+{"event": "entry_executed", "order_id": "6a8f0644-c2c0-43f9-900a-91ccd912a581", "qty": 2, "symbol": "OZK", "timestamp": "2026-08-26T15:30:18.073134+00:00"}
+{"event": "stop_placed", "order_id": "6a8f0654-f50e-47b7-b9c2-482c640eebdd", "symbol": "OZK", "timestamp": "2026-08-26T15:30:18.073149+00:00"}
+{"event": "entry_executed", "order_id": "6a8f065e-6ec5-44b1-8423-0b7bef13f59c", "qty": 2, "symbol": "RHI", "timestamp": "2026-08-26T15:30:18.073163+00:00"}
+{"event": "stop_placed", "order_id": "6a8f066c-c514-456c-bc81-ea34f1c39455", "symbol": "RHI", "timestamp": "2026-08-26T15:30:18.073178+00:00"}
