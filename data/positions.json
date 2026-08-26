@@ -12,6 +12,19 @@
     "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
     "stop_price": 64.77
   },
+  "KEY": {
+    "entry_d": 21.06055802155935,
+    "entry_k": 26.76315789473625,
+    "entry_order_id": "6a8ef8cd-4276-42fa-8012-e16c6e92c9f3",
+    "entry_prev_d": 18.83682096808236,
+    "entry_prev_k": 17.11403508771873,
+    "entry_price": 22.125,
+    "entry_time": "2026-08-26T14:31:41.733Z",
+    "qty": 5.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a8ef8e5-006f-4e26-9e6a-977876cf7a53",
+    "stop_price": 21.47
+  },
   "LAUR": {
     "entry_d": 22.677274064720994,
     "entry_k": 30.73515631655155,
@@ -50,6 +63,19 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a8dccc8-a904-4217-9e5c-09df7baba07b",
     "stop_price": 17.76
+  },
+  "SXC": {
+    "entry_d": 22.384114420166867,
+    "entry_k": 37.788385043755035,
+    "entry_order_id": "6a8ef8f6-18fa-4edd-9901-e3c087aa8ae1",
+    "entry_prev_d": 18.125125073394937,
+    "entry_prev_k": 17.92500070670231,
+    "entry_price": 9.7799,
+    "entry_time": "2026-08-26T14:32:22.498Z",
+    "qty": 10.0,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a8ef909-1bf8-4589-a4bb-9e4d6df5e609",
+    "stop_price": 9.07
   },
   "TAL": {
     "entry_d": 28.988951427975746,
