@@ -2390,5 +2390,29 @@
     "stop_order_id": "6a8f066c-c514-456c-bc81-ea34f1c39455",
     "stop_price": 40.82,
     "symbol": "RHI"
+  },
+  {
+    "closed_at": "2026-08-26T17:08:47.741442+00:00",
+    "entry_d": 22.468522762640493,
+    "entry_k": 38.0071725659961,
+    "entry_order_id": "6a85c9ac-629d-41b8-b7ac-1a08028cb738",
+    "entry_prev_d": 15.855614973262098,
+    "entry_prev_k": 10.574866310160711,
+    "entry_price": 54.61,
+    "entry_time": "2026-08-19T15:20:12.264Z",
+    "exit_d": 77.60922977620758,
+    "exit_k": 74.17062110313687,
+    "exit_order_id": "6a8f1d96-d84e-4ad3-a1a5-0f1ccde1d427",
+    "exit_prev_d": null,
+    "exit_prev_k": 77.68644542877672,
+    "exit_price": 54.5201,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-26T17:08:38.658Z",
+    "pnl_pct": -0.1646218641274455,
+    "pnl_usd": -0.17980000000000018,
+    "qty": 2.0,
+    "stop_order_id": "6a85c9ba-4533-4b3d-8310-c2a021cc3ba3",
+    "stop_price": 53.8,
+    "symbol": "PVAL"
   }
 ]

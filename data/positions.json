@@ -129,19 +129,6 @@
     "stop_order_id": "6a8f0654-f50e-47b7-b9c2-482c640eebdd",
     "stop_price": 47.9
   },
-  "PVAL": {
-    "entry_d": 22.468522762640493,
-    "entry_k": 38.0071725659961,
-    "entry_order_id": "6a85c9ac-629d-41b8-b7ac-1a08028cb738",
-    "entry_prev_d": 15.855614973262098,
-    "entry_prev_k": 10.574866310160711,
-    "entry_price": 54.61,
-    "entry_time": "2026-08-19T15:20:12.264Z",
-    "qty": 2.0,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a85c9ba-4533-4b3d-8310-c2a021cc3ba3",
-    "stop_price": 53.8
-  },
   "QYLD": {
     "entry_d": 20.43010752688144,
     "entry_k": 27.419354838709307,
