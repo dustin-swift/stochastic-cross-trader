@@ -1,16 +1,1 @@
-{
-  "FRO": {
-    "entry_price": 42.9429,
-    "stop_price": 42.71,
-    "target_1": 46.09631735714285,
-    "highest_close": 44.05,
-    "bars_held": 6,
-    "partial_taken": false,
-    "atr_entry": 1.4768462857142874,
-    "shares": 2,
-    "breakout_level": 43.89,
-    "entry_time": "2026-08-25T14:14:44.32Z",
-    "entry_order_id": "6a8da354-3f67-4fe0-ae55-690096adb787",
-    "stop_order_id": "6a8da366-b2ee-48c0-b951-df3725add67c"
-  }
-}
+{}

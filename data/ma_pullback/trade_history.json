@@ -1,0 +1,26 @@
+[
+  {
+    "closed_at": "2026-08-26T14:11:18.489456+00:00",
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a8da354-3f67-4fe0-ae55-690096adb787",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 42.9429,
+    "entry_time": "2026-08-25T14:14:44.32Z",
+    "exit_d": null,
+    "exit_k": null,
+    "exit_order_id": "6a8da366-b2ee-48c0-b951-df3725add67c",
+    "exit_prev_d": null,
+    "exit_prev_k": null,
+    "exit_price": 41.94,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-08-26T13:30:01.041Z",
+    "pnl_pct": -2.335426810951291,
+    "pnl_usd": -2.005800000000008,
+    "qty": 2,
+    "stop_order_id": "6a8da366-b2ee-48c0-b951-df3725add67c",
+    "stop_price": 42.71,
+    "symbol": "FRO"
+  }
+]
