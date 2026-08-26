@@ -1551,3 +1551,4 @@
 {"event": "entry_executed", "order_id": "6a8f3bfe-2cc5-4f4f-97aa-3e28f8bcbc7d", "qty": 2.0, "symbol": "NOBL", "timestamp": "2026-08-26T19:18:53.562412+00:00"}
 {"event": "stop_placed", "order_id": "6a8f3c0e-5a56-448b-85fc-4e0c1e6bba5e", "qty": 2.0, "symbol": "NOBL", "timestamp": "2026-08-26T19:18:53.562442+00:00"}
 {"event": "entries_earnings_excluded", "reason": "report_today_amc_exit_date", "symbols": ["OKTA"], "timestamp": "2026-08-26T19:18:53.562475+00:00"}
+{"candidates_checked": 444, "candidates_total": 466, "circuit_breaker_tripped": false, "entries_earnings_excluded": ["OKTA"], "entries_proposed": 4, "entries_taken": 3, "event": "cycle_summary", "exits_taken": 0, "market_trend_intact": true, "slots_remaining": 0, "stop_outs_found": 0, "timestamp": "2026-08-26T19:19:09.288387+00:00"}
