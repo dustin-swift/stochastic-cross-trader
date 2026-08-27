@@ -1,4 +1,17 @@
 {
+  "AMLX": {
+    "entry_d": 21.01540313488127,
+    "entry_k": 33.073929961089455,
+    "entry_order_id": "6a9055f5-8d48-4af5-9d3c-7bac6f575a78",
+    "entry_prev_d": 12.797826437103177,
+    "entry_prev_k": 19.455252918287936,
+    "entry_price": 37.6499,
+    "entry_time": "2026-08-27T15:21:25.743Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a905609-bb2e-4f74-8610-8b7ca43b2f37",
+    "stop_price": 35.83
+  },
   "APPS": {
     "entry_d": 31.630288903016183,
     "entry_k": 52.56410256410255,
