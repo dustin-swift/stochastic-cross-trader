@@ -69,3 +69,5 @@
 {"event": "stale_checkout_detected", "note": "local main was behind origin/main at routine start; reset --hard + clean -fd applied before proceeding", "origin_main": "201385e..872789f (fast-forwarded)", "prior_head": "872789fa2611c1fee03d62ca11fc4fcfd54a31b0", "timestamp": "2026-08-27T12:50:58.921987+00:00"}
 {"account_value": 2255.5404, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-08-27T13:12:54.761725+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-27T13:13:17.802475+00:00", "trend_intact": false}
+{"account_value": 2250.37, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.02, "timestamp": "2026-08-27T14:11:05.797621+00:00", "tripped": false, "unrealized_pnl_today": 0}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-27T14:11:34.912622+00:00", "trend_intact": true}
