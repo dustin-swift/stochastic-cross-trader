@@ -2582,5 +2582,29 @@
     "stop_order_id": "6a8ef909-1bf8-4589-a4bb-9e4d6df5e609",
     "stop_price": 9.07,
     "symbol": "SXC"
+  },
+  {
+    "closed_at": "2026-08-27T18:10:03.351753+00:00",
+    "entry_d": 28.988951427975746,
+    "entry_k": 41.951219512195024,
+    "entry_order_id": "6a8c7cf8-1b8f-4e9a-9acb-0411846e5b15",
+    "entry_prev_d": 19.88326037106519,
+    "entry_prev_k": 25.99124452782983,
+    "entry_price": 11.3987,
+    "entry_time": "2026-08-24T17:18:48.761Z",
+    "exit_d": 78.38086377229325,
+    "exit_k": 75.46969696969718,
+    "exit_order_id": "6a907d6f-a714-415f-b94d-11714f9fefae",
+    "exit_prev_d": 81.93963016630914,
+    "exit_prev_k": 78.19356486210441,
+    "exit_price": 11.6613,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-08-27T18:09:51.232Z",
+    "pnl_pct": 2.3037714827129463,
+    "pnl_usd": 2.3634000000000075,
+    "qty": 9,
+    "stop_order_id": "6a8c7d0e-f42c-4e37-ba6d-83e7ec3e42b7",
+    "stop_price": 10.74,
+    "symbol": "TAL"
   }
 ]
