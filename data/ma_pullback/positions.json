@@ -1,30 +1,30 @@
 {
-  "IOVA": {
-    "entry_price": 8.0588,
-    "stop_price": 7.624533928571428,
-    "target_1": 8.77569910714286,
-    "highest_close": 8.08,
-    "bars_held": 4,
-    "partial_taken": false,
-    "atr_entry": 0.6618642857142858,
-    "shares": 12,
-    "breakout_level": 8.055,
-    "entry_time": "2026-08-27T14:13:24.111Z",
-    "entry_order_id": "6a904603-a6c9-435b-931f-b647bbf0c305",
-    "stop_order_id": "6a904623-f531-4dbe-baaf-1cda1b479fa5"
-  },
   "CMBT": {
-    "entry_price": 18.1587,
-    "stop_price": 17.39,
-    "target_1": 19.33625,
-    "highest_close": 18.1587,
-    "bars_held": 3,
-    "partial_taken": false,
     "atr_entry": 0.4900000000000002,
-    "shares": 6,
+    "bars_held": 4,
     "breakout_level": 17.99,
-    "entry_time": "2026-08-27T15:19:27.407Z",
     "entry_order_id": "6a90557f-b9c0-4ad8-b7de-3b8da3ea8b2b",
-    "stop_order_id": "6a905593-c971-485f-a547-a17940fa9bec"
+    "entry_price": 18.1587,
+    "entry_time": "2026-08-27T15:19:27.407Z",
+    "highest_close": 18.1587,
+    "partial_taken": false,
+    "shares": 6,
+    "stop_order_id": "6a905593-c971-485f-a547-a17940fa9bec",
+    "stop_price": 17.39,
+    "target_1": 19.33625
+  },
+  "IOVA": {
+    "atr_entry": 0.6618642857142858,
+    "bars_held": 5,
+    "breakout_level": 8.055,
+    "entry_order_id": "6a904603-a6c9-435b-931f-b647bbf0c305",
+    "entry_price": 8.0588,
+    "entry_time": "2026-08-27T14:13:24.111Z",
+    "highest_close": 8.08,
+    "partial_taken": false,
+    "shares": 12,
+    "stop_order_id": "6a904623-f531-4dbe-baaf-1cda1b479fa5",
+    "stop_price": 7.624533928571428,
+    "target_1": 8.77569910714286
   }
 }
