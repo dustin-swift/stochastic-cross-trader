@@ -84,3 +84,6 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 12, "needs_cancel": false, "order_id": "6a904603-a6c9-435b-931f-b647bbf0c305", "order_state": "filled", "symbol": "IOVA", "timestamp": "2026-08-27T14:13:40.798874+00:00"}
 {"entry_order_id": "6a904603-a6c9-435b-931f-b647bbf0c305", "event": "ma_entry_executed", "fill_price": 8.0588, "qty": 12, "symbol": "IOVA", "timestamp": "2026-08-27T14:14:12.329918+00:00"}
 {"event": "ma_stop_placed", "qty": 12, "stop_order_id": "6a904623-f531-4dbe-baaf-1cda1b479fa5", "stop_price": 7.62, "symbol": "IOVA", "timestamp": "2026-08-27T14:14:12.330104+00:00"}
+{"account_value": 2254.17, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.37, "timestamp": "2026-08-27T15:12:23.845540+00:00", "tripped": false, "unrealized_pnl_today": 0.85}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-27T15:12:42.470442+00:00", "trend_intact": true}
+{"action": null, "bars_held": 1, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.624533928571428, "symbol": "IOVA", "timestamp": "2026-08-27T15:14:53.502341+00:00"}
