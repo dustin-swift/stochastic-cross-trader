@@ -2438,5 +2438,29 @@
     "stop_order_id": "6a85c978-93d7-406a-b2c9-55f336145bc6",
     "stop_price": 64.77,
     "symbol": "FCX"
+  },
+  {
+    "closed_at": "2026-08-27T13:35:56.769908+00:00",
+    "entry_d": 43.92486011191051,
+    "entry_k": 46.163069544364326,
+    "entry_order_id": "6a8f3bfe-2cc5-4f4f-97aa-3e28f8bcbc7d",
+    "entry_prev_d": 38.44924060751428,
+    "entry_prev_k": 44.42446043165466,
+    "entry_price": 58.8299,
+    "entry_time": "2026-08-26T19:18:22.261Z",
+    "exit_d": 47.182254196642646,
+    "exit_k": 46.762589928057245,
+    "exit_order_id": "6a903d2b-9fbd-4353-ad7c-78f527d267c8",
+    "exit_prev_d": 46.02318145483637,
+    "exit_prev_k": 48.26139088729019,
+    "exit_price": 58.3201,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-27T13:35:40.025Z",
+    "pnl_pct": -0.8665661508858724,
+    "pnl_usd": -1.0196000000000112,
+    "qty": 2.0,
+    "stop_order_id": "6a8f3c0e-5a56-448b-85fc-4e0c1e6bba5e",
+    "stop_price": 57.66,
+    "symbol": "NOBL"
   }
 ]

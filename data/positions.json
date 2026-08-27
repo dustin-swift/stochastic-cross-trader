@@ -47,7 +47,7 @@
     "entry_price": 136.8999,
     "entry_time": "2026-08-26T15:27:28.62Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8f05f0-3d91-4fc7-9606-bfb0ce510d65",
     "stop_price": 130.58
   },
@@ -86,7 +86,7 @@
     "entry_price": 76.5699,
     "entry_time": "2026-08-26T15:28:19.365Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8f0621-fe4b-4343-9bba-28a1333c4ba3",
     "stop_price": 75.08
   },
@@ -129,19 +129,6 @@
     "stop_order_id": "6a8f063a-8241-4efd-a157-3526fb57ad37",
     "stop_price": 61.0
   },
-  "NOBL": {
-    "entry_d": 43.92486011191051,
-    "entry_k": 46.163069544364326,
-    "entry_order_id": "6a8f3bfe-2cc5-4f4f-97aa-3e28f8bcbc7d",
-    "entry_prev_d": 38.44924060751428,
-    "entry_prev_k": 44.42446043165466,
-    "entry_price": 58.8299,
-    "entry_time": "2026-08-26T19:18:22.261Z",
-    "qty": 2.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a8f3c0e-5a56-448b-85fc-4e0c1e6bba5e",
-    "stop_price": 57.66
-  },
   "OZK": {
     "entry_d": 23.769338959212675,
     "entry_k": 32.27848101265859,
@@ -164,7 +151,7 @@
     "entry_price": 18.1199,
     "entry_time": "2026-08-25T17:11:26.794Z",
     "qty": 6,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8dccc8-a904-4217-9e5c-09df7baba07b",
     "stop_price": 17.76
   },
