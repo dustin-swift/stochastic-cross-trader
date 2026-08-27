@@ -705,3 +705,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 2, "needs_cancel": false, "order_id": "6a906f45-63c3-4973-8f64-a514e78e88b2", "order_state": "filled", "symbol": "CLDX", "timestamp": "2026-08-27T17:09:38.089055+00:00"}
 {"event": "entry_executed", "fill_price": 40.8899, "order_id": "6a906f45-63c3-4973-8f64-a514e78e88b2", "qty": 2, "symbol": "CLDX", "timestamp": "2026-08-27T17:09:54.983573+00:00"}
 {"event": "stop_placed", "order_id": "6a906f5a-1ee9-46a2-8e09-d9de52c6b0f8", "qty": 2, "stop_price": 38.55, "symbol": "CLDX", "timestamp": "2026-08-27T17:09:54.983711+00:00"}
+{"candidates_checked": 446, "candidates_total": 466, "circuit_breaker_tripped": false, "entries_proposed": 1, "entries_taken": 1, "event": "cycle_summary", "exits_taken": 0, "market_trend_intact": true, "max_positions": 15, "reconciliation_drift": ["IOVA", "CMBT"], "slots_remaining": 4, "stop_outs_found": 0, "timestamp": "2026-08-27T17:10:07.192419+00:00"}
