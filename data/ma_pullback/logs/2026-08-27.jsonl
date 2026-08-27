@@ -87,3 +87,13 @@
 {"account_value": 2254.17, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.37, "timestamp": "2026-08-27T15:12:23.845540+00:00", "tripped": false, "unrealized_pnl_today": 0.85}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-27T15:12:42.470442+00:00", "trend_intact": true}
 {"action": null, "bars_held": 1, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.624533928571428, "symbol": "IOVA", "timestamp": "2026-08-27T15:14:53.502341+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-27T15:18:43.114414+00:00"}
+{"entry_price": 18.17, "event": "ma_signal_check", "kind": "entry", "shares": 6, "signal": true, "stop_price": 17.392500000000002, "symbol": "CMBT", "timestamp": "2026-08-27T15:18:43.120714+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-27T15:18:43.123096+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-27T15:18:43.125148+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-08-27T15:18:43.127106+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-27T15:18:43.129010+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-27T15:18:43.130994+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-27T15:18:43.132915+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-27T15:18:43.134672+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 6, "needs_cancel": false, "order_id": "6a90557f-b9c0-4ad8-b7de-3b8da3ea8b2b", "order_state": "filled", "symbol": "CMBT", "timestamp": "2026-08-27T15:19:37.587739+00:00"}
