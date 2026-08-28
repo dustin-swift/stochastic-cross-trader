@@ -47,3 +47,4 @@
 {"account_value": 2242.1642, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -2.7, "timestamp": "2026-08-28T16:10:26.915043+00:00", "tripped": false, "unrealized_pnl_today": 1.1262}
 {"action": null, "bars_held": 8, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 17.39, "symbol": "CMBT", "timestamp": "2026-08-28T16:10:53.980776+00:00"}
 {"action": null, "bars_held": 9, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.624533928571428, "symbol": "IOVA", "timestamp": "2026-08-28T16:10:53.984578+00:00"}
+{"circuit_breaker_tripped": false, "cycle_gap_minutes": 55.42, "entries_proposed": 0, "entries_taken": 0, "event": "cycle_summary", "exits_taken": 0, "live": true, "partials_taken": 0, "stale_cycle": false, "stop_outs_reconciled": 0, "timestamp": "2026-08-28T16:11:45.826726+00:00", "trend_intact": false, "watchlist_eligible_not_evaluated": 9}
