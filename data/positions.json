@@ -12,6 +12,19 @@
     "stop_order_id": "6a8f05d6-f044-4def-8cad-afa3e54176fc",
     "stop_price": 9.12
   },
+  "BUD": {
+    "entry_d": 27.450980392157238,
+    "entry_k": 45.248868778280816,
+    "entry_order_id": "6a9198dd-c7c2-4374-9ec2-4508d6d5271b",
+    "entry_prev_d": 17.1442936148822,
+    "entry_prev_k": 18.4012066365011,
+    "entry_price": 79.3887,
+    "entry_time": "2026-08-28T14:19:09.365Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a9198ef-1d5e-405f-8705-14e93b7a7ef0",
+    "stop_price": 76.75
+  },
   "CVBF": {
     "entry_d": 39.04331450094125,
     "entry_k": 38.66666666666607,
