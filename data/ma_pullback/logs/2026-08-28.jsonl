@@ -19,3 +19,12 @@
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-28T14:14:14.111080+00:00", "trend_intact": true}
 {"action": null, "bars_held": 6, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 17.39, "symbol": "CMBT", "timestamp": "2026-08-28T14:16:13.813643+00:00"}
 {"action": null, "bars_held": 7, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.624533928571428, "symbol": "IOVA", "timestamp": "2026-08-28T14:16:13.816314+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-28T14:22:03.552695+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "FRO", "timestamp": "2026-08-28T14:22:03.554935+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-28T14:22:03.557069+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "KURA", "timestamp": "2026-08-28T14:22:03.559222+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-08-28T14:22:03.561146+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-28T14:22:03.563168+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-28T14:22:03.565853+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-28T14:22:03.568350+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-28T14:22:03.570920+00:00"}
