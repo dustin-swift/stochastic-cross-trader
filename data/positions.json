@@ -1,17 +1,4 @@
 {
-  "AMLX": {
-    "entry_d": 21.01540313488127,
-    "entry_k": 33.073929961089455,
-    "entry_order_id": "6a9055f5-8d48-4af5-9d3c-7bac6f575a78",
-    "entry_prev_d": 12.797826437103177,
-    "entry_prev_k": 19.455252918287936,
-    "entry_price": 37.6499,
-    "entry_time": "2026-08-27T15:21:25.743Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a905609-bb2e-4f74-8610-8b7ca43b2f37",
-    "stop_price": 35.83
-  },
   "APPS": {
     "entry_d": 31.630288903016183,
     "entry_k": 52.56410256410255,
@@ -24,19 +11,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a8f05d6-f044-4def-8cad-afa3e54176fc",
     "stop_price": 9.12
-  },
-  "CLDX": {
-    "entry_d": 32.64042769284572,
-    "entry_k": 42.610737311242225,
-    "entry_order_id": "6a906f45-63c3-4973-8f64-a514e78e88b2",
-    "entry_prev_d": 24.33713671484341,
-    "entry_prev_k": 32.8312179866767,
-    "entry_price": 40.8899,
-    "entry_time": "2026-08-27T17:09:25.63Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a906f5a-1ee9-46a2-8e09-d9de52c6b0f8",
-    "stop_price": 38.55
   },
   "CVBF": {
     "entry_d": 39.04331450094125,
