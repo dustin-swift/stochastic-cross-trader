@@ -22,5 +22,29 @@
     "stop_order_id": "6a8da366-b2ee-48c0-b951-df3725add67c",
     "stop_price": 42.71,
     "symbol": "FRO"
+  },
+  {
+    "closed_at": "2026-08-28T17:13:20.703923+00:00",
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a904603-a6c9-435b-931f-b647bbf0c305",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 8.0588,
+    "entry_time": "2026-08-27T14:13:24.111Z",
+    "exit_d": null,
+    "exit_k": null,
+    "exit_order_id": "6a91c1a2-0fb4-4196-b090-61069a60e920",
+    "exit_prev_d": null,
+    "exit_prev_k": null,
+    "exit_price": 8.0601,
+    "exit_reason": "time_stop",
+    "exit_time": "2026-08-28T17:13:06.337Z",
+    "pnl_pct": 0.016131433960397956,
+    "pnl_usd": 0.015600000000006276,
+    "qty": 12,
+    "stop_order_id": "6a904623-f531-4dbe-baaf-1cda1b479fa5",
+    "stop_price": 7.624533928571428,
+    "symbol": "IOVA"
   }
 ]
