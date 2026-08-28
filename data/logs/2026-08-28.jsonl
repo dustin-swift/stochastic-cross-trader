@@ -1434,3 +1434,4 @@
 {"event": "exit_executed", "order_id": "6a91b24f-467c-4f9c-9928-86dd3f764021", "qty": 1, "symbol": "IJH", "timestamp": "2026-08-28T16:08:22.380635+00:00"}
 {"event": "exit_executed", "order_id": "6a91b250-b34b-4f17-a696-9ee335ee6d57", "qty": 3, "symbol": "LAUR", "timestamp": "2026-08-28T16:08:22.380725+00:00"}
 {"event": "exit_executed", "order_id": "6a91b251-8f22-4353-b332-92166acbd6de", "qty": 2, "symbol": "OII", "timestamp": "2026-08-28T16:08:22.380781+00:00"}
+{"candidates_checked": 0, "candidates_total": 466, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_skipped_reason": "market_trend_intact_false", "entries_taken": 0, "event": "cycle_summary", "exits_taken": 4, "market_trend_intact": false, "max_positions": 15, "reconciliation_drift": ["IOVA", "CMBT"], "slots_remaining": 4, "stop_outs_found": 0, "timestamp": "2026-08-28T16:08:42.486535+00:00"}
