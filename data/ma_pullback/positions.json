@@ -1,7 +1,7 @@
 {
   "CMBT": {
     "atr_entry": 0.4900000000000002,
-    "bars_held": 5,
+    "bars_held": 6,
     "breakout_level": 17.99,
     "entry_order_id": "6a90557f-b9c0-4ad8-b7de-3b8da3ea8b2b",
     "entry_price": 18.1587,
@@ -15,7 +15,7 @@
   },
   "IOVA": {
     "atr_entry": 0.6618642857142858,
-    "bars_held": 6,
+    "bars_held": 7,
     "breakout_level": 8.055,
     "entry_order_id": "6a904603-a6c9-435b-931f-b647bbf0c305",
     "entry_price": 8.0588,
