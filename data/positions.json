@@ -12,19 +12,6 @@
     "stop_order_id": "6a9198ef-1d5e-405f-8705-14e93b7a7ef0",
     "stop_price": 76.75
   },
-  "CROX": {
-    "entry_d": 23.38882610627327,
-    "entry_k": 38.75209544336319,
-    "entry_order_id": "6a91aa6c-5e13-4f66-bb98-b2ced09dd780",
-    "entry_prev_d": 18.208932500651603,
-    "entry_prev_k": 16.8724011059587,
-    "entry_price": 123.9399,
-    "entry_time": "2026-08-28T15:34:04.948Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a91aa83-854b-4d35-9e13-9425accc7b67",
-    "stop_price": 114.98
-  },
   "ETSY": {
     "entry_d": 24.991142246983703,
     "entry_k": 40.36976753084925,
@@ -34,7 +21,7 @@
     "entry_price": 84.16,
     "entry_time": "2026-08-28T15:34:42.258Z",
     "qty": 1.0,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a91aaa7-efe4-4999-9346-f1493fdf87bc",
     "stop_price": 79.72
   },
@@ -50,18 +37,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a8f3bf4-e216-4017-9b37-0dbac3007152",
     "stop_price": 13.77
-  },
-  "QYLD": {
-    "entry_d": 20.43010752688144,
-    "entry_k": 27.419354838709307,
-    "entry_order_id": "6a8dccbe-9387-4987-9c43-69f4b60b053f",
-    "entry_prev_d": 15.40860215053732,
-    "entry_prev_k": 19.354838709677086,
-    "entry_price": 18.1199,
-    "entry_time": "2026-08-25T17:11:26.794Z",
-    "qty": 6,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a8dccc8-a904-4217-9e5c-09df7baba07b",
-    "stop_price": 17.76
   }
 }
