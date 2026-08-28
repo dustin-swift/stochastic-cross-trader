@@ -46,5 +46,29 @@
     "stop_order_id": "6a904623-f531-4dbe-baaf-1cda1b479fa5",
     "stop_price": 7.624533928571428,
     "symbol": "IOVA"
+  },
+  {
+    "closed_at": "2026-08-28T18:14:50.620618+00:00",
+    "entry_d": null,
+    "entry_k": null,
+    "entry_order_id": "6a90557f-b9c0-4ad8-b7de-3b8da3ea8b2b",
+    "entry_prev_d": null,
+    "entry_prev_k": null,
+    "entry_price": 18.1587,
+    "entry_time": "2026-08-27T15:19:27.407Z",
+    "exit_d": null,
+    "exit_k": null,
+    "exit_order_id": "6a91d00d-2db5-4c55-a915-98ca83a6c487",
+    "exit_prev_d": null,
+    "exit_prev_k": null,
+    "exit_price": 18.3401,
+    "exit_reason": "time_stop",
+    "exit_time": "2026-08-28T18:14:37.978Z",
+    "pnl_pct": 0.9989701905973369,
+    "pnl_usd": 1.0884,
+    "qty": 6,
+    "stop_order_id": "6a905593-c971-485f-a547-a17940fa9bec",
+    "stop_price": 17.39,
+    "symbol": "CMBT"
   }
 ]

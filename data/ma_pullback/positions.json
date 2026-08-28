@@ -1,16 +1,1 @@
-{
-  "CMBT": {
-    "atr_entry": 0.4900000000000002,
-    "bars_held": 9,
-    "breakout_level": 17.99,
-    "entry_order_id": "6a90557f-b9c0-4ad8-b7de-3b8da3ea8b2b",
-    "entry_price": 18.1587,
-    "entry_time": "2026-08-27T15:19:27.407Z",
-    "highest_close": 18.28,
-    "partial_taken": false,
-    "shares": 6,
-    "stop_order_id": "6a905593-c971-485f-a547-a17940fa9bec",
-    "stop_price": 17.39,
-    "target_1": 19.33625
-  }
-}
+{}
