@@ -1,17 +1,4 @@
 {
-  "APPS": {
-    "entry_d": 31.630288903016183,
-    "entry_k": 52.56410256410255,
-    "entry_order_id": "6a8f05c7-411d-4dc0-abc7-16ce6fd78315",
-    "entry_prev_d": 18.22417388073959,
-    "entry_prev_k": 31.538461538461533,
-    "entry_price": 10.7371,
-    "entry_time": "2026-08-26T15:27:03.375Z",
-    "qty": 9,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a8f05d6-f044-4def-8cad-afa3e54176fc",
-    "stop_price": 9.12
-  },
   "BUD": {
     "entry_d": 27.450980392157238,
     "entry_k": 45.248868778280816,
@@ -21,7 +8,7 @@
     "entry_price": 79.3887,
     "entry_time": "2026-08-28T14:19:09.365Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a9198ef-1d5e-405f-8705-14e93b7a7ef0",
     "stop_price": 76.75
   },
@@ -51,32 +38,6 @@
     "stop_order_id": "6a91aaa7-efe4-4999-9346-f1493fdf87bc",
     "stop_price": 79.72
   },
-  "FEZ": {
-    "entry_d": 24.571428571429138,
-    "entry_k": 41.142857142857615,
-    "entry_order_id": "6a91aab4-51ad-4747-b560-2107c6bef1d9",
-    "entry_prev_d": 16.444444444445,
-    "entry_prev_k": 17.71428571428638,
-    "entry_price": 71.6076,
-    "entry_time": "2026-08-28T15:35:16.472Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a91aac7-506c-4019-a2f4-aba2c41a6abf",
-    "stop_price": 70.17
-  },
-  "GPN": {
-    "entry_d": 20.91019574918708,
-    "entry_k": 29.28513961943807,
-    "entry_order_id": "6a91aad4-7b9f-4d30-b331-9a0b41a2f8cf",
-    "entry_prev_d": 13.196552736456278,
-    "entry_prev_k": 21.818967252008935,
-    "entry_price": 93.0199,
-    "entry_time": "2026-08-28T15:35:48.869Z",
-    "qty": 1.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a91aae8-36b7-4a82-8ae4-d0b94c205916",
-    "stop_price": 88.17
-  },
   "HAYW": {
     "entry_d": 49.670781893004204,
     "entry_k": 49.629629629629704,
@@ -89,19 +50,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a8f3bf4-e216-4017-9b37-0dbac3007152",
     "stop_price": 13.77
-  },
-  "JMKE": {
-    "entry_d": 27.970843549572795,
-    "entry_k": 46.46141086083467,
-    "entry_order_id": "6a91aaf6-e322-4b63-898f-754561baff18",
-    "entry_prev_d": 17.94589146991079,
-    "entry_prev_k": 21.035640552711424,
-    "entry_price": 22.9855,
-    "entry_time": "2026-08-28T15:36:22.93Z",
-    "qty": 4.0,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a91ab0d-fc2e-44ab-9cfd-d67f72407e91",
-    "stop_price": 20.38
   },
   "QYLD": {
     "entry_d": 20.43010752688144,
