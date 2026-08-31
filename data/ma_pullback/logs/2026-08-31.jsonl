@@ -38,3 +38,15 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-31T17:11:57.391616+00:00"}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-31T18:11:04.853602+00:00", "trend_intact": true}
 {"account_value": 2236.068, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -6.08, "timestamp": "2026-08-31T18:11:12.156011+00:00", "tripped": false, "unrealized_pnl_today": 0}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-31T18:12:05.017032+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-31T18:12:05.019713+00:00"}
+{"entry_price": 8.055, "event": "ma_signal_check", "kind": "entry", "shares": 12, "signal": true, "stop_price": 7.637773214285715, "symbol": "IOVA", "timestamp": "2026-08-31T18:12:05.026662+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "KURA", "timestamp": "2026-08-31T18:12:05.029533+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-08-31T18:12:05.031975+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-31T18:12:05.034692+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-31T18:12:05.037121+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-31T18:12:05.039465+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-31T18:12:05.041817+00:00"}
+{"decision": "proceed", "event": "order_fill_check", "filled_qty": 12, "needs_cancel": false, "order_id": "6a95c413-10e3-4d4a-a7ec-b3744ec2b88b", "order_state": "filled", "symbol": "IOVA", "timestamp": "2026-08-31T18:12:44.603363+00:00"}
+{"avg_price": 8.0187, "breakout_level": 8.055, "event": "ma_entry_executed", "order_id": "6a95c413-10e3-4d4a-a7ec-b3744ec2b88b", "qty": 12, "stop_price": 7.637773214285715, "symbol": "IOVA", "target_1": 8.680840178571428, "timestamp": "2026-08-31T18:13:18.481414+00:00"}
+{"event": "ma_stop_placed", "order_id": "6a95c42f-05f3-4df8-ab7f-453e88e0fc90", "qty": 12, "stop_price": 7.64, "symbol": "IOVA", "timestamp": "2026-08-31T18:13:18.481576+00:00"}

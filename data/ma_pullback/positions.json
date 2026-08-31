@@ -1,1 +1,16 @@
-{}
+{
+  "IOVA": {
+    "entry_price": 8.0187,
+    "stop_price": 7.637773214285715,
+    "target_1": 8.680840178571428,
+    "highest_close": 8.0187,
+    "bars_held": 0,
+    "partial_taken": false,
+    "atr_entry": 0.608907142857143,
+    "shares": 12,
+    "breakout_level": 8.055,
+    "entry_time": "2026-08-31T18:12:35.501Z",
+    "entry_order_id": "6a95c413-10e3-4d4a-a7ec-b3744ec2b88b",
+    "stop_order_id": "6a95c42f-05f3-4df8-ab7f-453e88e0fc90"
+  }
+}
