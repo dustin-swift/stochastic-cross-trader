@@ -10,3 +10,12 @@
 {"eligible_count": 9, "event": "ma_daily_scan", "symbols_checked": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-08-31T12:37:05.210917+00:00", "watchlist_count": 47}
 {"account_value": 2238.56, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-08-31T13:14:41.497369+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-31T13:15:05.868242+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-08-31T13:18:29.844407+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IMVT", "timestamp": "2026-08-31T13:18:29.846388+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IOVA", "timestamp": "2026-08-31T13:18:29.848165+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "KURA", "timestamp": "2026-08-31T13:18:29.850045+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-08-31T13:18:29.851709+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "OKE", "timestamp": "2026-08-31T13:18:29.853388+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "PR", "timestamp": "2026-08-31T13:18:29.854964+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-08-31T13:18:29.856551+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-08-31T13:18:29.858158+00:00"}
