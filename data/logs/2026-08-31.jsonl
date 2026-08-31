@@ -495,3 +495,6 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 2, "needs_cancel": false, "order_id": "6a95b63c-3a40-46b8-a9d2-0592848ac2ed", "order_state": "filled", "symbol": "TXG", "timestamp": "2026-08-31T17:13:41.903209+00:00"}
 {"event": "entry_executed", "fill_price": 60.75, "order_id": "6a95b63c-3a40-46b8-a9d2-0592848ac2ed", "qty": 2, "symbol": "TXG", "timestamp": "2026-08-31T17:14:14.587628+00:00"}
 {"event": "stop_placed", "order_id": "6a95b659-0e8a-40ea-907f-fa4bba04e3d9", "qty": 2, "stop_price": 56.69, "symbol": "TXG", "timestamp": "2026-08-31T17:14:14.587795+00:00"}
+{"account_value": 2235.94, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -6.08, "timestamp": "2026-08-31T18:05:21.506494+00:00", "tripped": false, "unrealized_pnl_today": 0.94}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-08-31T18:05:50.415343+00:00", "trend_intact": true}
+{"d": 26.04981547372294, "event": "signal_check", "k": 33.0097263669808, "kind": "exit", "prev_d": 20.528022479435936, "prev_k": 25.365472976173493, "signal": false, "state_transitioned": false, "stochastic_state": "NORMAL", "symbol": "TXG", "timestamp": "2026-08-31T18:06:20.267931+00:00", "trend_intact": null}
