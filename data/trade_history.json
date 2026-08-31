@@ -3014,5 +3014,29 @@
     "stop_order_id": "6a8f3bf4-e216-4017-9b37-0dbac3007152",
     "stop_price": 13.77,
     "symbol": "HAYW"
+  },
+  {
+    "closed_at": "2026-08-31T19:07:17.969472+00:00",
+    "entry_d": 21.002801579916483,
+    "entry_k": 22.80113255351847,
+    "entry_order_id": "6a95c68a-dfbb-4fd2-a2be-fea9f0bcda22",
+    "entry_prev_d": 17.755885369412443,
+    "entry_prev_k": 23.742718844860267,
+    "entry_price": 21.87,
+    "entry_time": "2026-08-31T18:23:06.554Z",
+    "exit_d": 23.003663323709787,
+    "exit_k": 22.46713857275063,
+    "exit_order_id": "6a95d0db-2580-4a03-9aad-9e9bd027c619",
+    "exit_prev_d": 21.002801579916483,
+    "exit_prev_k": 22.80113255351847,
+    "exit_price": 21.9013,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-08-31T19:07:07.668Z",
+    "pnl_pct": 0.14311842706904443,
+    "pnl_usd": 0.15649999999999054,
+    "qty": 5,
+    "stop_order_id": "6a95c699-70c8-46cd-b678-1dd171461898",
+    "stop_price": 20.51,
+    "symbol": "M"
   }
 ]
