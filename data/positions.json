@@ -1,1 +1,15 @@
-{}
+{
+  "TXG": {
+    "entry_d": 20.528022479435936,
+    "entry_k": 25.365472976173493,
+    "entry_order_id": "6a95b63c-3a40-46b8-a9d2-0592848ac2ed",
+    "entry_prev_d": 16.980469653689386,
+    "entry_prev_k": 19.774247078014522,
+    "entry_price": 60.75,
+    "entry_time": "2026-08-31T17:13:32.386Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a95b659-0e8a-40ea-907f-fa4bba04e3d9",
+    "stop_price": 56.69
+  }
+}
