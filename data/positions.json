@@ -12,19 +12,6 @@
     "stop_order_id": "6a9198ef-1d5e-405f-8705-14e93b7a7ef0",
     "stop_price": 76.75
   },
-  "ETSY": {
-    "entry_d": 24.991142246983703,
-    "entry_k": 40.36976753084925,
-    "entry_order_id": "6a91aa92-0232-4fb4-aca2-e42f5d0a80f8",
-    "entry_prev_d": 13.888341859548822,
-    "entry_prev_k": 25.147017889569753,
-    "entry_price": 84.16,
-    "entry_time": "2026-08-28T15:34:42.258Z",
-    "qty": 1.0,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a91aaa7-efe4-4999-9346-f1493fdf87bc",
-    "stop_price": 79.72
-  },
   "HAYW": {
     "entry_d": 49.670781893004204,
     "entry_k": 49.629629629629704,
