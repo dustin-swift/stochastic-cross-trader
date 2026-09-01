@@ -1473,3 +1473,4 @@
 {"event": "exit_executed", "order_id": "6a97069d-0393-4dfd-896f-547d3a3aa098", "qty": 3, "symbol": "CUBE", "timestamp": "2026-09-01T17:09:12.457997+00:00"}
 {"event": "exit_executed", "order_id": "6a97069e-dcc7-408e-b21d-5587620311b1", "qty": 6, "symbol": "IRT", "timestamp": "2026-09-01T17:09:12.458151+00:00"}
 {"event": "exit_executed", "order_id": "6a97069f-4bc6-4aee-9792-d59692b1d7aa", "qty": 2, "symbol": "TXG", "timestamp": "2026-09-01T17:09:12.458223+00:00"}
+{"candidates_checked": 0, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_skipped_reason": "market_regime_filter", "entries_taken": 0, "event": "cycle_summary", "exits_symbols": ["CUBE", "IRT", "TXG"], "exits_taken": 3, "market_trend_intact": false, "max_positions": 15, "open_positions_after": 9, "reconciliation_drift_symbols": ["IOVA"], "stop_outs_reconciled": 0, "timestamp": "2026-09-01T17:09:36.702854+00:00"}
