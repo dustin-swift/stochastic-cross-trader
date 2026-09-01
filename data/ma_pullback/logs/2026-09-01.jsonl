@@ -25,3 +25,6 @@
 {"account_value": 2232.45, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.42, "timestamp": "2026-09-01T14:13:52.715006+00:00", "tripped": false, "unrealized_pnl_today": 1.19}
 {"action": null, "bars_held": 3, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.637773214285715, "symbol": "IOVA", "timestamp": "2026-09-01T14:14:14.150191+00:00"}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-01T14:15:06.642871+00:00", "trend_intact": false}
+{"account_value": 2232.6432, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-09-01T15:12:18.814523+00:00", "tripped": false, "unrealized_pnl_today": 0.38}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-01T15:12:36.557213+00:00", "trend_intact": false}
+{"action": null, "bars_held": 4, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.637773214285715, "symbol": "IOVA", "timestamp": "2026-09-01T15:14:23.223957+00:00"}
