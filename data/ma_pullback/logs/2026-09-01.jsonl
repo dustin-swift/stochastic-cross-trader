@@ -40,3 +40,6 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-01T16:15:10.742013+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-01T16:15:10.743857+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-01T16:15:10.745686+00:00"}
+{"account_value": 2229.44, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0.0, "timestamp": "2026-09-01T17:10:22.757218+00:00", "tripped": false, "unrealized_pnl_today": 1.68}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-01T17:10:39.948936+00:00", "trend_intact": false}
+{"action": null, "bars_held": 6, "event": "ma_signal_check", "kind": "exit", "partial_taken": false, "stop_price": 7.637773214285715, "symbol": "IOVA", "timestamp": "2026-09-01T17:12:35.291970+00:00"}
