@@ -25,19 +25,6 @@
     "stop_order_id": "6a96f03b-aebe-4799-b6a5-6016b3579763",
     "stop_price": 45.64
   },
-  "CLDX": {
-    "entry_d": 22.714954422271443,
-    "entry_k": 33.259423503325905,
-    "entry_order_id": "6a96f046-df16-4608-b287-e3e542c329f0",
-    "entry_prev_d": 15.76743040157669,
-    "entry_prev_k": 21.72949002217287,
-    "entry_price": 39.5499,
-    "entry_time": "2026-09-01T15:33:26.471Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a96f04e-98e1-4287-a437-2ed2a42aca37",
-    "stop_price": 37.2
-  },
   "DLTR": {
     "entry_d": 24.351129963485544,
     "entry_k": 45.25317482777703,
@@ -47,7 +34,7 @@
     "entry_price": 131.39,
     "entry_time": "2026-09-01T15:34:17.733Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a96f083-6f15-4829-b331-4484de1059d3",
     "stop_price": 125.1
   },
@@ -76,19 +63,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a95c62e-a7fe-4804-9cf7-fbc9bd6d6e75",
     "stop_price": 36.44
-  },
-  "ELAN": {
-    "entry_d": 24.14135204442719,
-    "entry_k": 35.937499999999865,
-    "entry_order_id": "6a96f09f-abc2-434c-b9d5-6628cce000ec",
-    "entry_prev_d": 19.13480165399426,
-    "entry_prev_k": 17.90456589043922,
-    "entry_price": 24.3787,
-    "entry_time": "2026-09-01T15:34:55.819Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a96f0a8-0564-44ae-9a50-e7d353285076",
-    "stop_price": 22.9
   },
   "GRND": {
     "entry_d": 25.23159001550611,
