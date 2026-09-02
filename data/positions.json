@@ -12,19 +12,6 @@
     "stop_order_id": "6a95c5c6-2dc4-49d0-b94f-5c2ca6b79ce1",
     "stop_price": 16.54
   },
-  "AXGN": {
-    "entry_d": 23.371157148801483,
-    "entry_k": 23.660706962050487,
-    "entry_order_id": "6a96f030-aee2-42bd-8c22-a17691bd1ad5",
-    "entry_prev_d": 19.35476855084845,
-    "entry_prev_k": 28.45208416722085,
-    "entry_price": 49.44,
-    "entry_time": "2026-09-01T15:33:04.498Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a96f03b-aebe-4799-b6a5-6016b3579763",
-    "stop_price": 45.64
-  },
   "DLTR": {
     "entry_d": 24.351129963485544,
     "entry_k": 45.25317482777703,
@@ -76,18 +63,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a96f0ba-8496-4819-b038-9204d9e9b026",
     "stop_price": 14.49
-  },
-  "ORKA": {
-    "entry_d": 26.329479047721435,
-    "entry_k": 34.90347490347491,
-    "entry_order_id": "6a95c6a3-ecf4-43e2-a543-87a97ae4f3a5",
-    "entry_prev_d": 17.420839960890103,
-    "entry_prev_k": 28.442335131639023,
-    "entry_price": 91.09,
-    "entry_time": "2026-08-31T18:23:32.152Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a95c6b4-1556-4dd1-b174-b7f9aaa44ac7",
-    "stop_price": 82.99
   }
 }
