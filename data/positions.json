@@ -1,4 +1,30 @@
 {
+  "ACWX": {
+    "entry_d": 23.747456247455904,
+    "entry_k": 35.042735042734954,
+    "entry_order_id": "6a984b54-a71c-440e-8239-8545254a860e",
+    "entry_prev_d": 15.22895205993756,
+    "entry_prev_k": 24.102564102563694,
+    "entry_price": 77.1599,
+    "entry_time": "2026-09-02T16:14:12.713Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a984b6f-ea13-46a0-8dad-bfb87a923459",
+    "stop_price": 75.49
+  },
+  "AIG": {
+    "entry_d": 34.33496450934489,
+    "entry_k": 54.08569560824884,
+    "entry_order_id": "6a984b7c-9eb8-47cb-bf5c-7658d51cb278",
+    "entry_prev_d": 18.59235318500207,
+    "entry_prev_k": 37.50911731034257,
+    "entry_price": 76.5674,
+    "entry_time": "2026-09-02T16:14:52.999Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a984b95-adc1-4e5b-bba0-c635b5f2ca8a",
+    "stop_price": 74.06
+  },
   "AMLX": {
     "entry_d": 20.153945615972713,
     "entry_k": 25.946119102568563,
