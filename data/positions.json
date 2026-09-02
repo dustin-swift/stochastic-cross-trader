@@ -12,19 +12,6 @@
     "stop_order_id": "6a984b6f-ea13-46a0-8dad-bfb87a923459",
     "stop_price": 75.49
   },
-  "AIG": {
-    "entry_d": 34.33496450934489,
-    "entry_k": 54.08569560824884,
-    "entry_order_id": "6a984b7c-9eb8-47cb-bf5c-7658d51cb278",
-    "entry_prev_d": 18.59235318500207,
-    "entry_prev_k": 37.50911731034257,
-    "entry_price": 76.5674,
-    "entry_time": "2026-09-02T16:14:52.999Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a984b95-adc1-4e5b-bba0-c635b5f2ca8a",
-    "stop_price": 74.06
-  },
   "AMLX": {
     "entry_d": 20.153945615972713,
     "entry_k": 25.946119102568563,
@@ -34,7 +21,7 @@
     "entry_price": 34.3692,
     "entry_time": "2026-09-02T14:11:24.18Z",
     "qty": 3,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a982e9a-60c1-4133-8770-6f69d87745cc",
     "stop_price": 32.55
   },
@@ -73,7 +60,7 @@
     "entry_price": 92.5387,
     "entry_time": "2026-09-02T15:13:09.393Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a983d50-8da2-42fa-a551-f16dde1ade41",
     "stop_price": 90.27
   },
@@ -138,7 +125,7 @@
     "entry_price": 11.665,
     "entry_time": "2026-09-02T15:13:16.646Z",
     "qty": 9,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a983d58-0e33-4196-b146-ecaba3d4e47c",
     "stop_price": 11.27
   },

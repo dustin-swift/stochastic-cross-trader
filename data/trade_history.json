@@ -3494,5 +3494,29 @@
     "stop_order_id": "6a96f0ba-8496-4819-b038-9204d9e9b026",
     "stop_price": 14.49,
     "symbol": "GRND"
+  },
+  {
+    "closed_at": "2026-09-02T18:06:31.209158+00:00",
+    "entry_d": 34.33496450934489,
+    "entry_k": 54.08569560824884,
+    "entry_order_id": "6a984b7c-9eb8-47cb-bf5c-7658d51cb278",
+    "entry_prev_d": 18.59235318500207,
+    "entry_prev_k": 37.50911731034257,
+    "entry_price": 76.5674,
+    "entry_time": "2026-09-02T16:14:52.999Z",
+    "exit_d": 53.682573641568375,
+    "exit_k": 45.78059071729996,
+    "exit_order_id": "6a986598-b475-4753-b393-5d382af68969",
+    "exit_prev_d": 50.92541583924924,
+    "exit_prev_k": 61.18143459915629,
+    "exit_price": 76.4325,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-02T18:06:16.277Z",
+    "pnl_pct": -0.1761846425502256,
+    "pnl_usd": -0.1349000000000018,
+    "qty": 1,
+    "stop_order_id": "6a984b95-adc1-4e5b-bba0-c635b5f2ca8a",
+    "stop_price": 74.06,
+    "symbol": "AIG"
   }
 ]
