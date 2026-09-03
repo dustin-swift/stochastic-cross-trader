@@ -3566,5 +3566,29 @@
     "stop_order_id": "6a983d56-e93a-4fe3-89f6-33863d36c07a",
     "stop_price": 67.72,
     "symbol": "CFG"
+  },
+  {
+    "closed_at": "2026-09-03T13:31:33.815085+00:00",
+    "entry_d": 21.49981664833159,
+    "entry_k": 22.915291529152984,
+    "entry_order_id": "6a983d0a-71b5-4679-b036-fc51564356e4",
+    "entry_prev_d": 19.746974697469824,
+    "entry_prev_k": 21.782178217821794,
+    "entry_price": 108.0515,
+    "entry_time": "2026-09-02T15:13:14.46Z",
+    "exit_d": 75.10373036005736,
+    "exit_k": 67.41293532338311,
+    "exit_order_id": "6a9976a3-98d6-47cb-8ff2-04e901302e87",
+    "exit_prev_d": 72.57340875770454,
+    "exit_prev_k": 76.36815920398008,
+    "exit_price": 108.0401,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-03T13:31:15.486Z",
+    "pnl_pct": -0.010550524518404547,
+    "pnl_usd": -0.011400000000008959,
+    "qty": 1,
+    "stop_order_id": "6a983d54-6f10-4191-962a-5c00a3485872",
+    "stop_price": 103.97,
+    "symbol": "CCEP"
   }
 ]

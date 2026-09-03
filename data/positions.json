@@ -34,7 +34,7 @@
     "entry_price": 17.49,
     "entry_time": "2026-08-31T18:19:30.773Z",
     "qty": 6,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a95c5c6-2dc4-49d0-b94f-5c2ca6b79ce1",
     "stop_price": 16.54
   },
@@ -76,19 +76,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a983d53-a5dc-4975-aa3f-50c6165a7a41",
     "stop_price": 51.04
-  },
-  "CCEP": {
-    "entry_d": 21.49981664833159,
-    "entry_k": 22.915291529152984,
-    "entry_order_id": "6a983d0a-71b5-4679-b036-fc51564356e4",
-    "entry_prev_d": 19.746974697469824,
-    "entry_prev_k": 21.782178217821794,
-    "entry_price": 108.0515,
-    "entry_time": "2026-09-02T15:13:14.46Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6a983d54-6f10-4191-962a-5c00a3485872",
-    "stop_price": 103.97
   },
   "CLBK": {
     "entry_d": 25.84359982934556,
