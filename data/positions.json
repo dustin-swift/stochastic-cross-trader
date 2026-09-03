@@ -25,6 +25,19 @@
     "stop_order_id": "6a982e9a-60c1-4133-8770-6f69d87745cc",
     "stop_price": 32.55
   },
+  "APPS": {
+    "entry_d": 24.886461422175675,
+    "entry_k": 47.56623931623932,
+    "entry_order_id": "6a999c3a-0d44-4fa7-b063-f8e8e93e5c8a",
+    "entry_prev_d": 11.808826094540322,
+    "entry_prev_k": 19.82927786499211,
+    "entry_price": 10.4299,
+    "entry_time": "2026-09-03T16:11:38.33Z",
+    "qty": 10,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a999c48-77a2-4c87-954d-0eb94d56cfc6",
+    "stop_price": 8.81
+  },
   "BAC": {
     "entry_d": 24.991956250556942,
     "entry_k": 44.2005813953489,
@@ -50,6 +63,19 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6a998e58-e856-4beb-85d3-e30adef2e8ad",
     "stop_price": 25.55
+  },
+  "BN": {
+    "entry_d": 21.248158539273568,
+    "entry_k": 32.13428396549409,
+    "entry_order_id": "6a999c3b-ed2e-401a-8e87-72f8fa6084db",
+    "entry_prev_d": 15.782508384127738,
+    "entry_prev_k": 16.32882882882888,
+    "entry_price": 40.1875,
+    "entry_time": "2026-09-03T16:11:40.062Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a999c4a-817d-4502-b776-d7b071b8c904",
+    "stop_price": 38.73
   },
   "BNS": {
     "entry_d": 26.524899957470936,
