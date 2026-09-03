@@ -1977,3 +1977,4 @@
 {"d": 95.95466139133548, "event": "signal_check", "k": 98.14013275660652, "kind": "entry", "pending": null, "prev_d": 91.33414580125526, "prev_k": 95.99625285109157, "signal": false, "symbol": "ZION", "timestamp": "2026-09-03T19:10:12.950260+00:00"}
 {"event": "entry_executed", "order_id": "6a99c638-c1f8-4152-8748-13ac6102968c", "qty": 6, "symbol": "NEO", "timestamp": "2026-09-03T19:11:05.168471+00:00"}
 {"event": "stop_placed", "stop_order_id": "6a99c643-cea8-40bf-afba-bf305a5c18b3", "stop_price": 16.38, "symbol": "NEO", "timestamp": "2026-09-03T19:11:05.168589+00:00"}
+{"candidates_checked": 440, "circuit_breaker_tripped": false, "cycle_gap_minutes": 62.38286013333333, "entries_proposed": 1, "entries_taken": 1, "event": "cycle_summary", "exits_taken": 1, "market_trend_intact": true, "slots_remaining": 0, "stale_cycle": false, "stop_outs_reconciliation": 0, "timestamp": "2026-09-03T19:11:20.701579+00:00"}
