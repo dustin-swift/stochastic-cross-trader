@@ -3590,5 +3590,29 @@
     "stop_order_id": "6a983d54-6f10-4191-962a-5c00a3485872",
     "stop_price": 103.97,
     "symbol": "CCEP"
+  },
+  {
+    "closed_at": "2026-09-03T15:08:25.004352+00:00",
+    "entry_d": 21.36077672026241,
+    "entry_k": 31.10986354952695,
+    "entry_order_id": "6a983d07-da5a-4efb-85f5-31441a3682e0",
+    "entry_prev_d": 15.46126526522267,
+    "entry_prev_k": 20.356689939657453,
+    "entry_price": 54.9149,
+    "entry_time": "2026-09-02T15:13:11.943Z",
+    "exit_d": 74.34403308074393,
+    "exit_k": 66.83745228049033,
+    "exit_order_id": "6a998d4d-d5af-47fd-a278-31ead251b182",
+    "exit_prev_d": 73.53552128955607,
+    "exit_prev_k": 80.3675349722496,
+    "exit_price": 54.2621,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-03T15:07:57.318Z",
+    "pnl_pct": -1.1887484089017852,
+    "pnl_usd": -1.3056000000000125,
+    "qty": 2,
+    "stop_order_id": "6a983d53-a5dc-4975-aa3f-50c6165a7a41",
+    "stop_price": 51.04,
+    "symbol": "CBRL"
   }
 ]
