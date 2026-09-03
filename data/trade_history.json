@@ -3662,5 +3662,29 @@
     "stop_order_id": "6a96f083-6f15-4829-b331-4484de1059d3",
     "stop_price": 125.1,
     "symbol": "DLTR"
+  },
+  {
+    "closed_at": "2026-09-03T19:07:00.931349+00:00",
+    "entry_d": 24.94476213428346,
+    "entry_k": 33.77962140810295,
+    "entry_order_id": "6a998e86-82db-4bd9-b46a-e834214be746",
+    "entry_prev_d": 18.159313332876824,
+    "entry_prev_k": 25.78032331311232,
+    "entry_price": 109.33,
+    "entry_time": "2026-09-03T15:13:10.922Z",
+    "exit_d": 68.0802088432044,
+    "exit_k": 65.12481644640229,
+    "exit_order_id": "6a99c54b-6f80-4604-9fce-82b7aca19820",
+    "exit_prev_d": 63.769912805920654,
+    "exit_prev_k": 73.34801762114532,
+    "exit_price": 108.8301,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-03T19:06:51.576Z",
+    "pnl_pct": -0.4572395499862769,
+    "pnl_usd": -0.4998999999999967,
+    "qty": 1,
+    "stop_order_id": "6a998e99-3016-4e74-8246-cfcba5b9b51b",
+    "stop_price": 103.78,
+    "symbol": "CSCO"
   }
 ]
