@@ -168,6 +168,19 @@
     "stop_order_id": "6a998ede-a874-4d88-bfa1-7498822bacdb",
     "stop_price": 46.53
   },
+  "NEO": {
+    "entry_d": 27.274094823114478,
+    "entry_k": 35.098039215686335,
+    "entry_order_id": "6a99c638-c1f8-4152-8748-13ac6102968c",
+    "entry_prev_d": 19.922191098661656,
+    "entry_prev_k": 27.47276688453171,
+    "entry_price": 17.58,
+    "entry_time": "2026-09-03T19:10:48.462Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6a99c643-cea8-40bf-afba-bf305a5c18b3",
+    "stop_price": 16.38
+  },
   "PGNY": {
     "entry_d": 20.09473835909095,
     "entry_k": 24.785301717586236,
