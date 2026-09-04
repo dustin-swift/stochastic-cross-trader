@@ -51,19 +51,6 @@
     "stop_order_id": "6a999c4a-817d-4502-b776-d7b071b8c904",
     "stop_price": 38.73
   },
-  "BNS": {
-    "entry_d": 26.524899957470936,
-    "entry_k": 44.61375755950794,
-    "entry_order_id": "6a983d05-2511-48e3-87bc-4699b5cf4fd9",
-    "entry_prev_d": 20.168162588614873,
-    "entry_prev_k": 16.802198072989672,
-    "entry_price": 92.5387,
-    "entry_time": "2026-09-02T15:13:09.393Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a983d50-8da2-42fa-a551-f16dde1ade41",
-    "stop_price": 90.27
-  },
   "CLBK": {
     "entry_d": 25.84359982934556,
     "entry_k": 48.211875843454926,

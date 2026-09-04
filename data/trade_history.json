@@ -3806,5 +3806,29 @@
     "stop_order_id": "6a982eb1-c215-443f-bff2-c8cd60434fc4",
     "stop_price": 24.86,
     "symbol": "PGNY"
+  },
+  {
+    "closed_at": "2026-09-04T17:05:47.488050+00:00",
+    "entry_d": 26.524899957470936,
+    "entry_k": 44.61375755950794,
+    "entry_order_id": "6a983d05-2511-48e3-87bc-4699b5cf4fd9",
+    "entry_prev_d": 20.168162588614873,
+    "entry_prev_k": 16.802198072989672,
+    "entry_price": 92.5387,
+    "entry_time": "2026-09-02T15:13:09.393Z",
+    "exit_d": 78.99239522651511,
+    "exit_k": 68.24453516676598,
+    "exit_order_id": "6a9afa5d-e07a-49e6-bfbd-48d67c5e8ea6",
+    "exit_prev_d": 86.36767362771656,
+    "exit_prev_k": 80.27949147138517,
+    "exit_price": 93.7601,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-04T17:05:33.302Z",
+    "pnl_pct": 1.3198802230850237,
+    "pnl_usd": 1.2213999999999885,
+    "qty": 1,
+    "stop_order_id": "6a983d50-8da2-42fa-a551-f16dde1ade41",
+    "stop_price": 90.27,
+    "symbol": "BNS"
   }
 ]
