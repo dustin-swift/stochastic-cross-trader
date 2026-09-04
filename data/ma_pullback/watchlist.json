@@ -7,7 +7,7 @@
     "extension_confirmed": true,
     "failed": false,
     "max_close_since_breakout": 30.57,
-    "retest_low": 28.51,
+    "retest_low": 27.615,
     "retest_seen": true
   },
   "AMGN": {
@@ -17,7 +17,7 @@
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 442.84,
+    "max_close_since_breakout": 444.12,
     "retest_low": null,
     "retest_seen": false
   },
@@ -55,35 +55,35 @@
     "retest_seen": false
   },
   "BBVA": {
-    "breakout_date": "2026-08-24",
-    "breakout_level": 29.13,
-    "breakout_volume": 1242034.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 29.32,
+    "breakout_volume": 1204267.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 29.21,
+    "max_close_since_breakout": 29.64,
     "retest_low": null,
     "retest_seen": false
   },
   "CLMT": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 51.57,
-    "breakout_volume": 1435506.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 54.61,
+    "breakout_volume": 1180846.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 53.07,
+    "max_close_since_breakout": 53.5,
     "retest_low": null,
     "retest_seen": false
   },
   "CMBT": {
-    "breakout_date": "2026-08-31",
+    "breakout_date": "2026-09-03",
     "breakout_level": 18.85,
-    "breakout_volume": 1044452.0,
+    "breakout_volume": 1149622.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 18.75,
+    "max_close_since_breakout": 18.7,
     "retest_low": null,
     "retest_seen": false
   },
@@ -121,13 +121,13 @@
     "retest_seen": false
   },
   "DINO": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 103.99,
-    "breakout_volume": 2497873.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 107.31,
+    "breakout_volume": 2229350.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 106.06,
+    "max_close_since_breakout": 106.15,
     "retest_low": null,
     "retest_seen": false
   },
@@ -154,20 +154,20 @@
     "retest_seen": false
   },
   "FENY": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 35.99,
-    "breakout_volume": 1050963.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 36.256,
+    "breakout_volume": 932230.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 36.11,
+    "max_close_since_breakout": 35.85,
     "retest_low": null,
     "retest_seen": false
   },
   "FRO": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 45.29,
-    "breakout_volume": 1840815.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 45.585,
+    "breakout_volume": 2537247.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
@@ -176,13 +176,13 @@
     "retest_seen": false
   },
   "HALO": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 109.66,
-    "breakout_volume": 1619587.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 109.76,
+    "breakout_volume": 1889664.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 109.66,
+    "max_close_since_breakout": 110.76,
     "retest_low": null,
     "retest_seen": false
   },
@@ -201,12 +201,12 @@
     "breakout_date": "2026-09-02",
     "breakout_level": 46.53,
     "breakout_volume": 1983429.0,
-    "eligible_for_entry": false,
-    "extension_confirmed": false,
+    "eligible_for_entry": true,
+    "extension_confirmed": true,
     "failed": false,
     "max_close_since_breakout": 47.64,
-    "retest_low": null,
-    "retest_seen": false
+    "retest_low": 44.96,
+    "retest_seen": true
   },
   "HTFL": {
     "breakout_date": "2026-09-02",
@@ -242,13 +242,13 @@
     "retest_seen": true
   },
   "IYE": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 68.55,
-    "breakout_volume": 569399.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 69.1,
+    "breakout_volume": 549918.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 68.8,
+    "max_close_since_breakout": 68.37,
     "retest_low": null,
     "retest_seen": false
   },
@@ -275,13 +275,13 @@
     "retest_seen": true
   },
   "MPC": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 383.01,
-    "breakout_volume": 2399410.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 391.98,
+    "breakout_volume": 2136586.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 387.0,
+    "max_close_since_breakout": 387.71,
     "retest_low": null,
     "retest_seen": false
   },
@@ -297,24 +297,24 @@
     "retest_seen": true
   },
   "NAT": {
-    "breakout_date": "2026-08-21",
-    "breakout_level": 7.1,
-    "breakout_volume": 3912787.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 7.195,
+    "breakout_volume": 3988698.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 7.07,
+    "max_close_since_breakout": 7.1,
     "retest_low": null,
     "retest_seen": false
   },
   "NOV": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 21.735,
-    "breakout_volume": 2308860.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 21.8299,
+    "breakout_volume": 2220385.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 21.71,
+    "max_close_since_breakout": 21.49,
     "retest_low": null,
     "retest_seen": false
   },
@@ -363,13 +363,13 @@
     "retest_seen": true
   },
   "PSX": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 252.05,
-    "breakout_volume": 2890743.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 258.48,
+    "breakout_volume": 2718116.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 256.09,
+    "max_close_since_breakout": 254.66,
     "retest_low": null,
     "retest_seen": false
   },
@@ -407,13 +407,13 @@
     "retest_seen": false
   },
   "SBLK": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 31.37,
-    "breakout_volume": 1716845.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 31.88,
+    "breakout_volume": 1826284.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 31.82,
+    "max_close_since_breakout": 31.87,
     "retest_low": null,
     "retest_seen": false
   },
@@ -473,35 +473,35 @@
     "retest_seen": false
   },
   "VFLO": {
-    "breakout_date": "2026-08-28",
-    "breakout_level": 55.685,
-    "breakout_volume": 1873440.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 55.8857,
+    "breakout_volume": 2142315.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 55.66,
+    "max_close_since_breakout": 56.07,
     "retest_low": null,
     "retest_seen": false
   },
   "VLO": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 364.9031,
-    "breakout_volume": 2851432.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 370.11,
+    "breakout_volume": 2528214.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 366.09,
+    "max_close_since_breakout": 370.69,
     "retest_low": null,
     "retest_seen": false
   },
   "XLE": {
-    "breakout_date": "2026-09-02",
-    "breakout_level": 64.95,
-    "breakout_volume": 27401415.0,
+    "breakout_date": "2026-09-03",
+    "breakout_level": 65.345,
+    "breakout_volume": 24079406.0,
     "eligible_for_entry": false,
     "extension_confirmed": false,
     "failed": false,
-    "max_close_since_breakout": 65.1,
+    "max_close_since_breakout": 64.62,
     "retest_low": null,
     "retest_seen": false
   },

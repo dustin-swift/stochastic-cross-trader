@@ -1,0 +1,74 @@
+{"csv_path": "data/ma_pullback/finviz_export.csv", "event": "ma_universe_screen", "input_count": 56, "output_count": 56, "symbols": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:26:27.040724+00:00"}
+{"csv_path": "data/ma_pullback/finviz_export.csv", "event": "ma_universe_screen", "input_count": 56, "output_count": 56, "symbols": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:26:39.210973+00:00"}
+{"csv_path": "data/ma_pullback/finviz_export.csv", "event": "ma_universe_screen", "input_count": 56, "output_count": 56, "symbols": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:27:56.005319+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "ACAD", "timestamp": "2026-09-04T12:28:00.353101+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "AMGN", "timestamp": "2026-09-04T12:28:00.355252+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "ATAI", "timestamp": "2026-09-04T12:28:00.358102+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "AVAH", "timestamp": "2026-09-04T12:28:00.359809+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "AXGN", "timestamp": "2026-09-04T12:28:00.361431+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 29.32, "event": "ma_breakout_tracked", "symbol": "BBVA", "timestamp": "2026-09-04T12:28:00.363020+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 54.61, "event": "ma_breakout_tracked", "symbol": "CLMT", "timestamp": "2026-09-04T12:28:00.364715+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 18.85, "event": "ma_breakout_tracked", "symbol": "CMBT", "timestamp": "2026-09-04T12:28:00.367436+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "CRNX", "timestamp": "2026-09-04T12:28:00.367543+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "CVE", "timestamp": "2026-09-04T12:28:00.368998+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "DBRG", "timestamp": "2026-09-04T12:28:00.371686+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 107.31, "event": "ma_breakout_tracked", "symbol": "DINO", "timestamp": "2026-09-04T12:28:00.373626+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "DUKU", "timestamp": "2026-09-04T12:28:00.373795+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "EC", "timestamp": "2026-09-04T12:28:00.375442+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "ET", "timestamp": "2026-09-04T12:28:00.376968+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 36.256, "event": "ma_breakout_tracked", "symbol": "FENY", "timestamp": "2026-09-04T12:28:00.378495+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 45.585, "event": "ma_breakout_tracked", "symbol": "FRO", "timestamp": "2026-09-04T12:28:00.380010+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 109.76, "event": "ma_breakout_tracked", "symbol": "HALO", "timestamp": "2026-09-04T12:28:00.381543+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "HDV", "timestamp": "2026-09-04T12:28:00.383254+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "HP", "timestamp": "2026-09-04T12:28:00.384855+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "HTFL", "timestamp": "2026-09-04T12:28:00.384957+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "IBB", "timestamp": "2026-09-04T12:28:00.386455+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "IOVA", "timestamp": "2026-09-04T12:28:00.389172+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 69.1, "event": "ma_breakout_tracked", "symbol": "IYE", "timestamp": "2026-09-04T12:28:00.390689+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "KNTK", "timestamp": "2026-09-04T12:28:00.392251+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "KURA", "timestamp": "2026-09-04T12:28:00.395720+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 391.98, "event": "ma_breakout_tracked", "symbol": "MPC", "timestamp": "2026-09-04T12:28:00.397311+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "MRK", "timestamp": "2026-09-04T12:28:00.398939+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 7.195, "event": "ma_breakout_tracked", "symbol": "NAT", "timestamp": "2026-09-04T12:28:00.400534+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 21.8299, "event": "ma_breakout_tracked", "symbol": "NOV", "timestamp": "2026-09-04T12:28:00.402016+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "OKE", "timestamp": "2026-09-04T12:28:00.403638+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "OVV", "timestamp": "2026-09-04T12:28:00.406445+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "PK", "timestamp": "2026-09-04T12:28:00.409323+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "PR", "timestamp": "2026-09-04T12:28:00.410954+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 258.48, "event": "ma_breakout_tracked", "symbol": "PSX", "timestamp": "2026-09-04T12:28:00.412539+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "ROIV", "timestamp": "2026-09-04T12:28:00.415126+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "ROKU", "timestamp": "2026-09-04T12:28:00.416637+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "RVMD", "timestamp": "2026-09-04T12:28:00.418091+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 31.88, "event": "ma_breakout_tracked", "symbol": "SBLK", "timestamp": "2026-09-04T12:28:00.419665+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "SCHD", "timestamp": "2026-09-04T12:28:00.421169+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "SCHW", "timestamp": "2026-09-04T12:28:00.422775+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "SM", "timestamp": "2026-09-04T12:28:00.424460+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "THC", "timestamp": "2026-09-04T12:28:00.427102+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "TRGP", "timestamp": "2026-09-04T12:28:00.428626+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 55.8857, "event": "ma_breakout_tracked", "symbol": "VFLO", "timestamp": "2026-09-04T12:28:00.430083+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 370.11, "event": "ma_breakout_tracked", "symbol": "VLO", "timestamp": "2026-09-04T12:28:00.431679+00:00"}
+{"breakout_date": "2026-09-03T00:00:00Z", "breakout_level": 65.345, "event": "ma_breakout_tracked", "symbol": "XLE", "timestamp": "2026-09-04T12:28:00.433180+00:00"}
+{"event": "ma_watchlist_dropped", "symbol": "XLV", "timestamp": "2026-09-04T12:28:00.434717+00:00"}
+{"eligible_count": 0, "event": "ma_daily_scan", "symbols_checked": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:28:00.434883+00:00", "watchlist_count": 18}
+{"csv_path": "data/ma_pullback/finviz_export.csv", "event": "ma_universe_screen", "input_count": 56, "output_count": 56, "symbols": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:29:02.198289+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 29.32, "event": "ma_breakout_tracked", "symbol": "BBVA", "timestamp": "2026-09-04T12:29:06.757542+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 54.61, "event": "ma_breakout_tracked", "symbol": "CLMT", "timestamp": "2026-09-04T12:29:06.759591+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 18.85, "event": "ma_breakout_tracked", "symbol": "CMBT", "timestamp": "2026-09-04T12:29:06.762678+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "CRNX", "timestamp": "2026-09-04T12:29:06.762891+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 107.31, "event": "ma_breakout_tracked", "symbol": "DINO", "timestamp": "2026-09-04T12:29:06.768561+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "DUKU", "timestamp": "2026-09-04T12:29:06.768708+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 36.256, "event": "ma_breakout_tracked", "symbol": "FENY", "timestamp": "2026-09-04T12:29:06.773545+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 45.585, "event": "ma_breakout_tracked", "symbol": "FRO", "timestamp": "2026-09-04T12:29:06.775403+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 109.76, "event": "ma_breakout_tracked", "symbol": "HALO", "timestamp": "2026-09-04T12:29:06.777143+00:00"}
+{"event": "ma_retest_seen", "retest_low": 44.96, "symbol": "HP", "timestamp": "2026-09-04T12:29:06.780600+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "HTFL", "timestamp": "2026-09-04T12:29:06.780748+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 69.1, "event": "ma_breakout_tracked", "symbol": "IYE", "timestamp": "2026-09-04T12:29:06.786615+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 391.98, "event": "ma_breakout_tracked", "symbol": "MPC", "timestamp": "2026-09-04T12:29:06.791668+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 7.195, "event": "ma_breakout_tracked", "symbol": "NAT", "timestamp": "2026-09-04T12:29:06.796947+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 21.8299, "event": "ma_breakout_tracked", "symbol": "NOV", "timestamp": "2026-09-04T12:29:06.798752+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 258.48, "event": "ma_breakout_tracked", "symbol": "PSX", "timestamp": "2026-09-04T12:29:06.809158+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 31.88, "event": "ma_breakout_tracked", "symbol": "SBLK", "timestamp": "2026-09-04T12:29:06.816773+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 55.8857, "event": "ma_breakout_tracked", "symbol": "VFLO", "timestamp": "2026-09-04T12:29:06.827358+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 370.11, "event": "ma_breakout_tracked", "symbol": "VLO", "timestamp": "2026-09-04T12:29:06.829027+00:00"}
+{"breakout_date": "2026-09-03", "breakout_level": 65.345, "event": "ma_breakout_tracked", "symbol": "XLE", "timestamp": "2026-09-04T12:29:06.830703+00:00"}
+{"eligible_count": 8, "event": "ma_daily_scan", "symbols_checked": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-04T12:29:06.832555+00:00", "watchlist_count": 47}
