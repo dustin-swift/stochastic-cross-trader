@@ -62,3 +62,4 @@
 {"event": "exit_executed", "order_id": "6a9adec3-3d13-46b0-b2eb-40cee6cf4752", "qty": 2, "symbol": "BAC", "timestamp": "2026-09-04T15:08:24.763751+00:00"}
 {"event": "exit_executed", "order_id": "6a9adec4-78ec-4cee-88b9-07a981ed5d2d", "qty": 3, "symbol": "DBX", "timestamp": "2026-09-04T15:08:24.763956+00:00"}
 {"event": "exit_executed", "order_id": "6a9adec6-add3-48f4-a76d-ac2f50b4eaf2", "qty": 6, "symbol": "NEO", "timestamp": "2026-09-04T15:08:24.764070+00:00"}
+{"candidates_checked": 0, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_skipped_reason": "market_regime_filter_trend_not_intact", "entries_taken": 0, "event": "cycle_summary", "exit_symbols": ["BAC", "DBX", "NEO"], "exits_taken": 3, "market_trend_intact": false, "open_positions": 11, "reconciliation_drift": 0, "slots_remaining": 4, "stop_outs_reconciliation": 0, "timestamp": "2026-09-04T15:08:43.081649+00:00"}
