@@ -1,16 +1,16 @@
 {
-  "CCK": {
-    "entry_d": 20.627224341647892,
-    "entry_k": 33.66064176483862,
+  "AMZU": {
+    "entry_d": 23.791130239863122,
+    "entry_k": 27.538566179794376,
     "entry_order_id": "paper",
-    "entry_prev_d": 16.03186972217361,
-    "entry_prev_k": 18.47669937394977,
-    "entry_price": 120.21,
-    "entry_time": "2026-08-25T00:00:00Z",
-    "qty": 1,
+    "entry_prev_d": 18.162679232698224,
+    "entry_prev_k": 23.71300397073983,
+    "entry_price": 36.64,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "qty": 3,
     "stochastic_state": "NORMAL",
     "stop_order_id": null,
-    "stop_price": 115.5
+    "stop_price": 32.545
   },
   "GM": {
     "entry_d": 23.272303119886683,
@@ -51,6 +51,19 @@
     "stop_order_id": null,
     "stop_price": 29.05
   },
+  "PGNY": {
+    "entry_d": 24.895871528545836,
+    "entry_k": 27.485032412568714,
+    "entry_order_id": "paper",
+    "entry_prev_d": 22.314105936496986,
+    "entry_prev_k": 22.807958644585828,
+    "entry_price": 26.47,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 25.075
+  },
   "SBRA": {
     "entry_d": 24.410363681769777,
     "entry_k": 31.347730952307355,
@@ -76,5 +89,44 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": null,
     "stop_price": 79.99
+  },
+  "TTE": {
+    "entry_d": 24.635194486220296,
+    "entry_k": 40.02614379084969,
+    "entry_order_id": "paper",
+    "entry_prev_d": 20.974344907604472,
+    "entry_prev_k": 19.006535947712454,
+    "entry_price": 90.51,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 87.81
+  },
+  "WTTR": {
+    "entry_d": 32.23735491561578,
+    "entry_k": 37.51229060794279,
+    "entry_order_id": "paper",
+    "entry_prev_d": 26.261948244029004,
+    "entry_prev_k": 31.272501411631833,
+    "entry_price": 19.67,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "qty": 5,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 18.245
+  },
+  "XRAY": {
+    "entry_d": 31.46265725818951,
+    "entry_k": 31.49265610303155,
+    "entry_order_id": "paper",
+    "entry_prev_d": 26.57170576879008,
+    "entry_prev_k": 37.01132561704177,
+    "entry_price": 11.51,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "qty": 9,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 10.61
   }
 }

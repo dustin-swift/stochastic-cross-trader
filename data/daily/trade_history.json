@@ -430,5 +430,29 @@
     "stop_order_id": null,
     "stop_price": 10.745,
     "symbol": "SHO"
+  },
+  {
+    "closed_at": "2026-09-04T20:18:43.589341+00:00",
+    "entry_d": 20.627224341647892,
+    "entry_k": 33.66064176483862,
+    "entry_order_id": "paper",
+    "entry_prev_d": 16.03186972217361,
+    "entry_prev_k": 18.47669937394977,
+    "entry_price": 120.21,
+    "entry_time": "2026-08-25T00:00:00Z",
+    "exit_d": null,
+    "exit_k": null,
+    "exit_order_id": "paper",
+    "exit_prev_d": null,
+    "exit_prev_k": null,
+    "exit_price": 115.5,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-09-03T00:00:00Z",
+    "pnl_pct": -3.918143249313699,
+    "pnl_usd": -4.709999999999994,
+    "qty": 1,
+    "stop_order_id": null,
+    "stop_price": 115.5,
+    "symbol": "CCK"
   }
 ]
