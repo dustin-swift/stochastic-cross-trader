@@ -128,18 +128,5 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a998ede-a874-4d88-bfa1-7498822bacdb",
     "stop_price": 46.53
-  },
-  "PGNY": {
-    "entry_d": 20.09473835909095,
-    "entry_k": 24.785301717586236,
-    "entry_order_id": "6a982ea5-7a82-4c5e-b2d4-80ee97a3beef",
-    "entry_prev_d": 22.534503388432096,
-    "entry_prev_k": 17.89405684754524,
-    "entry_price": 26.2599,
-    "entry_time": "2026-09-02T14:11:50.188Z",
-    "qty": 4,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a982eb1-c215-443f-bff2-c8cd60434fc4",
-    "stop_price": 24.86
   }
 }

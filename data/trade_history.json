@@ -3782,5 +3782,29 @@
     "stop_order_id": "6a99c643-cea8-40bf-afba-bf305a5c18b3",
     "stop_price": 16.38,
     "symbol": "NEO"
+  },
+  {
+    "closed_at": "2026-09-04T16:07:13.963483+00:00",
+    "entry_d": 20.09473835909095,
+    "entry_k": 24.785301717586236,
+    "entry_order_id": "6a982ea5-7a82-4c5e-b2d4-80ee97a3beef",
+    "entry_prev_d": 22.534503388432096,
+    "entry_prev_k": 17.89405684754524,
+    "entry_price": 26.2599,
+    "entry_time": "2026-09-02T14:11:50.188Z",
+    "exit_d": 68.4604548816758,
+    "exit_k": 43.63015497767264,
+    "exit_order_id": "6a9aeca0-b22a-40d1-b646-fce063baa36b",
+    "exit_prev_d": 84.19191486984558,
+    "exit_prev_k": 71.9380707365688,
+    "exit_price": 25.8401,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-04T16:06:56.755Z",
+    "pnl_pct": -1.5986351813982447,
+    "pnl_usd": -1.6791999999999945,
+    "qty": 4,
+    "stop_order_id": "6a982eb1-c215-443f-bff2-c8cd60434fc4",
+    "stop_price": 24.86,
+    "symbol": "PGNY"
   }
 ]
