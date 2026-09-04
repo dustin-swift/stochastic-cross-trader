@@ -76,5 +76,31 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a983d5a-00d2-442c-a3b0-2b6c7b092a37",
     "stop_price": 31.88
+  },
+  "ATAI": {
+    "entry_price": 7.4,
+    "qty": 14,
+    "entry_time": "2026-09-04T19:09:38.818Z",
+    "entry_order_id": "6a9b1772-4c82-4d3a-a618-5ad0fbcf58a9",
+    "stop_order_id": "6a9b1793-fe6e-4545-94ba-a8c88854ee23",
+    "stop_price": 7.09,
+    "stochastic_state": "NORMAL",
+    "entry_k": 36.11111111111129,
+    "entry_d": 22.685185185185503,
+    "entry_prev_k": 18.055555555555888,
+    "entry_prev_d": 14.941077441077775
+  },
+  "PK": {
+    "entry_price": 15.2899,
+    "qty": 7,
+    "entry_time": "2026-09-04T19:10:25.7Z",
+    "entry_order_id": "6a9b17a1-27d0-4fea-bb72-0616da462a79",
+    "stop_order_id": "6a9b17b6-f64a-44e1-822e-81217526ff53",
+    "stop_price": 14.67,
+    "stochastic_state": "NORMAL",
+    "entry_k": 33.04093567251447,
+    "entry_d": 29.239766081871227,
+    "entry_prev_k": 28.654970760233812,
+    "entry_prev_d": 23.879142300194843
   }
 }
