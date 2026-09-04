@@ -12,19 +12,6 @@
     "stop_order_id": "6a984b6f-ea13-46a0-8dad-bfb87a923459",
     "stop_price": 75.49
   },
-  "APPS": {
-    "entry_d": 24.886461422175675,
-    "entry_k": 47.56623931623932,
-    "entry_order_id": "6a999c3a-0d44-4fa7-b063-f8e8e93e5c8a",
-    "entry_prev_d": 11.808826094540322,
-    "entry_prev_k": 19.82927786499211,
-    "entry_price": 10.4299,
-    "entry_time": "2026-09-03T16:11:38.33Z",
-    "qty": 10,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a999c48-77a2-4c87-954d-0eb94d56cfc6",
-    "stop_price": 8.81
-  },
   "BCS": {
     "entry_d": 22.988993699990726,
     "entry_k": 44.53102136376943,

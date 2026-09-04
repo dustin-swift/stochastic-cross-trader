@@ -3878,5 +3878,29 @@
     "stop_order_id": "6a998ede-a874-4d88-bfa1-7498822bacdb",
     "stop_price": 46.53,
     "symbol": "FAST"
+  },
+  {
+    "closed_at": "2026-09-04T19:06:38.199586+00:00",
+    "entry_d": 24.886461422175675,
+    "entry_k": 47.56623931623932,
+    "entry_order_id": "6a999c3a-0d44-4fa7-b063-f8e8e93e5c8a",
+    "entry_prev_d": 11.808826094540322,
+    "entry_prev_k": 19.82927786499211,
+    "entry_price": 10.4299,
+    "entry_time": "2026-09-03T16:11:38.33Z",
+    "exit_d": 79.73624091381099,
+    "exit_k": 78.23052959501557,
+    "exit_order_id": "6a9b16a9-4800-4125-afac-c13b6c65a529",
+    "exit_prev_d": 82.78712357217029,
+    "exit_prev_k": 79.00934579439253,
+    "exit_price": 10.5301,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-04T19:06:17.231Z",
+    "pnl_pct": 0.9606995273204744,
+    "pnl_usd": 1.0019999999999918,
+    "qty": 10,
+    "stop_order_id": "6a999c48-77a2-4c87-954d-0eb94d56cfc6",
+    "stop_price": 8.81,
+    "symbol": "APPS"
   }
 ]
