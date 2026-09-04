@@ -3686,5 +3686,29 @@
     "stop_order_id": "6a998e99-3016-4e74-8246-cfcba5b9b51b",
     "stop_price": 103.78,
     "symbol": "CSCO"
+  },
+  {
+    "closed_at": "2026-09-04T13:29:41.991563+00:00",
+    "entry_d": 20.153945615972713,
+    "entry_k": 25.946119102568563,
+    "entry_order_id": "6a982e8b-b1f8-441a-9167-aedf7fabddc4",
+    "entry_prev_d": 15.699308158624481,
+    "entry_prev_k": 18.448602434375676,
+    "entry_price": 34.3692,
+    "entry_time": "2026-09-02T14:11:24.18Z",
+    "exit_d": 75.4356963588401,
+    "exit_k": 60.95575441213046,
+    "exit_order_id": "6a9ac760-3996-4081-a94a-33e72c3dff65",
+    "exit_prev_d": 84.43371848430682,
+    "exit_prev_k": 76.97738006462863,
+    "exit_price": null,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-04T13:29:41.976941+00:00",
+    "pnl_pct": null,
+    "pnl_usd": null,
+    "qty": 3,
+    "stop_order_id": "6a982e9a-60c1-4133-8770-6f69d87745cc",
+    "stop_price": 32.55,
+    "symbol": "AMLX"
   }
 ]
