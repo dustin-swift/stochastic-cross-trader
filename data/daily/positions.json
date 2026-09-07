@@ -34,7 +34,7 @@
     "entry_price": 103.41,
     "entry_time": "2026-08-25T00:00:00Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": null,
     "stop_price": 100.05
   },
@@ -47,7 +47,7 @@
     "entry_price": 29.8,
     "entry_time": "2026-08-25T00:00:00Z",
     "qty": 3,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": null,
     "stop_price": 29.05
   },
@@ -89,19 +89,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": null,
     "stop_price": 79.99
-  },
-  "TTE": {
-    "entry_d": 24.635194486220296,
-    "entry_k": 40.02614379084969,
-    "entry_order_id": "paper",
-    "entry_prev_d": 20.974344907604472,
-    "entry_prev_k": 19.006535947712454,
-    "entry_price": 90.51,
-    "entry_time": "2026-09-03T00:00:00Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": null,
-    "stop_price": 87.81
   },
   "WTTR": {
     "entry_d": 32.23735491561578,

@@ -454,5 +454,29 @@
     "stop_order_id": null,
     "stop_price": 115.5,
     "symbol": "CCK"
+  },
+  {
+    "closed_at": "2026-09-07T20:20:36.257255+00:00",
+    "entry_d": 24.635194486220296,
+    "entry_k": 40.02614379084969,
+    "entry_order_id": "paper",
+    "entry_prev_d": 20.974344907604472,
+    "entry_prev_k": 19.006535947712454,
+    "entry_price": 90.51,
+    "entry_time": "2026-09-03T00:00:00Z",
+    "exit_d": null,
+    "exit_k": null,
+    "exit_order_id": "paper",
+    "exit_prev_d": null,
+    "exit_prev_k": null,
+    "exit_price": 87.81,
+    "exit_reason": "stop_out",
+    "exit_time": "2026-09-04T00:00:00Z",
+    "pnl_pct": -2.9830957905203848,
+    "pnl_usd": -2.700000000000003,
+    "qty": 1,
+    "stop_order_id": null,
+    "stop_price": 87.81,
+    "symbol": "TTE"
   }
 ]
