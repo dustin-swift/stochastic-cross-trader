@@ -3950,5 +3950,29 @@
     "stop_order_id": "6a983d59-f59e-48ff-a57a-0d13c245da4e",
     "stop_price": 110.44,
     "symbol": "CM"
+  },
+  {
+    "closed_at": "2026-09-08T15:06:45.118771+00:00",
+    "entry_d": 22.80261103236855,
+    "entry_k": 43.10102817840467,
+    "entry_order_id": "6a983d0e-4f32-4031-bc5f-dc4517d9d3f0",
+    "entry_prev_d": 11.172759817402715,
+    "entry_prev_k": 16.701596616240295,
+    "entry_price": 33.3399,
+    "entry_time": "2026-09-02T15:13:18.609Z",
+    "exit_d": 77.43977931233884,
+    "exit_k": 64.58254213529939,
+    "exit_order_id": "6aa0247c-192b-455a-85cb-480e1e228838",
+    "exit_prev_d": 86.31403690970217,
+    "exit_prev_k": 81.28624583900294,
+    "exit_price": 33.9701,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-08T15:06:36.235Z",
+    "pnl_pct": 1.8902276251578476,
+    "pnl_usd": 1.8906000000000063,
+    "qty": 3,
+    "stop_order_id": "6a983d5a-00d2-442c-a3b0-2b6c7b092a37",
+    "stop_price": 31.88,
+    "symbol": "CRBG"
   }
 ]
