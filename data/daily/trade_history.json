@@ -478,5 +478,29 @@
     "stop_order_id": null,
     "stop_price": 87.81,
     "symbol": "TTE"
+  },
+  {
+    "closed_at": "2026-09-08T20:46:14.798935+00:00",
+    "entry_d": 28.866197888737787,
+    "entry_k": 35.290280495759866,
+    "entry_order_id": "paper",
+    "entry_prev_d": 22.529313725078556,
+    "entry_prev_k": 27.85388127853871,
+    "entry_price": 15.43,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "exit_d": 31.267124981117988,
+    "exit_k": 30.657213169055385,
+    "exit_order_id": "paper",
+    "exit_prev_d": 28.866197888737787,
+    "exit_prev_k": 35.290280495759866,
+    "exit_price": 15.25,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-04T00:00:00Z",
+    "pnl_pct": -1.166558651976668,
+    "pnl_usd": -1.0799999999999983,
+    "qty": 6,
+    "stop_order_id": null,
+    "stop_price": 14.365,
+    "symbol": "GRND"
   }
 ]

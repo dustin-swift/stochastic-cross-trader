@@ -1,4 +1,17 @@
 {
+  "AFL": {
+    "entry_d": 26.598349053552965,
+    "entry_k": 34.59436738125256,
+    "entry_order_id": "paper",
+    "entry_prev_d": 18.05085699659194,
+    "entry_prev_k": 29.592265657839373,
+    "entry_price": 117.51,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 114.435
+  },
   "AMZU": {
     "entry_d": 23.791130239863122,
     "entry_k": 27.538566179794376,
@@ -11,6 +24,84 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": null,
     "stop_price": 32.545
+  },
+  "ASB": {
+    "entry_d": 27.45400504431433,
+    "entry_k": 41.34407893529691,
+    "entry_order_id": "paper",
+    "entry_prev_d": 18.23537848950623,
+    "entry_prev_k": 25.827183783683765,
+    "entry_price": 30.77,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 29.884999999999998
+  },
+  "AUB": {
+    "entry_d": 25.0083269085175,
+    "entry_k": 37.543351405040795,
+    "entry_order_id": "paper",
+    "entry_prev_d": 15.834265727216822,
+    "entry_prev_k": 23.37899543379001,
+    "entry_price": 40.7,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 39.440000000000005
+  },
+  "AVUV": {
+    "entry_d": 34.241962995230374,
+    "entry_k": 53.04511204047744,
+    "entry_order_id": "paper",
+    "entry_prev_d": 19.57113674515784,
+    "entry_prev_k": 32.37230329780917,
+    "entry_price": 125.7,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 123.39
+  },
+  "BAC": {
+    "entry_d": 28.292380644466068,
+    "entry_k": 34.97413514387335,
+    "entry_order_id": "paper",
+    "entry_prev_d": 22.365017782088646,
+    "entry_prev_k": 26.08309085030721,
+    "entry_price": 62.56,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 60.910000000000004
+  },
+  "BAX": {
+    "entry_d": 23.609065790020285,
+    "entry_k": 30.823891715305177,
+    "entry_order_id": "paper",
+    "entry_prev_d": 18.34325916532035,
+    "entry_prev_k": 21.691459184703366,
+    "entry_price": 25.33,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 23.544999999999998
+  },
+  "BCS": {
+    "entry_d": 22.181858494713797,
+    "entry_k": 39.34083721786329,
+    "entry_order_id": "paper",
+    "entry_prev_d": 12.911518920796246,
+    "entry_prev_k": 19.44860128578447,
+    "entry_price": 26.78,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 4,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 25.61
   },
   "GM": {
     "entry_d": 23.272303119886683,
@@ -50,6 +141,45 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": null,
     "stop_price": 29.05
+  },
+  "NWG": {
+    "entry_d": 23.411832611832534,
+    "entry_k": 43.26349206349196,
+    "entry_order_id": "paper",
+    "entry_prev_d": 11.56844636844634,
+    "entry_prev_k": 19.250793650793565,
+    "entry_price": 18.86,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 5,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 18.169999999999998
+  },
+  "OMF": {
+    "entry_d": 23.365379247200185,
+    "entry_k": 36.323987538940834,
+    "entry_order_id": "paper",
+    "entry_prev_d": 21.030382206143454,
+    "entry_prev_k": 19.466720262620182,
+    "entry_price": 64.1,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 61.73
+  },
+  "PFG": {
+    "entry_d": 23.63391278358672,
+    "entry_k": 41.94133613128023,
+    "entry_order_id": "paper",
+    "entry_prev_d": 16.817315968321072,
+    "entry_prev_k": 16.62937818529382,
+    "entry_price": 117.03,
+    "entry_time": "2026-09-04T00:00:00Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": null,
+    "stop_price": 113.46000000000001
   },
   "PGNY": {
     "entry_d": 24.895871528545836,
