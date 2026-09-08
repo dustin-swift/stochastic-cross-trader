@@ -1,43 +1,4 @@
 {
-  "ACWX": {
-    "entry_d": 23.747456247455904,
-    "entry_k": 35.042735042734954,
-    "entry_order_id": "6a984b54-a71c-440e-8239-8545254a860e",
-    "entry_prev_d": 15.22895205993756,
-    "entry_prev_k": 24.102564102563694,
-    "entry_price": 77.1599,
-    "entry_time": "2026-09-02T16:14:12.713Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a984b6f-ea13-46a0-8dad-bfb87a923459",
-    "stop_price": 75.49
-  },
-  "BCS": {
-    "entry_d": 22.988993699990726,
-    "entry_k": 44.53102136376943,
-    "entry_order_id": "6a998e44-730c-4b56-b585-8c49dc989c95",
-    "entry_prev_d": 10.789161707472084,
-    "entry_prev_k": 14.925373134328353,
-    "entry_price": 26.7187,
-    "entry_time": "2026-09-03T15:12:04.976Z",
-    "qty": 4,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a998e58-e856-4beb-85d3-e30adef2e8ad",
-    "stop_price": 25.55
-  },
-  "CP": {
-    "entry_d": 23.643763539782878,
-    "entry_k": 28.913266306816272,
-    "entry_order_id": "6a998e66-e986-418b-87fc-69f637afe482",
-    "entry_prev_d": 19.76300374020582,
-    "entry_prev_k": 22.584213862633288,
-    "entry_price": 90.543,
-    "entry_time": "2026-09-03T15:12:38.489Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6a998e79-413c-48fa-ae55-919202e2221f",
-    "stop_price": 87.59
-  },
   "HSIC": {
     "entry_d": 20.1096522135148,
     "entry_k": 23.86934673366787,
