@@ -37,5 +37,31 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6a998e79-413c-48fa-ae55-919202e2221f",
     "stop_price": 87.59
+  },
+  "HSIC": {
+    "entry_d": 20.1096522135148,
+    "entry_k": 23.86934673366787,
+    "entry_order_id": "6aa04fe9-4b9c-4fff-92b4-7d39e4bf0222",
+    "entry_prev_d": 19.137811113907347,
+    "entry_prev_k": 18.64225533319079,
+    "entry_price": 89.4243,
+    "entry_time": "2026-09-08T18:11:53.967275Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa04ff5-32f5-47cc-804d-46fccec7ede7",
+    "stop_price": 85.97
+  },
+  "RAMP": {
+    "entry_d": 41.270548623490846,
+    "entry_k": 52.38562091503346,
+    "entry_order_id": "6aa04fff-a400-4d9e-ad87-fcc792052cbe",
+    "entry_prev_d": 31.333927510399665,
+    "entry_prev_k": 42.183600713013924,
+    "entry_price": 37.7599,
+    "entry_time": "2026-09-08T18:12:15.606045Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa0500a-b886-4ca1-8e84-71903594eb23",
+    "stop_price": 37.43
   }
 }
