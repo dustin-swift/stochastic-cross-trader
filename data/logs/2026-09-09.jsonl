@@ -1387,3 +1387,9 @@
 {"d": 68.64089695197666, "event": "signal_check", "k": 55.997008544189754, "kind": "entry", "pending": null, "prev_d": 81.59144963065383, "prev_k": 66.93377703669913, "signal": false, "symbol": "ZIM", "timestamp": "2026-09-09T18:09:22.195515+00:00"}
 {"d": 13.034382395815507, "event": "signal_check", "k": 5.157025728158988, "kind": "entry", "pending": null, "prev_d": 16.9703124391101, "prev_k": 17.040731504571802, "signal": false, "symbol": "ZION", "timestamp": "2026-09-09T18:09:22.198190+00:00"}
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 2, "needs_cancel": false, "order_id": "6aa1a0ff-0f5e-4e45-9505-40c3e4cb0a33", "order_state": "filled", "symbol": "AAP", "timestamp": "2026-09-09T18:10:16.931662+00:00"}
+{"event": "entry_executed", "order_id": "6aa1a0ff-0f5e-4e45-9505-40c3e4cb0a33", "qty": 2, "symbol": "AAP", "timestamp": "2026-09-09T18:11:56.907104+00:00"}
+{"event": "stop_placed", "qty": 2, "stop_order_id": "6aa1a11e-2026-4f6a-bd6c-e08020776e3a", "symbol": "AAP", "timestamp": "2026-09-09T18:11:56.907365+00:00"}
+{"event": "entry_executed", "order_id": "6aa1a12e-a077-4c47-bd36-7528efb73c3e", "qty": 8, "symbol": "DRH", "timestamp": "2026-09-09T18:11:56.907419+00:00"}
+{"event": "stop_placed", "qty": 8, "stop_order_id": "6aa1a13b-0b25-46bf-8c9b-5a0336b8550f", "symbol": "DRH", "timestamp": "2026-09-09T18:11:56.907446+00:00"}
+{"event": "entry_executed", "order_id": "6aa1a145-cd09-4846-8e39-c27f758194e4", "qty": 4, "symbol": "SLDE", "timestamp": "2026-09-09T18:11:56.907464+00:00"}
+{"event": "stop_placed", "qty": 4, "stop_order_id": "6aa1a152-089f-485c-8241-cc986e82d761", "symbol": "SLDE", "timestamp": "2026-09-09T18:11:56.907484+00:00"}
