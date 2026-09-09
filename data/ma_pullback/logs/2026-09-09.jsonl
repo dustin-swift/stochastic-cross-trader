@@ -46,3 +46,5 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHD", "timestamp": "2026-09-09T18:14:34.919421+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-09T18:14:34.921226+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-09T18:14:34.922924+00:00"}
+{"account_value": 2230.93, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.51, "timestamp": "2026-09-09T19:09:54.688575+00:00", "tripped": false, "unrealized_pnl_today": 0}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-09T19:10:23.204622+00:00", "trend_intact": true}
