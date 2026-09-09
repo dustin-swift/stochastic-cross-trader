@@ -647,8 +647,6 @@ Robinhood MCP connector (see prerequisite #3 above):
   the-line confirmation reverse before the trade landed; see
   `scripts/check_hourly_signals.py`'s "Execution-lag cron fix" docstring
   note for the full writeup).
-- **daily-stochastic-check** — once per day, after market close. The daily
-  paper-comparison track — see "Daily comparison track" below.
 - **daily-ma-scan** — once per day, before market open, staggered a few
   minutes from `daily-universe-screen` so the two routines don't collide on
   the shared cloud sandbox. The MA Pullback / Breakout-Retest agent's daily
@@ -659,76 +657,12 @@ Robinhood MCP connector (see prerequisite #3 above):
   agent's entry/exit cycle — see that section below.
 - **dashboard-refresh** — hourly during market hours, a few minutes after
   `hourly-signal-check` — see Dashboard below. Also passes `--ma-config
-  config/ma_pullback_strategy.yaml --ma-data-dir data/ma_pullback` (in
-  addition to the existing `--daily-config`/`--daily-data-dir` flags) so the
-  dashboard's third tab stays current too.
+  config/ma_pullback_strategy.yaml --ma-data-dir data/ma_pullback` so the
+  dashboard's second tab stays current too.
 
 Minimum cron interval for a routine is 1 hour. All routines are safe
 to also trigger manually (`RemoteTrigger` `action: "run"`, or just asking an
 agent to follow the skill directly) any time, in addition to their schedule.
-
-## Daily comparison track (config/strategy_daily.yaml, 2026-08-13)
-
-A second, parallel strategy track built to directly answer "would this do
-better on daily bars instead of hourly?" — same stochastic entry/exit rules,
-same $100/15-slot sizing, and (at the user's explicit choice) the same
-daily-screened candidate list as the hourly track above, but every
-oscillator/ATR/trend/market-regime reading is computed on DAILY bars
-instead of hourly ones. See `.claude/skills/daily-stochastic-check.md` for
-the full runbook and `config/strategy_daily.yaml` for the rationale behind
-every value that differs from the hourly config (mainly: SMA periods that
-made sense at hourly granularity don't automatically make sense at daily
-granularity, so several were re-derived rather than copied as-is).
-
-**Permanent paper/dry-run — never trades real money.** This was an explicit
-choice (asked directly, 2026-08-13: dry-run-only vs. live-with-split-capital
-— dry-run won, to keep the comparison clean and avoid the two tracks
-competing for capital/slots in the same account). `config/strategy_daily.yaml`
-has `live: false`, but that's not the only safeguard — the
-`daily-stochastic-check` skill is written to never call an order-placing
-tool under any circumstance, full stop. Every entry/exit on this track is a
-**simulated fill** recorded straight into `data/daily/positions.json` /
-`data/daily/trade_history.json` — no broker order, no broker fill, nothing
-to reconcile. The stop-loss itself is simulated too (`scripts/
-check_paper_stops.py`, run each cycle before the ordinary signal-exit check):
-since there's no real resting stop order to check for a fill, this instead
-applies the same fill convention `lib/backtest.py` uses for historical
-research — a stop "fills" at the exact stop price on the first bar whose low
-touches or breaches it.
-
-**Separate state, shared candidates.** This track's positions, pending
-dual-cross setups, trade history, and last-cycle timestamp all live under
-`data/daily/` — completely separate from the hourly (live) track's
-`data/*.json`, so the two can never collide, double-count, or accidentally
-compete for the same simulated/real slot. The one deliberate exception:
-`data/candidates.json` (the daily-universe-screen's output) is read
-directly by both tracks, not duplicated — `scripts/build_entries_payload.py`'s
-`--candidates-data-dir` flag is what makes that split possible (positions/
-pending come from `--data-dir data/daily`, candidates come from
-`--candidates-data-dir data`).
-
-**Fills happen at the next trading day's open, not the signal day's close
-(2026-08-14).** The original design recorded a confirmed signal's fill at
-that day's own closing price — but since this routine only runs once per
-day, *after* close, that fill was never actually achievable by any real
-order: by the time the signal is even computed, the session it's priced off
-of is already over. So a confirmed entry is now **queued**
-(`scripts/queue_paper_fill.py`, into `data/daily/pending_fills.json`) rather
-than bought immediately, and **settled** into a real `positions.json` entry
-on the *next* cycle (`scripts/settle_paper_fills.py`), once that next day's
-open price is actually known — sizing the share count and the ATR stop off
-that real open, not the signal-day estimate, the same "size at the real
-fill price, not the signal price" principle the hourly track already
-follows. `pending_fills.json` is distinct from `pending_entries.json`: the
-latter is the %K/%D dual-cross confirmation state (*before* a signal
-fires), the former is a signal that's *already* confirmed and is just
-waiting one cycle to be realistically fillable.
-
-**Comparing results**: the dashboard's "Daily · Paper" tab (see Dashboard
-below) shows this track's open positions and closed-trade performance
-side by side with the hourly track's real results — same layout, same
-metrics, so a win-rate/P&L comparison is a glance, not a spreadsheet
-exercise.
 
 ## MA Pullback / Breakout-Retest Agent (config/ma_pullback_strategy.yaml, 2026-08-17)
 
@@ -941,12 +875,10 @@ behavior, and entries excluded above `max_price_per_share`);
 A published Claude Artifact — positions, closed-trade history with
 drill-down, today's watchlist, and portfolio/system stats — kept fresh by
 the **dashboard-refresh** cloud routine on the same hourly cadence as
-trading itself, with no manual "refresh" step required. It has three tabs:
-**Hourly · Live** (the real-money track described above), **Daily · Paper**
-(the comparison track described in "Daily comparison track" above, clearly
-banner-labeled as paper/dry-run), and **MA Pullback · Live** (the
-independent breakout-retest agent described below, clearly labeled with its
-own live/dry-run status).
+trading itself, with no manual "refresh" step required. It has two tabs:
+**Hourly · Live** (the real-money track described above) and
+**MA Pullback · Live** (the independent breakout-retest agent described
+below, clearly labeled with its own live/dry-run status).
 
 - `dashboard/template.html` — the page itself (self-contained: fonts
   embedded as base64 `@font-face` data URIs, since a published Artifact's
@@ -956,22 +888,18 @@ own live/dry-run status).
 - `scripts/build_dashboard.py` — renders `template.html` into
   `dashboard/dist.html`, pulling positions/trade history/candidates/logs/
   config straight from `data/` and `config/strategy.yaml` for the Hourly
-  tab, from `data/daily/` and `config/strategy_daily.yaml` (via
-  `--daily-data-dir`/`--daily-config`, defaulted to those paths) for the
-  Daily tab, and from `data/ma_pullback/` and
-  `config/ma_pullback_strategy.yaml` (via `--ma-data-dir`/`--ma-config`,
-  same defaulted-path convention) for the MA Pullback tab — each of the
-  latter two degrades to an empty tab rather than failing the whole build if
-  that track hasn't run yet or its config/state isn't present on this
-  checkout. The only inputs it can't derive itself — live account totals and
-  current prices for open positions, hourly track only, since neither the
-  daily nor the MA Pullback track's dashboard section needs a live broker
-  call — come in via a small JSON payload on stdin (see the script's own
-  docstring for the exact shape).
+  tab, and from `data/ma_pullback/` and `config/ma_pullback_strategy.yaml`
+  (via `--ma-data-dir`/`--ma-config`, defaulted to those paths) for the MA
+  Pullback tab — the MA tab degrades to an empty tab rather than failing the
+  whole build if that agent hasn't run yet or its config/state isn't present
+  on this checkout. The only inputs it can't derive itself — live account
+  totals and current prices for open positions, hourly track only, since the
+  MA Pullback track's dashboard section doesn't need a live broker call —
+  come in via a small JSON payload on stdin (see the script's own docstring
+  for the exact shape).
 - The **dashboard-refresh** routine's job each run: `sync_state.sh pull`,
   fetch that live snapshot via the Robinhood MCP connector, run
-  `build_dashboard.py` (with `--ma-config`/`--ma-data-dir` alongside the
-  existing `--daily-config`/`--daily-data-dir` flags), then publish
+  `build_dashboard.py` (with `--ma-config`/`--ma-data-dir`), then publish
   `dashboard/dist.html` with the Artifact tool using the dashboard's
   existing URL (so it updates in place rather than minting a new one each
   time).

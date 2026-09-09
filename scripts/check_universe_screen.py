@@ -17,11 +17,11 @@ a real export were past-dated this way). The safer, simpler design: don't
 try to filter earnings for the whole daily list at all, live or CSV-sourced.
 Earnings avoidance instead happens ONLY on the tiny handful of candidates
 that actually confirm a stochastic entry signal in a given hourly cycle —
-see `scripts/filter_entry_earnings.py` and the hourly-signal-check /
-daily-stochastic-check skills, which do a real-time `get_earnings_results`
-check right before buying. `--earnings-input` still exists below as a raw
-capability (some caller could still pass earnings data to filter on), but
-neither scheduled skill calls it anymore.
+see `scripts/filter_entry_earnings.py` and the hourly-signal-check skill,
+which does a real-time `get_earnings_results` check right before buying.
+`--earnings-input` still exists below as a raw capability (some caller
+could still pass earnings data to filter on), but no scheduled skill calls
+it anymore.
 
 Also resets data/pending_entries.json to empty on every successful run (spec
 §3, 2026-08-04 dual-cross entry revision, see lib.signals.advance_pending_entry)

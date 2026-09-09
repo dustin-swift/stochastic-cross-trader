@@ -31,15 +31,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from lib.config import load_config, load_ma_config
 from lib.state import StateStore
 
-DEFAULT_DAILY_CONFIG = "config/strategy_daily.yaml"
-DEFAULT_DAILY_DATA_DIR = "data/daily"
 DEFAULT_MA_CONFIG = "config/ma_pullback_strategy.yaml"
 DEFAULT_MA_DATA_DIR = "data/ma_pullback"
 
 ROUTINES = [
     {"name": "daily-universe-screen", "schedule": "8:00 AM ET, weekdays"},
     {"name": "hourly-signal-check", "schedule": "Hourly, 9:30 AM – 3:30 PM ET, weekdays"},
-    {"name": "daily-stochastic-check", "schedule": "Once, after close, weekdays (paper/dry-run comparison track)"},
     {"name": "daily-ma-scan", "schedule": "8:05 AM ET, weekdays (MA Pullback/Breakout-Retest agent, staggered from daily-universe-screen)"},
     {"name": "hourly-ma-signal-check", "schedule": "Hourly, 9:35 AM – 3:35 PM ET, weekdays (MA Pullback/Breakout-Retest agent, staggered from hourly-signal-check)"},
     {"name": "dashboard-refresh", "schedule": "Hourly, 9:40 AM – 3:40 PM ET, weekdays"},
@@ -91,37 +88,12 @@ def _latest_circuit_breaker_status(data_dir: Path, lookback_days: int = 3) -> di
     return {"tripped": bool(latest["tripped"]), "checked_at": latest["timestamp"]}
 
 
-def _build_daily_section(daily_config_path: str, daily_data_dir: str) -> dict:
-    """The daily-stochastic-check track's positions/trade_history for the
-    dashboard's second tab (2026-08-13). Never raises: this track is a
-    parallel comparison feature added after the dashboard's own launch, so a
-    dashboard-refresh run against an older bot-state checkout (or before the
-    daily track has ever run once) must still render the hourly tab fine --
-    an empty/absent daily config or data dir degrades to an empty section,
-    not a build failure.
-    """
-    try:
-        daily_config = load_config(daily_config_path)
-    except (FileNotFoundError, ValueError):
-        return {"positions": [], "trade_history": [], "config": {"max_positions": 0}, "available": False}
-
-    daily_store = StateStore(daily_data_dir)
-    positions = daily_store.load_positions()
-    positions_list = [dict(pos, symbol=symbol) for symbol, pos in positions.items()]
-    return {
-        "positions": positions_list,
-        "trade_history": daily_store.load_trade_history(),
-        "config": {"max_positions": daily_config["sizing"]["max_positions"]},
-        "available": True,
-    }
-
-
 def _build_ma_section(ma_config_path: str, ma_data_dir: str) -> dict:
     """The MA Pullback / Breakout-Retest agent's positions/watchlist/trade
-    history for the dashboard's third tab. Same degrades-to-empty pattern as
-    `_build_daily_section` above: an absent config or data dir (this agent
-    hasn't run yet, or an older bot-state checkout predates it) must not fail
-    the whole dashboard build -- it just renders an empty MA tab.
+    history for the dashboard's second tab. Never raises: an absent config or
+    data dir (this agent hasn't run yet, or an older bot-state checkout
+    predates it) must not fail the whole dashboard build -- it just renders
+    an empty MA tab.
     """
     try:
         ma_config = load_ma_config(ma_config_path)
@@ -157,7 +129,7 @@ def _build_ma_section(ma_config_path: str, ma_data_dir: str) -> dict:
     }
 
 
-def build_data(config: dict, store: StateStore, data_dir: Path, live_snapshot: dict, now: datetime, daily_config_path: str, daily_data_dir: str, ma_config_path: str, ma_data_dir: str) -> dict:
+def build_data(config: dict, store: StateStore, data_dir: Path, live_snapshot: dict, now: datetime, ma_config_path: str, ma_data_dir: str) -> dict:
     positions = store.load_positions()
     position_prices = live_snapshot.get("position_prices", {})
     positions_list = []
@@ -201,7 +173,6 @@ def build_data(config: dict, store: StateStore, data_dir: Path, live_snapshot: d
         "candidates": candidates,
         "routines": ROUTINES,
         "activity_today": _todays_event_counts(data_dir, today),
-        "daily": _build_daily_section(daily_config_path, daily_data_dir),
         "ma": _build_ma_section(ma_config_path, ma_data_dir),
     }
 
@@ -224,10 +195,8 @@ def main() -> None:
     parser.add_argument("--data-dir", default="data")
     parser.add_argument("--dashboard-dir", default="dashboard", help="Directory containing template.html and fonts/")
     parser.add_argument("--output", default="dashboard/dist.html")
-    parser.add_argument("--daily-config", default=DEFAULT_DAILY_CONFIG, help="daily-stochastic-check track's config, for the dashboard's second tab")
-    parser.add_argument("--daily-data-dir", default=DEFAULT_DAILY_DATA_DIR, help="daily-stochastic-check track's state dir, for the dashboard's second tab")
-    parser.add_argument("--ma-config", default=DEFAULT_MA_CONFIG, help="MA Pullback/Breakout-Retest agent's config, for the dashboard's third tab")
-    parser.add_argument("--ma-data-dir", default=DEFAULT_MA_DATA_DIR, help="MA Pullback/Breakout-Retest agent's state dir, for the dashboard's third tab")
+    parser.add_argument("--ma-config", default=DEFAULT_MA_CONFIG, help="MA Pullback/Breakout-Retest agent's config, for the dashboard's second tab")
+    parser.add_argument("--ma-data-dir", default=DEFAULT_MA_DATA_DIR, help="MA Pullback/Breakout-Retest agent's state dir, for the dashboard's second tab")
     args = parser.parse_args()
 
     config = load_config(args.config)
@@ -236,7 +205,7 @@ def main() -> None:
     live_snapshot = _load_input(args.input)
     now = datetime.now(timezone.utc)
 
-    data = build_data(config, store, data_dir, live_snapshot, now, args.daily_config, args.daily_data_dir, args.ma_config, args.ma_data_dir)
+    data = build_data(config, store, data_dir, live_snapshot, now, args.ma_config, args.ma_data_dir)
 
     dashboard_dir = Path(args.dashboard_dir)
     html = render(dashboard_dir / "template.html", dashboard_dir / "fonts", data)

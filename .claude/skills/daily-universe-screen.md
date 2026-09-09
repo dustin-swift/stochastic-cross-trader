@@ -24,8 +24,8 @@ the user's direction): earnings avoidance for entries happens only on the
 tiny handful of candidates that actually confirm a stochastic entry signal
 in a given hourly cycle, via a live `get_earnings_results` check right
 before buying — see `scripts/filter_entry_earnings.py` and the
-hourly-signal-check / daily-stochastic-check skills. This screen doesn't
-need to know about earnings dates at all.
+hourly-signal-check skill. This screen doesn't need to know about earnings
+dates at all.
 
 ## State sync (read this first)
 

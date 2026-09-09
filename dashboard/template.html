@@ -488,7 +488,6 @@
 
   <div class="tabbar" id="tabbar">
     <button class="tab-btn active" data-tab="hourly" type="button">Hourly &middot; Live</button>
-    <button class="tab-btn" data-tab="daily" type="button">Daily &middot; Paper</button>
     <button class="tab-btn" data-tab="ma" type="button">MA Pullback &middot; Live</button>
   </div>
 
@@ -538,36 +537,6 @@
       <span class="section-title">System</span>
     </div>
     <div class="system-grid" id="system-grid"></div>
-  </section>
-
-  </div>
-
-  <div class="tab-panel" id="tab-panel-daily" hidden>
-
-  <div class="paper-banner" id="daily-banner">Paper / dry-run comparison track — same stochastic rules and candidate list as the hourly track, evaluated on daily bars. No real orders are ever placed here.</div>
-
-  <section id="daily-stats">
-    <div class="section-head">
-      <span class="section-title">Paper Performance</span>
-      <span class="section-note">All closed paper trades, all-time</span>
-    </div>
-    <div id="daily-performance-body"></div>
-  </section>
-
-  <section id="daily-positions">
-    <div class="section-head">
-      <span class="section-title">Open Paper Positions</span>
-      <span class="section-note" id="daily-positions-note"></span>
-    </div>
-    <div class="panel table-scroll" id="daily-positions-table-wrap"></div>
-  </section>
-
-  <section id="daily-history">
-    <div class="section-head">
-      <span class="section-title">Closed Paper Trade History</span>
-      <span class="section-note">Click a row to drill in</span>
-    </div>
-    <div class="panel table-scroll" id="daily-history-table-wrap"></div>
   </section>
 
   </div>
@@ -730,8 +699,6 @@
   }
   renderPositions(DATA.positions, slotsMax, 'positions-note', 'positions-table-wrap',
     "The strategy hasn't taken an entry yet. New positions will appear here the moment an hourly cycle fills one.");
-  renderPositions(DATA.daily.positions, DATA.daily.config.max_positions, 'daily-positions-note', 'daily-positions-table-wrap',
-    "No paper entry yet. New paper positions will appear here the moment a daily cycle confirms one.");
 
   // ---- performance summary (generic) ----
   function renderPerformance(closed, bodyElId, emptyCopy) {
@@ -787,8 +754,6 @@
   const closed = DATA.trade_history;
   renderPerformance(closed, 'performance-body',
     'Win rate, P&L, and exit-reason breakdown will populate here once the first position closes.');
-  renderPerformance(DATA.daily.trade_history, 'daily-performance-body',
-    'Win rate, P&L, and exit-reason breakdown will populate here once the first paper trade closes.');
 
   // ---- closed trade history (generic) ----
   function renderHistory(closed, wrapElId, idPrefix, emptyCopy) {
@@ -849,8 +814,6 @@
   }
   renderHistory(closed, 'history-table-wrap', 'detail',
     'Every closed trade — stop-out, signal exit, overbought-hold exit, or earnings-forced exit — will land here with full entry/exit detail.');
-  renderHistory(DATA.daily.trade_history, 'daily-history-table-wrap', 'detail-d',
-    'Every closed paper trade — simulated stop-out, signal exit, overbought-hold exit, or earnings-forced exit — will land here with full entry/exit detail.');
 
   // ---- tab switching ----
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -858,7 +821,6 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('tab-panel-hourly').hidden = btn.dataset.tab !== 'hourly';
-      document.getElementById('tab-panel-daily').hidden = btn.dataset.tab !== 'daily';
       document.getElementById('tab-panel-ma').hidden = btn.dataset.tab !== 'ma';
     });
   });

@@ -115,7 +115,6 @@ def finalize(
     store: StateStore,
     logger: EventLogger,
     max_age_minutes: float,
-    candidates_store: StateStore | None = None,
 ) -> dict:
     if not build_file.exists():
         return {"candidates": [], "open_positions": []}
@@ -129,22 +128,9 @@ def finalize(
             "rerun --append for this cycle's batches before finalizing."
         )
 
-    # candidates_store defaults to `store` itself (the original, single-track
-    # behavior) -- the daily-stochastic-check track passes a SEPARATE store
-    # pointed at the shared data/candidates.json (2026-08-13: that track's
-    # own positions/pending state lives under data/daily/, but it reuses the
-    # hourly track's candidate list rather than screening independently, at
-    # the user's explicit choice) so candidates.json is read from one place
-    # while pending_entries.json/positions.json are read from another.
-    candidates_store = candidates_store or store
-    candidates_by_symbol = {c["symbol"]: c for c in candidates_store.load_candidates()}
+    candidates_by_symbol = {c["symbol"]: c for c in store.load_candidates()}
     pending_by_symbol = store.load_pending_entries()
-    # A symbol already open OR already queued for a next-open fill (2026-08-14,
-    # daily-stochastic-check's pending_fills.json -- see scripts/
-    # queue_paper_fill.py) must not be re-evaluated as a fresh candidate;
-    # load_pending_fills() is a no-op read (empty dict) for the hourly track,
-    # which never writes that file, so this is safe to always include.
-    open_symbols = set(store.load_positions().keys()) | set(store.load_pending_fills().keys())
+    open_symbols = set(store.load_positions().keys())
 
     seen: dict[str, dict] = {}
     with build_file.open() as f:
@@ -188,14 +174,6 @@ def main() -> None:
     parser.add_argument("--input", default="-", help="For --append: JSON input file, or '-' for stdin (default).")
     parser.add_argument("--build-file", default=DEFAULT_BUILD_FILE)
     parser.add_argument("--data-dir", default="data")
-    parser.add_argument(
-        "--candidates-data-dir",
-        default=None,
-        help="For --finalize: read candidates.json from this data dir instead of --data-dir "
-        "(pending_entries.json/positions.json still come from --data-dir). Defaults to --data-dir. "
-        "Used by the daily-stochastic-check track to share the hourly track's candidate list "
-        "while keeping its own position/pending state separate.",
-    )
     parser.add_argument("--max-build-file-age-minutes", type=float, default=120.0)
     args = parser.parse_args()
 
@@ -210,8 +188,7 @@ def main() -> None:
         return
 
     store = StateStore(args.data_dir)
-    candidates_store = StateStore(args.candidates_data_dir) if args.candidates_data_dir else None
-    result = finalize(build_file, store, logger, args.max_build_file_age_minutes, candidates_store=candidates_store)
+    result = finalize(build_file, store, logger, args.max_build_file_age_minutes)
     json.dump(result, sys.stdout, indent=2)
     sys.stdout.write("\n")
 
