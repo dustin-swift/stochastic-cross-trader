@@ -4214,5 +4214,29 @@
     "stop_order_id": "6aa1a152-089f-485c-8241-cc986e82d761",
     "stop_price": 22.93,
     "symbol": "SLDE"
+  },
+  {
+    "closed_at": "2026-09-10T18:08:43.187297+00:00",
+    "entry_d": 28.284708507058735,
+    "entry_k": 44.90788896203653,
+    "entry_order_id": "6aa2d6ee-e6ae-44f2-adff-3cffd3a0e292",
+    "entry_prev_d": 16.763915243516692,
+    "entry_prev_k": 29.18010752688173,
+    "entry_price": 48.9687,
+    "entry_time": "2026-09-10T16:12:30.69Z",
+    "exit_d": 51.72505668934246,
+    "exit_k": 50.36734693877552,
+    "exit_order_id": "6aa2f223-9830-4e8d-ad39-8320d3b6764b",
+    "exit_prev_d": 44.66264355204453,
+    "exit_prev_k": 59.899934167215314,
+    "exit_price": 48.7613,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-10T18:08:35.75Z",
+    "pnl_pct": -0.4235358504514064,
+    "pnl_usd": -0.4147999999999996,
+    "qty": 2,
+    "stop_order_id": "6aa2d6f4-f630-4e81-a8dd-24a0fc35a9c6",
+    "stop_price": 47.24,
+    "symbol": "CSX"
   }
 ]
