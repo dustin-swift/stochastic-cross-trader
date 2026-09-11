@@ -4430,5 +4430,29 @@
     "stop_order_id": "6aa41014-4589-41fd-b554-745f4e5ba390",
     "stop_price": 34.62,
     "symbol": "RDN"
+  },
+  {
+    "closed_at": "2026-09-11T19:07:30.587170+00:00",
+    "entry_d": 21.204234572601248,
+    "entry_k": 26.744201830329388,
+    "entry_order_id": "6aa2d721-b813-4af4-bf47-cd9c86e1120f",
+    "entry_prev_d": 19.43235777201527,
+    "entry_prev_k": 19.742785843698577,
+    "entry_price": 85.3399,
+    "entry_time": "2026-09-10T16:13:22.066Z",
+    "exit_d": 76.50983112119958,
+    "exit_k": 68.39959225280313,
+    "exit_order_id": "6aa4516a-9bff-4c4a-be20-4892efe6a68a",
+    "exit_prev_d": 84.54939661700433,
+    "exit_prev_k": 77.19367991845048,
+    "exit_price": 85.75,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-11T19:07:22.678Z",
+    "pnl_pct": 0.4805489577559774,
+    "pnl_usd": 0.4100999999999999,
+    "qty": 1,
+    "stop_order_id": "6aa2d72c-9acc-484b-88ad-b040d083b449",
+    "stop_price": 81.29,
+    "symbol": "GM"
   }
 ]
