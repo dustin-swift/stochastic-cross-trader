@@ -8,7 +8,7 @@
     "entry_price": 65.3199,
     "entry_time": "2026-09-10T17:17:07.414Z",
     "qty": 2,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aa2e628-85fd-42a4-9f04-82d2bf67e871",
     "stop_price": 63.05
   },
@@ -90,19 +90,6 @@
     "stop_order_id": "6aa2cbc1-8da5-4bb6-b804-a18f9f6847b3",
     "stop_price": 50.01
   },
-  "FHN": {
-    "entry_d": 20.328792703310842,
-    "entry_k": 29.2523290465015,
-    "entry_order_id": "6aa2d715-ef6b-4acf-9063-ac25309fc095",
-    "entry_prev_d": 12.738806952767609,
-    "entry_prev_k": 18.425859408258734,
-    "entry_price": 24.6799,
-    "entry_time": "2026-09-10T16:13:09.851Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aa2d71a-2c8e-4623-bf5f-127f4e50f76d",
-    "stop_price": 23.93
-  },
   "GM": {
     "entry_d": 21.204234572601248,
     "entry_k": 26.744201830329388,
@@ -112,35 +99,9 @@
     "entry_price": 85.3399,
     "entry_time": "2026-09-10T16:13:22.066Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aa2d72c-9acc-484b-88ad-b040d083b449",
     "stop_price": 81.29
-  },
-  "MET": {
-    "entry_d": 28.039684916621265,
-    "entry_k": 45.45721731164972,
-    "entry_order_id": "6aa2d75b-f85a-4c1e-a66b-6f70298c203b",
-    "entry_prev_d": 16.615625087060966,
-    "entry_prev_k": 24.059403835523188,
-    "entry_price": 96.3,
-    "entry_time": "2026-09-10T16:14:19.741Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aa2d763-32b4-45ab-a662-3c27737dd967",
-    "stop_price": 93.66
-  },
-  "MFC": {
-    "entry_d": 23.99819561323608,
-    "entry_k": 38.68632852590066,
-    "entry_order_id": "6aa2d76c-7cab-470b-b4a6-fdec51f04816",
-    "entry_prev_d": 15.778267526223045,
-    "entry_prev_k": 21.677559912853962,
-    "entry_price": 43.5387,
-    "entry_time": "2026-09-10T16:14:36.856Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aa2d775-8b75-45d3-a06d-b2b76abc1877",
-    "stop_price": 42.28
   },
   "NWBI": {
     "entry_d": 23.693128560098046,
