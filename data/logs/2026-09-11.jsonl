@@ -861,3 +861,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 1, "needs_cancel": false, "order_id": "6aa40ff4-4b23-4dbc-9b34-51474df0f322", "order_state": "filled", "symbol": "CGON", "timestamp": "2026-09-11T14:28:24.754893+00:00"}
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 6, "needs_cancel": false, "order_id": "6aa40ff6-3f94-4432-9a0b-684e1d2edf50", "order_state": "filled", "symbol": "NWBI", "timestamp": "2026-09-11T14:28:24.906751+00:00"}
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 3, "needs_cancel": false, "order_id": "6aa40ff7-1241-47da-8604-68ad8269d345", "order_state": "filled", "symbol": "RDN", "timestamp": "2026-09-11T14:28:25.054600+00:00"}
+{"event": "candidate_sweep_truncated", "reason": "turn/context budget in manual batch-fetch loop", "symbols_fetched": 377, "timestamp": "2026-09-11T14:29:01.775283+00:00", "total_candidates": 456}
