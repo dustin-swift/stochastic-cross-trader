@@ -1,4 +1,17 @@
 {
+  "AFL": {
+    "entry_d": 20.481930897468192,
+    "entry_k": 31.3130296165785,
+    "entry_order_id": "6aa41ccb-a787-407a-b0c7-c7116b12d512",
+    "entry_prev_d": 12.138191936609948,
+    "entry_prev_k": 20.919540229884788,
+    "entry_price": 114.64,
+    "entry_time": "2026-09-11T15:22:51.747Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa41ce3-80e9-496b-85d1-1b59937280ba",
+    "stop_price": 111.56
+  },
   "BMRN": {
     "entry_d": 22.5665989892734,
     "entry_k": 35.87433173899355,
