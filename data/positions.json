@@ -38,6 +38,19 @@
     "stop_order_id": "6aa2e62a-42ad-4e48-b1e2-e1d8345506f4",
     "stop_price": 107.74
   },
+  "CGON": {
+    "entry_d": 20.350116180284857,
+    "entry_k": 23.374179283339302,
+    "entry_order_id": "6aa40ff4-4b23-4dbc-9b34-51474df0f322",
+    "entry_prev_d": 19.389616674570963,
+    "entry_prev_k": 19.32334126622449,
+    "entry_price": 73.5295,
+    "entry_time": "2026-09-11T14:28:05.16Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa41011-5edd-41c6-a6bf-ab84fd78e5d2",
+    "stop_price": 68.02
+  },
   "CRBG": {
     "entry_d": 23.03569484074933,
     "entry_k": 33.26912434422661,
@@ -128,5 +141,31 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6aa2d775-8b75-45d3-a06d-b2b76abc1877",
     "stop_price": 42.28
+  },
+  "NWBI": {
+    "entry_d": 23.693128560098046,
+    "entry_k": 37.9551517773452,
+    "entry_order_id": "6aa40ff6-3f94-4432-9a0b-684e1d2edf50",
+    "entry_prev_d": 13.939962025620654,
+    "entry_prev_k": 18.148388492321015,
+    "entry_price": 15.3499,
+    "entry_time": "2026-09-11T14:28:06.32Z",
+    "qty": 6,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa41013-7a17-45f3-bca3-85f3ff77e44f",
+    "stop_price": 14.96
+  },
+  "RDN": {
+    "entry_d": 21.379274010853198,
+    "entry_k": 33.33333333333375,
+    "entry_order_id": "6aa40ff7-1241-47da-8604-68ad8269d345",
+    "entry_prev_d": 14.322875507086087,
+    "entry_prev_k": 17.543859649123046,
+    "entry_price": 35.9444,
+    "entry_time": "2026-09-11T14:28:07.644Z",
+    "qty": 3,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aa41014-4589-41fd-b554-745f4e5ba390",
+    "stop_price": 34.62
   }
 }
