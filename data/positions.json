@@ -128,18 +128,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6aa41013-7a17-45f3-bca3-85f3ff77e44f",
     "stop_price": 14.96
-  },
-  "RDN": {
-    "entry_d": 21.379274010853198,
-    "entry_k": 33.33333333333375,
-    "entry_order_id": "6aa40ff7-1241-47da-8604-68ad8269d345",
-    "entry_prev_d": 14.322875507086087,
-    "entry_prev_k": 17.543859649123046,
-    "entry_price": 35.9444,
-    "entry_time": "2026-09-11T14:28:07.644Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aa41014-4589-41fd-b554-745f4e5ba390",
-    "stop_price": 34.62
   }
 }

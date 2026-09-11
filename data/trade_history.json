@@ -4406,5 +4406,29 @@
     "stop_order_id": "6aa2d775-8b75-45d3-a06d-b2b76abc1877",
     "stop_price": 42.28,
     "symbol": "MFC"
+  },
+  {
+    "closed_at": "2026-09-11T16:08:24.978917+00:00",
+    "entry_d": 21.379274010853198,
+    "entry_k": 33.33333333333375,
+    "entry_order_id": "6aa40ff7-1241-47da-8604-68ad8269d345",
+    "entry_prev_d": 14.322875507086087,
+    "entry_prev_k": 17.543859649123046,
+    "entry_price": 35.9444,
+    "entry_time": "2026-09-11T14:28:07.644Z",
+    "exit_d": 30.360623781676875,
+    "exit_k": 27.63157894736895,
+    "exit_order_id": "6aa42770-2e49-476e-bec1-084853a21a79",
+    "exit_prev_d": 26.998050682261574,
+    "exit_prev_k": 30.11695906432792,
+    "exit_price": 35.8701,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-11T16:08:16.386Z",
+    "pnl_pct": -0.206708138124434,
+    "pnl_usd": -0.22290000000000276,
+    "qty": 3,
+    "stop_order_id": "6aa41014-4589-41fd-b554-745f4e5ba390",
+    "stop_price": 34.62,
+    "symbol": "RDN"
   }
 ]
