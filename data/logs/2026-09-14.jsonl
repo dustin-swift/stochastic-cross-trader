@@ -1031,3 +1031,4 @@
 {"event": "exit_executed", "order_id": "6aa84592-0300-4869-a7d4-d290feebaede", "qty": 2, "symbol": "AMCR", "timestamp": "2026-09-14T19:06:35.772454+00:00"}
 {"event": "exit_executed", "order_id": "6aa84594-bfd1-455f-9de2-45ebb150374e", "qty": 2, "symbol": "DPC", "timestamp": "2026-09-14T19:06:35.772558+00:00"}
 {"event": "exit_executed", "order_id": "6aa84595-7eec-4ae6-bdd9-4253c8c18db5", "qty": 2, "symbol": "ELVN", "timestamp": "2026-09-14T19:06:35.772592+00:00"}
+{"candidates_checked": 0, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_skipped_reason": "market_regime_filter", "entries_taken": 0, "event": "cycle_summary", "exit_symbols": ["AMCR", "DPC", "ELVN"], "exits_taken": 3, "market_trend_intact": false, "slots_max": 15, "slots_open": 3, "stop_outs_reconciliation": 0, "timestamp": "2026-09-14T19:06:58.993312+00:00"}
