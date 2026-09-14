@@ -4478,5 +4478,29 @@
     "stop_order_id": "6aa2e62a-42ad-4e48-b1e2-e1d8345506f4",
     "stop_price": 107.74,
     "symbol": "CCK"
+  },
+  {
+    "closed_at": "2026-09-14T15:19:49.750806+00:00",
+    "entry_d": 20.260709915963254,
+    "entry_k": 26.325189275016285,
+    "entry_order_id": "6aa443ad-88ef-4742-b589-301b75783ab0",
+    "entry_prev_d": 13.843353368044198,
+    "entry_prev_k": 18.675631683598187,
+    "entry_price": 53.8444,
+    "entry_time": "2026-09-11T18:08:45.877Z",
+    "exit_d": 33.38991424434463,
+    "exit_k": 29.14365170694286,
+    "exit_order_id": "6aa81087-bd45-4216-8d8f-4c50abae1371",
+    "exit_prev_d": 32.45042676703577,
+    "exit_prev_k": 40.53030303030304,
+    "exit_price": 52.0498,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-14T15:19:35.61Z",
+    "pnl_pct": -3.3329371299522403,
+    "pnl_usd": -3.5892000000000053,
+    "qty": 2,
+    "stop_order_id": "6aa443c3-3919-4938-aa43-046c8bd208ab",
+    "stop_price": 50.74,
+    "symbol": "FLR"
   }
 ]
