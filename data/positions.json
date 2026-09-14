@@ -47,7 +47,7 @@
     "entry_price": 73.5295,
     "entry_time": "2026-09-11T14:28:05.16Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aa41011-5edd-41c6-a6bf-ab84fd78e5d2",
     "stop_price": 68.02
   },
@@ -128,19 +128,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aa443de-e553-41ea-aa1c-51652c272d35",
     "stop_price": 60.69
-  },
-  "NWBI": {
-    "entry_d": 23.693128560098046,
-    "entry_k": 37.9551517773452,
-    "entry_order_id": "6aa40ff6-3f94-4432-9a0b-684e1d2edf50",
-    "entry_prev_d": 13.939962025620654,
-    "entry_prev_k": 18.148388492321015,
-    "entry_price": 15.3499,
-    "entry_time": "2026-09-11T14:28:06.32Z",
-    "qty": 6,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aa41013-7a17-45f3-bca3-85f3ff77e44f",
-    "stop_price": 14.96
   },
   "OGN": {
     "entry_d": 22.15007215007169,

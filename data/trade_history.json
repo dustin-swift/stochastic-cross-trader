@@ -4502,5 +4502,29 @@
     "stop_order_id": "6aa443c3-3919-4938-aa43-046c8bd208ab",
     "stop_price": 50.74,
     "symbol": "FLR"
+  },
+  {
+    "closed_at": "2026-09-14T18:07:32.206697+00:00",
+    "entry_d": 23.693128560098046,
+    "entry_k": 37.9551517773452,
+    "entry_order_id": "6aa40ff6-3f94-4432-9a0b-684e1d2edf50",
+    "entry_prev_d": 13.939962025620654,
+    "entry_prev_k": 18.148388492321015,
+    "entry_price": 15.3499,
+    "entry_time": "2026-09-11T14:28:06.32Z",
+    "exit_d": 76.96136635784967,
+    "exit_k": 76.85762904140675,
+    "exit_order_id": "6aa837dc-f770-4636-b25c-6c491210e5a2",
+    "exit_prev_d": 80.51218251717407,
+    "exit_prev_k": 75.29778786159959,
+    "exit_price": 15.5915,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-14T18:07:24.272Z",
+    "pnl_pct": 1.5739516218346683,
+    "pnl_usd": 1.4496000000000002,
+    "qty": 6,
+    "stop_order_id": "6aa41013-7a17-45f3-bca3-85f3ff77e44f",
+    "stop_price": 14.96,
+    "symbol": "NWBI"
   }
 ]
