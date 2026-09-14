@@ -4454,5 +4454,29 @@
     "stop_order_id": "6aa2d72c-9acc-484b-88ad-b040d083b449",
     "stop_price": 81.29,
     "symbol": "GM"
+  },
+  {
+    "closed_at": "2026-09-14T13:30:01.116567+00:00",
+    "entry_d": 20.255953041729843,
+    "entry_k": 23.69710738535851,
+    "entry_order_id": "6aa2e614-ceb7-46fc-b099-04243e969965",
+    "entry_prev_d": 17.577656968778854,
+    "entry_prev_k": 18.062164698457053,
+    "entry_price": 112.4499,
+    "entry_time": "2026-09-10T17:17:09.08Z",
+    "exit_d": 78.18189231681102,
+    "exit_k": 73.32812561718912,
+    "exit_order_id": "6aa7f690-989c-4a1f-8cb1-6c57c8a429a8",
+    "exit_prev_d": 79.18467805150975,
+    "exit_prev_k": 81.71579244774699,
+    "exit_price": null,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-14T13:29:57.099948+00:00",
+    "pnl_pct": null,
+    "pnl_usd": null,
+    "qty": 1,
+    "stop_order_id": "6aa2e62a-42ad-4e48-b1e2-e1d8345506f4",
+    "stop_price": 107.74,
+    "symbol": "CCK"
   }
 ]
