@@ -30,3 +30,10 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-15T17:12:44.527122+00:00"}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-15T18:10:32.244952+00:00", "trend_intact": true}
 {"account_value": 2236.595, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 11.45, "timestamp": "2026-09-15T18:10:42.234445+00:00", "tripped": false, "unrealized_pnl_today": 0}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "ACAD", "timestamp": "2026-09-15T18:13:47.938356+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "BBVA", "timestamp": "2026-09-15T18:13:47.940907+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "HP", "timestamp": "2026-09-15T18:13:47.943123+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-09-15T18:13:47.945403+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHD", "timestamp": "2026-09-15T18:13:47.947434+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-15T18:13:47.949559+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-15T18:13:47.951894+00:00"}
