@@ -24,5 +24,18 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6aa82b27-ed11-455b-bb89-502f62b1cbfa",
     "stop_price": 13.59
+  },
+  "BEN": {
+    "entry_price": 33.1299,
+    "qty": 3,
+    "entry_time": "2026-09-15T17:09:17.523Z",
+    "entry_order_id": "6aa97bbd-d9d0-4534-890e-68920ad73073",
+    "stop_order_id": "6aa97bc8-7291-480d-a842-a1da6126df7b",
+    "stop_price": 31.69,
+    "stochastic_state": "NORMAL",
+    "entry_k": 25.10944340212591,
+    "entry_d": 32.31906868682602,
+    "entry_prev_k": 34.6466541588489,
+    "entry_prev_d": 34.13937819693772
   }
 }
