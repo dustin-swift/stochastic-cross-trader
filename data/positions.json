@@ -21,7 +21,7 @@
     "entry_price": 13.6475,
     "entry_time": "2026-09-14T17:13:03.766Z",
     "qty": 7,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aa82b27-ed11-455b-bb89-502f62b1cbfa",
     "stop_price": 13.59
   },
