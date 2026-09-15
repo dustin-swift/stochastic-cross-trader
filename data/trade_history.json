@@ -4814,5 +4814,29 @@
     "stop_order_id": "6aa443f6-ea27-46b6-84ad-916fc8fe6190",
     "stop_price": 15.95,
     "symbol": "PBI"
+  },
+  {
+    "closed_at": "2026-09-15T17:06:00.274514+00:00",
+    "entry_d": 37.57632759595689,
+    "entry_k": 50.78125000000003,
+    "entry_order_id": "6aa443ce-9e96-40cf-8e35-194c9c728d81",
+    "entry_prev_d": 28.022625890611554,
+    "entry_prev_k": 33.708909128978064,
+    "entry_price": 62.3299,
+    "entry_time": "2026-09-11T18:09:19.151Z",
+    "exit_d": 79.04195517041177,
+    "exit_k": 67.57062146892638,
+    "exit_order_id": "6aa97aef-cea0-4547-857b-818b888a1e6f",
+    "exit_prev_d": 88.45099251581551,
+    "exit_prev_k": 79.09604519773988,
+    "exit_price": 62.882,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-15T17:05:51.419Z",
+    "pnl_pct": 0.8857707135740522,
+    "pnl_usd": 1.1041999999999916,
+    "qty": 2,
+    "stop_order_id": "6aa443de-e553-41ea-aa1c-51652c272d35",
+    "stop_price": 60.69,
+    "symbol": "KIE"
   }
 ]

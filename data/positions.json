@@ -12,19 +12,6 @@
     "stop_order_id": "6aa41ce3-80e9-496b-85d1-1b59937280ba",
     "stop_price": 111.56
   },
-  "KIE": {
-    "entry_d": 37.57632759595689,
-    "entry_k": 50.78125000000003,
-    "entry_order_id": "6aa443ce-9e96-40cf-8e35-194c9c728d81",
-    "entry_prev_d": 28.022625890611554,
-    "entry_prev_k": 33.708909128978064,
-    "entry_price": 62.3299,
-    "entry_time": "2026-09-11T18:09:19.151Z",
-    "qty": 2,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aa443de-e553-41ea-aa1c-51652c272d35",
-    "stop_price": 60.69
-  },
   "OGN": {
     "entry_d": 22.15007215007169,
     "entry_k": 33.33333333333235,
