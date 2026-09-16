@@ -1102,3 +1102,4 @@
 {"decision": "proceed", "event": "order_fill_check", "filled_qty": 1.0, "needs_cancel": false, "order_id": "6aaac138-d80a-4e34-810c-4b8d6d54f732", "order_state": "filled", "symbol": "ACWX", "timestamp": "2026-09-16T16:18:07.695789+00:00"}
 {"event": "entry_executed", "fill_price": 76.4199, "order_id": "6aaac138-d80a-4e34-810c-4b8d6d54f732", "qty": 1, "symbol": "ACWX", "timestamp": "2026-09-16T16:18:30.730011+00:00"}
 {"event": "stop_placed", "order_id": "6aaac14a-dfac-487f-8554-d9e73fe6d5a0", "qty": 1, "stop_price": 74.75, "symbol": "ACWX", "timestamp": "2026-09-16T16:18:30.730149+00:00"}
+{"candidates_checked": 439, "circuit_breaker_tripped": false, "cycle_gap_minutes": 65.47, "entries_confirmed": 52, "entries_symbol": "ACWX", "entries_taken": 1, "event": "cycle_summary", "exits_taken": 0, "market_trend_intact": true, "slots_remaining": 0, "stop_outs_reconciliation": 0, "timestamp": "2026-09-16T16:18:47.609733+00:00"}
