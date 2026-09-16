@@ -1,4 +1,17 @@
 {
+  "ACWX": {
+    "entry_d": 27.00460735405476,
+    "entry_k": 43.940792360043126,
+    "entry_order_id": "6aaac138-d80a-4e34-810c-4b8d6d54f732",
+    "entry_prev_d": 16.940826455629388,
+    "entry_prev_k": 23.18751487345743,
+    "entry_price": 76.4199,
+    "entry_time": "2026-09-16T16:18:00.299Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aaac14a-dfac-487f-8554-d9e73fe6d5a0",
+    "stop_price": 74.75
+  },
   "AFL": {
     "entry_d": 20.481930897468192,
     "entry_k": 31.3130296165785,
