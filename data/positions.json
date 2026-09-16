@@ -34,7 +34,7 @@
     "entry_price": 70.9799,
     "entry_time": "2026-09-16T15:11:32.589Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aaab1b0-f0f4-4c29-bdc6-67f1158de5ce",
     "stop_price": 67.44
   },
@@ -129,19 +129,6 @@
     "stop_order_id": "6aaab226-68d3-43b0-81c0-86bb51af7e82",
     "stop_price": 26.51
   },
-  "MAGS": {
-    "entry_d": 22.77271107136873,
-    "entry_k": 32.79622869197982,
-    "entry_order_id": "6aaab230-a1d0-42a3-adc6-3f1f62ab8333",
-    "entry_prev_d": 19.888402234270686,
-    "entry_prev_k": 16.051499537702558,
-    "entry_price": 70.1387,
-    "entry_time": "2026-09-16T15:13:53.1Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aaab239-5892-4a0c-abd4-34001b2b8b0a",
-    "stop_price": 67.98
-  },
   "OGN": {
     "entry_d": 22.15007215007169,
     "entry_k": 33.33333333333235,
@@ -164,7 +151,7 @@
     "entry_price": 18.3799,
     "entry_time": "2026-09-16T15:14:11.883Z",
     "qty": 5,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aaab24d-d78f-4060-83eb-36efd5ff93f5",
     "stop_price": 18.02
   },
@@ -177,7 +164,7 @@
     "entry_price": 37.7899,
     "entry_time": "2026-09-16T15:14:32.047Z",
     "qty": 3,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aaab260-7640-4e05-9c16-9be6e4ef76d6",
     "stop_price": 37.46
   },

@@ -4838,5 +4838,29 @@
     "stop_order_id": "6aa443de-e553-41ea-aa1c-51652c272d35",
     "stop_price": 60.69,
     "symbol": "KIE"
+  },
+  {
+    "closed_at": "2026-09-16T18:08:31.419546+00:00",
+    "entry_d": 22.77271107136873,
+    "entry_k": 32.79622869197982,
+    "entry_order_id": "6aaab230-a1d0-42a3-adc6-3f1f62ab8333",
+    "entry_prev_d": 19.888402234270686,
+    "entry_prev_k": 16.051499537702558,
+    "entry_price": 70.1387,
+    "entry_time": "2026-09-16T15:13:53.1Z",
+    "exit_d": 51.54048614336617,
+    "exit_k": 51.23084068741307,
+    "exit_order_id": "6aaadb13-bef3-4cd7-bc48-9c92937caffb",
+    "exit_prev_d": 45.39561547822175,
+    "exit_prev_k": 56.80445889456612,
+    "exit_price": 70.1901,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-16T18:08:19.914Z",
+    "pnl_pct": 0.07328336567402616,
+    "pnl_usd": 0.051400000000001,
+    "qty": 1,
+    "stop_order_id": "6aaab239-5892-4a0c-abd4-34001b2b8b0a",
+    "stop_price": 67.98,
+    "symbol": "MAGS"
   }
 ]
