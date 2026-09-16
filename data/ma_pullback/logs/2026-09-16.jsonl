@@ -1,0 +1,14 @@
+{"csv_path": "data/ma_pullback/finviz_export.csv", "event": "ma_universe_screen", "input_count": 56, "output_count": 56, "symbols": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-16T12:15:48.438458+00:00"}
+{"breakout_level": 30.25, "event": "ma_breakout_failed", "symbol": "ACAD", "timestamp": "2026-09-16T12:17:45.555303+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "ATAI", "timestamp": "2026-09-16T12:17:45.557311+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "CRNX", "timestamp": "2026-09-16T12:17:45.564036+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 112.165, "event": "ma_breakout_tracked", "symbol": "DINO", "timestamp": "2026-09-16T12:17:45.568468+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "DUKU", "timestamp": "2026-09-16T12:17:45.568577+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 18.19, "event": "ma_breakout_tracked", "symbol": "EC", "timestamp": "2026-09-16T12:17:45.569815+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 50.78, "event": "ma_breakout_tracked", "symbol": "FRO", "timestamp": "2026-09-16T12:17:45.573123+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 409.5, "event": "ma_breakout_tracked", "symbol": "MPC", "timestamp": "2026-09-16T12:17:45.583820+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 7.7, "event": "ma_breakout_tracked", "symbol": "NAT", "timestamp": "2026-09-16T12:17:45.585972+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 24.51, "event": "ma_breakout_tracked", "symbol": "PR", "timestamp": "2026-09-16T12:17:45.592634+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 265.43, "event": "ma_breakout_tracked", "symbol": "PSX", "timestamp": "2026-09-16T12:17:45.593880+00:00"}
+{"breakout_date": "2026-09-15", "breakout_level": 39.96, "event": "ma_breakout_tracked", "symbol": "SM", "timestamp": "2026-09-16T12:17:45.603305+00:00"}
+{"eligible_count": 6, "event": "ma_daily_scan", "symbols_checked": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-16T12:17:45.610310+00:00", "watchlist_count": 42}
