@@ -51,3 +51,9 @@
 {"event": {"circuit_breaker_tripped": false, "eligible_for_entry": 6, "eligible_symbols": ["BBVA", "MRK", "SCHD", "SCHW", "SM", "XLV"], "entries_proposed": 0, "entries_taken": 0, "event": "ma_cycle_summary", "exits_taken": 0, "live": true, "open_positions": 0, "partials_taken": 0, "position_updates": 0, "reconciliation_drift": false, "slots_free": 5, "stale_cycle": false, "stop_outs_found": 0, "trend_intact": true, "watchlist_total": 40}, "timestamp": "2026-09-17T18:16:26.240161+00:00"}
 {"account_value": 2220.11, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-09-17T19:10:40.868282+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-17T19:11:03.379563+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "BBVA", "timestamp": "2026-09-17T19:11:47.496358+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-09-17T19:11:47.498589+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHD", "timestamp": "2026-09-17T19:11:47.500552+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-17T19:11:47.502305+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-17T19:11:47.503890+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-17T19:11:47.505514+00:00"}
