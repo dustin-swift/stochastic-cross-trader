@@ -38,6 +38,19 @@
     "stop_order_id": "6aac108a-4942-4106-a1b6-802e55c4a673",
     "stop_price": 56.29
   },
+  "CSX": {
+    "entry_d": 30.26094276094257,
+    "entry_k": 39.646464646464466,
+    "entry_order_id": "6aac3c4c-179a-4027-b294-5ca91e0e22e0",
+    "entry_prev_d": 20.419191919191743,
+    "entry_prev_k": 30.050505050504807,
+    "entry_price": 48.0599,
+    "entry_time": "2026-09-17T19:15:25.16Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aac3c5d-35bc-4be7-bce7-0a93a03fcd1f",
+    "stop_price": 46.33
+  },
   "FHN": {
     "entry_d": 28.718416486674567,
     "entry_k": 37.654320987654465,
