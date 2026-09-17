@@ -86,7 +86,7 @@
     "entry_price": 103.036,
     "entry_time": "2026-09-17T16:09:34.318808Z",
     "qty": 1,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aac10c5-534f-4946-b7a1-eb7ba122aead",
     "stop_price": 99.68
   },
@@ -180,18 +180,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6aac1117-f72b-494d-bec5-947907bebacf",
     "stop_price": 72.68
-  },
-  "UBS": {
-    "entry_d": 20.684176241265686,
-    "entry_k": 34.386070853462265,
-    "entry_order_id": "6aac111e-6ab1-4437-bd38-87538ae3b43a",
-    "entry_prev_d": 13.425823434575776,
-    "entry_prev_k": 15.63607085346228,
-    "entry_price": 50.8599,
-    "entry_time": "2026-09-17T16:11:10.171975Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac1125-2ba4-4888-be1a-841def9a1742",
-    "stop_price": 49.25
   }
 }

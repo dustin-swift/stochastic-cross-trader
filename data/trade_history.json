@@ -5174,5 +5174,29 @@
     "stop_order_id": "6aa82b27-ed11-455b-bb89-502f62b1cbfa",
     "stop_price": 13.59,
     "symbol": "OGN"
+  },
+  {
+    "closed_at": "2026-09-17T19:08:26.985254+00:00",
+    "entry_d": 20.684176241265686,
+    "entry_k": 34.386070853462265,
+    "entry_order_id": "6aac111e-6ab1-4437-bd38-87538ae3b43a",
+    "entry_prev_d": 13.425823434575776,
+    "entry_prev_k": 15.63607085346228,
+    "entry_price": 50.8599,
+    "entry_time": "2026-09-17T16:11:10.171975Z",
+    "exit_d": 50.43248945147685,
+    "exit_k": 50.21097046413505,
+    "exit_order_id": "6aac3a9c-fa1b-4c5b-94b2-9b6fe46377f5",
+    "exit_prev_d": 45.15752291458592,
+    "exit_prev_k": 53.982067510548575,
+    "exit_price": 50.652,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-17T19:08:12.86Z",
+    "pnl_pct": -0.40876997398736625,
+    "pnl_usd": -0.4158000000000044,
+    "qty": 2,
+    "stop_order_id": "6aac1125-2ba4-4888-be1a-841def9a1742",
+    "stop_price": 49.25,
+    "symbol": "UBS"
   }
 ]
