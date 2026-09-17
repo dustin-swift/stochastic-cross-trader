@@ -2329,3 +2329,4 @@
 {"event": "entry_executed", "fill_price": 48.0599, "order_id": "6aac3c4c-179a-4027-b294-5ca91e0e22e0", "qty": 2, "symbol": "CSX", "timestamp": "2026-09-17T19:15:46.607509+00:00"}
 {"event": "stop_placed", "stop_order_id": "6aac3c5d-35bc-4be7-bce7-0a93a03fcd1f", "stop_price": 46.33, "symbol": "CSX", "timestamp": "2026-09-17T19:15:46.607637+00:00"}
 {"event": "candidate_sweep_truncated", "reason": "context budget - one batch (BOX,BOXX,BSP,BUD,BUG,C,CADL,CAH) skipped, all others covered", "symbols_fetched": 431, "timestamp": "2026-09-17T19:15:51.546874+00:00", "total_candidates": 452}
+{"candidates_checked": 431, "candidates_total": 452, "circuit_breaker_tripped": false, "entries_proposed": 13, "entries_taken": 1, "event": "cycle_summary", "exits_taken": 1, "market_trend_intact": true, "slots_remaining": 0, "stop_outs_found": 0, "timestamp": "2026-09-17T19:16:02.377724+00:00"}
