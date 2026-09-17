@@ -25,19 +25,6 @@
     "stop_order_id": "6aa82b27-ed11-455b-bb89-502f62b1cbfa",
     "stop_price": 13.59
   },
-  "QYLD": {
-    "entry_d": 21.818996415771664,
-    "entry_k": 35.2486559139796,
-    "entry_order_id": "6aaab243-2eae-4a0c-858d-11b75d43d7e3",
-    "entry_prev_d": 16.666666666667513,
-    "entry_prev_k": 13.541666666667652,
-    "entry_price": 18.3799,
-    "entry_time": "2026-09-16T15:14:11.883Z",
-    "qty": 5,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aaab24d-d78f-4060-83eb-36efd5ff93f5",
-    "stop_price": 18.02
-  },
   "RAMP": {
     "entry_d": 23.232323232321843,
     "entry_k": 40.404040404039755,
