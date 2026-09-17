@@ -1,30 +1,4 @@
 {
-  "ASH": {
-    "entry_d": 26.197955111187564,
-    "entry_k": 42.515726017283015,
-    "entry_order_id": "6aaab1a4-ac83-43a3-9e22-9df9482186ff",
-    "entry_prev_d": 18.025721929580104,
-    "entry_prev_k": 21.69863831154916,
-    "entry_price": 70.9799,
-    "entry_time": "2026-09-16T15:11:32.589Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aaab1b0-f0f4-4c29-bdc6-67f1158de5ce",
-    "stop_price": 67.44
-  },
-  "OGN": {
-    "entry_d": 22.15007215007169,
-    "entry_k": 33.33333333333235,
-    "entry_order_id": "6aa82b1f-e95a-4912-bd34-72ea84b9a852",
-    "entry_prev_d": 14.622414622414352,
-    "entry_prev_k": 19.841269841269817,
-    "entry_price": 13.6475,
-    "entry_time": "2026-09-14T17:13:03.766Z",
-    "qty": 7,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aa82b27-ed11-455b-bb89-502f62b1cbfa",
-    "stop_price": 13.59
-  },
   "RAMP": {
     "entry_d": 23.232323232321843,
     "entry_k": 40.404040404039755,
