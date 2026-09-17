@@ -1,4 +1,30 @@
 {
+  "ARWR": {
+    "entry_d": 25.629182526549474,
+    "entry_k": 30.552157377412275,
+    "entry_order_id": "6aac2d5b-618c-44da-8fa8-38fad9333003",
+    "entry_prev_d": 18.909392740112477,
+    "entry_prev_k": 27.43195736775758,
+    "entry_price": 67.62,
+    "entry_time": "2026-09-17T18:11:39.807Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aac2d67-d4d1-4a83-b65c-23f8a673ed5b",
+    "stop_price": 61.26
+  },
+  "BAC": {
+    "entry_d": 30.731683648714135,
+    "entry_k": 37.73333333333323,
+    "entry_order_id": "6aac2d72-872a-4872-93c2-db5242fb3f93",
+    "entry_prev_d": 21.289193123254183,
+    "entry_prev_k": 32.999999999999936,
+    "entry_price": 58.3282,
+    "entry_time": "2026-09-17T18:12:03.161Z",
+    "qty": 2,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6aac2d7c-db5f-4a36-a638-018b370c3796",
+    "stop_price": 56.68
+  },
   "CBSH": {
     "entry_d": 22.739817663621835,
     "entry_k": 33.26286116983797,
