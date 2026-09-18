@@ -53,3 +53,4 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-18T19:14:18.461961+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-18T19:14:18.463603+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-18T19:14:18.465274+00:00"}
+{"circuit_breaker_tripped": false, "entries_proposed": 0, "entries_taken": 0, "event": "ma_cycle_summary", "exits_taken": 0, "live": true, "market_trend_intact": true, "partials_taken": 0, "stale_cycle": false, "stop_outs_reconciled": 0, "timestamp": "2026-09-18T19:14:41.621409+00:00", "watchlist_symbols_evaluated": 6, "watchlist_total": 40}
