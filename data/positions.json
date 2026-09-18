@@ -24,18 +24,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6aac10a8-f65f-4d46-8b21-0e154c78d351",
     "stop_price": 49.79
-  },
-  "HSBC": {
-    "entry_d": 24.639529053757485,
-    "entry_k": 46.95579511800455,
-    "entry_order_id": "6aac10be-d234-480c-9dd5-fd71c6d44f98",
-    "entry_prev_d": 13.05833475182673,
-    "entry_prev_k": 19.360858409143862,
-    "entry_price": 103.036,
-    "entry_time": "2026-09-17T16:09:34.318808Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aac10c5-534f-4946-b7a1-eb7ba122aead",
-    "stop_price": 99.68
   }
 }
