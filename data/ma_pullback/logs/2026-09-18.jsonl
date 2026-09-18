@@ -21,3 +21,5 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-18T13:12:48.108054+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-18T13:12:48.109775+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-18T13:12:48.111377+00:00"}
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-18T14:10:04.148824+00:00", "trend_intact": false}
+{"account_value": 2208.1102, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -7.16, "timestamp": "2026-09-18T14:10:14.716830+00:00", "tripped": false, "unrealized_pnl_today": 0}
