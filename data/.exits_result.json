@@ -1,0 +1,172 @@
+{
+  "entries": [],
+  "exits": [
+    {
+      "symbol": "BAC",
+      "k": 33.799999999999955,
+      "d": 36.511111111111035,
+      "prev_k": 36.86666666666658,
+      "prev_d": 34.864444444444366,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "CBSH",
+      "k": 47.180762852404776,
+      "d": 49.75130536018878,
+      "prev_k": 51.58475187589718,
+      "prev_d": 47.93194473471789,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "HAPN",
+      "k": 36.46359250532937,
+      "d": 40.44517052373488,
+      "prev_k": 43.84045775833055,
+      "prev_d": 39.035455508326926,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "KBE",
+      "k": 48.35479256080132,
+      "d": 51.14763940182751,
+      "prev_k": 53.06082421893035,
+      "prev_d": 50.202128613453596,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "OMF",
+      "k": 54.76190476190474,
+      "d": 57.93650793650787,
+      "prev_k": 60.0985221674876,
+      "prev_d": 56.057232850124684,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "OSCR",
+      "k": 41.05392156862752,
+      "d": 47.42647058823538,
+      "prev_k": 51.7156862745099,
+      "prev_d": 50.748506223171425,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "PB",
+      "k": 67.38159070598736,
+      "d": 69.44247178975411,
+      "prev_k": 73.36309226822048,
+      "prev_d": 65.56729737661668,
+      "stochastic_state": "NORMAL",
+      "exit_reason": "signal_exit"
+    },
+    {
+      "symbol": "RAMP",
+      "k": 75.50200803212907,
+      "d": 78.71485943775129,
+      "prev_k": 79.11646586345393,
+      "prev_d": 82.73092369477938,
+      "stochastic_state": "OVERBOUGHT_HOLD",
+      "exit_reason": "overbought_hold_exit"
+    }
+  ],
+  "position_states": [
+    {
+      "symbol": "ARWR",
+      "k": 34.890652557319235,
+      "d": 33.156951494099495,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "BAC",
+      "k": 33.799999999999955,
+      "d": 36.511111111111035,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "CBSH",
+      "k": 47.180762852404776,
+      "d": 49.75130536018878,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "CSX",
+      "k": 35.78811369509041,
+      "d": 35.74504737295418,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "FHN",
+      "k": 49.41122669480884,
+      "d": 48.829109223802526,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "GGOV",
+      "k": 58.17432098765446,
+      "d": 45.5899588477367,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "HAPN",
+      "k": 36.46359250532937,
+      "d": 40.44517052373488,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "HSBC",
+      "k": 89.73346495557747,
+      "d": 89.09301444095944,
+      "stochastic_state": "OVERBOUGHT_HOLD"
+    },
+    {
+      "symbol": "KBE",
+      "k": 48.35479256080132,
+      "d": 51.14763940182751,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "NOBL",
+      "k": 52.83605283605245,
+      "d": 51.735301735301334,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "OMF",
+      "k": 54.76190476190474,
+      "d": 57.93650793650787,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "OSCR",
+      "k": 41.05392156862752,
+      "d": 47.42647058823538,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "PB",
+      "k": 67.38159070598736,
+      "d": 69.44247178975411,
+      "stochastic_state": "NORMAL"
+    },
+    {
+      "symbol": "RAMP",
+      "k": 75.50200803212907,
+      "d": 78.71485943775129,
+      "stochastic_state": "OVERBOUGHT_HOLD"
+    },
+    {
+      "symbol": "SF",
+      "k": 47.60348583877997,
+      "d": 47.309338509851464,
+      "stochastic_state": "NORMAL"
+    }
+  ],
+  "candidate_states": [],
+  "stale_cycle": true,
+  "cycle_gap_minutes": 1086.3792033333334
+}
