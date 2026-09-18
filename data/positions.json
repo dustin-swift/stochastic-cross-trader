@@ -12,32 +12,6 @@
     "stop_order_id": "6aac2d67-d4d1-4a83-b65c-23f8a673ed5b",
     "stop_price": 61.26
   },
-  "CSX": {
-    "entry_d": 30.26094276094257,
-    "entry_k": 39.646464646464466,
-    "entry_order_id": "6aac3c4c-179a-4027-b294-5ca91e0e22e0",
-    "entry_prev_d": 20.419191919191743,
-    "entry_prev_k": 30.050505050504807,
-    "entry_price": 48.0599,
-    "entry_time": "2026-09-17T19:15:25.16Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac3c5d-35bc-4be7-bce7-0a93a03fcd1f",
-    "stop_price": 46.33
-  },
-  "FHN": {
-    "entry_d": 28.718416486674567,
-    "entry_k": 37.654320987654465,
-    "entry_order_id": "6aac1093-bd45-4cff-b8ca-4bb51f46d481",
-    "entry_prev_d": 22.12722030259585,
-    "entry_prev_k": 24.47928501098239,
-    "entry_price": 24.0399,
-    "entry_time": "2026-09-17T16:08:51.475664Z",
-    "qty": 4,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac109a-65b7-4081-8222-0828422c6d0f",
-    "stop_price": 23.29
-  },
   "GGOV": {
     "entry_d": 32.69907968574645,
     "entry_k": 36.51851851851858,
@@ -63,31 +37,5 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6aac10c5-534f-4946-b7a1-eb7ba122aead",
     "stop_price": 99.68
-  },
-  "NOBL": {
-    "entry_d": 20.778004778004632,
-    "entry_k": 29.763014763014496,
-    "entry_order_id": "6aac10d8-1fa3-45dc-885b-4f61728876fe",
-    "entry_prev_d": 16.048048048048013,
-    "entry_prev_k": 15.444444444444215,
-    "entry_price": 56.0291,
-    "entry_time": "2026-09-17T16:10:00.273176Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac10df-5d9a-4c11-82aa-94f420569dcd",
-    "stop_price": 54.86
-  },
-  "SF": {
-    "entry_d": 23.99041023736281,
-    "entry_k": 32.66206508713327,
-    "entry_order_id": "6aac110f-0868-4dcd-83f3-25505e900fea",
-    "entry_prev_d": 18.249188294453244,
-    "entry_prev_k": 19.492219492219537,
-    "entry_price": 75.6699,
-    "entry_time": "2026-09-17T16:10:55.392214Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac1117-f72b-494d-bec5-947907bebacf",
-    "stop_price": 72.68
   }
 }
