@@ -59,3 +59,4 @@
 {"event": "exit_executed", "order_id": "6aad559d-3ae6-4a84-bbce-84ebf92ce283", "qty": 4, "symbol": "FHN", "timestamp": "2026-09-18T15:16:09.007736+00:00"}
 {"event": "exit_executed", "order_id": "6aad559e-57ff-49b1-9aff-972f959e2b3c", "qty": 2, "symbol": "NOBL", "timestamp": "2026-09-18T15:16:09.007774+00:00"}
 {"event": "exit_executed", "order_id": "6aad559f-5e89-4a5d-8246-ae22d693e536", "qty": 1, "symbol": "SF", "timestamp": "2026-09-18T15:16:09.007808+00:00"}
+{"candidates_checked": 0, "circuit_breaker_tripped": false, "entries_proposed": 0, "entries_taken": 0, "event": "cycle_summary", "exits_taken": 4, "market_trend_intact": false, "max_positions": 15, "note": "entries skipped this cycle: market-regime filter trend_intact=false", "open_positions": 3, "slots_remaining": 12, "stop_outs_reconciled": 0, "timestamp": "2026-09-18T15:16:32.313280+00:00"}
