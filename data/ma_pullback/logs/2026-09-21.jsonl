@@ -1,0 +1,13 @@
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "ATAI", "timestamp": "2026-09-21T12:23:36.597119+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 59.295, "event": "ma_breakout_tracked", "symbol": "CLMT", "timestamp": "2026-09-21T12:23:36.602229+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "CRNX", "timestamp": "2026-09-21T12:23:36.604475+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 116.69, "event": "ma_breakout_tracked", "symbol": "DINO", "timestamp": "2026-09-21T12:23:36.608983+00:00"}
+{"event": "ma_daily_scan_skipped", "reason": "no_price_history", "symbol": "DUKU", "timestamp": "2026-09-21T12:23:36.609094+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 111.15, "event": "ma_breakout_tracked", "symbol": "HALO", "timestamp": "2026-09-21T12:23:36.614769+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 51.778, "event": "ma_breakout_tracked", "symbol": "HTFL", "timestamp": "2026-09-21T12:23:36.617980+00:00"}
+{"event": "ma_retest_seen", "retest_low": 9.83, "symbol": "IOVA", "timestamp": "2026-09-21T12:23:36.621004+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 423.83, "event": "ma_breakout_tracked", "symbol": "MPC", "timestamp": "2026-09-21T12:23:36.625221+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 8.27, "event": "ma_breakout_tracked", "symbol": "NAT", "timestamp": "2026-09-21T12:23:36.629256+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 274.21, "event": "ma_breakout_tracked", "symbol": "PSX", "timestamp": "2026-09-21T12:23:36.637678+00:00"}
+{"breakout_date": "2026-09-18", "breakout_level": 413.442, "event": "ma_breakout_tracked", "symbol": "VLO", "timestamp": "2026-09-21T12:23:36.650959+00:00"}
+{"eligible_count": 7, "event": "ma_daily_scan", "symbols_checked": ["ACAD", "AMGN", "AMLX", "ATAI", "AVAH", "AXGN", "BBVA", "CLMT", "CLYM", "CMBT", "CRNX", "CVE", "DAR", "DBRG", "DINO", "DUKU", "EC", "ET", "FENY", "FRO", "HALO", "HDV", "HP", "HTFL", "IBB", "IMVT", "IOVA", "IYE", "KNTK", "KURA", "MPC", "MRK", "NAT", "NOV", "OKE", "ORKA", "OVV", "P", "PK", "PR", "PSX", "RLAY", "ROIV", "ROKU", "RVMD", "SBLK", "SCHD", "SCHW", "SM", "SYRE", "THC", "TRGP", "VFLO", "VLO", "XLE", "XLV"], "timestamp": "2026-09-21T12:23:36.653223+00:00", "watchlist_count": 41}
