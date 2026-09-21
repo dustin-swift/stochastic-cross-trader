@@ -5582,5 +5582,29 @@
     "stop_order_id": "6aad8d2e-9fca-43c4-9ba9-fc1e5fe24669",
     "stop_price": 13.71,
     "symbol": "CALY"
+  },
+  {
+    "closed_at": "2026-09-21T15:15:17.149115+00:00",
+    "entry_d": 21.982877563297574,
+    "entry_k": 27.22800925925915,
+    "entry_order_id": "6aad8d52-6f22-4601-8e64-7dd5b8425730",
+    "entry_prev_d": 19.273094332902744,
+    "entry_prev_k": 20.81886574074056,
+    "entry_price": 62.088,
+    "entry_time": "2026-09-18T19:13:22.624Z",
+    "exit_d": 25.1403040988807,
+    "exit_k": 21.109569704049704,
+    "exit_order_id": "6ab149fa-6ab6-4cce-8e3c-13f679def3c7",
+    "exit_prev_d": 25.043402777777654,
+    "exit_prev_k": 27.083333333333254,
+    "exit_price": 61.8733,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-21T15:15:06.703Z",
+    "pnl_pct": -0.3457995103723799,
+    "pnl_usd": -0.4294000000000011,
+    "qty": 2,
+    "stop_order_id": "6aad8d5a-66ba-40a4-8389-17b635381989",
+    "stop_price": 60.45,
+    "symbol": "KIE"
   }
 ]
