@@ -38,3 +38,4 @@
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-21T15:13:25.163071+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-21T15:13:25.165210+00:00"}
 {"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-21T15:13:25.167224+00:00"}
+{"circuit_breaker_tripped": false, "eligible_symbols": ["BBVA", "IOVA", "MRK", "SCHD", "SCHW", "SM", "XLV"], "entries_proposed": 0, "entries_taken": 0, "event": "ma_cycle_summary", "exits_taken": 0, "live": true, "open_positions": 0, "partials_taken": 0, "slots_available": 5, "stale_cycle": false, "stop_outs_reconciled": 0, "timestamp": "2026-09-21T15:14:00.967477+00:00", "trend_intact": true, "watchlist_symbols_evaluated": 7, "watchlist_total": 40}
