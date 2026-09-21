@@ -52,3 +52,10 @@
 {"circuit_breaker_tripped": false, "dry_run_reason": "scheduled task explicitly instructed no order-placing/cancelling calls this cycle, overriding config live=true pending user confirmation of the live-flag discrepancy", "eligible_symbols": ["BBVA", "IOVA", "MRK", "SCHD", "SCHW", "SM", "XLV"], "entries_proposed": 0, "entries_taken": 0, "event": "ma_cycle_summary", "exits_taken": 0, "live": true, "open_positions": 0, "partials_taken": 0, "slots_available": 5, "stale_cycle": false, "stop_outs_reconciled": 0, "timestamp": "2026-09-21T16:14:45.030073+00:00", "trend_intact": true, "watchlist_symbols_evaluated": 7, "watchlist_total": 40}
 {"account_value": 2207.325, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": -1.13, "timestamp": "2026-09-21T17:09:59.961110+00:00", "tripped": false, "unrealized_pnl_today": 0}
 {"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-21T17:10:28.037680+00:00", "trend_intact": true}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "BBVA", "timestamp": "2026-09-21T17:11:33.779991+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "IOVA", "timestamp": "2026-09-21T17:11:33.782892+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "MRK", "timestamp": "2026-09-21T17:11:33.785481+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHD", "timestamp": "2026-09-21T17:11:33.787959+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SCHW", "timestamp": "2026-09-21T17:11:33.790441+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "SM", "timestamp": "2026-09-21T17:11:33.792947+00:00"}
+{"event": "ma_signal_check", "kind": "entry", "signal": false, "symbol": "XLV", "timestamp": "2026-09-21T17:11:33.795440+00:00"}
