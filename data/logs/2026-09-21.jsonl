@@ -1458,3 +1458,4 @@
 {"event": "stop_placed", "stop_order_id": "6ab165c7-a728-40e7-a798-1e46d93b71d7", "stop_price": 29.19, "symbol": "CZR", "timestamp": "2026-09-21T17:13:57.902790+00:00"}
 {"event": "entry_executed", "order_id": "6ab16595-a12d-4efa-b679-771796e321e6", "qty": 1, "symbol": "DNTH", "timestamp": "2026-09-21T17:13:57.902844+00:00"}
 {"event": "stop_placed", "stop_order_id": "6ab165c8-976f-42ed-aafd-35e388fb435b", "stop_price": 88.84, "symbol": "DNTH", "timestamp": "2026-09-21T17:13:57.902888+00:00"}
+{"candidates_checked": 442, "circuit_breaker_tripped": false, "entries_proposed": 8, "entries_symbols": ["BCS", "CZR", "DNTH"], "entries_taken": 3, "entry_skipped_buying_power": ["IJR"], "event": "cycle_summary", "exits_symbols": ["CBSH", "GGOV", "MAN", "OII"], "exits_taken": 4, "market_trend_intact": true, "positions_open": 14, "slots_max": 15, "slots_open": 1, "stop_outs_reconciled": 0, "timestamp": "2026-09-21T17:14:18.954796+00:00"}
