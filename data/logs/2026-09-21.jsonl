@@ -16,3 +16,4 @@
 {"event": "exit_executed", "exit_reason": "signal_exit", "order_id": "6ab12fab-6666-461c-a1a5-fd4f29aa9baa", "qty": 1, "symbol": "ARWR", "timestamp": "2026-09-21T13:23:48.476982+00:00"}
 {"event": "exit_executed", "exit_reason": "signal_exit", "order_id": "6ab12fac-7b6b-457a-8a11-ba64d671bd6a", "qty": 1, "symbol": "BUD", "timestamp": "2026-09-21T13:23:48.477125+00:00"}
 {"event": "exit_executed", "exit_reason": "signal_exit", "order_id": "6ab12fae-06eb-49e4-86b8-09e20c773d50", "qty": 7, "symbol": "CALY", "timestamp": "2026-09-21T13:23:48.477164+00:00"}
+{"account_value": 2210.09, "candidates_checked": 0, "circuit_breaker_tripped": false, "cycle_gap_minutes": 3970.92, "entries_proposed": 0, "entries_taken": 0, "event": "cycle_summary", "exit_symbols": ["ARWR", "BUD", "CALY"], "exits_taken": 3, "market_trend_intact": false, "open_positions": 6, "slots_remaining": 9, "stale_cycle": true, "stop_outs": 0, "timestamp": "2026-09-21T13:24:18.201153+00:00"}
