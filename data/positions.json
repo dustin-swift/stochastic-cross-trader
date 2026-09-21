@@ -1,43 +1,4 @@
 {
-  "ARWR": {
-    "entry_d": 25.629182526549474,
-    "entry_k": 30.552157377412275,
-    "entry_order_id": "6aac2d5b-618c-44da-8fa8-38fad9333003",
-    "entry_prev_d": 18.909392740112477,
-    "entry_prev_k": 27.43195736775758,
-    "entry_price": 67.62,
-    "entry_time": "2026-09-17T18:11:39.807Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aac2d67-d4d1-4a83-b65c-23f8a673ed5b",
-    "stop_price": 61.26
-  },
-  "BUD": {
-    "entry_d": 22.113481902955794,
-    "entry_k": 23.567567567567753,
-    "entry_order_id": "6aad8d10-62fb-49ea-ba2e-e96ba3777d69",
-    "entry_prev_d": 18.326961574042034,
-    "entry_prev_k": 23.56756756756776,
-    "entry_price": 77.5816,
-    "entry_time": "2026-09-18T19:12:16.979Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aad8d1e-a459-47cb-87a1-edacb04e65d7",
-    "stop_price": 74.94
-  },
-  "CALY": {
-    "entry_d": 24.30544642170447,
-    "entry_k": 30.951515151515036,
-    "entry_order_id": "6aad8d26-8cf8-4be6-88ab-d1eab73d3753",
-    "entry_prev_d": 17.564917040299214,
-    "entry_prev_k": 23.348108825480995,
-    "entry_price": 14.7299,
-    "entry_time": "2026-09-18T19:12:38.751Z",
-    "qty": 7,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aad8d2e-9fca-43c4-9ba9-fc1e5fe24669",
-    "stop_price": 13.71
-  },
   "GGOV": {
     "entry_d": 32.69907968574645,
     "entry_k": 36.51851851851858,
