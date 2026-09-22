@@ -1,17 +1,4 @@
 {
-  "CZR": {
-    "entry_d": 29.1313131313137,
-    "entry_k": 34.666666666667346,
-    "entry_order_id": "6ab16593-fc41-40a3-b8dc-d2b61cae444a",
-    "entry_prev_d": 22.79172679172747,
-    "entry_prev_k": 30.666666666667197,
-    "entry_price": 29.6567,
-    "entry_time": "2026-09-21T17:12:51.78Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab165c7-a728-40e7-a798-1e46d93b71d7",
-    "stop_price": 29.19
-  },
   "EZU": {
     "entry_d": 28.2552083333334,
     "entry_k": 43.48958333333334,
@@ -34,7 +21,7 @@
     "entry_price": 24.6402,
     "entry_time": "2026-09-21T14:21:36.91Z",
     "qty": 4,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
     "stop_price": 22.9
   },
