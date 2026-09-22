@@ -5798,5 +5798,29 @@
     "stop_order_id": "6ab14b12-581d-4305-853c-fd437a8e6e44",
     "stop_price": 18.15,
     "symbol": "FTRE"
+  },
+  {
+    "closed_at": "2026-09-22T13:22:49.032137+00:00",
+    "entry_d": 20.264900689744252,
+    "entry_k": 21.843663162982065,
+    "entry_order_id": "6aad8d35-91aa-47b4-9a96-07794a6c10f2",
+    "entry_prev_d": 19.002953259045913,
+    "entry_prev_k": 20.430107526881994,
+    "entry_price": 28.755,
+    "entry_time": "2026-09-18T19:12:53.608Z",
+    "exit_d": 17.20325203252057,
+    "exit_k": 13.406504065040886,
+    "exit_order_id": "6ab280da-f584-4331-aacb-a4fcdfd301be",
+    "exit_prev_d": 17.993160407794722,
+    "exit_prev_k": 20.317073170732012,
+    "exit_price": null,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-22T13:22:30Z",
+    "pnl_pct": null,
+    "pnl_usd": null,
+    "qty": 3,
+    "stop_order_id": "6aad8d3c-ff8a-4153-99ae-9f901ae984ee",
+    "stop_price": 28.14,
+    "symbol": "HDV"
   }
 ]

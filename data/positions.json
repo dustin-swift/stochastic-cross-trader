@@ -38,19 +38,6 @@
     "stop_order_id": "6ab14aff-2bbf-4572-8b9f-1464c32a2c87",
     "stop_price": 67.55
   },
-  "HDV": {
-    "entry_d": 20.264900689744252,
-    "entry_k": 21.843663162982065,
-    "entry_order_id": "6aad8d35-91aa-47b4-9a96-07794a6c10f2",
-    "entry_prev_d": 19.002953259045913,
-    "entry_prev_k": 20.430107526881994,
-    "entry_price": 28.755,
-    "entry_time": "2026-09-18T19:12:53.608Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6aad8d3c-ff8a-4153-99ae-9f901ae984ee",
-    "stop_price": 28.14
-  },
   "IBN": {
     "entry_d": 21.082125603865162,
     "entry_k": 26.222222222222836,
