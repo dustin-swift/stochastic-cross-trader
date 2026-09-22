@@ -5966,5 +5966,29 @@
     "stop_order_id": "6ab165c7-a728-40e7-a798-1e46d93b71d7",
     "stop_price": 29.19,
     "symbol": "CZR"
+  },
+  {
+    "closed_at": "2026-09-22T17:06:46.279703+00:00",
+    "entry_d": 21.218203568622425,
+    "entry_k": 27.166126626268042,
+    "entry_order_id": "6aad8d71-670b-452e-8882-d554434ed473",
+    "entry_prev_d": 21.30824144978967,
+    "entry_prev_k": 19.372801270597368,
+    "entry_price": 98.5399,
+    "entry_time": "2026-09-18T19:13:53.805Z",
+    "exit_d": 78.38184098783778,
+    "exit_k": 75.94926128126913,
+    "exit_order_id": "6ab2b599-cb21-41c7-8b5c-f8a5eeb4ee50",
+    "exit_prev_d": 83.45839955920114,
+    "exit_prev_k": 74.92523364486043,
+    "exit_price": 99.0501,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-22T17:06:33.88Z",
+    "pnl_pct": 0.5177598110004178,
+    "pnl_usd": 0.5101999999999975,
+    "qty": 1,
+    "stop_order_id": "6aad8d79-551c-43f6-a8d5-518c04e4ea4a",
+    "stop_price": 97.19,
+    "symbol": "USMV"
   }
 ]

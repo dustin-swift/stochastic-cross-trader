@@ -24,18 +24,5 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
     "stop_price": 22.9
-  },
-  "USMV": {
-    "entry_d": 21.218203568622425,
-    "entry_k": 27.166126626268042,
-    "entry_order_id": "6aad8d71-670b-452e-8882-d554434ed473",
-    "entry_prev_d": 21.30824144978967,
-    "entry_prev_k": 19.372801270597368,
-    "entry_price": 98.5399,
-    "entry_time": "2026-09-18T19:13:53.805Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6aad8d79-551c-43f6-a8d5-518c04e4ea4a",
-    "stop_price": 97.19
   }
 }
