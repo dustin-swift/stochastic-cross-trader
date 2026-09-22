@@ -5990,5 +5990,29 @@
     "stop_order_id": "6aad8d79-551c-43f6-a8d5-518c04e4ea4a",
     "stop_price": 97.19,
     "symbol": "USMV"
+  },
+  {
+    "closed_at": "2026-09-22T18:06:22.892109+00:00",
+    "entry_d": 28.2552083333334,
+    "entry_k": 43.48958333333334,
+    "entry_order_id": "6ab14af8-ddbc-4c7d-9811-6d2696040dcc",
+    "entry_prev_d": 19.444444444444514,
+    "entry_prev_k": 22.265625000000085,
+    "entry_price": 68.96,
+    "entry_time": "2026-09-21T15:19:20.648Z",
+    "exit_d": 77.47283808896019,
+    "exit_k": 78.42147692467158,
+    "exit_order_id": "6ab2c38d-2b04-42c1-98a2-87d275e7fd6e",
+    "exit_prev_d": 81.02602744704915,
+    "exit_prev_k": 75.25098239881504,
+    "exit_price": 69.0901,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-22T18:06:05.189Z",
+    "pnl_pct": 0.18866009280744667,
+    "pnl_usd": 0.13010000000001298,
+    "qty": 1,
+    "stop_order_id": "6ab14aff-2bbf-4572-8b9f-1464c32a2c87",
+    "stop_price": 67.55,
+    "symbol": "EZU"
   }
 ]

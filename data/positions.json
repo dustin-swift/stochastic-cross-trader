@@ -1,17 +1,4 @@
 {
-  "EZU": {
-    "entry_d": 28.2552083333334,
-    "entry_k": 43.48958333333334,
-    "entry_order_id": "6ab14af8-ddbc-4c7d-9811-6d2696040dcc",
-    "entry_prev_d": 19.444444444444514,
-    "entry_prev_k": 22.265625000000085,
-    "entry_price": 68.96,
-    "entry_time": "2026-09-21T15:19:20.648Z",
-    "qty": 1,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6ab14aff-2bbf-4572-8b9f-1464c32a2c87",
-    "stop_price": 67.55
-  },
   "IMNM": {
     "entry_d": 22.092013888888914,
     "entry_k": 28.255208333333325,
