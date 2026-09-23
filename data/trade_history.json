@@ -6230,5 +6230,29 @@
     "stop_order_id": "6ab2d444-b0fa-4122-9777-e5d6858bf88a",
     "stop_price": 69.72,
     "symbol": "KRE"
+  },
+  {
+    "closed_at": "2026-09-23T16:07:25.994016+00:00",
+    "entry_d": 22.092013888888914,
+    "entry_k": 28.255208333333325,
+    "entry_order_id": "6ab13d70-6879-4278-a832-5c2c1f989377",
+    "entry_prev_d": 19.444444444444475,
+    "entry_prev_k": 19.661458333333382,
+    "entry_price": 24.6402,
+    "entry_time": "2026-09-21T14:21:36.91Z",
+    "exit_d": 74.51725815971066,
+    "exit_k": 53.08678140515122,
+    "exit_order_id": "6ab3f91c-480b-4a84-a02a-c1a91e8e0339",
+    "exit_prev_d": 85.08677157046922,
+    "exit_prev_k": 78.81959169173729,
+    "exit_price": 24.3701,
+    "exit_reason": "overbought_hold_exit",
+    "exit_time": "2026-09-23T16:06:52.745Z",
+    "pnl_pct": -1.0961761674012305,
+    "pnl_usd": -1.0803999999999974,
+    "qty": 4,
+    "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
+    "stop_price": 22.9,
+    "symbol": "IMNM"
   }
 ]

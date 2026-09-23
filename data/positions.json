@@ -1,17 +1,4 @@
 {
-  "IMNM": {
-    "entry_d": 22.092013888888914,
-    "entry_k": 28.255208333333325,
-    "entry_order_id": "6ab13d70-6879-4278-a832-5c2c1f989377",
-    "entry_prev_d": 19.444444444444475,
-    "entry_prev_k": 19.661458333333382,
-    "entry_price": 24.6402,
-    "entry_time": "2026-09-21T14:21:36.91Z",
-    "qty": 4,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
-    "stop_price": 22.9
-  },
   "MAN": {
     "entry_d": 35.339225589225606,
     "entry_k": 54.833333333333314,
