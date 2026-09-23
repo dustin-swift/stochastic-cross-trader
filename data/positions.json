@@ -1,4 +1,30 @@
 {
+  "GBTG": {
+    "entry_d": 20.70370370370129,
+    "entry_k": 25.444444444442922,
+    "entry_order_id": "6ab4162a-1eba-4aa4-9320-6f9dd43dc8fb",
+    "entry_prev_d": 17.777777777774883,
+    "entry_prev_k": 19.99999999999724,
+    "entry_price": 9.4699,
+    "entry_time": "2026-09-23T18:10:50.8Z",
+    "qty": 11,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6ab41640-dab2-44d4-8280-155971a20074",
+    "stop_price": 9.42
+  },
+  "GSAT": {
+    "entry_d": 20.339253187613647,
+    "entry_k": 28.2786885245901,
+    "entry_order_id": "6ab41649-34a8-438a-9e62-6b19dc7fac1c",
+    "entry_prev_d": 15.009107468123633,
+    "entry_prev_k": 16.80327868852447,
+    "entry_price": 82.5099,
+    "entry_time": "2026-09-23T18:11:21.507Z",
+    "qty": 1,
+    "stochastic_state": "NORMAL",
+    "stop_order_id": "6ab4165b-209f-4fac-a5ed-2745cf367be8",
+    "stop_price": 80.78
+  },
   "MAN": {
     "entry_d": 35.339225589225606,
     "entry_k": 54.833333333333314,
