@@ -1,30 +1,4 @@
 {
-  "CNC": {
-    "entry_d": 25.983525306193958,
-    "entry_k": 32.756124841537826,
-    "entry_order_id": "6ab2d3be-4ffa-47b5-8ce0-dcf41c0d6e4a",
-    "entry_prev_d": 19.503256676455184,
-    "entry_prev_k": 27.71762465537321,
-    "entry_price": 63.4291,
-    "entry_time": "2026-09-22T19:15:10.735Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab2d3cd-2553-4fbb-8d87-7b4ed7ee5638",
-    "stop_price": 59.38
-  },
-  "HOPE": {
-    "entry_d": 23.860427262530067,
-    "entry_k": 36.20689655172398,
-    "entry_order_id": "6ab2c5d1-062f-485f-9f0f-dc4e8055514d",
-    "entry_prev_d": 20.132312076400723,
-    "entry_prev_k": 19.86553892864873,
-    "entry_price": 13.8885,
-    "entry_time": "2026-09-22T18:15:46.086Z",
-    "qty": 7,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab2c5df-5e79-4a86-a341-dc7e8205cd50",
-    "stop_price": 13.45
-  },
   "IMNM": {
     "entry_d": 22.092013888888914,
     "entry_k": 28.255208333333325,
@@ -37,32 +11,6 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
     "stop_price": 22.9
-  },
-  "KBE": {
-    "entry_d": 23.590166879542437,
-    "entry_k": 29.247240618102058,
-    "entry_order_id": "6ab2d41e-dffa-4dbc-a455-a007fb84324e",
-    "entry_prev_d": 16.511303929458492,
-    "entry_prev_k": 26.598233995585417,
-    "entry_price": 65.508,
-    "entry_time": "2026-09-22T19:16:46.798Z",
-    "qty": 2,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab2d42c-a243-4266-ac1e-53e1c08748f3",
-    "stop_price": 63.92
-  },
-  "KRE": {
-    "entry_d": 21.289037295134978,
-    "entry_k": 26.984126984127144,
-    "entry_order_id": "6ab2d435-1458-4a27-a976-64bdbe5ae719",
-    "entry_prev_d": 14.845099679875469,
-    "entry_prev_k": 23.31349206349219,
-    "entry_price": 71.566,
-    "entry_time": "2026-09-22T19:17:10.135Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab2d444-b0fa-4122-9777-e5d6858bf88a",
-    "stop_price": 69.72
   },
   "MAN": {
     "entry_d": 35.339225589225606,
