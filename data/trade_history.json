@@ -6254,5 +6254,29 @@
     "stop_order_id": "6ab13d8c-002f-469d-910c-1a601bb82f5b",
     "stop_price": 22.9,
     "symbol": "IMNM"
+  },
+  {
+    "closed_at": "2026-09-24T13:27:36.907500+00:00",
+    "entry_d": 20.70370370370129,
+    "entry_k": 25.444444444442922,
+    "entry_order_id": "6ab4162a-1eba-4aa4-9320-6f9dd43dc8fb",
+    "entry_prev_d": 17.777777777774883,
+    "entry_prev_k": 19.99999999999724,
+    "entry_price": 9.4699,
+    "entry_time": "2026-09-23T18:10:50.8Z",
+    "exit_d": 24.333333333331748,
+    "exit_k": 22.111111111109395,
+    "exit_order_id": "6ab52509-39f3-4c37-a4c2-aee78a546364",
+    "exit_prev_d": 23.629629629627697,
+    "exit_prev_k": 25.444444444442926,
+    "exit_price": null,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-24T13:27:36.861043+00:00",
+    "pnl_pct": null,
+    "pnl_usd": null,
+    "qty": 11,
+    "stop_order_id": "6ab41640-dab2-44d4-8280-155971a20074",
+    "stop_price": 9.42,
+    "symbol": "GBTG"
   }
 ]
