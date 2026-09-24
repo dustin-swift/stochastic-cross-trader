@@ -6350,5 +6350,29 @@
     "stop_order_id": "6ab2c60b-5d3e-4c1f-81c3-c698102c623e",
     "stop_price": 28.3,
     "symbol": "OSCR"
+  },
+  {
+    "closed_at": "2026-09-24T16:05:57.266537+00:00",
+    "entry_d": 20.33686665549391,
+    "entry_k": 20.621794871794567,
+    "entry_order_id": "6ab53ddb-fab1-4472-aafd-98cf76d56d59",
+    "entry_prev_d": 17.097105773779706,
+    "entry_prev_k": 23.931623931623907,
+    "entry_price": 67.7599,
+    "entry_time": "2026-09-24T15:12:27.513Z",
+    "exit_d": 23.290598290598343,
+    "exit_k": 21.367521367521533,
+    "exit_order_id": "6ab54a56-44df-4e75-a6ab-17904d057c7e",
+    "exit_prev_d": 21.653818222445583,
+    "exit_prev_k": 24.57264957264958,
+    "exit_price": 67.8601,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-24T16:05:42.514Z",
+    "pnl_pct": 0.14787507065388006,
+    "pnl_usd": 0.10020000000000095,
+    "qty": 1,
+    "stop_order_id": "6ab53de6-de41-4117-8547-16131947d891",
+    "stop_price": 66.32,
+    "symbol": "FEZ"
   }
 ]
