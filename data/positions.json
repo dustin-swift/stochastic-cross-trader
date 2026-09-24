@@ -1,30 +1,4 @@
 {
-  "GSAT": {
-    "entry_d": 20.339253187613647,
-    "entry_k": 28.2786885245901,
-    "entry_order_id": "6ab41649-34a8-438a-9e62-6b19dc7fac1c",
-    "entry_prev_d": 15.009107468123633,
-    "entry_prev_k": 16.80327868852447,
-    "entry_price": 82.5099,
-    "entry_time": "2026-09-23T18:11:21.507Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab4165b-209f-4fac-a5ed-2745cf367be8",
-    "stop_price": 80.78
-  },
-  "MAN": {
-    "entry_d": 35.339225589225606,
-    "entry_k": 54.833333333333314,
-    "entry_order_id": "6ab2d44d-0aec-4a73-88d4-087fb9fcbec9",
-    "entry_prev_d": 19.504582865694026,
-    "entry_prev_k": 36.83333333333335,
-    "entry_price": 57.745,
-    "entry_time": "2026-09-22T19:17:34.114Z",
-    "qty": 2,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6ab2d45b-0cdf-4cfe-8e47-5c57db3342dd",
-    "stop_price": 53.72
-  },
   "MET": {
     "entry_d": 21.45513808182774,
     "entry_k": 33.88838033796867,
@@ -37,18 +11,5 @@
     "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab2c5f5-6708-4c34-ab9a-47dacbde925a",
     "stop_price": 93.42
-  },
-  "OSCR": {
-    "entry_d": 20.196189398226775,
-    "entry_k": 28.440860215053785,
-    "entry_order_id": "6ab2c5ff-83dc-4d65-a84d-f849ba8d4312",
-    "entry_prev_d": 14.466862695610102,
-    "entry_prev_k": 17.731560083003217,
-    "entry_price": 30.6999,
-    "entry_time": "2026-09-22T18:16:31.445Z",
-    "qty": 3,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab2c60b-5d3e-4c1f-81c3-c698102c623e",
-    "stop_price": 28.3
   }
 }
