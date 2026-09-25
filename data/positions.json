@@ -8,7 +8,7 @@
     "entry_price": 13.4768,
     "entry_time": "2026-09-24T18:12:26.215Z",
     "qty": 7,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab56813-8757-470e-bc66-5c916d5b675f",
     "stop_price": 12.41
   },
@@ -86,7 +86,7 @@
     "entry_price": 47.9499,
     "entry_time": "2026-09-24T18:13:10.198Z",
     "qty": 2,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab56842-650b-4700-8a27-21e1743f7b84",
     "stop_price": 46.72
   },
@@ -141,19 +141,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6ab6a1b9-378e-4618-a213-7e37d93f4fbb",
     "stop_price": 53.8
-  },
-  "PCAR": {
-    "entry_d": 21.065225404469825,
-    "entry_k": 36.94537605297116,
-    "entry_order_id": "6ab6a19d-5111-45e5-8e30-12e267fe4dc6",
-    "entry_prev_d": 10.291382456978381,
-    "entry_prev_k": 18.971696857842094,
-    "entry_price": 112.53,
-    "entry_time": "2026-09-25T16:30:21.505Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab6a1bb-6560-4a82-b7d8-3730061cd917",
-    "stop_price": 106.67
   },
   "SCHE": {
     "entry_d": 23.64213850870456,

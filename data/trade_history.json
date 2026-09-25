@@ -6686,5 +6686,29 @@
     "stop_order_id": "6ab559db-aae3-436d-bbcf-4e1acd3adf30",
     "stop_price": 18.58,
     "symbol": "AMRX"
+  },
+  {
+    "closed_at": "2026-09-25T19:07:27.056409+00:00",
+    "entry_d": 21.065225404469825,
+    "entry_k": 36.94537605297116,
+    "entry_order_id": "6ab6a19d-5111-45e5-8e30-12e267fe4dc6",
+    "entry_prev_d": 10.291382456978381,
+    "entry_prev_k": 18.971696857842094,
+    "entry_price": 112.53,
+    "entry_time": "2026-09-25T16:30:21.505Z",
+    "exit_d": 56.576121759292356,
+    "exit_k": 55.43608124253291,
+    "exit_order_id": "6ab6c664-a7f9-45a7-8eec-76321323a337",
+    "exit_prev_d": 50.38568247737612,
+    "exit_prev_k": 60.28887987195959,
+    "exit_price": 111.2501,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-25T19:07:16.759Z",
+    "pnl_pct": -1.137385586065931,
+    "pnl_usd": -1.2798999999999978,
+    "qty": 1,
+    "stop_order_id": "6ab6a1bb-6560-4a82-b7d8-3730061cd917",
+    "stop_price": 106.67,
+    "symbol": "PCAR"
   }
 ]
