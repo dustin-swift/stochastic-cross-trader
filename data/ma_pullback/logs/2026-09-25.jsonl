@@ -1,0 +1,2 @@
+{"event": "market_trend_check", "fast_sma_period": 20, "require_rising": false, "rising_lookback_bars": 5, "slow_sma_period": 200, "symbol": "SPY", "timestamp": "2026-09-25T13:10:26.853734+00:00", "trend_intact": true}
+{"account_value": 2196.28, "event": "circuit_breaker_check", "max_daily_loss_pct": 3, "realized_pnl_today": 0, "timestamp": "2026-09-25T13:10:30.546206+00:00", "tripped": false, "unrealized_pnl_today": 0}
