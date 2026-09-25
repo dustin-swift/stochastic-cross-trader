@@ -21,7 +21,7 @@
     "entry_price": 19.5274,
     "entry_time": "2026-09-24T17:11:37.3Z",
     "qty": 5,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab559db-aae3-436d-bbcf-4e1acd3adf30",
     "stop_price": 18.58
   },
@@ -37,19 +37,6 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6ab559ef-981b-45d3-a9f1-a55ea0953666",
     "stop_price": 49.99
-  },
-  "BUD": {
-    "entry_d": 37.3040207280771,
-    "entry_k": 51.09848302122244,
-    "entry_order_id": "6ab559f9-dd5d-48dc-a45b-22bdd173ec7b",
-    "entry_prev_d": 25.860891620329898,
-    "entry_prev_k": 33.71378402107127,
-    "entry_price": 78.0999,
-    "entry_time": "2026-09-24T17:12:25.816Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab55a03-905e-4fff-8b17-45149b16f40f",
-    "stop_price": 75.46
   },
   "CGGR": {
     "entry_d": 21.850956541593472,
@@ -141,18 +128,5 @@
     "stochastic_state": "NORMAL",
     "stop_order_id": "6ab55ab3-5bdf-419a-b789-4b49df004123",
     "stop_price": 75.18
-  },
-  "URBN": {
-    "entry_d": 21.242774566473972,
-    "entry_k": 22.97687861271672,
-    "entry_order_id": "6ab53e07-142d-44d6-978d-d85bc9d3d787",
-    "entry_prev_d": 19.492614001284498,
-    "entry_prev_k": 23.12138728323696,
-    "entry_price": 74.4699,
-    "entry_time": "2026-09-24T15:13:11.710Z",
-    "qty": 1,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab53e12-d054-4fa8-adf0-55bb16d05cee",
-    "stop_price": 70.37
   }
 }
