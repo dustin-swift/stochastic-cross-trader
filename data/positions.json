@@ -12,19 +12,6 @@
     "stop_order_id": "6ab56813-8757-470e-bc66-5c916d5b675f",
     "stop_price": 12.41
   },
-  "AMRX": {
-    "entry_d": 40.32632452709237,
-    "entry_k": 54.541964262911925,
-    "entry_order_id": "6ab559c9-cf80-4b99-95f1-3a67089fa7d1",
-    "entry_prev_d": 27.726952247700314,
-    "entry_prev_k": 39.61479198767327,
-    "entry_price": 19.5274,
-    "entry_time": "2026-09-24T17:11:37.3Z",
-    "qty": 5,
-    "stochastic_state": "OVERBOUGHT_HOLD",
-    "stop_order_id": "6ab559db-aae3-436d-bbcf-4e1acd3adf30",
-    "stop_price": 18.58
-  },
   "ARKG": {
     "entry_d": 34.570154095701625,
     "entry_k": 48.11435523114358,
