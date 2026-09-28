@@ -6710,5 +6710,29 @@
     "stop_order_id": "6ab6a1bb-6560-4a82-b7d8-3730061cd917",
     "stop_price": 106.67,
     "symbol": "PCAR"
+  },
+  {
+    "closed_at": "2026-09-28T13:41:20.286618+00:00",
+    "entry_d": 27.387856705746998,
+    "entry_k": 44.98892580287903,
+    "entry_order_id": "6ab6ab79-eb08-45b5-9bd7-dd41ce627dcf",
+    "entry_prev_d": 15.593392569189447,
+    "entry_prev_k": 24.95840077235402,
+    "entry_price": 14.4985,
+    "entry_time": "2026-09-25T17:12:25.273Z",
+    "exit_d": 58.730158730158486,
+    "exit_k": 56.34920634920615,
+    "exit_order_id": "6aba6e72-0680-4070-a129-a8fb3679f661",
+    "exit_prev_d": 54.94339854804944,
+    "exit_prev_k": 60.31746031746004,
+    "exit_price": 14.2273,
+    "exit_reason": "signal_exit",
+    "exit_time": "2026-09-28T13:41:06.548Z",
+    "pnl_pct": -1.8705383315515411,
+    "pnl_usd": -1.8984000000000023,
+    "qty": 7,
+    "stop_order_id": "6ab6ab92-6049-44cc-9dd4-e94624d1bf58",
+    "stop_price": 13.48,
+    "symbol": "CALY"
   }
 ]

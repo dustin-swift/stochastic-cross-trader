@@ -51,19 +51,6 @@
     "stop_order_id": "6ab6a1b7-ab2a-4da2-87c0-c9af965b64f7",
     "stop_price": 35.45
   },
-  "CALY": {
-    "entry_d": 27.387856705746998,
-    "entry_k": 44.98892580287903,
-    "entry_order_id": "6ab6ab79-eb08-45b5-9bd7-dd41ce627dcf",
-    "entry_prev_d": 15.593392569189447,
-    "entry_prev_k": 24.95840077235402,
-    "entry_price": 14.4985,
-    "entry_time": "2026-09-25T17:12:25.273Z",
-    "qty": 7,
-    "stochastic_state": "NORMAL",
-    "stop_order_id": "6ab6ab92-6049-44cc-9dd4-e94624d1bf58",
-    "stop_price": 13.48
-  },
   "CCK": {
     "entry_d": 21.975311928525517,
     "entry_k": 34.32141819238602,
@@ -138,7 +125,7 @@
     "entry_price": 54.8099,
     "entry_time": "2026-09-25T16:30:20.137Z",
     "qty": 2,
-    "stochastic_state": "NORMAL",
+    "stochastic_state": "OVERBOUGHT_HOLD",
     "stop_order_id": "6ab6a1b9-378e-4618-a213-7e37d93f4fbb",
     "stop_price": 53.8
   },
