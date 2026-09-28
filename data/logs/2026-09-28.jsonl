@@ -980,3 +980,4 @@
 {"event": "stop_placed", "order_id": "6aba9fd7-f8d4-49d1-a8a7-22396a1252c1", "qty": 4.0, "symbol": "RCUS", "timestamp": "2026-09-28T17:12:15.858654+00:00"}
 {"event": "entry_executed", "order_id": "6aba9fde-9817-4b73-90f2-cd37e0d62d74", "qty": 10.0, "symbol": "SXC", "timestamp": "2026-09-28T17:12:15.858686+00:00"}
 {"event": "stop_placed", "order_id": "6aba9fe6-cad5-47c8-82b9-16ca77c155f2", "qty": 10.0, "symbol": "SXC", "timestamp": "2026-09-28T17:12:15.858715+00:00"}
+{"candidates_checked": 451, "candidates_skipped_fetch": 13, "candidates_total": 464, "circuit_breaker_tripped": false, "entries_proposed": 3, "entries_taken": 3, "event": "cycle_summary", "exits_taken": 0, "market_trend_intact": true, "slots_remaining": 10, "stop_outs_reconciled": 0, "timestamp": "2026-09-28T17:12:31.097080+00:00"}
