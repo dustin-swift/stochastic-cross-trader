@@ -4,7 +4,9 @@
 # Live/dry-run switch. Must be flipped to true explicitly and deliberately —
 # everything defaults to dry-run (signals/orders are computed and logged,
 # but no order tools are ever called) until this is true.
-live: true
+# 2026-09-28: set back to false -- system shut down (net negative over 300+
+# trades), all routines disabled, account flat.
+live: false
 
 account_number: "849995824"  # Robinhood Agentic account (••••5824)
 

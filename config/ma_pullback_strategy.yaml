@@ -12,7 +12,9 @@
 # hard rules (never enter below breakout_level, always place the resting
 # broker-side stop immediately after a fill) apply for real starting the
 # next scheduled cycle.
-live: true
+# 2026-09-28: set back to false -- agent shut down (rarely triggers), all
+# routines disabled, account flat.
+live: false
 
 # Same Robinhood account as the stochastic system (config/strategy.yaml) --
 # at the user's direction, this agent trades a separate capital sleeve
